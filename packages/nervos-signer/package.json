@@ -2,7 +2,7 @@
 	"name": "@nervos/signer",
 	"version": "1.0.26",
 	"main": "lib/index.js",
-	"repository": "https://github.com/Keith-CY/nervos-signer",
+	"repository": "https://github.com/Keith-CY/nerovs",
 	"author": "Keith <keithwhisper@gmail.com>",
 	"license": "MIT",
 	"scripts": {

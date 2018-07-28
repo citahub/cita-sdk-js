@@ -1,0 +1,14 @@
+node_modules
+*.log
+*.html
+# deploy.js
+debug
+debug.*
+src/methods/citaSignTransaction.ts
+
+*.brk
+.vscode/last.sql
+
+
+# working
+subscription

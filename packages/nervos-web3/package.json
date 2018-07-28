@@ -2,11 +2,10 @@
   "name": "@nervos/web3",
   "version": "0.17.39",
   "main": "lib/index.js",
-  "repository": "https://github.com/cryptape/web3",
+  "repository": "https://github.com/keith-cy/nervos",
   "author": "Keith <keithwhisper@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "protoc": "protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --proto_path=cita-proto --ts_out=./proto-ts --js_out=import_style=commonjs,binary:./proto-ts cita-proto/blockchain.proto",
     "start": "nodemon --config nodemon.json",
     "debug": "node debug/index.js",
     "build": "tsc && browserify",
@@ -33,13 +32,11 @@
     "nodemon": "^1.17.5",
     "prettier": "^1.13.3",
     "ts-node": "^6.0.5",
-    "ts-protoc-gen": "^0.7.3",
     "typedoc": "^0.11.1",
     "typescript": "^2.8.4"
   },
   "dependencies": {
     "@nervos/signer": "^1.0.26",
-    "google-protobuf": "^3.5.0",
     "web3": "^1.0.0-beta.34"
   },
   "jest": {
