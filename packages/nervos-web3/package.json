@@ -1,0 +1,49 @@
+{
+  "name": "@nervos/web3",
+  "version": "0.17.39",
+  "main": "lib/index.js",
+  "repository": "https://github.com/cryptape/web3",
+  "author": "Keith <keithwhisper@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "protoc": "protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --proto_path=cita-proto --ts_out=./proto-ts --js_out=import_style=commonjs,binary:./proto-ts cita-proto/blockchain.proto",
+    "start": "nodemon --config nodemon.json",
+    "debug": "node debug/index.js",
+    "build": "tsc && browserify",
+    "docs": "typedoc --out ./documents/ ./src/",
+    "test": "jest",
+    "example": "node examples/deploy.js",
+    "browserify": "browserify ./lib/browser.js -o ./lib/bundle.js && minify ./lib/bundle.js -d ./lib/",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "docs": "typedoc --theme markdown",
+  "devDependencies": {
+    "babel-minify": "^0.4.3",
+    "browserify": "^16.2.2",
+    "eslint": "^4.19.1",
+    "husky": "^0.14.3",
+    "jest": "^23.1.0",
+    "lint-staged": "^7.1.2",
+    "nodemon": "^1.17.5",
+    "prettier": "^1.13.3",
+    "ts-node": "^6.0.5",
+    "ts-protoc-gen": "^0.7.3",
+    "typedoc": "^0.11.1",
+    "typescript": "^2.8.4"
+  },
+  "dependencies": {
+    "@nervos/signer": "^1.0.26",
+    "google-protobuf": "^3.5.0",
+    "web3": "^1.0.0-beta.34"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  }
+}
