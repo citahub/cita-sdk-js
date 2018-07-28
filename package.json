@@ -1,0 +1,41 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "@types/google-protobuf": "^3.2.7",
+    "@types/node": "^10.5.1",
+    "@types/underscore": "^1.8.8",
+    "@types/web3": "^1.0.0",
+    "babel-minify": "^0.4.3",
+    "browserify": "^16.2.2",
+    "chalk": "^2.4.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-typescript": "^0.12.0",
+    "husky": "^0.14.3",
+    "jest": "^23.2.0",
+    "lint-staged": "^7.1.2",
+    "lerna": "^3.0.0-rc.0",
+    "nodemon": "^1.17.5",
+    "prettier": "^1.13.3",
+    "ts-node": "^7.0.0",
+    "ts-protoc-gen": "^0.7.3",
+    "typedoc": "^0.11.1",
+    "types-bn": "^0.0.1",
+    "typescript-eslint-parser": "^15.0.0",
+    "utf8": "^3.0.0",
+    "protoc": "^1.0.3",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "crypto-js": "^3.1.9-1",
+    "ec": "^0.0.1",
+    "elliptic": "^6.4.0",
+    "google-protobuf": "^3.5.0",
+    "web3": "^1.0.0-beta.34"
+  }
+}
