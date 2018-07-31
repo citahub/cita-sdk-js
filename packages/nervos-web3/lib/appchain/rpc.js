@@ -2,11 +2,19 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const signer_1 = __importDefault(require("@nervos/signer"));
 var _ = require('underscore');
 var formatters = require('web3-core-helpers').formatters;
 var utils = require('web3-utils');
+const outputFormatter = __importStar(require("../utils/outputFormatters"));
 exports.peerCount = {
     name: 'peerCount',
     call: 'peerCount',
@@ -25,7 +33,8 @@ exports.getAbi = {
     inputFormatter: [
         formatters.inputAddressFormatter,
         formatters.inputDefaultBlockNumberFormatter
-    ]
+    ],
+    outputFormatter: outputFormatter.outputAbiFormatter
 };
 exports.getTransactionReceipt = {
     name: 'getTransactionReceipt',
