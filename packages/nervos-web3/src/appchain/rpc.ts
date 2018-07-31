@@ -1,20 +1,21 @@
-import signer from '@nervos/signer';
-var _ = require('underscore');
-var formatters = require('web3-core-helpers').formatters;
-var utils = require('web3-utils');
+import signer from '@nervos/signer'
+var _ = require('underscore')
+var formatters = require('web3-core-helpers').formatters
+var utils = require('web3-utils')
+import * as outputFormatter from '../utils/outputFormatters'
 
 export const peerCount = {
   name: 'peerCount',
   call: 'peerCount',
   params: 0
-};
+}
 
 export const getMetaData = {
   name: 'getMetaData',
   call: 'getMetaData',
   params: 1,
   inputFormatter: [formatters.inputDefaultBlockNumberFormatter]
-};
+}
 
 export const getAbi = {
   name: 'getAbi',
@@ -23,8 +24,9 @@ export const getAbi = {
   inputFormatter: [
     formatters.inputAddressFormatter,
     formatters.inputDefaultBlockNumberFormatter
-  ]
-};
+  ],
+  outputFormatter: outputFormatter.outputAbiFormatter
+}
 
 export const getTransactionReceipt = {
   name: 'getTransactionReceipt',
@@ -32,7 +34,7 @@ export const getTransactionReceipt = {
   params: 1,
   // inputFormatter: [formatters.inputAddressFormatter],
   outputFormatter: formatters.outputTransactionReceiptFormatter
-};
+}
 
 export const getCode = {
   name: 'getCode',
@@ -42,14 +44,14 @@ export const getCode = {
     formatters.inputAddressFormatter,
     formatters.inputDefaultBlockNumberFormatter
   ]
-};
+}
 
 export const getAccounts = {
   name: 'getAccounts',
   call: 'accounts',
   params: 0,
   outputFormatter: utils.toChecksumAddress
-};
+}
 
 export const getBalance = {
   name: 'getBalance',
@@ -60,13 +62,13 @@ export const getBalance = {
     formatters.inputDefaultBlockNumberFormatter
   ],
   outputFormatter: utils.hexToNumberString
-};
+}
 
 var blockCall = function(args: any) {
   return _.isString(args[0]) && args[0].indexOf('0x') === 0
     ? 'getBlockByHash'
-    : 'getBlockByNumber';
-};
+    : 'getBlockByNumber'
+}
 
 export const getBlock = {
   name: 'getBlock',
@@ -75,11 +77,11 @@ export const getBlock = {
   inputFormatter: [
     formatters.inputBlockNumberFormatter,
     function(val: any) {
-      return !!val;
+      return !!val
     }
   ],
   outputFormatter: formatters.outputBlockFormatter
-};
+}
 export const getBlockByHash = {
   name: 'getBlockByHash',
   call: 'getBlockByHash',
@@ -87,11 +89,11 @@ export const getBlockByHash = {
   inputFormatter: [
     formatters.inputBlockNumberFormatter,
     function(val: any) {
-      return !!val;
+      return !!val
     }
   ],
   outputFormatter: formatters.outputBlockFormatter
-};
+}
 export const getBlockByNumber = {
   name: 'getBlockByNumber',
   call: 'getBlockByNumber',
@@ -99,23 +101,23 @@ export const getBlockByNumber = {
   inputFormatter: [
     formatters.inputBlockNumberFormatter,
     function(val: any) {
-      return !!val;
+      return !!val
     }
   ],
   outputFormatter: formatters.outputBlockFormatter
-};
+}
 
 export const getBlockNumber = {
   name: 'getBlockNumber',
   call: 'blockNumber',
   params: 0,
   outputFormatter: utils.hexToNumber
-};
+}
 var getBlockTransactionCountCall = function(args: any) {
   return _.isString(args[0]) && args[0].indexOf('0x') === 0
     ? 'getBlockTransactionCountByHash'
-    : 'getBlockTransactionCountByNumber';
-};
+    : 'getBlockTransactionCountByNumber'
+}
 
 export const getBlockTransactionCount = {
   name: 'getBlockTransactionCount',
@@ -123,7 +125,7 @@ export const getBlockTransactionCount = {
   params: 1,
   inputFormatter: [formatters.inputBlockNumberFormatter],
   outputFormatter: utils.hexToNumber
-};
+}
 
 export const getTransaction = {
   name: 'getTransaction',
@@ -131,7 +133,7 @@ export const getTransaction = {
   params: 1,
   inputFormatter: [null]
   // outputFormatter: formatters.outputTransactionFormatter,
-};
+}
 
 export const getTransactionCount = {
   name: 'getTransactionCount',
@@ -142,21 +144,21 @@ export const getTransactionCount = {
     formatters.inputDefaultBlockNumberFormatter
   ],
   outputFormatter: utils.hexToNumber
-};
+}
 
 export const getTransactionProof = {
   name: 'getTransactionProof',
   call: 'getTransactionProof',
   params: 1,
   inputFormatter: [formatters.inputAddressFormatter]
-};
+}
 
 export const sendSignedTransaction = {
   name: 'sendSignedTransaction',
   call: 'sendRawTransaction',
   params: 1,
   inputFormatter: [null]
-};
+}
 
 export const signTransaction = {
   name: 'signTransaction',
@@ -164,14 +166,14 @@ export const signTransaction = {
   params: 1,
   // inputFormatter: [formatters.inputTransactionFormatter],
   inputFormatter: [signer]
-};
+}
 
 const sendTransactionCall = (args: any) => {
   if (args && args.length && args[0] && args[0].privateKey) {
-    return 'sendRawTransaction';
+    return 'sendRawTransaction'
   }
-  return 'sendTransaction';
-};
+  return 'sendTransaction'
+}
 export const sendTransaction = {
   name: 'sendTransaction',
   // call: 'sendRawTransaction',
@@ -179,35 +181,35 @@ export const sendTransaction = {
   params: 1,
   // inputFormatter: [formatters.inputTransactionFormatter],
   inputFormatter: [signer]
-};
+}
 
 export const newMessageFilter = {
   name: 'newMessageFilter',
   call: 'newFilter',
   params: 1
-};
+}
 export const newBlockFilter = {
   name: 'newBlockFilter',
   call: 'newBlockFilter',
   params: 0
-};
+}
 export const getFilterChanges = {
   name: 'getFilterChanges',
   call: 'getFilterChanges',
   params: 1
-};
+}
 
 export const getFilterLogs = {
   name: 'getFilterLogs',
   call: 'getFilterLogs',
   params: 1
-};
+}
 
 export const deleteMessageFilter = {
   name: 'deleteMessageFilter',
   call: 'uninstallFilter',
   params: 1
-};
+}
 
 export const sign = {
   name: 'sign',
@@ -219,10 +221,10 @@ export const sign = {
     // signer
   ],
   transformPayload: function(payload: any) {
-    payload.params.reverse();
-    return payload;
+    payload.params.reverse()
+    return payload
   }
-};
+}
 
 export const call = {
   name: 'call',
@@ -232,10 +234,10 @@ export const call = {
     formatters.inputCallFormatter,
     formatters.inputDefaultBlockNumberFormatter
   ]
-};
+}
 
 export const getLogs = {
   name: 'getLogs',
   call: 'getLogs',
   params: 1
-};
+}

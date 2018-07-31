@@ -1,4 +1,10 @@
-const { nervos, bytecode, privateKey, abi, tx } = require('./config')
+const {
+  nervos,
+  bytecode,
+  privateKey,
+  abi,
+  tx
+} = require('./config')
 
 const inquireReceipt = txHash =>
   new Promise((resolve, reject) => {
@@ -111,12 +117,14 @@ test('store abi', async () => {
     ...tx,
     validUntilBlock: +currentHeight + 88
   })
-  const { contractAddress } = contractReuslt
+  const {
+    contractAddress
+  } = contractReuslt
   const receipt = await nervos.appchain.storeAbi(contractAddress, abi, {
     ...tx,
     validUntilBlock: +currentHeight + 88
   })
 
   const returnAbi = await nervos.appchain.getAbi(contractAddress)
-  expect(returnAbi).toBe(nervos.utils.utf8ToHex(JSON.stringify(abi)))
+  expect(JSON.stringify(returnAbi)).toBe(JSON.stringify(abi))
 })
