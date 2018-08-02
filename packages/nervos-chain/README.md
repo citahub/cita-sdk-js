@@ -1,32 +1,32 @@
 ![Build Status](https://travis-ci.org/cryptape/web3.svg?branch=master)
-![npm](https://img.shields.io/npm/v/@nervos/web3.svg)
+![npm](https://img.shields.io/npm/v/@nervos/chain.svg)
 
 # About
 
-`@nervos/web3` is a high-order function takes `provider` and `Web3 Class`(optional) as inputs, returns nervos-supported web3 instance.
+`@nervos/chain` is a high-order function takes `provider` and `Web3 Class`(optional) as inputs, returns nervos-supported web3 instance.
 
 # Version
 
-`@nervos/web3` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@nervos/web3@0.17.x` will work perfectly with `CITA@0.17`
+`@nervos/chain` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@nervos/chain@0.17.x` will work perfectly with `CITA@0.17`
 
 # Getting Started
 
-To use `@nervos/web3', you can add it via npm
+To use `@nervos/chain', you can add it via npm
 
 ```shell
-yarn add @nervos/web3
+yarn add @nervos/chain
 ```
 
 or to link it in browser directly with
 
 ```html
-<script src="node_modules/@nervos/web3/lib/bundle.js" />
+<script src="node_modules/@nervos/chain/lib/bundle.js" />
 ```
 
 # Add `nervos.js`
 
 ```javascript
-import Nervos from '@nervos/web3'
+import Nervos from '@nervos/chain'
 const nervos = Nervos('http://localhost:1337')
 ```
 
