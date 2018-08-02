@@ -1,6 +1,6 @@
 {
   "name": "@nervos/chain",
-  "version": "0.17.43",
+  "version": "0.17.44",
   "main": "lib/index.js",
   "repository": "https://github.com/keith-cy/nervos",
   "author": "Keith <keithwhisper@gmail.com>",
@@ -22,6 +22,9 @@
     ]
   },
   "docs": "typedoc --theme markdown",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "babel-minify": "^0.4.3",
     "browserify": "^16.2.2",
@@ -43,5 +46,5 @@
     "verbose": true,
     "testURL": "http://localhost/"
   },
-  "gitHead": "62c8a38d2346a305c82e51b5ece3c255e46ba904"
+  "gitHead": "825f5c378d32c5582d282992165a26d3d3115667"
 }
