@@ -1,6 +1,6 @@
 {
   "name": "@nervos/chain",
-  "version": "0.17.41",
+  "version": "0.17.42",
   "main": "lib/index.js",
   "repository": "https://github.com/keith-cy/nervos",
   "author": "Keith <keithwhisper@gmail.com>",
