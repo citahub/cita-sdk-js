@@ -42,5 +42,6 @@
   "jest": {
     "verbose": true,
     "testURL": "http://localhost/"
-  }
+  },
+  "gitHead": "62c8a38d2346a305c82e51b5ece3c255e46ba904"
 }
