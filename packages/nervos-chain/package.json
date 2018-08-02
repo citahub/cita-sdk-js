@@ -1,5 +1,5 @@
 {
-  "name": "@nervos/web3",
+  "name": "@nervos/chain",
   "version": "0.17.41",
   "main": "lib/index.js",
   "repository": "https://github.com/keith-cy/nervos",
