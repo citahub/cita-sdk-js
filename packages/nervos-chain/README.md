@@ -383,3 +383,19 @@ nervos.appchain.unsigner(transactionContent)
 ```javascript
 nervos.listeners.listenToTransactionReceipt(result.hash).then(console.log)
 ```
+
+## System Contracts API
+
+System contracts locating in `nervos.system` can be used as normal contracts.
+
+```javascript
+nervos.system.admin
+nervos.system.authorization
+nervos.system.chainManager
+nervos.system.groupManagement
+nervos.system.nodeManager
+nervos.system.permissionManagement
+nervos.system.quotaManager
+```
+
+Corresponding methods can be found [here](https://docs.nervos.org/cita/#/system_management/node)
