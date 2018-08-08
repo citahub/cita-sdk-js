@@ -10,4 +10,5 @@ install:
 git:
   submodules: false
 script:
+  - npm bootstrap
   - npm test
