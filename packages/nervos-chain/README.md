@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/cryptape/web3.svg?branch=master)
+[![Travis](https://travis-ci.org/cryptape/nervos.js.svg?branch=develop)](https://travis-ci.org/cryptape/nervos.js)
 ![npm](https://img.shields.io/npm/v/@nervos/chain.svg)
 
 # About

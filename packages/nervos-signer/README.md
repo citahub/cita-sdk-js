@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cryptape/nervos-signer.svg?branch=master)](https://travis-ci.org/cryptape/nervos-signer)
+[![Travis](https://travis-ci.org/cryptape/nervos.js.svg?branch=develop)](https://travis-ci.org/cryptape/nervos.js)
 ![npm (scoped)](https://img.shields.io/npm/v/@nervos/signer.svg)
 
 # nervos-signer
@@ -11,8 +11,7 @@ Signer of Nervos
 import signer from '@nervos/signer'
 
 const transaction = {
-  privateKey:
-    '0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d9',
+  privateKey: '0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d9',
   nonce: 9999999,
   quota: 100,
   data:
