@@ -5,9 +5,9 @@ node_js:
 cache:
   directories:
     - node_modules
-# install:
-#   - npm install
+install:
+  - npm install
 git:
   submodules: false
 script:
-  - npm test
+  - lerna run test

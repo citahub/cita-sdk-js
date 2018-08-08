@@ -579,6 +579,12 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@types/bn.js@*":
+  version "4.11.1"
+  resolved "https://registry.npmjs.org/@types/bn.js/-/bn.js-4.11.1.tgz#6fd07b93490ecf0f3501a31ea9cfd330885b10fa"
+  dependencies:
+    "@types/node" "*"
+
 "@types/events@*":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
@@ -632,9 +638,16 @@
     "@types/glob" "*"
     "@types/node" "*"
 
-"@types/underscore@^1.8.8":
+"@types/underscore@*", "@types/underscore@^1.8.8":
   version "1.8.8"
   resolved "https://registry.npmjs.org/@types/underscore/-/underscore-1.8.8.tgz#510fe1ca5e7fa87fccd405b9a8b566d420bc3d1b"
+
+"@types/web3@^1.0.0":
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/@types/web3/-/web3-1.0.2.tgz#592c7c1f980f70df1b8e257c7987c56c21374d90"
+  dependencies:
+    "@types/bn.js" "*"
+    "@types/underscore" "*"
 
 JSONStream@^1.0.3, JSONStream@^1.0.4:
   version "1.3.3"
@@ -2563,6 +2576,10 @@ duplexer3@^0.1.4:
 duplexer@^0.1.1, duplexer@~0.1.1:
   version "0.1.1"
   resolved "https://registry.npmjs.org/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
+
+ec@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/ec/-/ec-0.0.1.tgz#5579aad6053f2ce337bc712a905188f69450b8e1"
 
 ecc-jsbn@~0.1.1:
   version "0.1.1"
@@ -4583,7 +4600,7 @@ jest-worker@^23.2.0:
   dependencies:
     merge-stream "^1.0.1"
 
-jest@^23.2.0:
+jest@^23.4.2:
   version "23.4.2"
   resolved "https://registry.npmjs.org/jest/-/jest-23.4.2.tgz#1fae3ed832192143070ae85156b25cea891a1260"
   dependencies:
