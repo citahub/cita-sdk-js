@@ -6,10 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const web3_1 = __importDefault(require("web3"));
 const systems_1 = __importDefault(require("./systems"));
 const appchain_1 = __importDefault(require("./appchain"));
-const contract_1 = __importDefault(require("./contract"));
 const NervosWeb3 = (provider, CustomWeb3 = web3_1.default) => {
     const web3 = new CustomWeb3(provider);
-    web3.eth.Contract.prototype._executeMethod = contract_1.default;
     const appchainWeb3 = appchain_1.default(web3);
     const systemWeb3 = systems_1.default(appchainWeb3);
     const target = systemWeb3;

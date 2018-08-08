@@ -6,9 +6,8 @@ cache:
   directories:
     - node_modules
 install:
-  - npm install
-git:
-  submodules: false
+  - yarn install 
+  - yarn install packages/*
 script:
-  - npm bootstrap
-  - npm test
+  - yarn bootstrap
+  - yarn test
