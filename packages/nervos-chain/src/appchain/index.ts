@@ -4,6 +4,7 @@ import * as rpc from './rpc'
 import * as personal from './neuron'
 import listener from './listener'
 import addPrivateKeyFrom from '../utils/addPrivateKey'
+import Contract from '../contract'
 
 export interface EnhancedWeb3 extends Web3 {
   appchain?: any
@@ -51,7 +52,8 @@ export default (web3: EnhancedWeb3) => {
     ]
   })
   // add contract
-  web3.appchain.Contract = web3.eth.Contract
+  Contract.setProvider(web3.currentProvider)
+  web3.appchain.Contract = Contract
   web3 = listener(web3) as any
   web3.appchain.signer = signer
   web3.appchain.unsigner = unsigner

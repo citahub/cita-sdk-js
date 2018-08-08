@@ -2,68 +2,71 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const signer_1 = __importDefault(require("@nervos/signer"));
-var _ = require('underscore');
-var core = require('web3-core');
-var Method = require('web3-core-method');
-var utils = require('web3-utils');
-var Subscription = require('web3-core-subscriptions').subscription;
-var formatters = require('web3-core-helpers').formatters;
-var errors = require('web3-core-helpers').errors;
-var promiEvent = require('web3-core-promievent');
-var abi = require('web3-eth-abi');
-function _executeMethod() {
-    var _this = this, args = this._parent._processExecuteArguments.call(this, Array.prototype.slice.call(arguments), defer), defer = promiEvent(args.type !== 'send'), ethAccounts = _this.constructor._ethAccounts || _this._ethAccounts;
+const _ = __importStar(require("underscore"));
+const Contract = require('web3-eth-contract');
+const Method = require('web3-core-method');
+const utils = require('web3-utils');
+const { formatters } = require('web3-core-helpers');
+const promiEvent = require('web3-core-promievent');
+var Action;
+(function (Action) {
+    Action["NONE"] = "";
+    Action["CALL"] = "call";
+    Action["SEND"] = "send";
+    Action["SEND_TRANSACTION"] = "sendTransaction";
+})(Action || (Action = {}));
+Contract.prototype._executeMethod = function _executeMethod() {
+    const ctx = this;
+    let args = this._parent._processExecuteArguments.call(this, Array.prototype.slice.call(arguments), defer);
+    var defer = promiEvent(args.type !== 'send');
+    const ethAccounts = ctx.constructor._ethAccounts || ctx._ethAccounts;
     if (args.generateRequest) {
-        var payload = {
+        const payload = {
             params: [formatters.inputCallFormatter.call(this._parent, args.options)],
             callback: args.callback,
+            method: '',
+            format: null
         };
-        if (args.type === 'call') {
+        if (args.type === Action.CALL) {
             payload.params.push(formatters.inputDefaultBlockNumberFormatter.call(this._parent, args.defaultBlock));
-            payload.method = 'call';
+            payload.method = Action.CALL;
             payload.format = this._parent._decodeMethodReturn.bind(null, this._method.outputs);
         }
         else {
-            payload.method = 'sendTransaction';
+            payload.method = Action.SEND_TRANSACTION;
         }
         return payload;
     }
     else {
         switch (args.type) {
-            case 'estimate':
-                var estimateGas = new Method({
-                    name: 'estimateGas',
-                    call: 'eth_estimateGas',
-                    params: 1,
-                    inputFormatter: [formatters.inputCallFormatter],
-                    outputFormatter: utils.hexToNumber,
-                    requestManager: _this._parent._requestManager,
-                    accounts: ethAccounts,
-                    defaultAccount: _this._parent.defaultAccount,
-                    defaultBlock: _this._parent.defaultBlock,
-                }).createFunction();
-                return estimateGas(args.options, args.callback);
-            case 'call':
-                var call = new Method({
+            case Action.CALL:
+                const call = new Method({
                     name: 'call',
-                    call: 'call',
+                    call: Action.CALL,
                     params: 2,
                     inputFormatter: [
                         formatters.inputCallFormatter,
-                        formatters.inputDefaultBlockNumberFormatter,
+                        formatters.inputDefaultBlockNumberFormatter
                     ],
                     outputFormatter: function (result) {
-                        return _this._parent._decodeMethodReturn(_this._method.outputs, result);
+                        return ctx._parent._decodeMethodReturn(ctx._method.outputs, result);
                     },
-                    requestManager: _this._parent._requestManager,
+                    requestManager: ctx._parent._requestManager,
                     accounts: ethAccounts,
-                    defaultAccount: _this._parent.defaultAccount,
-                    defaultBlock: _this._parent.defaultBlock,
+                    defaultAccount: ctx._parent.defaultAccount,
+                    defaultBlock: ctx._parent.defaultBlock
                 }).createFunction();
                 return call(args.options, args.defaultBlock, args.callback);
-            case 'send':
+            case Action.SEND:
                 if (!utils.isAddress(args.options.from)) {
                     return utils._fireError(new Error('No "from" address specified in neither the given options, nor the default options.'), defer.eventEmitter, defer.reject, args.callback);
                 }
@@ -73,18 +76,18 @@ function _executeMethod() {
                     args.options.value > 0) {
                     return utils._fireError(new Error('Can not send value to non-payable contract method or constructor'), defer.eventEmitter, defer.reject, args.callback);
                 }
-                var extraFormatters = {
-                    receiptFormatter: function (receipt) {
+                const extraFormatters = {
+                    receiptFormatter: (receipt) => {
                         if (_.isArray(receipt.logs)) {
                             var events = _.map(receipt.logs, function (log) {
-                                return _this._parent._decodeEventABI.call({
+                                return ctx._parent._decodeEventABI.call({
                                     name: 'ALLEVENTS',
-                                    jsonInterface: _this._parent.options.jsonInterface,
+                                    jsonInterface: ctx._parent.options.jsonInterface
                                 }, log);
                             });
                             receipt.events = {};
-                            var count = 0;
-                            events.forEach(function (ev) {
+                            let count = 0;
+                            events.forEach((ev) => {
                                 if (ev.event) {
                                     if (receipt.events[ev.event]) {
                                         if (Array.isArray(receipt.events[ev.event])) {
@@ -107,27 +110,25 @@ function _executeMethod() {
                         }
                         return receipt;
                     },
-                    contractDeployFormatter: function (receipt) {
-                        var newContract = _this._parent.clone();
+                    contractDeployFormatter: (receipt) => {
+                        const newContract = ctx._parent.clone();
                         newContract.options.address = receipt.contractAddress;
                         return newContract;
-                    },
+                    }
                 };
-                var call = args.options.quota ? 'sendTransaction' : 'eth_sendTransaction';
-                var signer = args.options.quota ? signer_1.default : formatters.inputDefaultBlockNumberFormatter;
                 var sendTransaction = new Method({
                     name: 'sendTransaction',
-                    call,
+                    call: Action.SEND_TRANSACTION,
                     params: 1,
-                    inputFormatter: [signer],
-                    requestManager: _this._parent._requestManager,
-                    accounts: _this.constructor._ethAccounts || _this._ethAccounts,
-                    defaultAccount: _this._parent.defaultAccount,
-                    defaultBlock: _this._parent.defaultBlock,
-                    extraFormatters: extraFormatters,
+                    inputFormatter: [signer_1.default],
+                    requestManager: ctx._parent._requestManager,
+                    accounts: ctx.constructor._ethAccounts || ctx._ethAccounts,
+                    defaultAccount: ctx._parent.defaultAccount,
+                    defaultBlock: ctx._parent.defaultBlock,
+                    extraFormatters: extraFormatters
                 }).createFunction();
                 return sendTransaction(args.options, args.callback);
         }
     }
-}
-exports.default = _executeMethod;
+};
+exports.default = Contract;
