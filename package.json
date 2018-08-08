@@ -1,6 +1,14 @@
 {
   "name": "root",
-  "private": true,
+  "private": false,
+  "scripts": {
+    "bootstrap": "lerna bootstrap --hoist",
+    "test": "jest"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  },
   "devDependencies": {
     "@types/google-protobuf": "^3.2.7",
     "@types/node": "^10.5.1",
