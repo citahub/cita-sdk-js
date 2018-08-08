@@ -1,4 +1,4 @@
-const Nervos = require('../../nervos-web3/lib').default;
+const Nervos = require('../../nervos-chain/lib').default;
 const SERVER = 'http://121.196.200.225:1337';
 
 const nervos = Nervos(SERVER);
