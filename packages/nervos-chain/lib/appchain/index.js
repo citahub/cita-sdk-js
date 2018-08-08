@@ -23,6 +23,7 @@ const rpc = __importStar(require("./rpc"));
 const personal = __importStar(require("./neuron"));
 const listener_1 = __importDefault(require("./listener"));
 const addPrivateKey_1 = __importDefault(require("../utils/addPrivateKey"));
+const contract_1 = __importDefault(require("../contract"));
 exports.default = (web3) => {
     web3.extend({
         property: 'appchain',
@@ -59,7 +60,8 @@ exports.default = (web3) => {
             personal.ecRecover
         ]
     });
-    web3.appchain.Contract = web3.eth.Contract;
+    contract_1.default.setProvider(web3.currentProvider);
+    web3.appchain.Contract = contract_1.default;
     web3 = listener_1.default(web3);
     web3.appchain.signer = signer_1.default;
     web3.appchain.unsigner = signer_1.unsigner;

@@ -1,0 +1,9 @@
+export const ReservedAddr: { [index: string]: string } = {
+  admin: '0xffffffffffffffffffffffffffffffffff02000c',
+  authorization: '0xffffffffffffffffffffffffffffffffff020006',
+  chainManageer: '0xffffffffffffffffffffffffffffffffff020002',
+  groupManagement: '0xffffffffffffffffffffffffffffffffff02000a',
+  nodeManager: '0xffffffffffffffffffffffffffffffffff020001',
+  permissionManagement: '0xffffffffffffffffffffffffffffffffff020004',
+  quotaManager: '0xffffffffffffffffffffffffffffffffff020003'
+}

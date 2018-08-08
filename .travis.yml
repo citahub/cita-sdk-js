@@ -10,4 +10,4 @@ install:
 git:
   submodules: false
 script:
-  - lerna run test
+  - npm test
