@@ -1,5 +1,6 @@
 import { EnhancedWeb3 } from '../appchain'
 import { ReservedAddr } from './config'
+import abis from './abis'
 
 const systemContracts = [
   'admin',
@@ -12,8 +13,7 @@ const systemContracts = [
 ]
 
 const manageGen = (web3: any, contract: string) => {
-  const abi = require(`./abis/${contract}.json`)
-  return new web3.appchain.Contract(abi, ReservedAddr[contract])
+  return new web3.appchain.Contract(abis[contract], ReservedAddr[contract])
 }
 
 const system = (web3: EnhancedWeb3) => {

@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const config_1 = require("./config");
+const abis_1 = __importDefault(require("./abis"));
 const systemContracts = [
     'admin',
     'authorization',
@@ -11,8 +15,7 @@ const systemContracts = [
     'quotaManager'
 ];
 const manageGen = (web3, contract) => {
-    const abi = require(`./abis/${contract}.json`);
-    return new web3.appchain.Contract(abi, config_1.ReservedAddr[contract]);
+    return new web3.appchain.Contract(abis_1.default[contract], config_1.ReservedAddr[contract]);
 };
 const system = (web3) => {
     const contracts = {};

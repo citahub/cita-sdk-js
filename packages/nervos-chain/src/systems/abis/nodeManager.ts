@@ -1,4 +1,4 @@
-[{
+export default [{
   "constant": true,
   "inputs": [],
   "name": "deleteRoleAddr",
@@ -10,21 +10,18 @@
   "stateMutability": "view",
   "type": "function"
 }, {
-  "constant": false,
+  "constant": true,
   "inputs": [{
-    "name": "_account",
-    "type": "address"
-  }, {
-    "name": "_permission",
+    "name": "_node",
     "type": "address"
   }],
-  "name": "cancelAuth",
+  "name": "stakePermillage",
   "outputs": [{
     "name": "",
-    "type": "bool"
+    "type": "uint64"
   }],
   "payable": false,
-  "stateMutability": "nonpayable",
+  "stateMutability": "view",
   "type": "function"
 }, {
   "constant": true,
@@ -38,35 +35,18 @@
   "stateMutability": "view",
   "type": "function"
 }, {
-  "constant": true,
+  "constant": false,
   "inputs": [{
-    "name": "_account",
-    "type": "address"
-  }, {
-    "name": "_permission",
+    "name": "_node",
     "type": "address"
   }],
-  "name": "checkPermission",
+  "name": "deleteNode",
   "outputs": [{
     "name": "",
     "type": "bool"
   }],
   "payable": false,
-  "stateMutability": "view",
-  "type": "function"
-}, {
-  "constant": true,
-  "inputs": [{
-    "name": "_permission",
-    "type": "address"
-  }],
-  "name": "queryAccounts",
-  "outputs": [{
-    "name": "_accounts",
-    "type": "address[]"
-  }],
-  "payable": false,
-  "stateMutability": "view",
+  "stateMutability": "nonpayable",
   "type": "function"
 }, {
   "constant": true,
@@ -75,6 +55,20 @@
   "outputs": [{
     "name": "",
     "type": "address"
+  }],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "constant": true,
+  "inputs": [{
+    "name": "_node",
+    "type": "address"
+  }],
+  "name": "getStatus",
+  "outputs": [{
+    "name": "",
+    "type": "uint8"
   }],
   "payable": false,
   "stateMutability": "view",
@@ -102,20 +96,6 @@
   "stateMutability": "view",
   "type": "function"
 }, {
-  "constant": false,
-  "inputs": [{
-    "name": "_permission",
-    "type": "address"
-  }],
-  "name": "clearAuthOfPermission",
-  "outputs": [{
-    "name": "",
-    "type": "bool"
-  }],
-  "payable": false,
-  "stateMutability": "nonpayable",
-  "type": "function"
-}, {
   "constant": true,
   "inputs": [],
   "name": "permissionCreatorAddr",
@@ -136,6 +116,20 @@
   }],
   "payable": false,
   "stateMutability": "view",
+  "type": "function"
+}, {
+  "constant": false,
+  "inputs": [{
+    "name": "_node",
+    "type": "address"
+  }, {
+    "name": "stake",
+    "type": "uint64"
+  }],
+  "name": "setStake",
+  "outputs": [],
+  "payable": false,
+  "stateMutability": "nonpayable",
   "type": "function"
 }, {
   "constant": true,
@@ -162,10 +156,35 @@
 }, {
   "constant": true,
   "inputs": [],
+  "name": "listNode",
+  "outputs": [{
+    "name": "",
+    "type": "address[]"
+  }],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "constant": true,
+  "inputs": [],
   "name": "cancelRoleAddr",
   "outputs": [{
     "name": "",
     "type": "address"
+  }],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "constant": true,
+  "inputs": [{
+    "name": "",
+    "type": "address"
+  }],
+  "name": "status",
+  "outputs": [{
+    "name": "",
+    "type": "uint8"
   }],
   "payable": false,
   "stateMutability": "view",
@@ -177,6 +196,17 @@
   "outputs": [{
     "name": "",
     "type": "address"
+  }],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "constant": true,
+  "inputs": [],
+  "name": "listStake",
+  "outputs": [{
+    "name": "_stakes",
+    "type": "uint64[]"
   }],
   "payable": false,
   "stateMutability": "view",
@@ -238,20 +268,6 @@
   "type": "function"
 }, {
   "constant": true,
-  "inputs": [{
-    "name": "_account",
-    "type": "address"
-  }],
-  "name": "queryPermissions",
-  "outputs": [{
-    "name": "_permissions",
-    "type": "address[]"
-  }],
-  "payable": false,
-  "stateMutability": "view",
-  "type": "function"
-}, {
-  "constant": true,
   "inputs": [],
   "name": "userManagementAddr",
   "outputs": [{
@@ -271,20 +287,6 @@
   }],
   "payable": false,
   "stateMutability": "view",
-  "type": "function"
-}, {
-  "constant": false,
-  "inputs": [{
-    "name": "_account",
-    "type": "address"
-  }],
-  "name": "clearAuth",
-  "outputs": [{
-    "name": "",
-    "type": "bool"
-  }],
-  "payable": false,
-  "stateMutability": "nonpayable",
   "type": "function"
 }, {
   "constant": true,
@@ -331,35 +333,18 @@
   "stateMutability": "view",
   "type": "function"
 }, {
-  "constant": true,
-  "inputs": [],
-  "name": "queryAllAccounts",
-  "outputs": [{
-    "name": "",
-    "type": "address[]"
-  }],
-  "payable": false,
-  "stateMutability": "view",
-  "type": "function"
-}, {
-  "constant": true,
+  "constant": false,
   "inputs": [{
-    "name": "_account",
+    "name": "_node",
     "type": "address"
-  }, {
-    "name": "_cont",
-    "type": "address"
-  }, {
-    "name": "_func",
-    "type": "bytes4"
   }],
-  "name": "checkResource",
+  "name": "approveNode",
   "outputs": [{
     "name": "",
     "type": "bool"
   }],
   "payable": false,
-  "stateMutability": "view",
+  "stateMutability": "nonpayable",
   "type": "function"
 }, {
   "constant": true,
@@ -395,26 +380,12 @@
   "stateMutability": "view",
   "type": "function"
 }, {
-  "constant": false,
   "inputs": [{
-    "name": "_account",
-    "type": "address"
+    "name": "_nodes",
+    "type": "address[]"
   }, {
-    "name": "_permission",
-    "type": "address"
-  }],
-  "name": "setAuth",
-  "outputs": [{
-    "name": "",
-    "type": "bool"
-  }],
-  "payable": false,
-  "stateMutability": "nonpayable",
-  "type": "function"
-}, {
-  "inputs": [{
-    "name": "_superAdmin",
-    "type": "address"
+    "name": "_stakes",
+    "type": "uint64[]"
   }],
   "payable": false,
   "stateMutability": "nonpayable",
@@ -423,35 +394,44 @@
   "anonymous": false,
   "inputs": [{
     "indexed": true,
-    "name": "_account",
-    "type": "address"
+    "name": "errorType",
+    "type": "uint8"
   }, {
-    "indexed": true,
-    "name": "_permission",
-    "type": "address"
+    "indexed": false,
+    "name": "msg",
+    "type": "string"
   }],
-  "name": "AuthSetted",
+  "name": "ErrorLog",
   "type": "event"
 }, {
   "anonymous": false,
   "inputs": [{
     "indexed": true,
-    "name": "_account",
-    "type": "address"
-  }, {
-    "indexed": true,
-    "name": "_permission",
+    "name": "_node",
     "type": "address"
   }],
-  "name": "AuthCanceled",
+  "name": "ApproveNode",
   "type": "event"
 }, {
   "anonymous": false,
   "inputs": [{
     "indexed": true,
-    "name": "_account",
+    "name": "_node",
     "type": "address"
   }],
-  "name": "AuthCleared",
+  "name": "DeleteNode",
+  "type": "event"
+}, {
+  "anonymous": false,
+  "inputs": [{
+    "indexed": true,
+    "name": "_node",
+    "type": "address"
+  }, {
+    "indexed": false,
+    "name": "_stake",
+    "type": "uint256"
+  }],
+  "name": "SetStake",
   "type": "event"
 }]
