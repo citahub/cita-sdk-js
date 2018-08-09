@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/cryptape/web3.svg?branch=master)
+[![Travis](https://travis-ci.org/cryptape/nervos.js.svg?branch=develop)](https://travis-ci.org/cryptape/nervos.js)
 ![npm](https://img.shields.io/npm/v/@nervos/chain.svg)
 
 # About
@@ -67,7 +67,7 @@ nervos.appchain.getMetaData()
  * @method getAbi
  * @param {string} - contract address
  * @param {string} - block number
- * @return {Promise<string>} Promise returns abi
+ * @return {Promise<abi>} Promise returns abi
  */
 nervos.appchain.getAbi('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
 ```
