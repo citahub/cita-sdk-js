@@ -3,7 +3,7 @@
 
 # nervos-signer
 
-Signer of Nervos
+This package is the signing module. 
 
 ### Basic Usage
 
