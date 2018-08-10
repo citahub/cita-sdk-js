@@ -11,6 +11,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const signer_1 = __importDefault(require("@nervos/signer"));
+const addPrivateKey_1 = __importDefault(require("../utils/addPrivateKey"));
 const _ = __importStar(require("underscore"));
 const Contract = require('web3-eth-contract');
 const Method = require('web3-core-method');
@@ -24,6 +25,10 @@ var Action;
     Action["SEND"] = "send";
     Action["SEND_TRANSACTION"] = "sendTransaction";
 })(Action || (Action = {}));
+const sign = (_tx) => {
+    const tx = addPrivateKey_1.default(Contract.accounts.wallet)(_tx);
+    return signer_1.default(tx);
+};
 Contract.prototype._executeMethod = function _executeMethod() {
     const ctx = this;
     let args = this._parent._processExecuteArguments.call(this, Array.prototype.slice.call(arguments), defer);
@@ -120,9 +125,9 @@ Contract.prototype._executeMethod = function _executeMethod() {
                     name: 'sendTransaction',
                     call: Action.SEND_TRANSACTION,
                     params: 1,
-                    inputFormatter: [signer_1.default],
+                    inputFormatter: [sign],
                     requestManager: ctx._parent._requestManager,
-                    accounts: ctx.constructor._ethAccounts || ctx._ethAccounts,
+                    accounts: Contract.accounts,
                     defaultAccount: ctx._parent.defaultAccount,
                     defaultBlock: ctx._parent.defaultBlock,
                     extraFormatters: extraFormatters

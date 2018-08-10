@@ -24,7 +24,9 @@ const personal = __importStar(require("./neuron"));
 const listener_1 = __importDefault(require("./listener"));
 const addPrivateKey_1 = __importDefault(require("../utils/addPrivateKey"));
 const contract_1 = __importDefault(require("../contract"));
+const proxy_1 = __importDefault(require("./proxy"));
 exports.default = (web3) => {
+    web3.appchain = web3.appchain || {};
     web3.extend({
         property: 'appchain',
         methods: [
@@ -60,7 +62,9 @@ exports.default = (web3) => {
             personal.ecRecover
         ]
     });
+    web3.appchain.accounts = web3.eth.accounts;
     contract_1.default.setProvider(web3.currentProvider);
+    contract_1.default.accounts = web3.appchain.accounts;
     web3.appchain.Contract = contract_1.default;
     web3 = listener_1.default(web3);
     web3.appchain.signer = signer_1.default;
@@ -86,7 +90,6 @@ exports.default = (web3) => {
         if (paramaters.length) {
             encodedArgs = web3.eth.abi.encodeParameters(types, paramaters);
         }
-        console.log(encodedArgs);
         const _tx = Object.assign({ version: 0, value: 0, nonce: Math.round(Math.random() * 10) }, transaction, { data: bytecode.replace(/^0x/, '') + encodedArgs, validUntilBlock: +currentHeight + 88 });
         const tx = addPrivateKey_1.default(web3.eth.accounts.wallet)(_tx);
         const result = yield web3.appchain.sendTransaction(tx).catch((err) => {
@@ -137,5 +140,5 @@ exports.default = (web3) => {
         sign: web3.appchain.neuron_sign
     };
     web3.appchain.personal = neuron;
-    return web3;
+    return proxy_1.default(web3);
 };

@@ -1,5 +1,6 @@
 // import Contract from 'web3-eth-contract'
 import signer from '@nervos/signer'
+import addPrivateKeyFrom from '../utils/addPrivateKey'
 import * as _ from 'underscore'
 const Contract = require('web3-eth-contract')
 const Method = require('web3-core-method')
@@ -12,6 +13,10 @@ enum Action {
   CALL = 'call',
   SEND = 'send',
   SEND_TRANSACTION = 'sendTransaction'
+}
+const sign = (_tx: any) => {
+  const tx = addPrivateKeyFrom(Contract.accounts.wallet)(_tx)
+  return signer(tx)
 }
 Contract.prototype._executeMethod = function _executeMethod() {
   const ctx = this
@@ -153,9 +158,9 @@ Contract.prototype._executeMethod = function _executeMethod() {
           name: 'sendTransaction',
           call: Action.SEND_TRANSACTION,
           params: 1,
-          inputFormatter: [signer],
+          inputFormatter: [sign],
           requestManager: ctx._parent._requestManager,
-          accounts: ctx.constructor._ethAccounts || ctx._ethAccounts, // is eth.accounts (necessary for wallet signing)
+          accounts: Contract.accounts, // is eth.accounts (necessary for wallet signing)
           defaultAccount: ctx._parent.defaultAccount,
           defaultBlock: ctx._parent.defaultBlock,
           extraFormatters: extraFormatters

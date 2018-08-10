@@ -5,6 +5,7 @@ import * as personal from './neuron'
 import listener from './listener'
 import addPrivateKeyFrom from '../utils/addPrivateKey'
 import Contract from '../contract'
+import proxy from './proxy'
 
 export interface EnhancedWeb3 extends Web3 {
   appchain?: any
@@ -12,6 +13,7 @@ export interface EnhancedWeb3 extends Web3 {
 }
 
 export default (web3: EnhancedWeb3) => {
+  web3.appchain = web3.appchain || {}
   web3.extend({
     property: 'appchain',
     methods: [
@@ -51,8 +53,12 @@ export default (web3: EnhancedWeb3) => {
       personal.ecRecover
     ]
   })
+  // add account
+  web3.appchain.accounts = web3.eth.accounts
   // add contract
   Contract.setProvider(web3.currentProvider)
+  // Contract.prototype.accounts = web3.appchain.accounts
+  Contract.accounts = web3.appchain.accounts
   web3.appchain.Contract = Contract
   web3 = listener(web3) as any
   web3.appchain.signer = signer
@@ -81,7 +87,6 @@ export default (web3: EnhancedWeb3) => {
     if (paramaters.length) {
       encodedArgs = web3.eth.abi.encodeParameters(types, paramaters)
     }
-    console.log(encodedArgs)
 
     const _tx = {
       version: 0,
@@ -154,5 +159,5 @@ export default (web3: EnhancedWeb3) => {
   }
   web3.appchain.personal = neuron
 
-  return web3
+  return proxy(web3)
 }
