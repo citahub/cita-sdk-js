@@ -6,6 +6,7 @@ cache:
   directories:
     - /*/**/node_modules
 install:
-  - yarn bootstrap
+  # - yarn bootstrap
+  - travis_retry make ci-install
 script:
   - yarn test
