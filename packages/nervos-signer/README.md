@@ -1,9 +1,10 @@
 [![Travis](https://travis-ci.org/cryptape/nervos.js.svg?branch=develop)](https://travis-ci.org/cryptape/nervos.js)
 ![npm (scoped)](https://img.shields.io/npm/v/@nervos/signer.svg)
+[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@nervos/signer.svg)
 
 # nervos-signer
 
-This package is the signing module. 
+This package is the signing module.
 
 ### Basic Usage
 

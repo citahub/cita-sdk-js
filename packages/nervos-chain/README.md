@@ -1,5 +1,6 @@
 [![Travis](https://travis-ci.org/cryptape/nervos.js.svg?branch=develop)](https://travis-ci.org/cryptape/nervos.js)
 ![npm](https://img.shields.io/npm/v/@nervos/chain.svg)
+[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@nervos/chain.svg)
 
 # About
 
