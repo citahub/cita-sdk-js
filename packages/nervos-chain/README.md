@@ -1,5 +1,6 @@
 [![Travis](https://travis-ci.org/cryptape/nervos.js.svg?branch=develop)](https://travis-ci.org/cryptape/nervos.js)
 ![npm](https://img.shields.io/npm/v/@nervos/chain.svg)
+[![AppChain](https://img.shields.io/badge/made%20for-AppChain-618833.svg)](appchain.nervos.org)
 
 # About
 
