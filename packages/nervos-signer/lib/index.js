@@ -10,14 +10,13 @@ exports.sha3 = utils.sha3;
 exports.getNonce = () => {
     return utils.randomHex(5);
 };
-exports.hex2bytes = (hex) => {
-    if (typeof hex === 'string') {
-        return utils.hexToBytes(hex.startsWith('0x') ? hex : '0x' + hex);
+exports.hex2bytes = (num) => {
+    let hex = utils.toHex(num).replace(/^0x/, '');
+    if (hex.length % 2) {
+        hex = '0' + hex;
     }
-    if (typeof hex === 'number') {
-        return utils.hexToBytes('0x' + hex.toString(16));
-    }
-    throw new Error('Invalid Hex or Number');
+    hex = '0x' + hex;
+    return utils.hexToBytes(hex);
 };
 exports.bytes2hex = (bytes) => {
     return utils.bytesToHex(bytes);

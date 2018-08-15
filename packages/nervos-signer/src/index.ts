@@ -5,22 +5,19 @@ export const unsigner = require('./unsigner').default
 
 const EC = require('elliptic').ec
 export const ec = new EC('secp256k1')
-
-// export const web3 = new Web3('')
 export const sha3 = utils.sha3
 
 export const getNonce = () => {
   return utils.randomHex(5)
 }
 
-export const hex2bytes = (hex: string | number) => {
-  if (typeof hex === 'string') {
-    return utils.hexToBytes(hex.startsWith('0x') ? hex : '0x' + hex)
+export const hex2bytes = (num: string | number) => {
+  let hex = utils.toHex(num).replace(/^0x/, '')
+  if (hex.length % 2) {
+    hex = '0' + hex
   }
-  if (typeof hex === 'number') {
-    return utils.hexToBytes('0x' + hex.toString(16))
-  }
-  throw new Error('Invalid Hex or Number')
+  hex = '0x' + hex
+  return utils.hexToBytes(hex)
 }
 
 export const bytes2hex = (bytes: Uint8Array) => {
