@@ -12,3 +12,7 @@ The `nervos.js` library is a collection of packages which contains specific func
 # Version
 
 `@nervos/chain` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@nervos/chain@0.17.x` will work perfectly with `CITA@0.17`
+
+# Changelog after @nervos/chain@0.17.5
+
+[fix]: **utils.hexToBytes**, and error of original web3@1.0.0
