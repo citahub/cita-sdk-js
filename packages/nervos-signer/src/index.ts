@@ -11,13 +11,8 @@ export const getNonce = () => {
   return utils.randomHex(5)
 }
 
-export const hex2bytes = (num: string | number) => {
-  let hex = utils.toHex(num).replace(/^0x/, '')
-  if (hex.length % 2) {
-    hex = '0' + hex
-  }
-  hex = '0x' + hex
-  return utils.hexToBytes(hex)
+export const hex2bytes = (num: string) => {
+  return utils.hexToBytes(num.startsWith('0x') ? num : '0x' + num)
 }
 
 export const bytes2hex = (bytes: Uint8Array) => {
@@ -77,6 +72,10 @@ const signer = (
 
   if (value) {
     try {
+      value = value.replace(/^0x/, '')
+      if (value.length % 2) {
+        value = '0' + value
+      }
       const _value = hex2bytes(value)
       const valueBytes = new Uint8Array(32)
       valueBytes.set(_value, 32 - _value.length)

@@ -49,10 +49,10 @@ const checkBalance = async to => {
 }
 
 // const to = '0xb4061fa8e18654a7d51fef3866d45bb1dc688710';
-const to = '0xb4061fa8e18654a7d51fef3866d45bb1dc688719'
+const to = '0xb4061fa8e18654a8d51fef3866d45bb1dc688719'
 // const v = 10000 * 10 ** 18
 // const hv = web3.utils.numberToHex(v)
 // console.log(hv)
 // v = web3.utils.numberToHex('1000000000000000000000')
 
-transfer(to, '0x21e19e0c9bab2400000')
+transfer(to, '0x10')

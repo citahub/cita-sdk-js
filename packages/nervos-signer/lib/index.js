@@ -11,12 +11,7 @@ exports.getNonce = () => {
     return utils.randomHex(5);
 };
 exports.hex2bytes = (num) => {
-    let hex = utils.toHex(num).replace(/^0x/, '');
-    if (hex.length % 2) {
-        hex = '0' + hex;
-    }
-    hex = '0x' + hex;
-    return utils.hexToBytes(hex);
+    return utils.hexToBytes(num.startsWith('0x') ? num : '0x' + num);
 };
 exports.bytes2hex = (bytes) => {
     return utils.bytesToHex(bytes);
@@ -50,6 +45,10 @@ const signer = ({ privateKey, data = '', nonce = exports.getNonce(), quota, vali
     }
     if (value) {
         try {
+            value = value.replace(/^0x/, '');
+            if (value.length % 2) {
+                value = '0' + value;
+            }
             const _value = exports.hex2bytes(value);
             const valueBytes = new Uint8Array(32);
             valueBytes.set(_value, 32 - _value.length);
