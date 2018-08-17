@@ -81,7 +81,7 @@ const signer = (
       valueBytes.set(_value, 32 - _value.length)
       tx.setValue(valueBytes)
     } catch (err) {
-      throw new Error(err)
+      throw err
     }
   }
 
@@ -105,7 +105,7 @@ const signer = (
     const _data = hex2bytes(data)
     tx.setData(new Uint8Array(_data))
   } catch (err) {
-    throw new Error(err)
+    throw err
   }
 
   tx.setVersion(version)

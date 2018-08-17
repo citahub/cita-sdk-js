@@ -39,12 +39,12 @@
     "typescript": "^2.8.4"
   },
   "dependencies": {
-    "@nervos/signer": "^1.0.31",
+    "@nervos/signer": "1.0.31",
     "web3": "^1.0.0-beta.34"
   },
   "jest": {
     "verbose": true,
     "testURL": "http://localhost/"
   },
-  "gitHead": "ddff86287afa51fa79c2742301a32048274d5e9a"
+  "gitHead": "e8e630a6e62a4a4cfb2ad2fd22df3fab0f9dcb4a"
 }
