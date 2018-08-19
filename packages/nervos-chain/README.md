@@ -3,7 +3,7 @@
 
 # About
 
-`@nervos/chain` is a high-order function takes `provider` and `Web3 Class`(optional) as inputs, returns nervos-supported web3 instance.
+`@nervos/chain` is a function takes `provider` and `Web3 Class`(optional) as inputs, returns nervos-supported web3 instance.
 
 # Version
 
