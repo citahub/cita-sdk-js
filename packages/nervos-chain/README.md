@@ -369,6 +369,17 @@ const transaction = {
 nervos.appchain.deploy(bytecode, tx)
 // or nervos.appchain.deploy({code, types, args}, tx) if the contract should be instantiated with arguments, code => bytecode, type => argsType, args => initialValues
 // or txResult = await new nervos.appchain.Contract(abi).deploy({data: bytecode}).send(tx) if you'd like standard web3 api
+// if contract has constructor args
+// deploy contract by nervos.appchain.deploy({
+//   code: string,
+//   initTypes: [],
+//   args: [],
+// })
+// or in web3 form
+// new nervos.appchain.Contract(abi).deploy({
+//   data: bytecode,
+//   arguments: [],
+// }).send(tx)
 ```
 
 ### Store Abi
