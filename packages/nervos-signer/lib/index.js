@@ -55,11 +55,11 @@ const signer = ({ privateKey, data = '', nonce = exports.getNonce(), quota, vali
             tx.setValue(valueBytes);
         }
         catch (err) {
-            throw new Error(err);
+            throw err;
         }
     }
     if (to) {
-        tx.setTo(to);
+        tx.setTo(to.replace(/^0x/, ''));
     }
     if (validUntilBlock === undefined) {
         throw new Error('ValidUntilBlock should be set');
@@ -78,7 +78,7 @@ const signer = ({ privateKey, data = '', nonce = exports.getNonce(), quota, vali
         tx.setData(new Uint8Array(_data));
     }
     catch (err) {
-        throw new Error(err);
+        throw err;
     }
     tx.setVersion(version);
     const txMsg = tx.serializeBinary();
