@@ -86,7 +86,7 @@ const signer = (
   }
 
   if (to) {
-    tx.setTo(to)
+    tx.setTo(to.replace(/^0x/, ''))
   }
 
   if (validUntilBlock === undefined) {
