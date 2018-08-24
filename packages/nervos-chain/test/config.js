@@ -1,5 +1,5 @@
 const Nervos = require('../lib').default
-const SERVER = 'http://121.196.200.225:1337'
+const SERVER = 'http://47.94.105.230:1337'
 
 const nervos = Nervos(SERVER)
 

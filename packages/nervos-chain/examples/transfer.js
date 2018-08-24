@@ -4,8 +4,6 @@ const {
   privateKey
 } = require('./config')
 
-// const myPrivateKey = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
-// const myAccount = web3.eth.accounts.privateKeyToAccount(myPrivateKey);
 
 const divider = () => console.log(chalk.green('-'.repeat(10)))
 
@@ -48,11 +46,6 @@ const checkBalance = async to => {
   console.log(chalk.green.bold(`Now ${to} has balance of ${balance}`))
 }
 
-// const to = '0xb4061fa8e18654a7d51fef3866d45bb1dc688710';
-const to = '0xb4061fa8e18654a8d51fef3866d45bb1dc688719'
-// const v = 10000 * 10 ** 18
-// const hv = web3.utils.numberToHex(v)
-// console.log(hv)
-// v = web3.utils.numberToHex('1000000000000000000000')
+const to = '0x46a23e25df9a0f6c18729dda9ad1af3b6a131161'
 
 transfer(to, '0x10')
