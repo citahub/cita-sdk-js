@@ -32,6 +32,7 @@ const listener = (web3) => {
             });
         };
     });
-    return Object.assign({}, web3, { listeners });
+    web3.listeners = listeners;
+    return web3;
 };
 exports.default = listener;
