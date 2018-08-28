@@ -1,0 +1,41 @@
+:root {
+  --bg-color: #f8f8fa;
+  --bg-border-color: #e9ebf0;
+  --text-color: #6c7184;
+  --a-color: #456cff;
+}
+
+.transactions__container {
+  text-align: center;
+}
+
+.transaction__list--board {
+  background: var(--bg-color, #f8f8fa);
+  border: 1px solid var(--bg-border-color, #e9ebf0);
+  border-radius: 2px;
+  margin: 0 15px;
+  padding: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 100;
+}
+
+.transactions__list--item {
+  display: flex;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.transactions__list--item a {
+  color: var(--a-color);
+  font-family: Cousine, monospace;
+}
+
+.transactions__list--time {
+  flex-basis: 200px;
+}
+
+.transactions__list--hash {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
