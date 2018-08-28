@@ -1,6 +1,6 @@
 {
   "name": "@nervos/chain",
-  "version": "0.17.15",
+  "version": "0.17.16",
   "main": "lib/index.js",
   "repository": "https://github.com/cryptape/nervos.js/tree/master/packages/nervos-chain",
   "author": "Keith <keithwhisper@gmail.com>",
@@ -46,5 +46,5 @@
     "verbose": true,
     "testURL": "http://localhost/"
   },
-  "gitHead": "4bef6c5b48d7ce65e4ed0630e2de6ec39f4b1242"
+  "gitHead": "114c63979b6466beba9bf469bf50efb018701e5a"
 }
