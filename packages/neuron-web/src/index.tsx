@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom'
 import { NervosProvider } from './contexts/nervos'
 import theme from './theme'
 
+import './common.css'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 import Routes from './routes'
