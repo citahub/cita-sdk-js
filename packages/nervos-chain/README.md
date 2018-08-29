@@ -346,13 +346,9 @@ nervos.appchain.getTransaction('0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
 ### Deploy Contract
 
 ```javascript
-/**
- * @method deploy
- * @desc deploy contract to AppChain
- * @param {string} - contract bytecode, compiled from contract
- * @param {object} - transaction
- * @return {Promise<object>} Promise returns transaction receipt object
- */
+const abi = JSON.parse(
+  '[{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]',
+)
 const bytecode =
   '6060604052341561000f57600080fd5b60d38061001d6000396000f3006060604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806360fe47b114604e5780636d4ce63c14606e575b600080fd5b3415605857600080fd5b606c60048080359060200190919050506094565b005b3415607857600080fd5b607e609e565b6040518082815260200191505060405180910390f35b8060008190555050565b600080549050905600a165627a7a723058202d9a0979adf6bf48461f24200e635bc19cd1786efbcfc0608eb1d76114d405860029'
 const privateKey = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
@@ -366,20 +362,22 @@ const transaction = {
   validUntilBlock: 999999,
   value: '0x0',
 }
-nervos.appchain.deploy(bytecode, tx)
-// or nervos.appchain.deploy({code, types, args}, tx) if the contract should be instantiated with arguments, code => bytecode, type => argsType, args => initialValues
-// or txResult = await new nervos.appchain.Contract(abi).deploy({data: bytecode}).send(tx) if you'd like standard web3 api
-// if contract has constructor args
-// deploy contract by nervos.appchain.deploy({
-//   code: string,
-//   initTypes: [],
-//   args: [],
-// })
-// or in web3 form
-// new nervos.appchain.Contract(abi).deploy({
-//   data: bytecode,
-//   arguments: [],
-// }).send(tx)
+// create contract instance
+const myContract = new web3.appchain.Contract(abi)
+
+// deploy contract and get transaction result
+const txRes = await myContract
+  .deploy({
+    data: bytecode,
+    arguments: [],
+  })
+  .send(tx)
+
+// get transaction receipt by transaction hash
+const receipt = await web3.listeners.listenToTransactionReceipt(txRes.hash)
+
+// set contract address to contract instance
+myContract.options.address = receipt.contractAddress
 ```
 
 ### Store Abi
@@ -410,12 +408,12 @@ const contract = new nervos.appchain.Contract(abi, contractAddress)
 
 // call method
 // get method is specified by contract through abi
-// contract.methods.myMethod.call()
+// contract.methods.myMethod(paramters).call(transaction)
 contract.methods.get().call()
 
 // send method
 // set method is specified by contract through abi
-// contract.methods.myMethod.send(transaction)
+// contract.methods.myMethod(parameters).send(transaction)
 contract.methods.set(5).send(transaction)
 ```
 
