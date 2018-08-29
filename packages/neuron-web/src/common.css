@@ -16,6 +16,7 @@
   font-size: 14px;
   border-radius: 2px;
   color: #FFF !important;
+  text-transform: none !important;
 }
 
 .primary {

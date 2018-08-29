@@ -7,7 +7,7 @@
   width: 90px;
   filter: drop-shadow(100vw 0 blue);
   margin: 24px 0;
-  animation: neon 10s linear 30s infinite;
+  animation: neon 10s linear 60s infinite;
 }
 
 @keyframes neon {

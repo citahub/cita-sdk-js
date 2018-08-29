@@ -1,14 +1,16 @@
-import { Button, TextField, Typography } from '@material-ui/core'
+import { Button, TextField } from '@material-ui/core'
 import * as React from 'react'
 import { pwd } from '../../config'
 import { INervosContext, withNervos } from '../../contexts/nervos'
 import { handleInputOf } from '../../utils/compActions'
+import './accounts.css'
 
 enum EnterEventType {
   privateKey = 'PRIVATE_KEY',
   login = 'LOGIN',
 }
 const initState = {
+  cleared: false,
   loaded: false,
   privateKey: '',
   privateKeyError: '',
@@ -61,13 +63,20 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
       })
     }
   }
+  public clearAccount = (e?: any) => {
+    this.props.nervos.appchain.accounts.wallet.clear()
+    this.props.nervos.appchain.accounts.wallet.save(pwd)
+    this.setState({
+      cleared: true,
+      privateKey: '',
+      privateKeyError: '',
+    })
+  }
   public render() {
-    const { privateKey, privateKeyError } = this.state
+    const { cleared, privateKey, privateKeyError } = this.state
     return (
-      <div>
-        <Typography variant="display1" align="center" title="Private Key">
-          Private Key
-        </Typography>
+      <div className="accounts__container">
+        <h1 className="title-1">Private Key</h1>
         <TextField
           value={privateKey}
           error={!!privateKeyError}
@@ -76,7 +85,23 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
           onKeyPress={this.handleKeyPress(EnterEventType.privateKey)}
           fullWidth={true}
         />
-        <Button onClick={this.addAccount}>Enter</Button>
+        <Button
+          classes={{
+            root: 'button-1 primary accounts__container--button',
+          }}
+          onClick={this.addAccount}
+        >
+          Enter
+        </Button>
+        <Button
+          classes={{
+            root: `button-1 ${cleared ? 'disabled' : 'primary'} accounts__container--button`,
+          }}
+          disabled={cleared}
+          onClick={this.clearAccount}
+        >
+          {cleared ? 'Cleared' : 'Clear'}
+        </Button>
       </div>
     )
   }
