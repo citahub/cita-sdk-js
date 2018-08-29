@@ -5,5 +5,5 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = __importDefault(require("./index"));
 if (window) {
-    window.NervosWeb3 = index_1.default;
+    window.Nervos = index_1.default;
 }

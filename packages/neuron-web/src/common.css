@@ -15,9 +15,15 @@
   padding: 8px 13px;
   font-size: 14px;
   border-radius: 2px;
-  color: #FFF;
+  color: #FFF !important;
+  text-transform: none !important;
 }
 
 .primary {
-  background: #456cff;
+  background: #456cff !important;
+}
+
+.disabled {
+  background: #eee !important;
+  color: #ccc !important;
 }
