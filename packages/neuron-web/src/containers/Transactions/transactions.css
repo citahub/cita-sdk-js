@@ -47,7 +47,8 @@
   white-space: nowrap;
 }
 
-.transactions__list--button {
+.transactions__list--button,
+.transaction__button--submit {
   width: 120px;
   height: 36px;
   margin: 0 10px !important;

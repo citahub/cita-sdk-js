@@ -2,6 +2,7 @@ import { Button } from '@material-ui/core'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { INervosContext, withNervos } from '../../contexts/nervos'
+import { IUniComp } from '../../hoc/UniComp'
 import { copyToClipboard } from '../../utils/compActions'
 import './transactions.css'
 
@@ -24,7 +25,7 @@ const initState = {
   transactions: [] as ITransaction[],
 }
 type ITransactionsState = typeof initState
-class Transactions extends React.Component<INervosContext, ITransactionsState> {
+class Transactions extends React.Component<INervosContext & IUniComp, ITransactionsState> {
   public readonly state = initState
   private timer: any
   public componentDidMount() {
@@ -81,6 +82,11 @@ class Transactions extends React.Component<INervosContext, ITransactionsState> {
     }
   }
 
+  public editTransaction = (e: any) => {
+    // this.props.setTransaction()
+    // this.props.setDialogue()
+  }
+
   public render() {
     const { address, transactions, copied } = this.state
     return (
@@ -122,6 +128,11 @@ class Transactions extends React.Component<INervosContext, ITransactionsState> {
               </div>
             ))}
           </div>
+        </div>
+        <div className="transaction__container--third">
+          <h1 className="title-1">DApp 测试</h1>
+          <Button classes={{ root: 'button-1 primary transaction__button--submit' }}>发送交易</Button>
+          <Button classes={{ root: 'button-1 primary transaction__button--submit' }}>签名信息</Button>
         </div>
       </div>
     )

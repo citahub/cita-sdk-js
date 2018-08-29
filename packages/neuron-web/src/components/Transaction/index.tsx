@@ -1,26 +1,24 @@
 import { TextField } from '@material-ui/core'
 import * as React from 'react'
 
-export interface ITransaction {
-  from: string
-  to: string
-  value: string
-  quota: string
-  chainId: string
-  validUntilBlock: string
-  data: string
-  nonce: string
-  version: number
-}
-
-const transaction = {
+export const tx = {
   chainId: 0,
   data: '',
+  from: '',
   nonce: '',
   quota: '',
+  to: '',
   validUntilBlock: 0,
   value: '',
   version: 0,
 }
 
-const Transaction = (props: ITransaction) => <React.Fragment />
+const Transaction = ({ transaction = tx }) => (
+  <React.Fragment>
+    {Object.keys(transaction).map((key: string) => {
+      return <TextField key={key} value={transaction[key]} label={key} />
+    })}
+  </React.Fragment>
+)
+
+export default Transaction
