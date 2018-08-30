@@ -4,7 +4,6 @@ exports.default = (web3) => {
     web3.utils.hexToBytes = new Proxy(web3.utils.hexToBytes, {
         apply: (target, _thisArg, argumentsList) => {
             let hex = ('' + argumentsList[0] || '').replace(/^0x/, '');
-            console.log(hex);
             if (hex.length % 2) {
                 hex = '0' + hex;
             }
