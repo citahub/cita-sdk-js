@@ -1,0 +1,59 @@
+:root {
+  --bg-color: #f8f8fa;
+  --bg-border-color: #e9ebf0;
+  --text-color: #6c7184;
+  --a-color: #456cff;
+}
+
+.transactions__container {
+  text-align: center;
+}
+
+.transactions__container--second {
+  border-top: 1px solid #eee;
+  margin-top: 45px;
+}
+
+.transaction__list--board {
+  background: var(--bg-color, #f8f8fa);
+  border: 1px solid var(--bg-border-color, #e9ebf0);
+  border-radius: 2px;
+  margin: 0 15px;
+  padding: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 100;
+}
+
+.transactions__list--item {
+  display: flex;
+  font-size: 14px;
+  color: var(--text-color);
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.transactions__list--item a {
+  color: var(--a-color);
+  font-family: PingFangSC-Light, Cousine, monospace;
+}
+
+.transactions__list--time {
+  flex-basis: 200px;
+}
+
+.transactions__list--hash {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transactions__list--button,
+.transaction__button--submit {
+  width: 120px;
+  height: 36px;
+  margin: 0 10px !important;
+  font-size: 12px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  font-weight: 100 !important;
+}

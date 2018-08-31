@@ -61,7 +61,7 @@ test('transfer', async () => {
   expect.assertions(6)
   jest.setTimeout(30000)
 
-  const to = '0xb4061fa8e18654a7d51fef3866d45bb1dc688710'
+  const to = '0xb4061fa8e18eeeeeeeeeeeeeeeeeeeeeeeeeeeee'
   const prevBalance = await nervos.appchain.getBalance(to)
 
   const currentHeight = await nervos.appchain.getBlockNumber()

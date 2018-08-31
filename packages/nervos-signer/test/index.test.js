@@ -95,9 +95,11 @@ test('sendTransaction with external key, getTransactionReceipt, and getTransacti
   console.log(transactionResult)
   return
 })
-test('unsign', () => {
+test.skip('unsign', () => {
 
   const signedMsg = sign(tx, privateKey)
+  console.log('signed msg')
+  console.log(signedMsg)
   const {
     transaction,
     // signature,

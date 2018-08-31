@@ -1,10 +1,10 @@
-import NervosWeb3 from './index';
+import Nervos from './index'
 
 declare global {
   interface Window {
-    NervosWeb3: typeof NervosWeb3;
+    Nervos: typeof Nervos
   }
 }
 if (window) {
-  window.NervosWeb3 = NervosWeb3;
+  window.Nervos = Nervos
 }

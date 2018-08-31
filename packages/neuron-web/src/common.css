@@ -1,0 +1,29 @@
+.title-1 {
+  color: #6c7184;
+  font-size: 18px;
+  font-family: PingFangSC;
+  font-weight: 300;
+}
+
+.subtitle-1 {
+  font-size: 18px;
+  font-family: PingFangSC;
+  color: #2e313e;
+}
+
+.button-1 {
+  padding: 8px 13px;
+  font-size: 14px;
+  border-radius: 2px;
+  color: #FFF !important;
+  text-transform: none !important;
+}
+
+.primary {
+  background: #456cff !important;
+}
+
+.disabled {
+  background: #eee !important;
+  color: #ccc !important;
+}

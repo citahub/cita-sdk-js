@@ -10,14 +10,8 @@ exports.sha3 = utils.sha3;
 exports.getNonce = () => {
     return utils.randomHex(5);
 };
-exports.hex2bytes = (hex) => {
-    if (typeof hex === 'string') {
-        return utils.hexToBytes(hex.startsWith('0x') ? hex : '0x' + hex);
-    }
-    if (typeof hex === 'number') {
-        return utils.hexToBytes('0x' + hex.toString(16));
-    }
-    throw new Error('Invalid Hex or Number');
+exports.hex2bytes = (num) => {
+    return utils.hexToBytes(num.startsWith('0x') ? num : '0x' + num);
 };
 exports.bytes2hex = (bytes) => {
     return utils.bytesToHex(bytes);
@@ -51,6 +45,10 @@ const signer = ({ privateKey, data = '', nonce = exports.getNonce(), quota, vali
     }
     if (value) {
         try {
+            value = value.replace(/^0x/, '');
+            if (value.length % 2) {
+                value = '0' + value;
+            }
             const _value = exports.hex2bytes(value);
             const valueBytes = new Uint8Array(32);
             valueBytes.set(_value, 32 - _value.length);

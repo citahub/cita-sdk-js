@@ -28,7 +28,7 @@ test('getBalance', async () => {
 // TODO: getAccounts
 
 test('getBlock', async () => {
-  const blockFromNumber = await nervos.appchain.getBlock('0');
+  const blockFromNumber = await nervos.appchain.getBlock('latest');
   expect(blockFromNumber.hash).toBeTruthy();
 
   const blockFromHash = await nervos.appchain.getBlock(blockFromNumber.hash);
@@ -36,7 +36,7 @@ test('getBlock', async () => {
 });
 
 test('getBlockByNumber and getBlockByHash', async () => {
-  const blockFromNumber = await nervos.appchain.getBlockByNumber('0');
+  const blockFromNumber = await nervos.appchain.getBlockByNumber('latest');
   expect(blockFromNumber.hash).toBeTruthy();
 
   const blockFromHash = await nervos.appchain.getBlockByHash(blockFromNumber.hash);

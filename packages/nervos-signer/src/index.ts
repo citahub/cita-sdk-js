@@ -5,22 +5,14 @@ export const unsigner = require('./unsigner').default
 
 const EC = require('elliptic').ec
 export const ec = new EC('secp256k1')
-
-// export const web3 = new Web3('')
 export const sha3 = utils.sha3
 
 export const getNonce = () => {
   return utils.randomHex(5)
 }
 
-export const hex2bytes = (hex: string | number) => {
-  if (typeof hex === 'string') {
-    return utils.hexToBytes(hex.startsWith('0x') ? hex : '0x' + hex)
-  }
-  if (typeof hex === 'number') {
-    return utils.hexToBytes('0x' + hex.toString(16))
-  }
-  throw new Error('Invalid Hex or Number')
+export const hex2bytes = (num: string) => {
+  return utils.hexToBytes(num.startsWith('0x') ? num : '0x' + num)
 }
 
 export const bytes2hex = (bytes: Uint8Array) => {
@@ -80,12 +72,16 @@ const signer = (
 
   if (value) {
     try {
+      value = value.replace(/^0x/, '')
+      if (value.length % 2) {
+        value = '0' + value
+      }
       const _value = hex2bytes(value)
       const valueBytes = new Uint8Array(32)
       valueBytes.set(_value, 32 - _value.length)
       tx.setValue(valueBytes)
     } catch (err) {
-      throw new Error(err)
+      throw err
     }
   }
 
@@ -109,7 +105,7 @@ const signer = (
     const _data = hex2bytes(data)
     tx.setData(new Uint8Array(_data))
   } catch (err) {
-    throw new Error(err)
+    throw err
   }
 
   tx.setVersion(version)

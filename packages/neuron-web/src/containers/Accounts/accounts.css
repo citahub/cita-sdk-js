@@ -1,0 +1,12 @@
+.accounts__container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.accounts__container--button {
+  margin: 60px 10px !important;
+  width: 120px !important;
+  height: 36px !important;
+  font-weight: 100 !important;
+}

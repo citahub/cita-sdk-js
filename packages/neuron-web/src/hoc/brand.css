@@ -1,0 +1,47 @@
+.logo {
+  /* margin: 0 auto; */
+  position: relative;
+  top: 0;
+  right: 50vw;
+  transform: translateX(-50%);
+  width: 90px;
+  filter: drop-shadow(100vw 0 blue);
+  margin: 24px 0;
+  animation: neon 10s linear 60s infinite;
+}
+
+@keyframes neon {
+  0% {
+    filter: drop-shadow(100vw 0 blue);
+  }
+  10% {
+    filter: drop-shadow(100vw 0 blue) blur(1px);
+  }
+  20% {
+    filter: drop-shadow(100vw 0 green);
+  }
+  30% {
+    filter: drop-shadow(100vw 0 green) blur(1px);
+  }
+  40% {
+    filter: drop-shadow(100vw 0 yellow);
+  }
+  50% {
+    filter: drop-shadow(100vw 0 yellow) blur(1px);
+  }
+  60% {
+    filter: drop-shadow(100vw 0 orange);
+  }
+  70% {
+    filter: drop-shadow(100vw 0 orange) blur(1px);
+  }
+  80% {
+    filter: drop-shadow(100vw 0 red);
+  }
+  90% {
+    filter: drop-shadow(100vw 0 red) blur(1px);
+  }
+  100% {
+    filter: drop-shadow(100vw 0 blue);
+  }
+}
