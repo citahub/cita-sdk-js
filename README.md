@@ -18,3 +18,4 @@ The `nervos.js` library is a collection of packages which contains specific func
 [fix]: **utils.hexToBytes**, and error of original web3@1.0.0;
 [fix]: **setProvider**, enable `nervos.setProvider` function;
 [update]: **UMD Object**, update UMD Object to `window.Nervos`;
+[fix]: **Chain Manage**, fix chainManage Contract address;
