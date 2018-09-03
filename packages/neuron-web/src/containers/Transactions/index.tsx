@@ -1,10 +1,13 @@
-import { Button } from '@material-ui/core'
+import { Button, IconButton } from '@material-ui/core'
+import SettingsIcon from '@material-ui/icons/Settings'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { INervosContext, withNervos } from '../../contexts/nervos'
 import { IUniComp } from '../../hoc/UniComp'
 import { copyToClipboard } from '../../utils/compActions'
 import './transactions.css'
+
+const rebirth = window.localStorage.getItem('rebirth') || 'https://microscope.cryptape.com:8888'
 
 const SwitchWallet = () => (
   <Link to="/accounts">
@@ -38,7 +41,8 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
     }
   }
   public getSnapshotBeforeUpdate(prevProps: INervosContext) {
-    if (prevProps.currentNumber < this.props.currentNumber) {
+    const { wallet } = this.props.nervos.appchain.accounts
+    if (prevProps.currentNumber < this.props.currentNumber && wallet.length) {
       this.loadTxs()
     }
     return null
@@ -48,13 +52,10 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
   }
 
   public loadTxs = async () => {
-    if (this.state.error) {
+    if (this.state.error && !this.state.address) {
       return
     }
-    const tx = await fetch(
-      this.props.nervos.currentProvider.host +
-        `/api/transactions?account${this.state.address}&limit=${this.state.limit}`,
-    )
+    const tx = await fetch(rebirth + `/api/transactions?account=${this.state.address}&limit=${this.state.limit}`)
       .then(res => {
         if (res.status !== 200) {
           throw new Error(res.statusText)
@@ -83,8 +84,8 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
   }
 
   public editTransaction = (e: any) => {
-    // this.props.setTransaction()
-    // this.props.setDialogue()
+    this.props.setTransaction()
+    this.props.setDialogue(true)
   }
 
   public render() {
@@ -111,8 +112,21 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
           </React.Fragment>
         )}
         <div className="transactions__container--second">
-          <h2>History Transactions</h2>
+          <h2>
+            History Transactions{' '}
+            <Link to="/options">
+              <IconButton>
+                <SettingsIcon />
+              </IconButton>
+            </Link>
+          </h2>
           <div className="transaction__list--board">
+            {this.props.currentTxHash ? (
+              <div className="transaction__list--item">
+                <div className="transactions__list--time">Listening to</div>
+                <div className="transactions__list--hash">{this.props.currentTxHash}</div>
+              </div>
+            ) : null}
             {transactions.map(tx => (
               <div className="transactions__list--item" key={tx.hash}>
                 <div className="transactions__list--time">{new Date(tx.timestamp).toLocaleString()}</div>
@@ -130,9 +144,13 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
           </div>
         </div>
         <div className="transaction__container--third">
-          <h1 className="title-1">DApp 测试</h1>
-          <Button classes={{ root: 'button-1 primary transaction__button--submit' }}>发送交易</Button>
+          <h1 className="title-1">DApp Test</h1>
+          <Button onClick={this.editTransaction} classes={{ root: 'button-1 primary transaction__button--submit' }}>
+            Send Transaction
+          </Button>
+          {/*
           <Button classes={{ root: 'button-1 primary transaction__button--submit' }}>签名信息</Button>
+          */}
         </div>
       </div>
     )

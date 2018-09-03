@@ -44,19 +44,25 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
   }
   public addAccount = (e?: any) => {
     const { privateKey } = this.state
+    const { accounts } = this.props.nervos.appchain
     if (!privateKey) {
       this.setState({
         privateKeyError: 'Please enter private key',
       })
       return
     }
+    if (accounts.wallet[0] && accounts.wallet[0].privateKey === privateKey) {
+      return this.props.history.push('/transactions')
+    }
     try {
-      this.props.nervos.appchain.accounts.wallet.clear()
-      const account = this.props.nervos.appchain.accounts.privateKeyToAccount(privateKey)
-      this.props.nervos.appchain.accounts.wallet.add(account)
-      this.props.nervos.appchain.accounts.wallet.save(pwd)
+      accounts.wallet.clear()
+      const account = accounts.privateKeyToAccount(privateKey)
+      accounts.wallet.add(account)
+      accounts.wallet.save(pwd)
       this.props.history.push('/transactions')
-      // this.setState({ loaded: true })
+      chrome.runtime.sendMessage({
+        action: 'privateKeyChanged',
+      })
     } catch (err) {
       this.setState({
         privateKeyError: err.message,
