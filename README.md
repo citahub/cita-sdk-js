@@ -21,3 +21,4 @@ The `nervos.js` library is a collection of packages which contains specific func
 [fix]: **Chain Manage**, fix chainManage Contract address;
 [update]: **Return From**, parameter `from` will be included to return when sendTransaction has no private key;
 [update]: **Lower Address**, lower `to` address in transaction when sendTransaction;
+[update]: **Format Address**, remove `0x` in `to` address;

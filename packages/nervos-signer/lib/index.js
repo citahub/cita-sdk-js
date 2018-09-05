@@ -38,7 +38,7 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     else {
         tx.setNonce(nonce);
     }
-    if (quota > 0) {
+    if (typeof quota === 'number' && quota > 0) {
         tx.setQuota(quota);
     }
     else {
@@ -63,13 +63,18 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
         }
     }
     if (to) {
-        tx.setTo(to.toLowerCase());
+        if (utils.isAddress(to)) {
+            tx.setTo(to.toLowerCase().replace(/^0x/, ''));
+        }
+        else {
+            throw new Error('Invalid to address');
+        }
     }
     if (validUntilBlock === undefined) {
         throw new Error('ValidUntilBlock should be set');
     }
     else {
-        tx.setValidUntilBlock(validUntilBlock);
+        tx.setValidUntilBlock(+validUntilBlock);
     }
     if (chainId === undefined) {
         throw new Error('Chain Id should be set');
