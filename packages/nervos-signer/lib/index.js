@@ -16,11 +16,12 @@ exports.hex2bytes = (num) => {
 exports.bytes2hex = (bytes) => {
     return utils.bytesToHex(bytes);
 };
-const signer = ({ privateKey, data = '', nonce = exports.getNonce(), quota, validUntilBlock, value = '', version = 0, chainId = 1, to = '', }, externalKey) => {
+const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota, validUntilBlock, value = '', version = 0, chainId = 1, to = '', }, externalKey) => {
     if (!privateKey && !externalKey) {
         console.warn('No private key found');
         return {
             data,
+            from,
             nonce,
             quota,
             validUntilBlock,
@@ -44,6 +45,9 @@ const signer = ({ privateKey, data = '', nonce = exports.getNonce(), quota, vali
         throw new Error('Quota should be set larger than 0');
     }
     if (value) {
+        if (typeof value === 'number') {
+            value = value.toString(16);
+        }
         try {
             value = value.replace(/^0x/, '');
             if (value.length % 2) {
@@ -55,11 +59,11 @@ const signer = ({ privateKey, data = '', nonce = exports.getNonce(), quota, vali
             tx.setValue(valueBytes);
         }
         catch (err) {
-            throw new Error(err);
+            throw err;
         }
     }
     if (to) {
-        tx.setTo(to);
+        tx.setTo(to.toLowerCase());
     }
     if (validUntilBlock === undefined) {
         throw new Error('ValidUntilBlock should be set');
@@ -78,7 +82,7 @@ const signer = ({ privateKey, data = '', nonce = exports.getNonce(), quota, vali
         tx.setData(new Uint8Array(_data));
     }
     catch (err) {
-        throw new Error(err);
+        throw err;
     }
     tx.setVersion(version);
     const txMsg = tx.serializeBinary();

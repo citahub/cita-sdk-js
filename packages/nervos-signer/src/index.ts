@@ -21,6 +21,7 @@ export const bytes2hex = (bytes: Uint8Array) => {
 
 const signer = (
   {
+    from,
     privateKey,
     data = '',
     nonce = getNonce(),
@@ -31,12 +32,13 @@ const signer = (
     chainId = 1,
     to = '',
   }: {
+    from: string
     privateKey: string
     data?: string
     nonce: string
     quota: number
     validUntilBlock: string | number
-    value: string
+    value: string | number
     version?: number
     chainId: number
     to?: string
@@ -47,6 +49,7 @@ const signer = (
     console.warn('No private key found')
     return {
       data,
+      from,
       nonce,
       quota,
       validUntilBlock,
@@ -71,6 +74,9 @@ const signer = (
   }
 
   if (value) {
+    if (typeof value === 'number') {
+      value = value.toString(16)
+    }
     try {
       value = value.replace(/^0x/, '')
       if (value.length % 2) {
@@ -86,7 +92,7 @@ const signer = (
   }
 
   if (to) {
-    tx.setTo(to)
+    tx.setTo(to.toLowerCase())
   }
 
   if (validUntilBlock === undefined) {
