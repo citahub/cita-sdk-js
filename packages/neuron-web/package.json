@@ -1,11 +1,11 @@
 {
   "name": "neuron-web",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^2.0.3",
-    "@nervos/chain": "^0.17.19",
+    "@nervos/chain": "^0.17.20",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-router-dom": "^4.3.1",
