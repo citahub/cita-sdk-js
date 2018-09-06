@@ -21,6 +21,7 @@ export const bytes2hex = (bytes: Uint8Array) => {
 
 const signer = (
   {
+    from,
     privateKey,
     data = '',
     nonce = getNonce(),
@@ -31,12 +32,13 @@ const signer = (
     chainId = 1,
     to = '',
   }: {
+    from: string
     privateKey: string
     data?: string
     nonce: string
     quota: number
     validUntilBlock: string | number
-    value: string
+    value: string | number
     version?: number
     chainId: number
     to?: string
@@ -47,6 +49,7 @@ const signer = (
     console.warn('No private key found')
     return {
       data,
+      from,
       nonce,
       quota,
       validUntilBlock,
@@ -64,13 +67,16 @@ const signer = (
     tx.setNonce(nonce)
   }
 
-  if (quota > 0) {
+  if (typeof quota === 'number' && quota > 0) {
     tx.setQuota(quota)
   } else {
     throw new Error('Quota should be set larger than 0')
   }
 
   if (value) {
+    if (typeof value === 'number') {
+      value = value.toString(16)
+    }
     try {
       value = value.replace(/^0x/, '')
       if (value.length % 2) {
@@ -86,13 +92,17 @@ const signer = (
   }
 
   if (to) {
-    tx.setTo(to)
+    if (utils.isAddress(to)) {
+      tx.setTo(to.toLowerCase().replace(/^0x/, ''))
+    } else {
+      throw new Error('Invalid to address')
+    }
   }
 
   if (validUntilBlock === undefined) {
     throw new Error('ValidUntilBlock should be set')
   } else {
-    tx.setValidUntilBlock(validUntilBlock)
+    tx.setValidUntilBlock(+validUntilBlock)
   }
 
   if (chainId === undefined) {
