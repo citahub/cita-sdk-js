@@ -1,4 +1,5 @@
 import Accounts from '../containers/Accounts'
+import Options from '../containers/Options'
 import Transactions from '../containers/Transactions'
 
 const routes = [
@@ -9,6 +10,10 @@ const routes = [
   {
     component: Transactions,
     path: '/transactions',
+  },
+  {
+    component: Options,
+    path: '/options',
   },
 ]
 
