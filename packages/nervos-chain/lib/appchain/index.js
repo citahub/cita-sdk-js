@@ -25,6 +25,7 @@ const listener_1 = __importDefault(require("./listener"));
 const addPrivateKey_1 = __importDefault(require("../utils/addPrivateKey"));
 const contract_1 = __importDefault(require("../contract"));
 const proxy_1 = __importDefault(require("./proxy"));
+const validators_1 = __importDefault(require("../utils/validators"));
 exports.default = (web3) => {
     web3.appchain = web3.appchain || {};
     web3.extend({
@@ -140,5 +141,6 @@ exports.default = (web3) => {
         sign: web3.appchain.neuron_sign
     };
     web3.appchain.personal = neuron;
+    Object.assign(web3.utils, validators_1.default);
     return proxy_1.default(web3);
 };

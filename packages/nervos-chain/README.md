@@ -499,3 +499,15 @@ nervos.system.quotaManager
 ```
 
 Corresponding methods can be found [here](https://docs.nervos.org/cita/#/system_management/node)
+
+## Additional Utils
+
+```javascript
+/**
+ * @function isPrivateKey
+ * @desc check if private key is in right format
+ * @param {string} - privateKey
+ * @return {boolean} - valid
+ */
+const valid = nervos.utils.isPrivateKey('0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d')
+```

@@ -22,3 +22,4 @@ The `nervos.js` library is a collection of packages which contains specific func
 - [update]: **Return From**, parameter `from` will be included to return when sendTransaction has no private key;
 - [update]: **Lower Address**, lower `to` address in transaction when sendTransaction;
 - [update]: **Format Address**, remove `0x` in `to` address;
+- [feature]: **PrivateKey Validator**, add `nervos.utils.isPrivateKey(privateKey)` to check private key format;
