@@ -34,7 +34,7 @@ const nervos = Nervos('http://localhost:1337')
 
 # AppChain
 
-`nervos.appchain` allows you to interact with an Nervos Appchain and Nervos Smart Contract.
+`nervos.appchain` allows you to interact with an Nervos AppChain and Nervos Smart Contract.
 
 ## RPC API Reference
 
