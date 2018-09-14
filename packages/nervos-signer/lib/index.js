@@ -93,7 +93,7 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     const txMsg = tx.serializeBinary();
     const hashedMsg = exports.sha3(txMsg).slice(2);
     var key = exports.ec.keyFromPrivate((externalKey || privateKey).replace(/^0x/, ''), 'hex');
-    var sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'));
+    var sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true });
     var sign_r = sign.r.toString(16);
     var sign_s = sign.s.toString(16);
     if (sign_r.length == 63)
