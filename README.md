@@ -23,3 +23,5 @@ The `nervos.js` library is a collection of packages which contains specific func
 - [update]: **Lower Address**, lower `to` address in transaction when sendTransaction;
 - [update]: **Format Address**, remove `0x` in `to` address;
 - [feature]: **PrivateKey Validator**, add `nervos.utils.isPrivateKey(privateKey)` to check private key format;
+- [fix]: **Fix Typo**, fix typo in log of transactionReceipt listener;
+- [fix]: **Fix getTransactionProof**, fix rpc input formatter;

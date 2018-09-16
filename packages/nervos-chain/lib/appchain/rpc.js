@@ -146,7 +146,6 @@ exports.getTransactionProof = {
     name: 'getTransactionProof',
     call: 'getTransactionProof',
     params: 1,
-    inputFormatter: [formatters.inputAddressFormatter]
 };
 exports.sendSignedTransaction = {
     name: 'sendSignedTransaction',

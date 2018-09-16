@@ -325,7 +325,18 @@ nervos.appchain.sendSignedTransaction('signedTransaction')
  * @return {Promise<object>} Promise returns transaction receipt object
  */
 
-nervos.appchain.getTransactionReceipt('0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
+nervos.appchain.getTransactionReceipt('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
+```
+
+```javascript
+/**
+ * @method getTransactionProof
+ * @desc request transaction proof
+ * @param {string} - transaction hash
+ * @return {Promise<string>} Promise returns transaction proof
+ */
+
+nervos.appchain.getTransactionProof('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
 ```
 
 ### getTransaction
