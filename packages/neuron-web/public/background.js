@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       chrome.windows.remove(appId)
     }
     chrome.windows.create({
-      url: "index.html/#/transactions",
+      url: "index.html#/transactions",
       type: 'popup',
       width: 600,
       height: 700
