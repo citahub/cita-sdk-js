@@ -1,17 +1,16 @@
-let i = 1
-const listener = (actionType, cb) => {
+const listener = (actionType, cb, payload) => {
   return new Promise((resolve, reject) => {
     window.addEventListener('message', (message) => {
       if (message.data.action === actionType) {
-        if (cb) {
-          cb(null, {
-            jsonrpc: '2.0',
-            id: i,
-            result: message.data.data
-          })
-          // cb(null, message.data.data)
+        const res = {
+          jsonrpc: payload ? payload.jsonrpc : '2.0',
+          id: payload ? payload.id : -1,
+          result: message.data.data
         }
-        resolve(message.data.data)
+        if (cb) {
+          cb(null, res)
+        }
+        resolve(res.id === -1 ? res.result : res)
       }
     })
   })
@@ -21,34 +20,38 @@ window.addMessenger = (sdk) => {
     window.postMessage({
       action: 'getAccounts',
     }, '*')
-    return listener('returnAccounts', cb)
+    return listener('returnAccounts', cb, {
+      jsonrpc: '2.0',
+      id: -1
+    })
   }
   sdk.appchain.getDefaultAccount = (cb) => {
     window.postMessage({
       action: 'getDefaultAccount'
     }, '*')
-    return listener('returnDefaultAccount', cb)
+    return listener('returnDefaultAccount', cb, {
+      jsonrpc: '2.0',
+      id: -1
+    })
   }
   sdk._requestManager.provider.__proto__.send = new Proxy(
     sdk._requestManager.provider.__proto__.send, {
       apply: (target, thisArg, argumentsList) => {
         const payload = argumentsList[0]
         const callback = argumentsList[1]
-        i++
         if (payload && (payload.method === 'send' || payload.method === 'sendTransaction')) {
           window.postMessage({
             action: 'sendTransaction',
             transaction: payload.params[0],
           }, '*')
-          return listener("returnTransactionReceipt", callback)
+          return listener("returnTransactionReceipt", callback, payload)
         }
         target = target.bind(thisArg)
-        target(...argumentsList)
         return target(...argumentsList)
       }
     }
   )
 }
-if (window.nervos) {
-  window.addMessenger(window.nervos)
-}
+
+const neuronWebReadyEvent = new Event("neuronWebReady")
+window.dispatchEvent(neuronWebReadyEvent)

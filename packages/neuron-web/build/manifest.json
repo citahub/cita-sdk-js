@@ -6,7 +6,7 @@
   "theme_color": "#000",
   "background_color": "#fff",
   "browser_action": {
-    "default_popup": "./index.html/#/transactions",
+    "default_popup": "./index.html#/transactions",
     "default_title": "NervosWeb"
   },
   "manifest_version": 2,
