@@ -28,16 +28,26 @@ window.addEventListener('message', (e) => {
     data
   } = e
   if (data.action === 'getAccounts') {
-    window.postMessage({
-      action: 'returnAccounts',
-      data: _accounts
-    }, "*")
+    chrome.runtime.sendMessage({
+        action: 'getAccounts',
+      },
+      res => {
+        window.postMessage({
+          action: 'returnAccounts',
+          data: res
+        }, "*")
+      }
+    )
   }
   if (data.action === 'getDefaultAccount') {
-    window.postMessage({
-      action: 'returnDefaultAccount',
-      data: _accounts[0] || null
-    }, "*")
+    chrome.runtime.sendMessage({
+      action: 'getDefaultAccount'
+    }, res => {
+      window.postMessage({
+        action: 'returnDefaultAccount',
+        data: res || null
+      }, "*")
+    })
   }
   if (data.action === 'sendTransaction') {
     chrome.runtime.sendMessage(data, res => {
