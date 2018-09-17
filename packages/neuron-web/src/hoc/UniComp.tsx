@@ -98,19 +98,10 @@ const UniComp = (Comp: typeof React.Component) => {
         })
       }
       if (type === TransactionAction.SUBMIT) {
-        this.submitTransaction().then((res: string | Error) => {
-          let data = '' as string | object
-          if (typeof res === 'string') {
-            data = res
-          } else {
-            data = {
-              error: -1,
-              message: res.message,
-            }
-          }
+        this.submitTransaction().then((res: { status: string; hash: string } | { code: number; message: string }) => {
           chrome.runtime.sendMessage({
             action: 'returnTransactionReceipt',
-            data,
+            data: res,
           })
         })
       }
@@ -135,12 +126,15 @@ const UniComp = (Comp: typeof React.Component) => {
         })
         .then((hash: string) => {
           this.setState(initState)
-          return hash
+          return { status: 'OK', hash }
         })
         .catch((err: { message: string }) => {
           this.handleError(err.message)
           this.setState({ ...initState, errorMsg: err.message })
-          return err
+          return {
+            code: -1,
+            message: err.message,
+          }
         })
     }
     public closeNotifier = (e: any) => {
