@@ -3,6 +3,20 @@ let appId = null
 // dapp
 let dappId = null
 
+_nervos = Nervos()
+
+// init _accounts
+let _accounts = []
+
+const loadAccounts = () => {
+  _nervos.appchain.accounts.wallet.load('')
+  _accounts = Array.from(_nervos.appchain.accounts.wallet).map(w => w.address)
+  _nervos.appchain.accounts.wallet.clear()
+  return _accounts
+}
+// load accounts
+loadAccounts()
+
 const sendMsgToApp = (action, data) => {
   setTimeout(() => {
     chrome.runtime.sendMessage({
@@ -43,6 +57,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       appId = res.id
       sendMsgToApp('confirm', message.data)
     })
+  } else if (message.action === 'getAccounts') {
+    sendResponse(_accounts)
+  } else if (message.action === 'getDefaultAccount') {
+    sendResponse(_accounts[0])
   } else if (message.action === 'returnTransactionReceipt') {
     chrome.windows.remove(appId)
 
@@ -53,6 +71,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       chrome.tabs.sendMessage(tabs[0].id, message, res => {});
     });
   } else if (message.action === 'privateKeyChanged') {
+    // update accounts when privatekey changed
+    loadAccounts()
     chrome.tabs.query({
       active: true,
       currentWindow: true
