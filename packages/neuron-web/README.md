@@ -43,4 +43,4 @@ Go to `about://extension` in chrome and turn on the switch of `Developer Mode`
 
 ## Add Develop Package of NeuronWeb
 
-Click on `Load Unpacked Extension` to select the pre-built package `built` in `neuronWeb` for adding the develop package.
+Click on <kbd>Load Unpacked Extension</kbd> to select the pre-built package `built` in `neuronWeb` for adding the develop package.
