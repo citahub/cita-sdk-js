@@ -77,6 +77,9 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
       privateKey: '',
       privateKeyError: '',
     })
+    chrome.runtime.sendMessage({
+      action: 'privateKeyChanged',
+    })
   }
   public render() {
     const { cleared, privateKey, privateKeyError } = this.state
