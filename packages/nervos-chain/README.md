@@ -11,6 +11,36 @@
 
 `@nervos/chain` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@nervos/chain@0.17.x` will work perfectly with `CITA@0.17`
 
+# Prerequisites
+
+## Learn `web3@1.0`
+
+By default, `@nervos/chain` acts like [`web3@1.0.0`](https://web3js.readthedocs.io/en/1.0/getting-started.html), and has the same APIs.
+
+## Learn `CITA`
+
+`@nervos/chain` works for Nervos AppChain whose kernel is [CITA](https://docs.nervos.org/cita/#/README).
+
+Before using this SDK, following concept should be cast.
+
+1. Transaction Object
+
+Transaction Object to be signed has been defined in [cita-proto](https://github.com/cryptape/cita-proto/blob/master/blockchain.proto#L49)
+
+Transaction Object returned from CITA has been declared [here](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransaction)
+
+2. Transaction Receipt
+
+[Transaction Receipt](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransactionreceipt)
+
+3. Block Object
+
+[Block Object](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getblockbyhash)
+
+4. MetaData Object
+
+[MetaData Object](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getmetadata)
+
 # Getting Started
 
 To use `@nervos/chain', you can add it via npm
