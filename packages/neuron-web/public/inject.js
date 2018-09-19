@@ -53,5 +53,11 @@ window.addMessenger = (sdk) => {
   )
 }
 
+// Fuer die schwach app
+
+window.addEventListener("neuronWebReady", () => {
+  window.console.log("NeuronWebReady")
+  window.addMessenger(nervos)
+})
 const neuronWebReadyEvent = new Event("neuronWebReady")
 window.dispatchEvent(neuronWebReadyEvent)
