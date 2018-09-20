@@ -15,7 +15,7 @@ const tx = {
   privateKey,
   data: bytecode,
   nonce: 999999,
-  quota: 1000000,
+  quota: 1e8,
   chainId: 1,
   version: 0,
   validUntilBlock: 999999,
