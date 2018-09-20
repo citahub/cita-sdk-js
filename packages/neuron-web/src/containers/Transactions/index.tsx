@@ -88,6 +88,10 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
     this.props.setDialogue(true)
   }
 
+  public editEncryptedMessage = (e: any) => {
+    this.props.setEncryptedMessage(e.currentTarget.value)
+    this.props.setDialogue(true)
+  }
   public render() {
     const { address, transactions, copied } = this.state
     return (
@@ -149,7 +153,12 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
             Send Transaction
           </Button>
           {/*
-          <Button classes={{ root: 'button-1 primary transaction__button--submit' }}>签名信息</Button>
+          <Button
+            onClick={this.editEncryptedMessage}
+            classes={{ root: 'button-1 primary transaction__button--submit' }}
+          >
+            Sign
+          </Button>
           */}
         </div>
       </div>

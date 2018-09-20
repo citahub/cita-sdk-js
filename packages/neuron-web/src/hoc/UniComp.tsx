@@ -1,10 +1,9 @@
 import * as React from 'react'
 import Dialogue from '../components/Dialogue'
+import EncryptedMessage from '../components/EncryptedMessage'
 import Notifier, { NotifierType } from '../components/Notifier'
 import Transaction, { tx } from '../components/Transaction'
 import { INervosContext, withNervos } from '../contexts/nervos'
-// import { sendMessageToContentScript, sendMessageToRuntime } from '../utils/extensions'
-// import { handleInputOf } from '../utils/compActions'
 import './brand.css'
 
 export interface IUniComp {
@@ -12,10 +11,18 @@ export interface IUniComp {
   handleError: (errorMsg: string) => void
   setDialogue: (dialogueOn?: boolean) => void
   setTransaction: (transaction?: typeof tx) => void
+  setEncryptedMessage: (encryptedMessage: string) => void
   // handleUniInput: (key: string) => (e?: any) => void
 }
 
 export enum TransactionAction {
+  NONE,
+  REJECT,
+  SUBMIT,
+  SENDING,
+}
+
+export enum EncryptedMessageAction {
   NONE,
   REJECT,
   SUBMIT,
@@ -27,7 +34,9 @@ const initState = {
   currentTxHash: '',
   dappId: 0,
   dialogueOn: false,
+  encryptedMessage: '',
   errorMsg: '',
+  fromAccount: '',
   transaction: tx,
   txStatus: TransactionAction.NONE,
 }
@@ -40,17 +49,34 @@ const UniComp = (Comp: typeof React.Component) => {
   class WithUniComp extends React.Component<INervosContext, typeof initState> {
     public readonly state = initState
     public componentDidMount() {
-      chrome.runtime.onMessage.addListener((message, sender, res) => {
-        const { action, data } = message
-        if (action === 'confirm') {
-          this.setState({
-            appId: data.appId,
-            dappId: data.dappId,
-            dialogueOn: true,
-            transaction: data.transaction,
-          })
+      // load manifest
+      const m = window.localStorage.getItem('manifest')
+      if (m) {
+        try {
+          const manifest = JSON.parse(m)
+          const { chainSet } = manifest
+          const ids = Object.keys(chainSet)
+          tx.chainId = ids[0]
+          this.props.nervos.setProvider(chainSet[tx.chainId])
+        } catch (e) {
+          window.console.error(e)
         }
-      })
+      }
+      if (chrome && chrome.runtime && chrome.runtime.onMessage) {
+        chrome.runtime.onMessage.addListener((message, sender, res) => {
+          const { action, data } = message
+          if (action === 'confirm') {
+            this.setState({
+              appId: data.appId,
+              dappId: data.dappId,
+              dialogueOn: true,
+              encryptedMessage: data.encryptedMessage || '',
+              fromAccount: data.fromAccount || '',
+              transaction: data.transaction || tx,
+            })
+          }
+        })
+      }
     }
 
     public handleError = (errorMsg: string) => {
@@ -68,6 +94,9 @@ const UniComp = (Comp: typeof React.Component) => {
         }
       })
     }
+    public handleEncryptedMessageEdit = (e: any) => {
+      this.setState({ encryptedMessage: e.currentTarget.value })
+    }
     public setDialogue = (dialogueOn: boolean = false) => {
       if (dialogueOn && !this.state.transaction.validUntilBlock) {
         this.setState((state: any) => {
@@ -83,27 +112,83 @@ const UniComp = (Comp: typeof React.Component) => {
     public setTransaction = (transaction: any = tx) => {
       this.setState({ transaction })
     }
+    public setEncryptedMessage = (encryptedMessage: string = '') => {
+      this.setState({ encryptedMessage })
+    }
     public handleTxAction = (type: TransactionAction) => (e?: any) => {
       if (type === TransactionAction.REJECT) {
         this.setState({
           dialogueOn: false,
           transaction: tx,
         })
-        chrome.runtime.sendMessage({
-          action: 'returnTransactionReceipt',
-          data: {
-            error: -1,
-            message: 'reject',
-          },
-        })
+        if (chrome && chrome.runtime) {
+          chrome.runtime.sendMessage({
+            action: 'returnTransactionReceipt',
+            data: {
+              error: -1,
+              message: 'reject',
+            },
+          })
+        }
       }
       if (type === TransactionAction.SUBMIT) {
         this.submitTransaction().then((res: { status: string; hash: string } | { code: number; message: string }) => {
-          chrome.runtime.sendMessage({
-            action: 'returnTransactionReceipt',
-            data: res,
-          })
+          if (chrome && chrome.runtime) {
+            chrome.runtime.sendMessage({
+              action: 'returnTransactionReceipt',
+              data: res,
+            })
+          }
         })
+      }
+    }
+    public handleEncryptedMessageAction = (type: EncryptedMessageAction) => (e: any) => {
+      this.setState({
+        dialogueOn: false,
+        encryptedMessage: '',
+        fromAccount: '',
+      })
+      if (type === EncryptedMessageAction.REJECT) {
+        if (chrome && chrome.runtime) {
+          chrome.runtime.sendMessage({
+            action: 'returnSignedMessage',
+            data: {
+              error: -1,
+              message: 'reject',
+            },
+          })
+        }
+      }
+      if (type === EncryptedMessageAction.SUBMIT) {
+        const account = this.props.nervos.appchain.accounts.wallet[0]
+        if (!account) {
+          if (chrome && chrome.runtime) {
+            chrome.runtime.sendMessage({
+              action: 'returnSignedMessage',
+              data: {
+                error: -1,
+                message: 'no account',
+              },
+            })
+          }
+        }
+        if (account.address.toLowerCase() !== this.state.fromAccount.toLowerCase()) {
+          if (chrome && chrome.runtime) {
+            chrome.runtime.sendMessage({
+              action: 'returnSignedMessage',
+              data: {
+                error: -1,
+                message: 'account not found',
+              },
+            })
+          }
+        }
+        if (chrome && chrome.runtime) {
+          chrome.runtime.sendMessage({
+            action: 'returnSignedMessage',
+            data: account.sign(this.state.encryptedMessage),
+          })
+        }
       }
     }
     public submitTransaction = () => {
@@ -143,7 +228,7 @@ const UniComp = (Comp: typeof React.Component) => {
       })
     }
     public render() {
-      const { errorMsg, dialogueOn } = this.state
+      const { errorMsg, dialogueOn, encryptedMessage, transaction } = this.state
       return (
         <div>
           <img className="logo" src="https://cdn.cryptape.com/images/neuron-logo.png" alt="logo" />
@@ -154,15 +239,24 @@ const UniComp = (Comp: typeof React.Component) => {
             handleError={this.handleError}
             setDialogue={this.setDialogue}
             setTransaction={this.setTransaction}
+            setEncryptedMessage={this.setEncryptedMessage}
           />
           <Dialogue fullScreen={true} dialogueOn={dialogueOn}>
-            <Transaction
-              handleTxAction={this.handleTxAction}
-              transaction={this.state.transaction}
-              handleTxEdit={this.handleTxEdit}
-              chain={this.props.nervos.currentProvider.host}
-              status={this.state.txStatus}
-            />
+            {!encryptedMessage ? (
+              <Transaction
+                handleTxAction={this.handleTxAction}
+                transaction={transaction}
+                handleTxEdit={this.handleTxEdit}
+                chain={this.props.nervos.currentProvider.host}
+                status={this.state.txStatus}
+              />
+            ) : (
+              <EncryptedMessage
+                encryptedMessage={encryptedMessage}
+                handleEncryptedMessageEdit={this.handleEncryptedMessageEdit}
+                handleEncryptedMessageAction={this.handleEncryptedMessageAction}
+              />
+            )}
           </Dialogue>
         </div>
       )

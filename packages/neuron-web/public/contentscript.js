@@ -49,6 +49,21 @@ window.addEventListener('message', (e) => {
       }, "*")
     })
   }
+  if (data.action === 'manifest') {
+    chrome.runtime.sendMessage(
+      data
+    )
+  }
+  if (data.action === 'sign') {
+    chrome.runtime.sendMessage(data, res => {
+      if (!!data.fromAccount) {
+        return chrome.runtime.sendMessage({
+          action: 'open',
+          data
+        }, console.log)
+      }
+    })
+  }
   if (data.action === 'sendTransaction') {
     chrome.runtime.sendMessage(data, res => {
       if (data.transaction) {
@@ -62,7 +77,7 @@ window.addEventListener('message', (e) => {
 })
 
 chrome.runtime.onMessage.addListener((message, sender, res) => {
-  if (['returnTransactionReceipt', 'privateKeyChanged'].includes(message.action)) {
+  if (['returnTransactionReceipt', 'privateKeyChanged', 'returnSignedMessage'].includes(message.action)) {
     window.postMessage(message, "*")
   }
 })
