@@ -171,6 +171,7 @@ const UniComp = (Comp: typeof React.Component) => {
               },
             })
           }
+          return
         }
         if (account.address.toLowerCase() !== this.state.fromAccount.toLowerCase()) {
           if (chrome && chrome.runtime) {
@@ -182,6 +183,7 @@ const UniComp = (Comp: typeof React.Component) => {
               },
             })
           }
+          return
         }
         if (chrome && chrome.runtime) {
           chrome.runtime.sendMessage({
