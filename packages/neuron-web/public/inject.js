@@ -23,7 +23,7 @@ const listener = (actionType, cb, payload) => {
           result: message.data.data
         }
         if (cb) {
-          cb(null, res)
+          cb(null, res.id === -1 ? res.result : res)
         }
         resolve(res.id === -1 ? res.result : res)
       }
