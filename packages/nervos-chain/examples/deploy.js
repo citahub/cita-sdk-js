@@ -15,7 +15,7 @@ const transaction = {
   from: '0xb4061fA8E18654a7d51FEF3866d45bB1DC688717',
   privateKey,
   nonce: 999999,
-  quota: 1000000,
+  quota: 1e8,
   data: bytecode,
   chainId: 1,
   version: 0,
