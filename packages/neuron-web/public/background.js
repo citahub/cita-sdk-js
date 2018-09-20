@@ -57,11 +57,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       appId = res.id
       sendMsgToApp('confirm', message.data)
     })
+  } else if (message.action === 'manifest') {
+    window.localStorage.setItem('manifest', JSON.stringify(message.data))
   } else if (message.action === 'getAccounts') {
     sendResponse(_accounts)
   } else if (message.action === 'getDefaultAccount') {
     sendResponse(_accounts[0])
-  } else if (message.action === 'returnTransactionReceipt') {
+  } else if (['returnTransactionReceipt', 'returnSignedMessage'].includes(message.action)) {
     chrome.windows.remove(appId)
 
     chrome.tabs.query({

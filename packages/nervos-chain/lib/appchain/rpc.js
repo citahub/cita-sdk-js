@@ -145,7 +145,7 @@ exports.getTransactionCount = {
 exports.getTransactionProof = {
     name: 'getTransactionProof',
     call: 'getTransactionProof',
-    params: 1,
+    params: 1
 };
 exports.sendSignedTransaction = {
     name: 'sendSignedTransaction',
