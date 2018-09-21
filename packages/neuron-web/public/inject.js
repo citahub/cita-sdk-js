@@ -81,6 +81,11 @@ window.addMessenger = (sdk) => {
       }
     }
   )
+  sdk.appchain.getDefaultAccount().then(account => {
+    if (account) {
+      sdk.appchain.defaultAccount = account
+    }
+  })
 }
 
 const neuronWebReadyEvent = new Event("neuronWebReady")
@@ -92,7 +97,9 @@ if (window.localStorage.getItem('DISABLE_NEURON_WEB_AUTO_IMPORT')) {
 } else {
   window.addEventListener("neuronWebReady", () => {
     window.console.log("NeuronWebReady")
-    window.addMessenger(nervos)
+    if (nervos) {
+      window.addMessenger(nervos)
+    }
   })
   setTimeout(() => {
     window.dispatchEvent(neuronWebReadyEvent)
