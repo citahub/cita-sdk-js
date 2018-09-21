@@ -13,7 +13,7 @@ const from = account.address;
 const tx = {
   from,
   data: bytecode,
-  quota: 1e8,
+  quota: 1000000,
   chainId: 1,
   version: 0,
   validUntilBlock: 999999,
