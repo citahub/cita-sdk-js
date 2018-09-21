@@ -147,7 +147,12 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
             ))}
           </div>
         </div>
-        <div className="transaction__container--third">
+        <div
+          className="transaction__container--third"
+          style={{
+            display: 'none',
+          }}
+        >
           <h1 className="title-1">DApp Test</h1>
           <Button onClick={this.editTransaction} classes={{ root: 'button-1 primary transaction__button--submit' }}>
             Send Transaction
