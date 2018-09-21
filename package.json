@@ -3,7 +3,8 @@
   "private": false,
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "precommit": "yarn run test"
   },
   "jest": {
     "verbose": true,
