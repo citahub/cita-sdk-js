@@ -57,6 +57,13 @@ test('getTransactionCount', async () => {
   expect(number).toBeGreaterThanOrEqual(0);
 });
 
+test.skip('getLogs', async () => {
+  // TODO: getLogs
+  // const logs = await nervos.appchain.getLogs({
+  // address: 
+  // })
+})
+
 test('newMessageFilter', async () => {
   const topics = {
     topics: [
