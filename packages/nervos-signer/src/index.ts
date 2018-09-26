@@ -72,6 +72,8 @@ const signer = (
   } else {
     throw new Error('Quota should be set larger than 0')
   }
+  // tradeoff: now cita will throw error when value not set
+  value = value || '0x0'
 
   if (value) {
     if (typeof value === 'number') {
