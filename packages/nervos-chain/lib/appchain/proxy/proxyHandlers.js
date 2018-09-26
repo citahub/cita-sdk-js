@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const addPrivateKey_1 = __importDefault(require("../../utils/addPrivateKey"));
+const parsers_1 = require("../../utils/parsers");
 exports.sendTransactionHandler = {
     apply: function (target, thisArg, argumentsList) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -21,6 +22,30 @@ exports.sendTransactionHandler = {
         });
     }
 };
+exports.getLogsHandler = {
+    apply: function (target, _thisArg, argumentsList) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const filter = argumentsList[0];
+            const abi = argumentsList[1];
+            return target(filter).then((logs) => {
+                if (!abi) {
+                    return logs;
+                }
+                else {
+                    try {
+                        const decodedLogs = [...logs].map((log) => parsers_1.LogParser(log, abi));
+                        return decodedLogs;
+                    }
+                    catch (e) {
+                        console.warn(e.message);
+                        return logs;
+                    }
+                }
+            });
+        });
+    }
+};
 exports.default = {
-    sendTransactionHandler: exports.sendTransactionHandler
+    sendTransactionHandler: exports.sendTransactionHandler,
+    getLogsHandler: exports.getLogsHandler
 };

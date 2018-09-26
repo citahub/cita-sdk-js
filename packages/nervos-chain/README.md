@@ -41,13 +41,38 @@ Transaction Object returned from CITA has been declared [here](https://github.co
 
 [MetaData Object](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getmetadata)
 
+5. ABI
+
+[ABI](https://solidity.readthedocs.io/en/v0.4.25/abi-spec.html)
+
+6. Filter Object
+
+[Filter Object](https://docs.nervos.org/cita/#/rpc_guide/rpc-types?id=filter)
+
+7. Transaction Log
+
+````javascript
+Log {
+  address: string
+  topics: string[]
+  data: string
+  blockHash: string
+  blockNumber: string
+  transactionHash: string
+  transactionIndex: string
+  logIndex: string
+  transactionLogIndex: string
+  decodedLogs: object
+}
+``
+
 # Getting Started
 
 To use `@nervos/chain', you can add it via npm
 
 ```shell
 yarn add @nervos/chain
-```
+````
 
 or to link it in browser directly with
 
@@ -222,6 +247,41 @@ nervos.appchain.getBlockNumber()
 nervos.appchain.getTransactionCount('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
 ```
 
+### getLogs
+
+```javascript
+/**
+ * @method getLogs
+ * @desc get logs by filter object and abi
+ * @param {object} - filter object
+ * @param {object} - [abi], event abi
+ * @return {Promise<logs>} Promise returns logs of block or transaction
+ */
+
+const abi = [
+  {
+    indexed: false,
+    name: '_sender',
+    type: 'address',
+  },
+  {
+    indexed: false,
+    name: '_text',
+    type: 'string',
+  },
+  {
+    indexed: true,
+    name: '_time',
+    type: 'uint256',
+  },
+]
+const filter = {
+  address: '0x35bD452c37d28becA42097cFD8ba671C8DD430a1',
+  fromBlock: '0x0',
+}
+web3.appchain.getLogs(filter, abi).then(console.log)
+```
+
 ### newMessageFilter
 
 ```javascript
@@ -256,7 +316,7 @@ nervos.appchain.newBlockFilter()
 ```javascript
 /**
  * @method getFilterChanges
- * @desc polling method for a filter, which returns an array of logs which occurred since last poll.
+ * @desc polling method for a filter, which returns an array of logs which occurred since last poll. If parameter is a block filter id, it will return an array of block hashes, otherwise it will return an array of transaction logs
  * @param {string} - filter id
  * @return {Promise<Array<string>} Promise returns filter logs
  */
