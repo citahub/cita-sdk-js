@@ -149,8 +149,7 @@ export const getTransactionCount = {
 export const getTransactionProof = {
   name: 'getTransactionProof',
   call: 'getTransactionProof',
-  params: 1,
-  inputFormatter: [formatters.inputAddressFormatter]
+  params: 1
 }
 
 export const sendSignedTransaction = {
@@ -176,10 +175,8 @@ const sendTransactionCall = (args: any) => {
 }
 export const sendTransaction = {
   name: 'sendTransaction',
-  // call: 'sendRawTransaction',
   call: sendTransactionCall,
   params: 1,
-  // inputFormatter: [formatters.inputTransactionFormatter],
   inputFormatter: [signer]
 }
 

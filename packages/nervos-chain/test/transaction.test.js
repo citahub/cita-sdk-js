@@ -6,19 +6,19 @@ const {
   tx
 } = require('./config')
 
-const inquireReceipt = txHash =>
+const inquireTx = (action = 'getTransactionReceipt') => txHash =>
   new Promise((resolve, reject) => {
     let remains = 10
     let interval = setInterval(() => {
       if (!remains) {
         clearInterval(interval)
-        reject(new Error('No Receipt Received'))
+        reject(new Error('No Result Received'))
       }
       remains--
-      nervos.appchain.getTransactionReceipt(txHash).then(receipt => {
-        if (receipt && receipt.transactionHash) {
+      nervos.appchain[action](txHash).then(res => {
+        if (res) {
           clearInterval(interval)
-          resolve(receipt)
+          resolve(res)
         }
       })
     }, 1000)
@@ -32,8 +32,8 @@ test.skip('sendSignedTransaction', () => {
   //
 })
 
-test('sendTransaction, getTransactionReceipt, and getTransaction', async () => {
-  expect.assertions(5)
+test('sendTransaction, getTransactionReceipt, getTransactionProof, and getTransaction', async () => {
+  expect.assertions(6)
   jest.setTimeout(30000)
   const currentHeight = await nervos.appchain.getBlockNumber()
   const result = await nervos.appchain.sendTransaction({
@@ -47,13 +47,17 @@ test('sendTransaction, getTransactionReceipt, and getTransaction', async () => {
     return new Error('No TxHash Received')
   }
 
-  const receipt = await inquireReceipt(result.hash)
+  const receipt = await inquireTx('getTransactionReceipt')(result.hash)
 
   expect(receipt.transactionHash).toBe(result.hash)
   expect(receipt.errorMessages).not.toBeNull()
-  //TODO: getTransactionProof
+
+  const proof = await inquireTx('getTransactionProof')(result.hash)
+  expect(proof).not.toBeNull()
+
   const transactionResult = await nervos.appchain.getTransaction(result.hash)
   expect(transactionResult.hash).toBe(result.hash)
+
   return
 })
 
@@ -79,7 +83,7 @@ test('transfer', async () => {
     return new Error('No TxHash Received')
   }
 
-  const receipt = await inquireReceipt(result.hash)
+  const receipt = await inquireTx('getTransactionReceipt')(result.hash)
 
   expect(receipt.transactionHash).toBe(result.hash)
   expect(receipt.errorMessages).not.toBeNull()

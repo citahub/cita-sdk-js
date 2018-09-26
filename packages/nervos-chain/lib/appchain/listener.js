@@ -19,11 +19,11 @@ const listener = (web3) => {
                 listener = setInterval(() => {
                     if (!remains) {
                         stopWatching();
-                        reject('No Result Receved');
+                        reject('No Result Received');
                     }
                     web3.appchain[action](params).then((res) => {
                         remains--;
-                        if (res) {
+                        if ((action === 'getFilterChanges' && res.length) || res) {
                             clearInterval(listener);
                             resolve(res);
                         }

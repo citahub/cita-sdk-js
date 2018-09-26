@@ -20,6 +20,7 @@ export const withNervos = (Comp: typeof React.Component) =>
 
     public componentDidMount() {
       this.updateHeight()
+
       this.timer = setInterval(this.updateHeight, 1000)
     }
     public componentWillUnmount() {

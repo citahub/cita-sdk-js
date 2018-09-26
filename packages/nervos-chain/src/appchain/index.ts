@@ -6,6 +6,7 @@ import listener from './listener'
 import addPrivateKeyFrom from '../utils/addPrivateKey'
 import Contract from '../contract'
 import proxy from './proxy'
+import validators from '../utils/validators'
 
 export interface EnhancedWeb3 extends Web3 {
   appchain?: any
@@ -158,6 +159,8 @@ export default (web3: EnhancedWeb3) => {
     sign: web3.appchain.neuron_sign
   }
   web3.appchain.personal = neuron
+  // add validators
+  Object.assign(web3.utils, validators)
 
   return proxy(web3)
 }

@@ -4,21 +4,26 @@
 
 # Overview
 
-The `nervos.js` library is a collection of packages which contains specific functionality for the [Nervos Appchain](http://appchain.nervos.org/) ecosystem.
+The `nervos.js` library is a collection of packages which contains specific functionality for the [Nervos AppChain](http://appchain.nervos.org/) ecosystem.
 
-- The `nervos-chain` is for interacting with `Appchain` and has been published at [@nervos/chain](https://www.npmjs.com/package/@nervos/chain)
-- The `nervos-signer` is for signing transaction for `Appchain` and has been published at [@nervos/signer](https://www.npmjs.com/package/@nervos/signer)
+- The `nervos-chain` is for interacting with `AppChain` and has been published at [@nervos/chain](https://www.npmjs.com/package/@nervos/chain)
+- The `nervos-signer` is for signing transaction for `AppChain` and has been published at [@nervos/signer](https://www.npmjs.com/package/@nervos/signer)
 
 # Version
 
 `@nervos/chain` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@nervos/chain@0.17.x` will work perfectly with `CITA@0.17`
 
-# Changelog after @nervos/chain@0.17.5
+# Changelog since @nervos/chain@0.17.5
 
-[fix]: **utils.hexToBytes**, and error of original web3@1.0.0;
-[fix]: **setProvider**, enable `nervos.setProvider` function;
-[update]: **UMD Object**, update UMD Object to `window.Nervos`;
-[fix]: **Chain Manage**, fix chainManage Contract address;
-[update]: **Return From**, parameter `from` will be included to return when sendTransaction has no private key;
-[update]: **Lower Address**, lower `to` address in transaction when sendTransaction;
-[update]: **Format Address**, remove `0x` in `to` address;
+- [fix]: **utils.hexToBytes**, and error of original web3@1.0.0;
+- [fix]: **setProvider**, enable `nervos.setProvider` function;
+- [update]: **UMD Object**, update UMD Object to `window.Nervos`;
+- [fix]: **Chain Manage**, fix chainManage Contract address;
+- [update]: **Return From**, parameter `from` will be included to return when sendTransaction has no private key;
+- [update]: **Lower Address**, lower `to` address in transaction when sendTransaction;
+- [update]: **Format Address**, remove `0x` in `to` address;
+- [feature]: **PrivateKey Validator**, add `nervos.utils.isPrivateKey(privateKey)` to check private key format;
+- [fix]: **Fix Typo**, fix typo in log of transactionReceipt listener;
+- [fix]: **Fix getTransactionProof**, fix rpc input formatter;
+- [feature]: **Optimize Logs Output**, add second parameter on `getLogs` to format logs;
+- [update]: **Doc**, add more details in README;

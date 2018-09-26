@@ -11,13 +11,68 @@
 
 `@nervos/chain` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@nervos/chain@0.17.x` will work perfectly with `CITA@0.17`
 
+# Prerequisites
+
+## Learn `web3@1.0`
+
+By default, `@nervos/chain` acts like [`web3@1.0.0`](https://web3js.readthedocs.io/en/1.0/getting-started.html), and has the same APIs.
+
+## Learn `CITA`
+
+`@nervos/chain` works for Nervos AppChain whose kernel is [CITA](https://docs.nervos.org/cita/#/README).
+
+Before using this SDK, following concept should be cast.
+
+1. Transaction Object
+
+Transaction Object to be signed has been defined in [cita-proto](https://github.com/cryptape/cita-proto/blob/master/blockchain.proto#L49)
+
+Transaction Object returned from CITA has been declared [here](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransaction)
+
+2. Transaction Receipt
+
+[Transaction Receipt](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransactionreceipt)
+
+3. Block Object
+
+[Block Object](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getblockbyhash)
+
+4. MetaData Object
+
+[MetaData Object](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getmetadata)
+
+5. ABI
+
+[ABI](https://solidity.readthedocs.io/en/v0.4.25/abi-spec.html)
+
+6. Filter Object
+
+[Filter Object](https://docs.nervos.org/cita/#/rpc_guide/rpc-types?id=filter)
+
+7. Transaction Log
+
+````javascript
+Log {
+  address: string
+  topics: string[]
+  data: string
+  blockHash: string
+  blockNumber: string
+  transactionHash: string
+  transactionIndex: string
+  logIndex: string
+  transactionLogIndex: string
+  decodedLogs: object
+}
+``
+
 # Getting Started
 
 To use `@nervos/chain', you can add it via npm
 
 ```shell
 yarn add @nervos/chain
-```
+````
 
 or to link it in browser directly with
 
@@ -34,7 +89,7 @@ const nervos = Nervos('http://localhost:1337')
 
 # AppChain
 
-`nervos.appchain` allows you to interact with an Nervos Appchain and Nervos Smart Contract.
+`nervos.appchain` allows you to interact with an Nervos AppChain and Nervos Smart Contract.
 
 ## RPC API Reference
 
@@ -192,6 +247,41 @@ nervos.appchain.getBlockNumber()
 nervos.appchain.getTransactionCount('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
 ```
 
+### getLogs
+
+```javascript
+/**
+ * @method getLogs
+ * @desc get logs by filter object and abi
+ * @param {object} - filter object
+ * @param {object} - [abi], event abi
+ * @return {Promise<logs>} Promise returns logs of block or transaction
+ */
+
+const abi = [
+  {
+    indexed: false,
+    name: '_sender',
+    type: 'address',
+  },
+  {
+    indexed: false,
+    name: '_text',
+    type: 'string',
+  },
+  {
+    indexed: true,
+    name: '_time',
+    type: 'uint256',
+  },
+]
+const filter = {
+  address: '0x35bD452c37d28becA42097cFD8ba671C8DD430a1',
+  fromBlock: '0x0',
+}
+web3.appchain.getLogs(filter, abi).then(console.log)
+```
+
 ### newMessageFilter
 
 ```javascript
@@ -226,7 +316,7 @@ nervos.appchain.newBlockFilter()
 ```javascript
 /**
  * @method getFilterChanges
- * @desc polling method for a filter, which returns an array of logs which occurred since last poll.
+ * @desc polling method for a filter, which returns an array of logs which occurred since last poll. If parameter is a block filter id, it will return an array of block hashes, otherwise it will return an array of transaction logs
  * @param {string} - filter id
  * @return {Promise<Array<string>} Promise returns filter logs
  */
@@ -325,7 +415,18 @@ nervos.appchain.sendSignedTransaction('signedTransaction')
  * @return {Promise<object>} Promise returns transaction receipt object
  */
 
-nervos.appchain.getTransactionReceipt('0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
+nervos.appchain.getTransactionReceipt('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
+```
+
+```javascript
+/**
+ * @method getTransactionProof
+ * @desc request transaction proof
+ * @param {string} - transaction hash
+ * @return {Promise<string>} Promise returns transaction proof
+ */
+
+nervos.appchain.getTransactionProof('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
 ```
 
 ### getTransaction
@@ -356,7 +457,7 @@ const transaction = {
   from: '0xb4061fA8E18654a7d51FEF3866d45bB1DC688717',
   privateKey,
   nonce: 999999,
-  quota: 1000000,
+  quota: 1e10,
   chainId: 1,
   version: 0,
   validUntilBlock: 999999,
@@ -434,7 +535,7 @@ nervos.appchain.signer({
   data:
     '6060604052341561000f57600080fd5b60d38061001d6000396000f3006060604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806360fe47b114604e5780636d4ce63c14606e575b600080fd5b3415605857600080fd5b606c60048080359060200190919050506094565b005b3415607857600080fd5b607e609e565b6040518082815260200191505060405180910390f35b8060008190555050565b600080549050905600a165627a7a723058202d9a0979adf6bf48461f24200e635bc19cd1786efbcfc0608eb1d76114d405860029',
   nonce: '47',
-  quota: 999999,
+  quota: 2.1e13,
   validUntilBlock: 114930,
   version: 0,
   chainId: 1,
@@ -461,7 +562,7 @@ nervos.appchain.signer({
  *      chainId: 1,
  *      data: [...],
  *      nonce: '2e96d7a387092faa' ,
- *      quota: 50000,
+ *      quota: 1e10,
  *      to: '',
  *      validUntilBlock: 663228,
  *      value: [...],
@@ -499,3 +600,15 @@ nervos.system.quotaManager
 ```
 
 Corresponding methods can be found [here](https://docs.nervos.org/cita/#/system_management/node)
+
+## Additional Utils
+
+```javascript
+/**
+ * @function isPrivateKey
+ * @desc check if private key is in right format
+ * @param {string} - privateKey
+ * @return {boolean} - valid
+ */
+const valid = nervos.utils.isPrivateKey('0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d')
+```

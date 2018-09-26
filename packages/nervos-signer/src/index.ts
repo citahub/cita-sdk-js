@@ -72,6 +72,8 @@ const signer = (
   } else {
     throw new Error('Quota should be set larger than 0')
   }
+  // tradeoff: now cita will throw error when value not set
+  value = value || '0x0'
 
   if (value) {
     if (typeof value === 'number') {
@@ -130,7 +132,7 @@ const signer = (
     (externalKey || privateKey).replace(/^0x/, ''),
     'hex',
   )
-  var sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'))
+  var sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true })
   var sign_r = sign.r.toString(16)
   var sign_s = sign.s.toString(16)
   if (sign_r.length == 63) sign_r = '0' + sign_r

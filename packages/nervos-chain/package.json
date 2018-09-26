@@ -1,6 +1,6 @@
 {
   "name": "@nervos/chain",
-  "version": "0.17.21",
+  "version": "0.18.0",
   "main": "lib/index.js",
   "repository": "https://github.com/cryptape/nervos.js/tree/master/packages/nervos-chain",
   "author": "Keith <keithwhisper@gmail.com>",
@@ -39,7 +39,7 @@
     "typescript": "^2.8.4"
   },
   "dependencies": {
-    "@nervos/signer": "^1.0.35",
+    "@nervos/signer": "^1.0.37",
     "web3": "^1.0.0-beta.34"
   },
   "jest": {

@@ -9,6 +9,7 @@ const actions = [
 
 const listener = (web3: EnhancedWeb3) => {
   let listeners: { [index: string]: Function } = {}
+  // add getTransactionReceipt, getTransaction, getTransactionProof, getFilterChanges
   actions.forEach(action => {
     listeners[`listenTo${action.slice(3)}`] = (
       params: any,
@@ -23,11 +24,11 @@ const listener = (web3: EnhancedWeb3) => {
         listener = setInterval(() => {
           if (!remains) {
             stopWatching()
-            reject('No Result Receved')
+            reject('No Result Received')
           }
           web3.appchain[action](params).then((res: any) => {
             remains--
-            if (res) {
+            if ((action === 'getFilterChanges' && res.length) || res) {
               clearInterval(listener)
               resolve(res)
             }

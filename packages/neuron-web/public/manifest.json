@@ -6,7 +6,7 @@
   "theme_color": "#000",
   "background_color": "#fff",
   "browser_action": {
-    "default_popup": "./index.html",
+    "default_popup": "./index.html#/transactions",
     "default_title": "NervosWeb"
   },
   "manifest_version": 2,
@@ -18,5 +18,22 @@
     "http://**/*",
     "https://**/*"
   ],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  "background": {
+    "scripts": [
+      "bundle.js",
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [{
+    "matches": [
+      "<all_urls>"
+    ],
+    "js": [
+      "bundle.js",
+      "contentscript.js"
+    ],
+    "run_at": "document_end"
+  }],
+  "web_accessible_resources": ["/bundle.js", "/inject.js"]
 }
