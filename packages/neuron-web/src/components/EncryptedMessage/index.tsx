@@ -13,6 +13,7 @@ const EncryptedMessage = ({
 }) => (
   <div>
     <TextField
+      label={'Message To Sign'}
       value={encryptedMessage}
       placeholder="Encrypted Message"
       fullWidth={true}

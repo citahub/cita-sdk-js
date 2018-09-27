@@ -9,9 +9,11 @@ import './transactions.css'
 
 const rebirth = window.localStorage.getItem('rebirth') || 'https://microscope.cryptape.com:8888'
 
-const SwitchWallet = () => (
+const SwitchWallet = ({ address }: { address: string }) => (
   <Link to="/accounts">
-    <Button classes={{ root: `button-1 primary transactions__list--button` }}>Switch Wallet</Button>
+    <Button classes={{ root: `button-1 primary transactions__list--button` }}>
+      {address ? `Switch Wallet` : `Import Wallet`}
+    </Button>
   </Link>
 )
 
@@ -37,7 +39,7 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
       this.setState({
         address: wallet[0].address,
       })
-      this.loadTxs()
+      // this.loadTxs()
     }
   }
   public getSnapshotBeforeUpdate(prevProps: INervosContext) {
@@ -107,12 +109,12 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
             >
               {copied ? 'Copied' : 'Copy Address'}
             </Button>
-            <SwitchWallet />
+            <SwitchWallet address={address} />
           </React.Fragment>
         ) : (
           <React.Fragment>
             <h1 className="title-1">No wallet yet, please import wallet first!</h1>
-            <SwitchWallet />
+            <SwitchWallet address={address} />
           </React.Fragment>
         )}
         <div className="transactions__container--second">
@@ -131,20 +133,22 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
                 <div className="transactions__list--hash">{this.props.currentTxHash}</div>
               </div>
             ) : null}
-            {transactions.map(tx => (
-              <div className="transactions__list--item" key={tx.hash}>
-                <div className="transactions__list--time">{new Date(tx.timestamp).toLocaleString()}</div>
-                <div className="transactions__list--hash" title={tx.hash}>
-                  <a
-                    href={`${process.env.REACT_APP_MICROSCOPE}#/transaction/${tx.hash}`}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    {tx.hash}
-                  </a>
-                </div>
-              </div>
-            ))}
+            {transactions.length
+              ? transactions.map(tx => (
+                  <div className="transactions__list--item" key={tx.hash}>
+                    <div className="transactions__list--time">{new Date(tx.timestamp).toLocaleString()}</div>
+                    <div className="transactions__list--hash" title={tx.hash}>
+                      <a
+                        href={`${process.env.REACT_APP_MICROSCOPE}#/transaction/${tx.hash}`}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        {tx.hash}
+                      </a>
+                    </div>
+                  </div>
+                ))
+              : 'No Transactions'}
           </div>
         </div>
         <div

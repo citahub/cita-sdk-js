@@ -29,12 +29,17 @@ class Options extends React.Component<IUniComp & INervosContext, typeof initStat
     this.setState({ saved: true })
     return
   }
+  public componentDidMount() {
+    this.setState({
+      chainIp: this.props.nervos.currentProvider ? this.props.nervos.currentProvider.host : '',
+    })
+  }
   public render() {
     const { chainIp, chainIpError, saved } = this.state
     return (
       <div className="options__container">
         <TextField
-          label="chain"
+          label="Chain Address"
           value={chainIp}
           helperText={chainIpError}
           error={!!chainIpError}
