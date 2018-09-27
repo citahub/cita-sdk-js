@@ -2,6 +2,8 @@ import { Button, TextField } from '@material-ui/core'
 import * as React from 'react'
 import { TransactionAction } from '../../hoc/UniComp'
 
+const fields = ['from', 'to', 'value', 'quota', 'nonce', 'validUntilBlock', 'version', 'chainId', 'data']
+
 export const tx = {
   chainId: '',
   data: '',
@@ -30,7 +32,8 @@ const Transaction = ({
   <div>
     {status === TransactionAction.SENDING ? 'Sending' : ''}
     <div>
-      {Object.keys(transaction).map((key: string) => {
+      {// Object.keys(transaction)
+      fields.map((key: string) => {
         return (
           <TextField fullWidth={true} onChange={handleTxEdit(key)} key={key} value={transaction[key]} label={key} />
         )
