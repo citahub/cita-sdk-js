@@ -33,6 +33,15 @@ type ITransactionsState = typeof initState
 class Transactions extends React.Component<INervosContext & IUniComp, ITransactionsState> {
   public readonly state = initState
   private timer: any
+  public componentDidMount() {
+    const { wallet } = this.props.nervos.appchain.accounts
+    if (wallet.length) {
+      this.setState({
+        address: wallet[0].address,
+      })
+      // this.loadTxs()
+    }
+  }
   public getSnapshotBeforeUpdate(prevProps: INervosContext) {
     const { wallet } = this.props.nervos.appchain.accounts
     if (prevProps.currentNumber < this.props.currentNumber && wallet.length) {
