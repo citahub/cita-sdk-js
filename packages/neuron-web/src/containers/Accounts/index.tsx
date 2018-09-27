@@ -5,6 +5,8 @@ import { INervosContext, withNervos } from '../../contexts/nervos'
 import { handleInputOf } from '../../utils/compActions'
 import './accounts.css'
 
+const ErrorMessage = 'Private Key Error...'
+
 enum EnterEventType {
   privateKey = 'PRIVATE_KEY',
   login = 'LOGIN',
@@ -89,7 +91,7 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
         <TextField
           value={privateKey}
           error={!!privateKeyError}
-          helperText={privateKeyError}
+          helperText={privateKeyError ? ErrorMessage : ''}
           onChange={this.handleInput('privateKey')}
           onKeyPress={this.handleKeyPress(EnterEventType.privateKey)}
           fullWidth={true}

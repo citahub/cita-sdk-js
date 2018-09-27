@@ -2,6 +2,10 @@
 
 Neuron Web is an extension of chrome similar to [MetaMask](https://metamask.io).
 
+# Disclaimer
+
+Neuron Web is just a debugger tool now, do not take it as an official wallet.
+
 # Quick Start
 
 ## Enable nervos in dapp to interact with NeuronWeb
