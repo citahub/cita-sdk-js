@@ -97,8 +97,8 @@ if (window.localStorage.getItem('DISABLE_NEURON_WEB_AUTO_IMPORT')) {
 } else {
   window.addEventListener("neuronWebReady", () => {
     window.console.log("NeuronWebReady")
-    if (nervos) {
-      window.addMessenger(nervos)
+    if (window.nervos) {
+      window.addMessenger(window.nervos)
     }
   })
   setTimeout(() => {
