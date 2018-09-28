@@ -1,10 +1,9 @@
 {
   "short_name": "NeuronWeb",
   "name": "Neuron Web",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000",
-  "background_color": "#fff",
+  "icons": {
+    "48": "favicon.png"
+  },
   "browser_action": {
     "default_popup": "./index.html#/transactions",
     "default_title": "NervosWeb"
@@ -15,8 +14,7 @@
     "tabs",
     "activeTab",
     "clipboardWrite",
-    "http://**/*",
-    "https://**/*"
+    "<all_urls>"
   ],
   "background": {
     "scripts": [
