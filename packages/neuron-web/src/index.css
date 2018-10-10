@@ -12,3 +12,15 @@ body {
 a {
   text-decoration: none;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 25px;
+}
+
+button {
+  border-radius: 2px !important;
+}

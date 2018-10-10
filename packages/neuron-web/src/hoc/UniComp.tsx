@@ -233,7 +233,9 @@ const UniComp = (Comp: typeof React.Component) => {
       const { errorMsg, dialogueOn, encryptedMessage, transaction } = this.state
       return (
         <div>
+          {/*
           <img className="logo" src="https://cdn.cryptape.com/images/neuron-logo.png" alt="logo" />
+        */}
           <Notifier message={errorMsg} on={!!errorMsg} type={NotifierType.ERROR} handleClose={this.closeNotifier} />
           <Comp
             {...this.props}
