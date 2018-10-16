@@ -1,20 +1,18 @@
 require('web3-eth')
+const EC = require('elliptic').ec
 const utils = require('web3-utils')
 const blockchainPb = require('../proto-js/blockchain_pb')
-export const unsigner = require('./unsigner').default
 
-const EC = require('elliptic').ec
+const MAX_VALUE = '0x' + 'f'.repeat(32)
+export const unsigner = require('./unsigner').default
 export const ec = new EC('secp256k1')
 export const sha3 = utils.sha3
-
 export const getNonce = () => {
   return utils.randomHex(5)
 }
-
 export const hex2bytes = (num: string) => {
   return utils.hexToBytes(num.startsWith('0x') ? num : '0x' + num)
 }
-
 export const bytes2hex = (bytes: Uint8Array) => {
   return utils.bytesToHex(bytes)
 }
@@ -46,7 +44,7 @@ const signer = (
   externalKey?: string,
 ) => {
   if (!privateKey && !externalKey) {
-    console.warn('No private key found')
+    console.warn(`No private key found`)
     return {
       data,
       from,
@@ -61,24 +59,39 @@ const signer = (
   }
   const tx = new blockchainPb.Transaction()
 
+  /**
+   * nonce
+   * random string with max length of 128, used to prevent repeated transaction
+   */
   if (nonce === undefined) {
     tx.setNonce(getNonce())
+  } else if (nonce.length > 128) {
+    throw new Error(`Nonce should be random string with max length of 128`)
   } else {
     tx.setNonce(nonce)
   }
 
+  /**
+   * quota
+   * user-defined number, acts as gas limit
+   */
   if (typeof quota === 'number' && quota > 0) {
     tx.setQuota(quota)
   } else {
-    throw new Error('Quota should be set larger than 0')
+    throw new Error('Quota should be larger than 0')
   }
+
   // tradeoff: now cita will throw error when value not set
-  value = value || '0x0'
+  value = typeof value === 'number' ? '0x' + value.toString(16) : value || '0x0'
+
+  if (value.length > MAX_VALUE.length) {
+    throw new Error(`Value should not be larger than ${MAX_VALUE}`)
+  }
+  if (+value < 0) {
+    throw new Error(`Value should not be negative`)
+  }
 
   if (value) {
-    if (typeof value === 'number') {
-      value = value.toString(16)
-    }
     try {
       value = value.replace(/^0x/, '')
       if (value.length % 2) {
@@ -97,18 +110,22 @@ const signer = (
     if (utils.isAddress(to)) {
       tx.setTo(to.toLowerCase().replace(/^0x/, ''))
     } else {
-      throw new Error('Invalid to address')
+      throw new Error(`Invalid to address`)
     }
   }
 
-  if (validUntilBlock === undefined) {
-    throw new Error('ValidUntilBlock should be set')
+  /**
+   * validUntilBlock
+   * works as timeout, usually set to be current block number + 88, if the transaction has not been mined after valid until block, it will be reguarded as a failed transaction.
+   */
+  if (validUntilBlock === undefined || isNaN(+validUntilBlock)) {
+    throw new Error(`ValidUntilBlock should be set`)
   } else {
     tx.setValidUntilBlock(+validUntilBlock)
   }
 
   if (chainId === undefined) {
-    throw new Error('Chain Id should be set')
+    throw new Error(`Chain Id should be set`)
   } else {
     tx.setChainId(chainId)
   }
