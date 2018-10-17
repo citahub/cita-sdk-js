@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require('web3-eth');
+const EC = require('elliptic').ec;
 const utils = require('web3-utils');
 const blockchainPb = require('../proto-js/blockchain_pb');
+const MAX_VALUE = '0x' + 'f'.repeat(32);
 exports.unsigner = require('./unsigner').default;
-const EC = require('elliptic').ec;
 exports.ec = new EC('secp256k1');
 exports.sha3 = utils.sha3;
 exports.getNonce = () => {
@@ -18,7 +19,7 @@ exports.bytes2hex = (bytes) => {
 };
 const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota, validUntilBlock, value = '', version = 0, chainId = 1, to = '', }, externalKey) => {
     if (!privateKey && !externalKey) {
-        console.warn('No private key found');
+        console.warn(`No private key found`);
         return {
             data,
             from,
@@ -35,6 +36,9 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     if (nonce === undefined) {
         tx.setNonce(exports.getNonce());
     }
+    else if (nonce.length > 128) {
+        throw new Error(`Nonce should be random string with max length of 128`);
+    }
     else {
         tx.setNonce(nonce);
     }
@@ -42,13 +46,16 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
         tx.setQuota(quota);
     }
     else {
-        throw new Error('Quota should be set larger than 0');
+        throw new Error('Quota should be larger than 0');
     }
-    value = value || '0x0';
+    value = typeof value === 'number' ? '0x' + value.toString(16) : value || '0x0';
+    if (value.length > MAX_VALUE.length) {
+        throw new Error(`Value should not be larger than ${MAX_VALUE}`);
+    }
+    if (+value < 0) {
+        throw new Error(`Value should not be negative`);
+    }
     if (value) {
-        if (typeof value === 'number') {
-            value = value.toString(16);
-        }
         try {
             value = value.replace(/^0x/, '');
             if (value.length % 2) {
@@ -68,17 +75,17 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
             tx.setTo(to.toLowerCase().replace(/^0x/, ''));
         }
         else {
-            throw new Error('Invalid to address');
+            throw new Error(`Invalid to address`);
         }
     }
-    if (validUntilBlock === undefined) {
-        throw new Error('ValidUntilBlock should be set');
+    if (validUntilBlock === undefined || isNaN(+validUntilBlock)) {
+        throw new Error(`ValidUntilBlock should be set`);
     }
     else {
         tx.setValidUntilBlock(+validUntilBlock);
     }
     if (chainId === undefined) {
-        throw new Error('Chain Id should be set');
+        throw new Error(`Chain Id should be set`);
     }
     else {
         tx.setChainId(chainId);
