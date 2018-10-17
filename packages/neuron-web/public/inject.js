@@ -3,13 +3,14 @@
 const manifestDOM = document.querySelector('link[ref=manifest]')
 if (manifestDOM) {
   const href = manifestDOM.href
-  fetch(href).then(res => res.json()).then(m => {
-    if (m) {
-      window.postMessage({
-        action: 'manifest',
-        data: m
-      }, "*")
-    }
+  fetch(href).then(res => res.json()).then(manifest => {
+    // if (m) {
+    //   window.postMessage({
+    //     action: 'manifest',
+    //     data: m
+    //   }, "*")
+    // }
+    window.manifest = manifest
   }).catch(window.console.error)
 }
 
@@ -70,9 +71,13 @@ window.addMessenger = (sdk) => {
         if (payload && (
             payload.method === 'send' ||
             payload.method === 'sendTransaction')) {
+          if (!window.manifest) {
+            window.console.warn('Manifest not loaded')
+          }
           window.postMessage({
             action: 'sendTransaction',
             transaction: payload.params[0],
+            manifest: window.manifest
           }, '*')
           return listener("returnTransactionReceipt", callback, payload)
         }

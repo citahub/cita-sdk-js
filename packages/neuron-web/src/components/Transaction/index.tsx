@@ -1,6 +1,6 @@
-import { Button, TextField } from '@material-ui/core'
+import { Button, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, TextField } from '@material-ui/core'
 import * as React from 'react'
-import { TransactionAction } from '../../hoc/UniComp'
+import { IManifest, TransactionAction } from '../../hoc/UniComp'
 
 const fields = ['from', 'to', 'value', 'quota', 'nonce', 'validUntilBlock', 'version', 'chainId', 'data']
 
@@ -22,15 +22,25 @@ const Transaction = ({
   handleTxAction,
   chain,
   status,
+  manifest,
 }: {
   transaction?: any
   handleTxEdit: (key: string) => (e: any) => void
   handleTxAction: (type: TransactionAction) => (e: any) => void
   chain: string
   status: TransactionAction
+  manifest: IManifest
 }) => (
   <div>
     {status === TransactionAction.SENDING ? 'Sending' : ''}
+    {manifest.name ? (
+      <ExpansionPanel>
+        <ExpansionPanelSummary>DApp Name: {manifest.name}</ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <pre>{JSON.stringify(manifest, null, 2)}</pre>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    ) : null}
     <div>
       {// Object.keys(transaction)
       fields.map((key: string) => {
