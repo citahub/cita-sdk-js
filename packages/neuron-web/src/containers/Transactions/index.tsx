@@ -195,12 +195,12 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
           </h2>
           <div className="transaction__list--board">
             {this.props.currentTxHash ? (
-              <div className="transaction__list--item">
+              <div className="transactions__list--item">
                 <div className="transactions__list--time">
                   {/*
                   Listening to
                 */}
-                  '****/**/** **:**:**'
+                  ****/**/** **:**:**
                 </div>
                 <div className="transactions__list--hash">{this.props.currentTxHash}</div>
               </div>
