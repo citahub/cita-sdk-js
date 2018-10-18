@@ -1,0 +1,3 @@
+[submodule "packages/nervos-chain/cita-sys-abi"]
+	path = packages/nervos-chain/cita-sys-abi
+	url = https://github.com/cryptape/cita-sys-abi
