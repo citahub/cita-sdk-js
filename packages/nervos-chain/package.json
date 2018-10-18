@@ -11,6 +11,7 @@
     "build": "tsc && browserify",
     "docs": "typedoc --out ./documents/ ./src/",
     "test": "jest",
+    "parse-abi": "node ./scripts/parse_abi.js",
     "example": "node examples/deploy.js",
     "browserify": "browserify ./lib/browser.js -o ./lib/bundle.js && minify ./lib/bundle.js -d ./lib/",
     "precommit": "lint-staged"
