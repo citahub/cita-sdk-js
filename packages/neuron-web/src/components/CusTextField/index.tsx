@@ -23,9 +23,11 @@ export default ({
 }) => (
   <div className="cusTextField__container" style={style}>
     <input type={type} onChange={onChange} onKeyPress={onKeyPress} value={value} />
-    <button onClick={onClear}>
-      <AddCircleIcon />
-    </button>
+    {value ? (
+      <button onClick={onClear}>
+        <AddCircleIcon />
+      </button>
+    ) : null}
     {error ? <span className="cusTextField__error">{helperText}</span> : null}
   </div>
 )

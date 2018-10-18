@@ -11,7 +11,7 @@ import { copyToClipboard } from '../../utils/compActions'
 import './transactions.css'
 
 const rebirth = window.localStorage.getItem('rebirth') || 'https://microscope.cryptape.com:8888'
-const RATIO = 1e9
+const RATIO = 1e18
 
 const SwitchWallet = ({ address }: { address: string }) => (
   <Link to="/accounts">
@@ -49,7 +49,6 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
         address: wallet[0].address,
       })
       this.getBalance(wallet[0].address)
-      // this.loadTxs()
     }
     this.getMetaData()
   }
@@ -134,7 +133,8 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
         <div className="header" style={{ borderBottom: '1px solid #e9ebf0' }}>
           <img className="logo" src="https://cdn.cryptape.com/images/neuron-logo.png" alt="logo" />
           <div className="transactions__network">
-            Current Network: <Link to="/options" style={{ color: 'inherit' }}>{`${metadata.chainName}`}</Link>
+            Current Network:{' '}
+            <Link to="/options" style={{ color: 'inherit' }}>{`${metadata.chainName || 'unknown'}`}</Link>
           </div>
         </div>
         {address ? (
@@ -195,12 +195,12 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
           </h2>
           <div className="transaction__list--board">
             {this.props.currentTxHash ? (
-              <div className="transaction__list--item">
+              <div className="transactions__list--item">
                 <div className="transactions__list--time">
                   {/*
                   Listening to
                 */}
-                  '****/**/** **:**:**'
+                  ****/**/** **:**:**
                 </div>
                 <div className="transactions__list--hash">{this.props.currentTxHash}</div>
               </div>
@@ -211,7 +211,9 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
                     <div className="transactions__list--time">{new Date(tx.timestamp).toLocaleString()}</div>
                     <div className="transactions__list--hash" title={tx.hash}>
                       <a
-                        href={`${process.env.REACT_APP_MICROSCOPE}#/transaction/${tx.hash}`}
+                        href={`${process.env.REACT_APP_MICROSCOPE}${
+                          this.props.nervos.currentProvider ? '?chain=' + this.props.nervos.currentProvider.host : ''
+                        }#/transaction/${tx.hash}`}
                         target="_blank"
                         rel="noreferrer noopener"
                       >
