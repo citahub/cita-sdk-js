@@ -24,7 +24,8 @@ class Options extends React.Component<IUniComp & INervosContext, typeof initStat
     }
     if (!chainIp.startsWith('http')) {
       this.setState({
-        chainIpError: 'Protocol required',
+        // chainIpError: 'Protocol required',
+        chainIpError: 'chain address error...',
       })
       return
     }
