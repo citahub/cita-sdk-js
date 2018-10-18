@@ -592,14 +592,20 @@ System contracts locating in `nervos.system` can be used as normal contracts.
 ```javascript
 nervos.system.admin
 nervos.system.authorization
+nervos.system.batchTx
 nervos.system.chainManager
+nervos.system.emergencyBrake
 nervos.system.groupManagement
 nervos.system.nodeManager
 nervos.system.permissionManagement
+nervos.system.priceManager
 nervos.system.quotaManager
+nervos.system.roleManagement
+nervos.system.sysConfig
+nervos.system.versionManage
 ```
 
-Corresponding methods can be found [here](https://docs.nervos.org/cita/#/system_management/node)
+Corresponding methods can be found [here](https://docs.nervos.org/cita/#/contracts_guide/sys)
 
 ## Additional Utils
 
