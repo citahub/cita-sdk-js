@@ -16,3 +16,4 @@ The `nervos.js` library is a collection of packages which contains specific func
 # Changelog since @nervos/chain@0.18.0
 
 - [update]: **System Contracts**, add 7 more system contracts instance.
+- [fix]: **Account Generation**, fix bug of pass privatekey without `0x` to nervos.appchain.accounts.privateKeyToAccount;
