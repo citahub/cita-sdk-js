@@ -1,10 +1,16 @@
 import admin from './admin'
 import authorization from './authorization'
+import batchTx from './batchTx'
 import chainManager from './chainManager'
+import emergencyBrake from './emergencyBrake'
 import groupManagement from './groupManagement'
 import nodeManager from './nodeManager'
 import permissionManagement from './permissionManagement'
+import priceManager from './priceManager'
 import quotaManager from './quotaManager'
+import roleManagement from './roleManagement'
+import sysConfig from './sysConfig'
+import versionManager from './versionManager'
 
 interface ABI {
   constant?: boolean
@@ -20,11 +26,17 @@ interface ABI {
 const abis: { [index: string]: ABI[] } = {
   admin,
   authorization,
+  batchTx,
   chainManager,
+  emergencyBrake,
   groupManagement,
   nodeManager,
   permissionManagement,
-  quotaManager
+  priceManager,
+  quotaManager,
+  roleManagement,
+  sysConfig,
+  versionManager
 }
 
 export default abis

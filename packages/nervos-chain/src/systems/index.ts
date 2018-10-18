@@ -5,11 +5,17 @@ import abis from './abis'
 const systemContracts = [
   'admin',
   'authorization',
+  'batchTx',
   'chainManager',
+  'emergencyBrake',
   'groupManagement',
   'nodeManager',
   'permissionManagement',
-  'quotaManager'
+  'priceManager',
+  'quotaManager',
+  'roleManagement',
+  'sysConfig',
+  'versionManager'
 ]
 
 const manageGen = (web3: any, contract: string) => {

@@ -8,11 +8,17 @@ const abis_1 = __importDefault(require("./abis"));
 const systemContracts = [
     'admin',
     'authorization',
+    'batchTx',
     'chainManager',
+    'emergencyBrake',
     'groupManagement',
     'nodeManager',
     'permissionManagement',
-    'quotaManager'
+    'priceManager',
+    'quotaManager',
+    'roleManagement',
+    'sysConfig',
+    'versionManager'
 ];
 const manageGen = (web3, contract) => {
     return new web3.appchain.Contract(abis_1.default[contract], config_1.ReservedAddr[contract]);
