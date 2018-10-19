@@ -56,9 +56,9 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
       return this.clearAccount()
     }
     const { accounts } = this.props.nervos.appchain
-    if (!privateKey) {
+    if (privateKey.replace(/^0x/, '').length !== 64) {
       this.setState({
-        privateKeyError: 'Please enter private key',
+        privateKeyError: 'Please enter private key with valid format',
       })
       return
     }
