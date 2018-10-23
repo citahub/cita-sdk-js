@@ -2,6 +2,7 @@ import { Button, IconButton, TextField } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
+import { chain } from '../../config'
 import { INervosContext, withNervos } from '../../contexts/nervos'
 import { IUniComp } from '../../hoc/UniComp'
 import { handleInputOf } from '../../utils/compActions'
@@ -17,10 +18,14 @@ class Options extends React.Component<IUniComp & INervosContext, typeof initStat
   public readonly state = initState
   public handleInput = handleInputOf(this)
   public handleClick = (e: any) => {
-    const { chainIp } = this.state
+    let { chainIp } = this.state
+    if (!chainIp) {
+      chainIp = chain
+    }
     if (!chainIp.startsWith('http')) {
       this.setState({
-        chainIpError: 'Protocol required',
+        // chainIpError: 'Protocol required',
+        chainIpError: 'chain address error...',
       })
       return
     }
@@ -31,7 +36,8 @@ class Options extends React.Component<IUniComp & INervosContext, typeof initStat
   }
   public componentDidMount() {
     this.setState({
-      chainIp: this.props.nervos.currentProvider ? this.props.nervos.currentProvider.host : '',
+      chainIp: window.localStorage.getItem('chainIp') || '',
+      // chainIp: this.props.nervos.currentProvider ? this.props.nervos.currentProvider.host : '',
     })
   }
   public render() {

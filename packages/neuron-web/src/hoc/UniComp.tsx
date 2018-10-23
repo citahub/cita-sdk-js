@@ -28,15 +28,43 @@ export enum EncryptedMessageAction {
   SUBMIT,
   SENDING,
 }
+export interface IChainInfo {
+  address: string
+  id: string
+}
+
+export interface IManifest {
+  chainSet: {
+    [index: string]: string
+  }
+  entry: string
+  icon: string
+  name: string
+  provider: string
+}
+
+const initManifest: IManifest = {
+  chainSet: {},
+  entry: '',
+  icon: '',
+  name: '',
+  provider: '',
+}
+const initChainInfo: IChainInfo = {
+  address: '',
+  id: '',
+}
 
 const initState = {
   appId: 0,
+  chainInfo: initChainInfo,
   currentTxHash: '',
   dappId: 0,
   dialogueOn: false,
   encryptedMessage: '',
   errorMsg: '',
   fromAccount: '',
+  manifest: initManifest,
   transaction: tx,
   txStatus: TransactionAction.NONE,
 }
@@ -65,13 +93,19 @@ const UniComp = (Comp: typeof React.Component) => {
       if (chrome && chrome.runtime && chrome.runtime.onMessage) {
         chrome.runtime.onMessage.addListener((message, sender, res) => {
           const { action, data } = message
+          let chainInfo = initChainInfo
+          if (data.manifest) {
+            chainInfo = this.getChainFromManifest(data.manifest)
+          }
           if (action === 'confirm') {
             this.setState({
               appId: data.appId,
+              chainInfo,
               dappId: data.dappId,
               dialogueOn: true,
               encryptedMessage: data.encryptedMessage || '',
               fromAccount: data.fromAccount || '',
+              manifest: data.manifest || initManifest,
               transaction: data.transaction || tx,
             })
           }
@@ -193,7 +227,31 @@ const UniComp = (Comp: typeof React.Component) => {
         }
       }
     }
+
+    public getChainFromManifest = (manifest: IManifest): IChainInfo => {
+      if (manifest.name && manifest.chainSet) {
+        const chainIds = Object.keys(manifest.chainSet)
+        if (chainIds[0]) {
+          return {
+            address: manifest.chainSet[chainIds[0]],
+            id: chainIds[0],
+          }
+        }
+      }
+      return {
+        address: '',
+        id: '',
+      }
+    }
     public submitTransaction = () => {
+      const { chainInfo } = this.state
+      try {
+        if (chainInfo.address) {
+          this.props.nervos.setProvider(chainInfo.address)
+        }
+      } catch (err) {
+        window.console.error(err)
+      }
       this.setState({ txStatus: TransactionAction.SENDING })
       return this.props.nervos.appchain
         .sendTransaction(this.state.transaction)
@@ -230,10 +288,12 @@ const UniComp = (Comp: typeof React.Component) => {
       })
     }
     public render() {
-      const { errorMsg, dialogueOn, encryptedMessage, transaction } = this.state
+      const { errorMsg, dialogueOn, encryptedMessage, transaction, manifest, txStatus } = this.state
       return (
         <div>
+          {/*
           <img className="logo" src="https://cdn.cryptape.com/images/neuron-logo.png" alt="logo" />
+        */}
           <Notifier message={errorMsg} on={!!errorMsg} type={NotifierType.ERROR} handleClose={this.closeNotifier} />
           <Comp
             {...this.props}
@@ -248,9 +308,10 @@ const UniComp = (Comp: typeof React.Component) => {
               <Transaction
                 handleTxAction={this.handleTxAction}
                 transaction={transaction}
+                manifest={manifest}
                 handleTxEdit={this.handleTxEdit}
                 chain={this.props.nervos.currentProvider.host}
-                status={this.state.txStatus}
+                status={txStatus}
               />
             ) : (
               <EncryptedMessage

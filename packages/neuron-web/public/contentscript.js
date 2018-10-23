@@ -59,7 +59,7 @@ window.addEventListener('message', (e) => {
       if (!!data.fromAccount) {
         return chrome.runtime.sendMessage({
           action: 'open',
-          data
+          data,
         }, console.log)
       }
     })

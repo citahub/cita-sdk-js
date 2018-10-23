@@ -1,5 +1,11 @@
-import { Button, TextField } from '@material-ui/core'
+import {
+  Button,
+  // TextField
+} from '@material-ui/core'
+import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
 import * as React from 'react'
+import CusTextField from '../../components/CusTextField'
+
 import { pwd } from '../../config'
 import { INervosContext, withNervos } from '../../contexts/nervos'
 import { handleInputOf } from '../../utils/compActions'
@@ -46,10 +52,13 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
   }
   public addAccount = (e?: any) => {
     const { privateKey } = this.state
-    const { accounts } = this.props.nervos.appchain
     if (!privateKey) {
+      return this.clearAccount()
+    }
+    const { accounts } = this.props.nervos.appchain
+    if (privateKey.replace(/^0x/, '').length !== 64) {
       this.setState({
-        privateKeyError: 'Please enter private key',
+        privateKeyError: 'Please enter private key in valid format',
       })
       return
     }
@@ -62,14 +71,22 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
       accounts.wallet.add(account)
       accounts.wallet.save(pwd)
       this.props.history.push('/transactions')
-      chrome.runtime.sendMessage({
-        action: 'privateKeyChanged',
-      })
+      if (chrome && chrome.runtime) {
+        chrome.runtime.sendMessage({
+          action: 'privateKeyChanged',
+        })
+      }
     } catch (err) {
       this.setState({
         privateKeyError: err.message,
       })
     }
+  }
+  public clearText = (e?: any) => {
+    this.setState({
+      privateKey: '',
+      privateKeyError: '',
+    })
   }
   public clearAccount = (e?: any) => {
     this.props.nervos.appchain.accounts.wallet.clear()
@@ -79,15 +96,28 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
       privateKey: '',
       privateKeyError: '',
     })
-    chrome.runtime.sendMessage({
-      action: 'privateKeyChanged',
-    })
+    if (chrome && chrome.runtime) {
+      chrome.runtime.sendMessage({
+        action: 'privateKeyChanged',
+      })
+    }
+  }
+  public goBack = (e?: any) => {
+    this.props.history.goBack()
   }
   public render() {
-    const { cleared, privateKey, privateKeyError } = this.state
+    const {
+      // cleared,
+      privateKey,
+      privateKeyError,
+    } = this.state
     return (
       <div className="accounts__container">
+        <div className="header">
+          <ArrowBackIos onClick={this.goBack} style={{ cursor: 'pointer' }} />
+        </div>
         <h1 className="title-1">Private Key</h1>
+        {/*
         <TextField
           value={privateKey}
           error={!!privateKeyError}
@@ -95,6 +125,19 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
           onChange={this.handleInput('privateKey')}
           onKeyPress={this.handleKeyPress(EnterEventType.privateKey)}
           fullWidth={true}
+        />
+        */}
+        <CusTextField
+          value={privateKey}
+          onChange={this.handleInput('privateKey')}
+          onClear={this.clearText}
+          onKeyPress={this.handleKeyPress(EnterEventType.privateKey)}
+          error={!!privateKeyError}
+          helperText={privateKeyError ? ErrorMessage : ''}
+          style={{
+            margin: '0 auto',
+            maxWidth: '474px',
+          }}
         />
         <Button
           classes={{
@@ -104,6 +147,7 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
         >
           Enter
         </Button>
+        {/*
         <Button
           classes={{
             root: `button-1 ${cleared ? 'disabled' : 'primary'} accounts__container--button`,
@@ -113,6 +157,7 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
         >
           {cleared ? 'Cleared' : 'Clear'}
         </Button>
+        */}
       </div>
     )
   }

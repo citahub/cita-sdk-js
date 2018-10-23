@@ -1,0 +1,41 @@
+.cusTextField__container {
+  position: relative;
+  display: flex;
+  border: 1px solid #e9ebf0;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: #f8f8fa;
+  padding: 2px 5px;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+.cusTextField__container input {
+  border: none;
+  flex: 1;
+  background: none;
+  color: #6c7184;
+  font-size: 0.875rem;
+  outline: none;
+  font-weight: 100;
+}
+
+
+.cusTextField__container button {
+  display: flex;
+  padding: 0;
+  border: none;
+  background: none;
+  transform: rotate(45deg);
+  color: #dbdce3;
+  cursor: pointer;
+  outline: none;
+}
+
+.cusTextField__error {
+  position: absolute;
+  color: #ff4545;
+  font-size: 0.875rem;
+  margin-top: 5px;
+  top: 100%;
+}
