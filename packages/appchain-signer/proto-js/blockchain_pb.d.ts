@@ -56,11 +56,11 @@ export class BlockHeader extends jspb.Message {
   getReceiptsRoot_asB64(): string;
   setReceiptsRoot(value: Uint8Array | string): void;
 
-  getGasUsed(): number;
-  setGasUsed(value: number): void;
+  getQuotaUsed(): number;
+  setQuotaUsed(value: number): void;
 
-  getGasLimit(): number;
-  setGasLimit(value: number): void;
+  getQuotaLimit(): number;
+  setQuotaLimit(value: number): void;
 
   hasProof(): boolean;
   clearProof(): void;
@@ -90,8 +90,8 @@ export namespace BlockHeader {
     stateRoot: Uint8Array | string,
     transactionsRoot: Uint8Array | string,
     receiptsRoot: Uint8Array | string,
-    gasUsed: number,
-    gasLimit: number,
+    quotaUsed: number,
+    quotaLimit: number,
     proof?: Proof.AsObject,
     proposer: Uint8Array | string,
   }
@@ -124,11 +124,11 @@ export namespace Status {
 }
 
 export class AccountGasLimit extends jspb.Message {
-  getCommonGasLimit(): number;
-  setCommonGasLimit(value: number): void;
+  getCommonQuotaLimit(): number;
+  setCommonQuotaLimit(value: number): void;
 
-  getSpecificGasLimitMap(): jspb.Map<string, number>;
-  clearSpecificGasLimitMap(): void;
+  getSpecificQuotaLimitMap(): jspb.Map<string, number>;
+  clearSpecificQuotaLimitMap(): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AccountGasLimit.AsObject;
   static toObject(includeInstance: boolean, msg: AccountGasLimit): AccountGasLimit.AsObject;
@@ -141,8 +141,8 @@ export class AccountGasLimit extends jspb.Message {
 
 export namespace AccountGasLimit {
   export type AsObject = {
-    commonGasLimit: number,
-    specificGasLimitMap: Array<[string, number]>,
+    commonQuotaLimit: number,
+    specificQuotaLimitMap: Array<[string, number]>,
   }
 }
 
@@ -165,6 +165,9 @@ export class RichStatus extends jspb.Message {
   getInterval(): number;
   setInterval(value: number): void;
 
+  getVersion(): number;
+  setVersion(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): RichStatus.AsObject;
   static toObject(includeInstance: boolean, msg: RichStatus): RichStatus.AsObject;
@@ -181,6 +184,7 @@ export namespace RichStatus {
     height: number,
     nodesList: Array<Uint8Array | string>,
     interval: number,
+    version: number,
   }
 }
 
@@ -213,6 +217,16 @@ export class Transaction extends jspb.Message {
   getVersion(): number;
   setVersion(value: number): void;
 
+  getToV1(): Uint8Array | string;
+  getToV1_asU8(): Uint8Array;
+  getToV1_asB64(): string;
+  setToV1(value: Uint8Array | string): void;
+
+  getChainIdV1(): Uint8Array | string;
+  getChainIdV1_asU8(): Uint8Array;
+  getChainIdV1_asB64(): string;
+  setChainIdV1(value: Uint8Array | string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Transaction.AsObject;
   static toObject(includeInstance: boolean, msg: Transaction): Transaction.AsObject;
@@ -233,6 +247,8 @@ export namespace Transaction {
     value: Uint8Array | string,
     chainId: number,
     version: number,
+    toV1: Uint8Array | string,
+    chainIdV1: Uint8Array | string,
   }
 }
 
@@ -442,10 +458,30 @@ export namespace BlackList {
   }
 }
 
+export class StateSignal extends jspb.Message {
+  getHeight(): number;
+  setHeight(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StateSignal.AsObject;
+  static toObject(includeInstance: boolean, msg: StateSignal): StateSignal.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: StateSignal, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StateSignal;
+  static deserializeBinaryFromReader(message: StateSignal, reader: jspb.BinaryReader): StateSignal;
+}
+
+export namespace StateSignal {
+  export type AsObject = {
+    height: number,
+  }
+}
+
 export enum ProofType {
   AUTHORITYROUND = 0,
   RAFT = 1,
-  TENDERMINT = 2,
+  BFT = 2,
 }
 
 export enum Crypto {
