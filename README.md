@@ -4,10 +4,10 @@
 
 # Overview
 
-The `nervos.js` library is a collection of packages which contains specific functionality for the [Nervos AppChain](http://appchain.nervos.org/) ecosystem.
+The `appchain.js` library is a collection of packages which contains specific functionality for the [Nervos AppChain](http://appchain.nervos.org/) ecosystem.
 
-- The `nervos-chain` is for interacting with `AppChain` and has been published at [@appchain/base](https://www.npmjs.com/package/@appchain/base)
-- The `nervos-signer` is for signing transaction for `AppChain` and has been published at [@appchain/signer](https://www.npmjs.com/package/@appchain/signer)
+- The `appchain-base` is for interacting with `AppChain` and has been published at [@appchain/base](https://www.npmjs.com/package/@appchain/base)
+- The `appchain-signer` is for signing transaction for `AppChain` and has been published at [@appchain/signer](https://www.npmjs.com/package/@appchain/signer)
 
 # Version
 
