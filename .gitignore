@@ -16,3 +16,5 @@ citaSignTransaction.ts
 # working
 subscription
 
+# npm
+package-lock.json

@@ -108,8 +108,7 @@ test('listen to transaction receipt', async () => {
     ...tx,
     validUntilBlock: +currentHeight + 88
   })
-  const receipt = await appchain.listene
-  rs.listenToTransactionReceipt(result.hash)
+  const receipt = await appchain.listeners.listenToTransactionReceipt(result.hash)
   expect(receipt.transactionHash).toBe(result.hash)
 })
 
