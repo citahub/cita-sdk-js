@@ -1,0 +1,51 @@
+{
+  "name": "@appchain/base",
+  "version": "0.18.2",
+  "main": "lib/index.js",
+  "repository": "https://github.com/cryptape/appchain.js/tree/master/packages/appchain-base",
+  "author": "Keith <keithwhisper@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --config nodemon.json",
+    "debug": "node debug/index.js",
+    "build": "tsc && browserify",
+    "docs": "typedoc --out ./documents/ ./src/",
+    "test": "jest",
+    "parse-abi": "node ./scripts/parse_abi.js",
+    "example": "node examples/deploy.js",
+    "browserify": "browserify ./lib/browser.js -o ./lib/bundle.js && minify ./lib/bundle.js -d ./lib/",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "docs": "typedoc --theme markdown",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "babel-minify": "^0.4.3",
+    "browserify": "^16.2.2",
+    "eslint": "^4.19.1",
+    "husky": "^0.14.3",
+    "jest": "^23.1.0",
+    "lint-staged": "^7.1.2",
+    "nodemon": "^1.17.5",
+    "prettier": "^1.13.3",
+    "ts-node": "^6.0.5",
+    "typedoc": "^0.11.1",
+    "typescript": "^2.8.4"
+  },
+  "dependencies": {
+    "@appchain/signer": "^1.0.37",
+    "web3": "^1.0.0-beta.34"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  },
+  "gitHead": "114c63979b6466beba9bf469bf50efb018701e5a"
+}

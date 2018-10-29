@@ -6,14 +6,14 @@
 
 The `nervos.js` library is a collection of packages which contains specific functionality for the [Nervos AppChain](http://appchain.nervos.org/) ecosystem.
 
-- The `nervos-chain` is for interacting with `AppChain` and has been published at [@nervos/chain](https://www.npmjs.com/package/@nervos/chain)
-- The `nervos-signer` is for signing transaction for `AppChain` and has been published at [@nervos/signer](https://www.npmjs.com/package/@nervos/signer)
+- The `nervos-chain` is for interacting with `AppChain` and has been published at [@appchain/base](https://www.npmjs.com/package/@appchain/base)
+- The `nervos-signer` is for signing transaction for `AppChain` and has been published at [@appchain/signer](https://www.npmjs.com/package/@appchain/signer)
 
 # Version
 
-`@nervos/chain` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@nervos/chain@0.17.x` will work perfectly with `CITA@0.17`
+`@appchain/base` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@appchain/base@0.17.x` will work perfectly with `CITA@0.17`
 
-# Changelog since @nervos/chain@0.18.0
+# Changelog since @appchain/base@0.18.0
 
 - [update]: **System Contracts**, add 7 more system contracts instance.
 - [fix]: **Account Generation**, fix bug of pass privatekey without `0x` to nervos.appchain.accounts.privateKeyToAccount;
