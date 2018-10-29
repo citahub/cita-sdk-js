@@ -11,24 +11,15 @@ export default [
   {
     constant: true,
     inputs: [],
-    name: 'getSendTxPermissionCheck',
-    outputs: [{ name: '', type: 'bool' }],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'getCreateContractPermissionCheck',
-    outputs: [{ name: '', type: 'bool' }],
+    name: 'getEconomicalModel',
+    outputs: [{ name: '', type: 'uint8' }],
     payable: false,
     stateMutability: 'view',
     type: 'function'
   },
   {
     constant: false,
-    inputs: [{ name: '', type: 'string' }],
+    inputs: [{ name: '_operator', type: 'string' }],
     name: 'setOperator',
     outputs: [],
     payable: false,
@@ -58,9 +49,9 @@ export default [
     inputs: [],
     name: 'getTokenInfo',
     outputs: [
-      { name: '', type: 'string' },
-      { name: '', type: 'string' },
-      { name: '', type: 'string' }
+      { name: 'name', type: 'string' },
+      { name: 'symbol', type: 'string' },
+      { name: 'avatar', type: 'string' }
     ],
     payable: false,
     stateMutability: 'view',
@@ -77,7 +68,7 @@ export default [
   },
   {
     constant: false,
-    inputs: [{ name: '', type: 'string' }],
+    inputs: [{ name: '_chainName', type: 'string' }],
     name: 'setChainName',
     outputs: [],
     payable: false,
@@ -140,11 +131,32 @@ export default [
   },
   {
     constant: false,
-    inputs: [{ name: '', type: 'string' }],
+    inputs: [{ name: '_website', type: 'string' }],
     name: 'setWebsite',
     outputs: [],
     payable: false,
     stateMutability: 'nonpayable',
     type: 'function'
+  },
+  {
+    inputs: [
+      { name: '_delayBlockNumber', type: 'uint256' },
+      { name: '_checkPermission', type: 'bool' },
+      { name: '_checkQuota', type: 'bool' },
+      { name: '_checkFeeBackPlatform', type: 'bool' },
+      { name: '_chainOwner', type: 'address' },
+      { name: '_chainName', type: 'string' },
+      { name: '_chainId', type: 'uint32' },
+      { name: '_operator', type: 'string' },
+      { name: '_website', type: 'string' },
+      { name: '_blockInterval', type: 'uint64' },
+      { name: '_economicalModel', type: 'uint8' },
+      { name: '_name', type: 'string' },
+      { name: '_symbol', type: 'string' },
+      { name: '_avatar', type: 'string' }
+    ],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'constructor'
   }
 ]
