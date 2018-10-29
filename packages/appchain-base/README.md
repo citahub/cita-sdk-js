@@ -5,7 +5,7 @@
 
 # About
 
-`@appchain/base` is a function takes `provider` and `Web3 Class`(optional) as inputs, returns nervos-supported web3 instance, methods of `nervos.utils`, `nervos.eth`, `nervos.shh`, `nervos.bzz` are same as [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html)
+`@appchain/base` is a function takes `provider` and `Web3 Class`(optional) as inputs, returns nervos-supported web3 instance, methods of `appchain.utils`, `appchain.eth`, `appchain.shh`, `appchain.bzz` are same as [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html)
 
 # Version
 
@@ -80,16 +80,16 @@ or to link it in browser directly with
 <script src="node_modules/@appchain/base/lib/bundle.js" />
 ```
 
-# Add `nervos.js`
+# Add `appchain.js`
 
 ```javascript
-import Nervos from '@appchain/base'
-const nervos = Nervos('http://localhost:1337')
+import AppChain from '@appchain/base'
+const appchain = AppChain('http://localhost:1337')
 ```
 
 # AppChain
 
-`nervos.appchain` allows you to interact with an Nervos AppChain and Nervos Smart Contract.
+`appchain.base` allows you to interact with an Nervos AppChain and Nervos Smart Contract.
 
 ## RPC API Reference
 
@@ -102,7 +102,7 @@ const nervos = Nervos('http://localhost:1337')
  * @param null
  * @return {Promise<string>} Promise returns peer count
  */
-nervos.appchain.peerCount()
+appchain.base.peerCount()
 ```
 
 ### getMetaData
@@ -134,7 +134,7 @@ nervos.appchain.peerCount()
  *   }
  * }
  */
-nervos.appchain.getMetaData()
+appchain.base.getMetaData()
 ```
 
 ### getAbi
@@ -147,7 +147,7 @@ nervos.appchain.getMetaData()
  * @param {string} - block number
  * @return {Promise<Abi>} Promise returns abi
  */
-nervos.appchain.getAbi('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
+appchain.base.getAbi('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
 ```
 
 ### getCode
@@ -160,7 +160,7 @@ nervos.appchain.getAbi('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
  * @param {string} - block number
  * @return {Promise<string>} Promise returns code
  */
-nervos.appchain.getCode('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
+appchain.base.getCode('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
 ```
 
 ### getBalance
@@ -172,7 +172,7 @@ nervos.appchain.getCode('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
  * @param {string} - account address
  * @return {Promise<BN>} Promise returns balance
  */
-nervos.appchain.getBalance('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
+appchain.base.getBalance('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
 ```
 
 ### getAccounts
@@ -190,7 +190,7 @@ nervos.appchain.getBalance('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
  * @param {string|number} - block hash or block number
  * @return {Promise<Block>} Promise returns block
  */
-nervos.appchain.getBlock(0)
+appchain.base.getBlock(0)
 ```
 
 ### getBlockByNumber
@@ -202,7 +202,7 @@ nervos.appchain.getBlock(0)
  * @param {number} - block number
  * @return {Promise<Block>} Promise returns block
  */
-nervos.appchain.getBlockByNumber(0)
+appchain.base.getBlockByNumber(0)
 ```
 
 ### getBlockByHash
@@ -214,7 +214,7 @@ nervos.appchain.getBlockByNumber(0)
  * @param {string} - block hash
  * @return {Promise<Block>} Promise returns block
  */
-nervos.appchain.getBlockByHash('0x0c56def738d15d9dfaad64ad246e8b5fe39e175ce3da308ea1018869522a1a4d')
+appchain.base.getBlockByHash('0x0c56def738d15d9dfaad64ad246e8b5fe39e175ce3da308ea1018869522a1a4d')
 ```
 
 ### getBlockNumber
@@ -226,7 +226,7 @@ nervos.appchain.getBlockByHash('0x0c56def738d15d9dfaad64ad246e8b5fe39e175ce3da30
  * @param null
  * @return {Promise<number>} Promise returns current block number
  */
-nervos.appchain.getBlockNumber()
+appchain.base.getBlockNumber()
 ```
 
 ### getBlockTransactionCount
@@ -244,7 +244,7 @@ nervos.appchain.getBlockNumber()
  * @param {string} - account address
  * @return {Promise<number>} Promise returns transaction count of account address
  */
-nervos.appchain.getTransactionCount('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
+appchain.base.getTransactionCount('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
 ```
 
 ### getLogs
@@ -295,7 +295,7 @@ web3.appchain.getLogs(filter, abi).then(console.log)
 const topics = {
   topics: ['0x8fb1356be6b2a4e49ee94447eb9dcb8783f51c41dcddfe7919f945017d163bf3'],
 }
-nervos.appchain.newMessageFilter(topics)
+appchain.base.newMessageFilter(topics)
 ```
 
 ### newBlockFilter
@@ -308,7 +308,7 @@ nervos.appchain.newMessageFilter(topics)
  * @return {Promise<string>} Promise returns filter id
  */
 
-nervos.appchain.newBlockFilter()
+appchain.base.newBlockFilter()
 ```
 
 ### getFilterChanges
@@ -321,7 +321,7 @@ nervos.appchain.newBlockFilter()
  * @return {Promise<Array<string>} Promise returns filter logs
  */
 
-nervos.appchain.getFilterChanges('0x1')
+appchain.base.getFilterChanges('0x1')
 ```
 
 ### getFitlerLogs
@@ -334,7 +334,7 @@ nervos.appchain.getFilterChanges('0x1')
  * @return {Promise<Array<string>} Promise returns filter logs
  */
 
-nervos.appchain.getFitlerLogs('0x1')
+appchain.base.getFitlerLogs('0x1')
 ```
 
 ### deleteMessageFilter
@@ -347,7 +347,7 @@ nervos.appchain.getFitlerLogs('0x1')
  * @return {Promise<boolean>} Promise returns success
  */
 
-nervos.appchain.deleteMessageFilter('0x1')
+appchain.base.deleteMessageFilter('0x1')
 ```
 
 ### sign
@@ -361,7 +361,7 @@ nervos.appchain.deleteMessageFilter('0x1')
  * @return {Promise<string>} Promise returns signed message
  */
 
-nervos.appchain.sign('hello', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
+appchain.base.sign('hello', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
 ```
 
 ### personal.sign
@@ -376,7 +376,7 @@ nervos.appchain.sign('hello', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
  * @return {Promise<string>} Promise returns signed message
  */
 
-nervos.appchain.personal.sign('message', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58', 'password')
+appchain.base.personal.sign('message', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58', 'password')
 ```
 
 ### sendTransaction
@@ -389,7 +389,7 @@ nervos.appchain.personal.sign('message', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025
  * @return {Promise<object>} Promise returns transaction hash object
  */
 
-nervos.appchain.sendTransaction(transaction)
+appchain.base.sendTransaction(transaction)
 ```
 
 ### sendSignedTransaction
@@ -402,7 +402,7 @@ nervos.appchain.sendTransaction(transaction)
  * @return {Promise<object>} Promise returns transaction hash object
  */
 
-nervos.appchain.sendSignedTransaction('signedTransaction')
+appchain.base.sendSignedTransaction('signedTransaction')
 ```
 
 ### getTransactionReceipt
@@ -415,7 +415,7 @@ nervos.appchain.sendSignedTransaction('signedTransaction')
  * @return {Promise<object>} Promise returns transaction receipt object
  */
 
-nervos.appchain.getTransactionReceipt('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
+appchain.base.getTransactionReceipt('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
 ```
 
 ```javascript
@@ -426,7 +426,7 @@ nervos.appchain.getTransactionReceipt('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f
  * @return {Promise<string>} Promise returns transaction proof
  */
 
-nervos.appchain.getTransactionProof('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
+appchain.base.getTransactionProof('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
 ```
 
 ### getTransaction
@@ -439,7 +439,7 @@ nervos.appchain.getTransactionProof('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b
  * @return {Promise<object>} Promise returns transaction object
  */
 
-nervos.appchain.getTransaction('0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
+appchain.base.getTransaction('0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
 ```
 
 ## Contract Reference
@@ -496,7 +496,7 @@ const abi = JSON.parse(
   '[{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]',
 )
 
-const receipt = nervos.appchain.storeAbi(contractAddress, abi, transaction)
+const receipt = appchain.base.storeAbi(contractAddress, abi, transaction)
 ```
 
 ### Use Contract
@@ -505,7 +505,7 @@ const receipt = nervos.appchain.storeAbi(contractAddress, abi, transaction)
 const abi = JSON.parse(
   '[{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]',
 )
-const contract = new nervos.appchain.Contract(abi, contractAddress)
+const contract = new appchain.base.Contract(abi, contractAddress)
 
 // call method
 // get method is specified by contract through abi
@@ -530,7 +530,7 @@ contract.methods.set(5).send(transaction)
  * @param {string} [externalPrivateKey] - if external private key exsits, the one in transaction object will be overriden
  * @return {string} signedTransaction
  */
-nervos.appchain.signer({
+appchain.base.signer({
   privateKey: '0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d9',
   data:
     '6060604052341561000f57600080fd5b60d38061001d6000396000f3006060604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806360fe47b114604e5780636d4ce63c14606e575b600080fd5b3415605857600080fd5b606c60048080359060200190919050506094565b005b3415607857600080fd5b607e609e565b6040518082815260200191505060405180910390f35b8060008190555050565b600080549050905600a165627a7a723058202d9a0979adf6bf48461f24200e635bc19cd1786efbcfc0608eb1d76114d405860029',
@@ -570,7 +570,7 @@ nervos.appchain.signer({
  *    }
  * }
  */
-nervos.appchain.unsigner(transactionContent)
+appchain.base.unsigner(transactionContent)
 ```
 
 ### transactionReceiptListener
@@ -582,27 +582,27 @@ nervos.appchain.unsigner(transactionContent)
  * @param {string} transaction hash
  * @return {Promise<object>} transaction receipt object
  */
-nervos.listeners.listenToTransactionReceipt(result.hash).then(console.log)
+appchain.listeners.listenToTransactionReceipt(result.hash).then(console.log)
 ```
 
 ## System Contracts API
 
-System contracts locating in `nervos.system` can be used as normal contracts.
+System contracts locating in `appchain.system` can be used as normal contracts.
 
 ```javascript
-nervos.system.admin
-nervos.system.authorization
-nervos.system.batchTx
-nervos.system.chainManager
-nervos.system.emergencyBrake
-nervos.system.groupManagement
-nervos.system.nodeManager
-nervos.system.permissionManagement
-nervos.system.priceManager
-nervos.system.quotaManager
-nervos.system.roleManagement
-nervos.system.sysConfig
-nervos.system.versionManage
+appchain.system.admin
+appchain.system.authorization
+appchain.system.batchTx
+appchain.system.chainManager
+appchain.system.emergencyBrake
+appchain.system.groupManagement
+appchain.system.nodeManager
+appchain.system.permissionManagement
+appchain.system.priceManager
+appchain.system.quotaManager
+appchain.system.roleManagement
+appchain.system.sysConfig
+appchain.system.versionManage
 ```
 
 Corresponding methods can be found [here](https://docs.nervos.org/cita/#/contracts_guide/sys)
@@ -616,5 +616,5 @@ Corresponding methods can be found [here](https://docs.nervos.org/cita/#/contrac
  * @param {string} - privateKey
  * @return {boolean} - valid
  */
-const valid = nervos.utils.isPrivateKey('0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d')
+const valid = appchain.utils.isPrivateKey('0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d')
 ```
