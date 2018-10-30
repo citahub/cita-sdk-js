@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = require("./index");
 const Signature = require('elliptic/lib/elliptic/ec/signature');
 const blockchainPb = require('../proto-js/blockchain_pb');
+const index_1 = require("./index");
 const base64ToBytes = (b64) => Buffer.from(b64, 'base64');
 const unsigner = (hexUnverifiedTransaction) => {
     const bytesUnverifiedTransaction = index_1.hex2bytes(hexUnverifiedTransaction);
@@ -13,6 +13,18 @@ const unsigner = (hexUnverifiedTransaction) => {
     const transaction = blockchainPb.Transaction.toObject(true, transactionPb);
     transaction.value = base64ToBytes(transaction.value);
     transaction.data = base64ToBytes(transaction.data);
+    switch (+transaction.version) {
+        case 1: {
+            transaction.chainId = base64ToBytes(transaction.chainIdV1);
+            transaction.to = transaction.toV1;
+            delete transaction.chainIdV1;
+            delete transaction.toV1;
+            break;
+        }
+        default: {
+            break;
+        }
+    }
     const sign = new Signature({
         r: index_1.bytes2hex(signature.slice(0, 32)).slice(2),
         s: index_1.bytes2hex(signature.slice(32, 64)).slice(2),

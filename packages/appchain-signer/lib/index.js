@@ -17,7 +17,7 @@ exports.hex2bytes = (num) => {
 exports.bytes2hex = (bytes) => {
     return utils.bytesToHex(bytes);
 };
-const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota, validUntilBlock, value = '', version = 0, chainId = 1, to = '', }, externalKey) => {
+const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota, validUntilBlock, value = '', version = '0', chainId = '1', to = '', }, externalKey) => {
     if (!privateKey && !externalKey) {
         console.warn(`No private key found`);
         return {
@@ -32,6 +32,26 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
             to,
         };
     }
+    let _to = to.toLowerCase().replace(/^0x/, '');
+    let _chainId = chainId;
+    let _version = +version ? `V${version}` : '';
+    switch (_version) {
+        case 'V1': {
+            _to = new Uint8Array(exports.hex2bytes(_to));
+            chainId = chainId.toString().replace(/^0x/, '');
+            if (chainId.length % 2) {
+                chainId = '0' + chainId;
+            }
+            _chainId = exports.hex2bytes(chainId);
+            const chainIdBytes = new Uint8Array(32);
+            chainIdBytes.set(_chainId, 32 - _chainId.length);
+            _chainId = chainIdBytes;
+            break;
+        }
+        default: {
+            break;
+        }
+    }
     const tx = new blockchainPb.Transaction();
     if (nonce === undefined) {
         tx.setNonce(exports.getNonce());
@@ -42,8 +62,8 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     else {
         tx.setNonce(nonce);
     }
-    if (typeof quota === 'number' && quota > 0) {
-        tx.setQuota(quota);
+    if (typeof +quota === 'number' && +quota > 0) {
+        tx.setQuota(+quota);
     }
     else {
         throw new Error('Quota should be larger than 0');
@@ -72,7 +92,7 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     }
     if (to) {
         if (utils.isAddress(to)) {
-            tx.setTo(to.toLowerCase().replace(/^0x/, ''));
+            tx[`setTo${_version}`](_to);
         }
         else {
             throw new Error(`Invalid to address`);
@@ -84,11 +104,11 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     else {
         tx.setValidUntilBlock(+validUntilBlock);
     }
-    if (chainId === undefined) {
+    if (_chainId === undefined) {
         throw new Error(`Chain Id should be set`);
     }
     else {
-        tx.setChainId(chainId);
+        tx[`setChainId${_version}`](_chainId);
     }
     try {
         const _data = exports.hex2bytes(data);
