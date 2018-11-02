@@ -10,7 +10,9 @@
     "start": "nodemon src/index.js",
     "protoc": "protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --ts_out=./proto-js --proto_path=cita-proto --js_out=import_style=commonjs,binary:./proto-js cita-proto/blockchain.proto",
     "build": "tsc",
-    "test": "jest"
+    "test": "npm run test:v0 && npm run test:v1",
+    "test:v0": "VERSION=0 jest",
+    "test:v1": "VERSION=1 jest"
   },
   "dependencies": {
     "ec": "^0.0.1",

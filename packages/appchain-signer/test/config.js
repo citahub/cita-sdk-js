@@ -1,5 +1,6 @@
 const AppChain = require('../../appchain-base/lib').default;
-const SERVER = 'https://node.cryptape.com';
+const version = process.env.VERSION
+const SERVER = version === '0' ? 'https://node.cryptape.com' : 'http://47.94.105.230:3337';
 
 const appchain = AppChain(SERVER);
 
@@ -15,7 +16,7 @@ const tx = {
   data: bytecode,
   quota: 1000000,
   chainId: 1,
-  version: 0,
+  version: version,
   validUntilBlock: 999999,
   value: '0x0'
 };
@@ -25,5 +26,5 @@ module.exports = {
   from,
   privateKey,
   tx,
-  abi
+  abi,
 };

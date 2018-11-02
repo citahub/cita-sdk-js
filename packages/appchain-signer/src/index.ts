@@ -62,6 +62,7 @@ const signer = (
   let _to: Uint8Array | string = to.toLowerCase().replace(/^0x/, '')
   let _chainId: Uint8Array | string | number = chainId
   let _version = +version ? `V${version}` : ''
+  let _nonce = `${nonce}`
   switch (_version) {
     case 'V1': {
       // set to
@@ -72,11 +73,14 @@ const signer = (
       if (chainId.length % 2) {
         chainId = '0' + chainId
       }
-      _chainId = hex2bytes(chainId) as Uint8Array
+      try {
+        _chainId = hex2bytes(chainId) as Uint8Array
+      } catch (err) {
+        throw err
+      }
       const chainIdBytes = new Uint8Array(32)
       chainIdBytes.set(_chainId, 32 - _chainId.length)
       _chainId = chainIdBytes
-
       break
     }
     default: {
@@ -89,12 +93,12 @@ const signer = (
    * nonce
    * random string with max length of 128, used to prevent repeated transaction
    */
-  if (nonce === undefined) {
+  if (!_nonce) {
     tx.setNonce(getNonce())
-  } else if (nonce.length > 128) {
+  } else if (_nonce.length > 128) {
     throw new Error(`Nonce should be random string with max length of 128`)
   } else {
-    tx.setNonce(nonce)
+    tx.setNonce(_nonce)
   }
 
   /**

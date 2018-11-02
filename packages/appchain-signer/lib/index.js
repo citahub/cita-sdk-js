@@ -35,6 +35,7 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     let _to = to.toLowerCase().replace(/^0x/, '');
     let _chainId = chainId;
     let _version = +version ? `V${version}` : '';
+    let _nonce = `${nonce}`;
     switch (_version) {
         case 'V1': {
             _to = new Uint8Array(exports.hex2bytes(_to));
@@ -42,7 +43,12 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
             if (chainId.length % 2) {
                 chainId = '0' + chainId;
             }
-            _chainId = exports.hex2bytes(chainId);
+            try {
+                _chainId = exports.hex2bytes(chainId);
+            }
+            catch (err) {
+                throw err;
+            }
             const chainIdBytes = new Uint8Array(32);
             chainIdBytes.set(_chainId, 32 - _chainId.length);
             _chainId = chainIdBytes;
@@ -53,14 +59,14 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
         }
     }
     const tx = new blockchainPb.Transaction();
-    if (nonce === undefined) {
+    if (!_nonce) {
         tx.setNonce(exports.getNonce());
     }
-    else if (nonce.length > 128) {
+    else if (_nonce.length > 128) {
         throw new Error(`Nonce should be random string with max length of 128`);
     }
     else {
-        tx.setNonce(nonce);
+        tx.setNonce(_nonce);
     }
     if (typeof +quota === 'number' && +quota > 0) {
         tx.setQuota(+quota);
