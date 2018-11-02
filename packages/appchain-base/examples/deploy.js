@@ -39,7 +39,7 @@ const deploy = async () => {
   // deploy myContract to AppChain and get transaction result
   const txRes = await myContract.deploy({
     data: bytecode,
-    arguments: []
+    arguments: [10]
   }).send(tx)
   console.log(chalk.blue.bold('Received Transaction Result'))
   divider()
