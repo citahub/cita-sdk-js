@@ -1,6 +1,6 @@
 const AppChain = require('../../appchain-base/lib').default;
 const version = process.env.VERSION
-const SERVER = version === '0' ? 'https://node.cryptape.com' : 'http://47.94.105.230:3337';
+const SERVER = version === '0' ? 'https://node.cryptape.com' : 'https://node.cryptape.com';
 
 const appchain = AppChain(SERVER);
 
