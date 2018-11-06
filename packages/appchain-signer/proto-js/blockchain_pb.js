@@ -23,6 +23,7 @@ goog.exportSymbol('proto.Proof', null, global);
 goog.exportSymbol('proto.ProofType', null, global);
 goog.exportSymbol('proto.RichStatus', null, global);
 goog.exportSymbol('proto.SignedTransaction', null, global);
+goog.exportSymbol('proto.StateSignal', null, global);
 goog.exportSymbol('proto.Status', null, global);
 goog.exportSymbol('proto.Transaction', null, global);
 goog.exportSymbol('proto.UnverifiedTransaction', null, global);
@@ -272,8 +273,8 @@ proto.BlockHeader.toObject = function(includeInstance, msg) {
     stateRoot: msg.getStateRoot_asB64(),
     transactionsRoot: msg.getTransactionsRoot_asB64(),
     receiptsRoot: msg.getReceiptsRoot_asB64(),
-    gasUsed: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    gasLimit: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    quotaUsed: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    quotaLimit: jspb.Message.getFieldWithDefault(msg, 8, 0),
     proof: (f = msg.getProof()) && proto.Proof.toObject(includeInstance, f),
     proposer: msg.getProposer_asB64()
   };
@@ -338,11 +339,11 @@ proto.BlockHeader.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 7:
       var value = /** @type {number} */ (reader.readUint64());
-      msg.setGasUsed(value);
+      msg.setQuotaUsed(value);
       break;
     case 8:
       var value = /** @type {number} */ (reader.readUint64());
-      msg.setGasLimit(value);
+      msg.setQuotaLimit(value);
       break;
     case 9:
       var value = new proto.Proof;
@@ -424,14 +425,14 @@ proto.BlockHeader.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getGasUsed();
+  f = message.getQuotaUsed();
   if (f !== 0) {
     writer.writeUint64(
       7,
       f
     );
   }
-  f = message.getGasLimit();
+  f = message.getQuotaLimit();
   if (f !== 0) {
     writer.writeUint64(
       8,
@@ -643,31 +644,31 @@ proto.BlockHeader.prototype.setReceiptsRoot = function(value) {
 
 
 /**
- * optional uint64 gas_used = 7;
+ * optional uint64 quota_used = 7;
  * @return {number}
  */
-proto.BlockHeader.prototype.getGasUsed = function() {
+proto.BlockHeader.prototype.getQuotaUsed = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
 };
 
 
 /** @param {number} value */
-proto.BlockHeader.prototype.setGasUsed = function(value) {
+proto.BlockHeader.prototype.setQuotaUsed = function(value) {
   jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
 /**
- * optional uint64 gas_limit = 8;
+ * optional uint64 quota_limit = 8;
  * @return {number}
  */
-proto.BlockHeader.prototype.getGasLimit = function() {
+proto.BlockHeader.prototype.getQuotaLimit = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
 /** @param {number} value */
-proto.BlockHeader.prototype.setGasLimit = function(value) {
+proto.BlockHeader.prototype.setQuotaLimit = function(value) {
   jspb.Message.setProto3IntField(this, 8, value);
 };
 
@@ -981,8 +982,8 @@ proto.AccountGasLimit.prototype.toObject = function(opt_includeInstance) {
  */
 proto.AccountGasLimit.toObject = function(includeInstance, msg) {
   var f, obj = {
-    commonGasLimit: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    specificGasLimitMap: (f = msg.getSpecificGasLimitMap()) ? f.toObject(includeInstance, undefined) : []
+    commonQuotaLimit: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    specificQuotaLimitMap: (f = msg.getSpecificQuotaLimitMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {
@@ -1021,10 +1022,10 @@ proto.AccountGasLimit.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readUint64());
-      msg.setCommonGasLimit(value);
+      msg.setCommonQuotaLimit(value);
       break;
     case 2:
-      var value = msg.getSpecificGasLimitMap();
+      var value = msg.getSpecificQuotaLimitMap();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readUint64);
          });
@@ -1058,14 +1059,14 @@ proto.AccountGasLimit.prototype.serializeBinary = function() {
  */
 proto.AccountGasLimit.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getCommonGasLimit();
+  f = message.getCommonQuotaLimit();
   if (f !== 0) {
     writer.writeUint64(
       1,
       f
     );
   }
-  f = message.getSpecificGasLimitMap(true);
+  f = message.getSpecificQuotaLimitMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(2, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeUint64);
   }
@@ -1073,35 +1074,35 @@ proto.AccountGasLimit.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional uint64 common_gas_limit = 1;
+ * optional uint64 common_quota_limit = 1;
  * @return {number}
  */
-proto.AccountGasLimit.prototype.getCommonGasLimit = function() {
+proto.AccountGasLimit.prototype.getCommonQuotaLimit = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /** @param {number} value */
-proto.AccountGasLimit.prototype.setCommonGasLimit = function(value) {
+proto.AccountGasLimit.prototype.setCommonQuotaLimit = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * map<string, uint64> specific_gas_limit = 2;
+ * map<string, uint64> specific_quota_limit = 2;
  * @param {boolean=} opt_noLazyCreate Do not create the map if
  * empty, instead returning `undefined`
  * @return {!jspb.Map<string,number>}
  */
-proto.AccountGasLimit.prototype.getSpecificGasLimitMap = function(opt_noLazyCreate) {
+proto.AccountGasLimit.prototype.getSpecificQuotaLimitMap = function(opt_noLazyCreate) {
   return /** @type {!jspb.Map<string,number>} */ (
       jspb.Message.getMapField(this, 2, opt_noLazyCreate,
       null));
 };
 
 
-proto.AccountGasLimit.prototype.clearSpecificGasLimitMap = function() {
-  this.getSpecificGasLimitMap().clear();
+proto.AccountGasLimit.prototype.clearSpecificQuotaLimitMap = function() {
+  this.getSpecificQuotaLimitMap().clear();
 };
 
 
@@ -1162,7 +1163,8 @@ proto.RichStatus.toObject = function(includeInstance, msg) {
     hash: msg.getHash_asB64(),
     height: jspb.Message.getFieldWithDefault(msg, 2, 0),
     nodesList: msg.getNodesList_asB64(),
-    interval: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    interval: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    version: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -1214,6 +1216,10 @@ proto.RichStatus.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setInterval(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setVersion(value);
       break;
     default:
       reader.skipField();
@@ -1269,6 +1275,13 @@ proto.RichStatus.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint64(
       4,
+      f
+    );
+  }
+  f = message.getVersion();
+  if (f !== 0) {
+    writer.writeUint32(
+      5,
       f
     );
   }
@@ -1397,6 +1410,21 @@ proto.RichStatus.prototype.setInterval = function(value) {
 };
 
 
+/**
+ * optional uint32 version = 5;
+ * @return {number}
+ */
+proto.RichStatus.prototype.getVersion = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.RichStatus.prototype.setVersion = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -1451,7 +1479,9 @@ proto.Transaction.toObject = function(includeInstance, msg) {
     data: msg.getData_asB64(),
     value: msg.getValue_asB64(),
     chainId: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    version: jspb.Message.getFieldWithDefault(msg, 8, 0)
+    version: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    toV1: msg.getToV1_asB64(),
+    chainIdV1: msg.getChainIdV1_asB64()
   };
 
   if (includeInstance) {
@@ -1519,6 +1549,14 @@ proto.Transaction.deserializeBinaryFromReader = function(msg, reader) {
     case 8:
       var value = /** @type {number} */ (reader.readUint32());
       msg.setVersion(value);
+      break;
+    case 9:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setToV1(value);
+      break;
+    case 10:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setChainIdV1(value);
       break;
     default:
       reader.skipField();
@@ -1602,6 +1640,20 @@ proto.Transaction.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint32(
       8,
+      f
+    );
+  }
+  f = message.getToV1_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      9,
+      f
+    );
+  }
+  f = message.getChainIdV1_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      10,
       f
     );
   }
@@ -1773,6 +1825,84 @@ proto.Transaction.prototype.getVersion = function() {
 /** @param {number} value */
 proto.Transaction.prototype.setVersion = function(value) {
   jspb.Message.setProto3IntField(this, 8, value);
+};
+
+
+/**
+ * optional bytes to_v1 = 9;
+ * @return {!(string|Uint8Array)}
+ */
+proto.Transaction.prototype.getToV1 = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * optional bytes to_v1 = 9;
+ * This is a type-conversion wrapper around `getToV1()`
+ * @return {string}
+ */
+proto.Transaction.prototype.getToV1_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getToV1()));
+};
+
+
+/**
+ * optional bytes to_v1 = 9;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getToV1()`
+ * @return {!Uint8Array}
+ */
+proto.Transaction.prototype.getToV1_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getToV1()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.Transaction.prototype.setToV1 = function(value) {
+  jspb.Message.setProto3BytesField(this, 9, value);
+};
+
+
+/**
+ * optional bytes chain_id_v1 = 10;
+ * @return {!(string|Uint8Array)}
+ */
+proto.Transaction.prototype.getChainIdV1 = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * optional bytes chain_id_v1 = 10;
+ * This is a type-conversion wrapper around `getChainIdV1()`
+ * @return {string}
+ */
+proto.Transaction.prototype.getChainIdV1_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getChainIdV1()));
+};
+
+
+/**
+ * optional bytes chain_id_v1 = 10;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getChainIdV1()`
+ * @return {!Uint8Array}
+ */
+proto.Transaction.prototype.getChainIdV1_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getChainIdV1()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.Transaction.prototype.setChainIdV1 = function(value) {
+  jspb.Message.setProto3BytesField(this, 10, value);
 };
 
 
@@ -3313,13 +3443,155 @@ proto.BlackList.prototype.clearClearListList = function() {
 };
 
 
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.StateSignal = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.StateSignal, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.StateSignal.displayName = 'proto.StateSignal';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.StateSignal.prototype.toObject = function(opt_includeInstance) {
+  return proto.StateSignal.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.StateSignal} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.StateSignal.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    height: jspb.Message.getFieldWithDefault(msg, 1, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.StateSignal}
+ */
+proto.StateSignal.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.StateSignal;
+  return proto.StateSignal.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.StateSignal} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.StateSignal}
+ */
+proto.StateSignal.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setHeight(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.StateSignal.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.StateSignal.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.StateSignal} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.StateSignal.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getHeight();
+  if (f !== 0) {
+    writer.writeUint64(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional uint64 height = 1;
+ * @return {number}
+ */
+proto.StateSignal.prototype.getHeight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.StateSignal.prototype.setHeight = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
 /**
  * @enum {number}
  */
 proto.ProofType = {
   AUTHORITYROUND: 0,
   RAFT: 1,
-  TENDERMINT: 2
+  BFT: 2
 };
 
 /**
