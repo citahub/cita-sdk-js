@@ -12,8 +12,8 @@ declare const signer: ({ from, privateKey, data, nonce, quota, validUntilBlock, 
     quota: number;
     validUntilBlock: string | number;
     value: string | number;
-    version?: number | undefined;
-    chainId: number;
+    version?: string | number | undefined;
+    chainId: string | number;
     to?: string | undefined;
 }, externalKey?: string | undefined) => any;
 export default signer;

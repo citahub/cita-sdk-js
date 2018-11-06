@@ -1,6 +1,8 @@
-import { ec, hex2bytes, bytes2hex, sha3 } from './index'
+// const utils = require('web3-utils')
 const Signature = require('elliptic/lib/elliptic/ec/signature')
 const blockchainPb = require('../proto-js/blockchain_pb')
+
+import { ec, hex2bytes, bytes2hex, sha3 } from './index'
 
 const base64ToBytes = (b64: string) => Buffer.from(b64, 'base64')
 
@@ -14,6 +16,19 @@ const unsigner = (hexUnverifiedTransaction: string) => {
   // convert base64 data, value to hex
   transaction.value = base64ToBytes(transaction.value)
   transaction.data = base64ToBytes(transaction.data)
+
+  switch (+transaction.version) {
+    case 1: {
+      transaction.chainId = base64ToBytes(transaction.chainIdV1)
+      transaction.to = transaction.toV1
+      delete transaction.chainIdV1
+      delete transaction.toV1
+      break
+    }
+    default: {
+      break
+    }
+  }
 
   const sign = new Signature({
     r: bytes2hex(signature.slice(0, 32)).slice(2),

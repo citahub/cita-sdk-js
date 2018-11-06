@@ -26,8 +26,8 @@ const signer = (
     quota,
     validUntilBlock,
     value = '',
-    version = 0,
-    chainId = 1,
+    version = '0',
+    chainId = '1',
     to = '',
   }: {
     from: string
@@ -37,8 +37,8 @@ const signer = (
     quota: number
     validUntilBlock: string | number
     value: string | number
-    version?: number
-    chainId: number
+    version?: string | number
+    chainId: string | number
     to?: string
   },
   externalKey?: string,
@@ -55,6 +55,32 @@ const signer = (
       version,
       chainId,
       to,
+    }
+  }
+
+  // preprocess
+  let _to: Uint8Array | string = to.toLowerCase().replace(/^0x/, '')
+  let _chainId: Uint8Array | string | number = chainId
+  let _version = +version ? `V${version}` : ''
+  switch (_version) {
+    case 'V1': {
+      // set to
+      _to = new Uint8Array(hex2bytes(_to))
+
+      // set chain id
+      chainId = chainId.toString().replace(/^0x/, '')
+      if (chainId.length % 2) {
+        chainId = '0' + chainId
+      }
+      _chainId = hex2bytes(chainId) as Uint8Array
+      const chainIdBytes = new Uint8Array(32)
+      chainIdBytes.set(_chainId, 32 - _chainId.length)
+      _chainId = chainIdBytes
+
+      break
+    }
+    default: {
+      break
     }
   }
   const tx = new blockchainPb.Transaction()
@@ -75,8 +101,8 @@ const signer = (
    * quota
    * user-defined number, acts as gas limit
    */
-  if (typeof quota === 'number' && quota > 0) {
-    tx.setQuota(quota)
+  if (typeof +quota === 'number' && +quota > 0) {
+    tx.setQuota(+quota)
   } else {
     throw new Error('Quota should be larger than 0')
   }
@@ -108,7 +134,7 @@ const signer = (
 
   if (to) {
     if (utils.isAddress(to)) {
-      tx.setTo(to.toLowerCase().replace(/^0x/, ''))
+      tx[`setTo${_version}`](_to)
     } else {
       throw new Error(`Invalid to address`)
     }
@@ -124,10 +150,10 @@ const signer = (
     tx.setValidUntilBlock(+validUntilBlock)
   }
 
-  if (chainId === undefined) {
+  if (_chainId === undefined) {
     throw new Error(`Chain Id should be set`)
   } else {
-    tx.setChainId(chainId)
+    tx[`setChainId${_version}`](_chainId)
   }
 
   try {
@@ -143,12 +169,8 @@ const signer = (
 
   const hashedMsg = sha3(txMsg).slice(2)
 
-  // old style
-  var key = ec.keyFromPrivate(
-    // privateKey.startsWith('0x') ? privateKey.slice(2) : privateKey,
-    (externalKey || privateKey).replace(/^0x/, ''),
-    'hex',
-  )
+  // old school code
+  var key = ec.keyFromPrivate((externalKey || privateKey).replace(/^0x/, ''), 'hex')
   var sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true })
   var sign_r = sign.r.toString(16)
   var sign_s = sign.s.toString(16)
