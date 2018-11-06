@@ -33,6 +33,19 @@ const unsigner = (hexUnverifiedTransaction: string) => {
     }
   }
 
+  switch (+transaction.version) {
+    case 1: {
+      transaction.chainId = base64ToBytes(transaction.chainIdV1)
+      transaction.to = transaction.toV1
+      delete transaction.chainIdV1
+      delete transaction.toV1
+      break
+    }
+    default: {
+      break
+    }
+  }
+
   const sign = new Signature({
     r: bytes2hex(signature.slice(0, 32)).slice(2),
     s: bytes2hex(signature.slice(32, 64)).slice(2),
