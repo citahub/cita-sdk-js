@@ -1,4 +1,4 @@
-[![Travis](https://travis-ci.org/cryptape/nervos.js.svg?branch=develop)](https://travis-ci.org/cryptape/nervos.js)
+[![Travis](https://travis-ci.org/cryptape/appchain.js.svg?branch=develop)](https://travis-ci.org/cryptape/appchain.js)
 ![npm (scoped)](https://img.shields.io/npm/v/@appchain/signer.svg)
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@appchain/signer.svg)
 [![AppChain](https://img.shields.io/badge/made%20for-Nervos%20AppChain-blue.svg)](https://appchain.nervos.org)
