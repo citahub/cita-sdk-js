@@ -8,7 +8,7 @@ debug.*
 sign.*
 
 
-packages/nervos-chain/*.html
+packages/appchain-base/*.html
 debug
 citaSignTransaction.ts
 *.brk

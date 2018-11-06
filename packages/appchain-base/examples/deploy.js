@@ -9,12 +9,12 @@ const {
 const divider = () => console.log(chalk.green('-'.repeat(10)))
 
 const account = web3.eth.accounts.privateKeyToAccount(privateKey)
-web3.appchain.getBalance(account.address).then(console.log)
+web3.base.getBalance(account.address).then(console.log)
 
 const transaction = {
   from: '0xb4061fA8E18654a7d51FEF3866d45bB1DC688717',
   privateKey,
-  nonce: 999999,
+  nonce: '999999',
   quota: 1e8,
   data: bytecode,
   chainId: 1,
@@ -24,7 +24,7 @@ const transaction = {
 }
 
 const deploy = async () => {
-  const current = await web3.appchain.getBlockNumber()
+  const current = await web3.base.getBlockNumber()
   const tx = {
     ...transaction,
     validUntilBlock: +current + 88
@@ -34,12 +34,12 @@ const deploy = async () => {
   console.log(chalk.green(JSON.stringify(tx, null, 2)))
   // method 1, standard web3 api
   // create contract ins
-  const myContract = new web3.appchain.Contract(abi)
+  const myContract = new web3.base.Contract(abi)
 
   // deploy myContract to AppChain and get transaction result
   const txRes = await myContract.deploy({
     data: bytecode,
-    arguments: []
+    arguments: [10]
   }).send(tx)
   console.log(chalk.blue.bold('Received Transaction Result'))
   divider()
@@ -55,11 +55,11 @@ const deploy = async () => {
   return myContract
 
   // method 2, step by step
-  // const res = await web3.appchain.deploy(tx.data, tx)
+  // const res = await web3.base.deploy(tx.data, tx)
   // console.log(chalk.blue.bold('Received Result'))
   // divider()
   // console.log(chalk.blue(JSON.stringify(res, null, 2)))
-  // const contract = new web3.appchain.Contract(abi, res.contractAddress)
+  // const contract = new web3.base.Contract(abi, res.contractAddress)
   // return contract
 }
 
@@ -74,7 +74,7 @@ const callMethod = async contract => {
 const setMethod = async contract => {
   console.log(chalk.green.bold('Call Send Method'))
   divider()
-  const current = await web3.appchain.getBlockNumber()
+  const current = await web3.base.getBlockNumber()
   const tx = {
     ...transaction,
     validUntilBlock: +current + 88

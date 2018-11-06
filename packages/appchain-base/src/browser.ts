@@ -1,10 +1,10 @@
-import Nervos from './index'
+import AppChain from './index'
 
 declare global {
   interface Window {
-    Nervos: typeof Nervos
+    AppChain: typeof AppChain
   }
 }
 if (window) {
-  window.Nervos = Nervos
+  window.AppChain = AppChain
 }

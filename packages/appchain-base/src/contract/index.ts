@@ -170,4 +170,22 @@ Contract.prototype._executeMethod = function _executeMethod() {
     }
   }
 }
+
+Contract.prototype.getPastEvents = function() {
+  var subOptions = this._generateEventOptions.apply(this, arguments)
+
+  var getPastLogs = new Method({
+    name: 'getPastLogs',
+    call: 'getLogs',
+    params: 1,
+    inputFormatter: [formatters.inputLogFormatter],
+    outputFormatter: this._decodeEventABI.bind(subOptions.event)
+  })
+  getPastLogs.setRequestManager(this._requestManager)
+  var call = getPastLogs.buildCall()
+
+  getPastLogs = null
+
+  return call(subOptions.params, subOptions.callback)
+}
 export default Contract

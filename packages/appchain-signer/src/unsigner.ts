@@ -14,8 +14,24 @@ const unsigner = (hexUnverifiedTransaction: string) => {
   const crypto = unverifiedTransaction.getCrypto()
   const transaction = blockchainPb.Transaction.toObject(true, transactionPb)
   // convert base64 data, value to hex
-  transaction.value = base64ToBytes(transaction.value)
-  transaction.data = base64ToBytes(transaction.data)
+  transaction.value = base64ToBytes(transaction.value).toString('hex')
+  transaction.data = base64ToBytes(transaction.data).toString('hex')
+
+  transaction.value = +transaction.value ? '0x' + transaction.value : `0x0`
+  transaction.data = transaction.data ? '0x' + transaction.data : transaction.data
+
+  switch (+transaction.version) {
+    case 1: {
+      transaction.chainId = +base64ToBytes(transaction.chainIdV1).toString('hex')
+      transaction.to = transaction.toV1
+      delete transaction.chainIdV1
+      delete transaction.toV1
+      break
+    }
+    default: {
+      break
+    }
+  }
 
   switch (+transaction.version) {
     case 1: {
