@@ -5,12 +5,13 @@ import {
 // import SettingsIcon from '@material-ui/icons/Settings'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
+import { rebirthAddr } from '../../config'
 import { INervosContext, withNervos } from '../../contexts/nervos'
 import { IUniComp } from '../../hoc/UniComp'
 import { copyToClipboard } from '../../utils/compActions'
 import './transactions.css'
 
-const rebirth = window.localStorage.getItem('rebirth') || 'https://microscope.cryptape.com:8888'
+const rebirth = window.localStorage.getItem('rebirth') || rebirthAddr
 const RATIO = 1e18
 
 const SwitchWallet = ({ address }: { address: string }) => (
