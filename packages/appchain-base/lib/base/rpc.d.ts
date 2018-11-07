@@ -1,3 +1,4 @@
+import * as outputFormatter from '../utils/outputFormatters'
 export declare const peerCount: {
   name: string
   call: string
@@ -82,6 +83,16 @@ export declare const getTransaction: {
   call: string
   params: number
   inputFormatter: null[]
+  outputFormatter: (
+    rpcTx: outputFormatter.RPC.getTransactionResult
+  ) => {
+    unsignedTransaction: any
+    blockHash: string
+    blockNumber: string
+    content: string
+    hash: string
+    index: string
+  }
 }
 export declare const getTransactionCount: {
   name: string

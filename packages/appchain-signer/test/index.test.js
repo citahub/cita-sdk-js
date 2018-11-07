@@ -111,8 +111,7 @@ test('unsign', () => {
   expect(transaction.validUntilBlock).toBe(tx.validUntilBlock)
   expect(transaction.version.toString()).toBe(tx.version)
   expect(transaction.chainId).toBe(tx.chainId)
-  expect(crypto).toBe(0)
-  expect(sender.address).toBe(from.slice(2).toLowerCase())
+  expect(sender.address).toBe(from.toLowerCase())
 })
 
 
