@@ -130,7 +130,8 @@ exports.getTransaction = {
     name: 'getTransaction',
     call: 'getTransaction',
     params: 1,
-    inputFormatter: [null]
+    inputFormatter: [null],
+    outputFormatter: outputFormatter.outputTransactionFormatter
 };
 exports.getTransactionCount = {
     name: 'getTransactionCount',

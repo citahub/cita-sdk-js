@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require('web3-eth');
 const EC = require('elliptic').ec;
 const utils = require('web3-utils');
 const blockchainPb = require('../proto-js/blockchain_pb');
@@ -12,7 +11,9 @@ exports.getNonce = () => {
     return utils.randomHex(5);
 };
 exports.hex2bytes = (num) => {
-    return utils.hexToBytes(num.startsWith('0x') ? num : '0x' + num);
+    num = num.replace(/^0x/, '');
+    num = num.length % 2 ? '0x0' + num : '0x' + num;
+    return utils.hexToBytes(num);
 };
 exports.bytes2hex = (bytes) => {
     return utils.bytesToHex(bytes);
@@ -39,16 +40,7 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     switch (_version) {
         case 'V1': {
             _to = new Uint8Array(exports.hex2bytes(_to));
-            chainId = chainId.toString().replace(/^0x/, '');
-            if (chainId.length % 2) {
-                chainId = '0' + chainId;
-            }
-            try {
-                _chainId = exports.hex2bytes(chainId);
-            }
-            catch (err) {
-                throw err;
-            }
+            _chainId = exports.hex2bytes('' + chainId);
             const chainIdBytes = new Uint8Array(32);
             chainIdBytes.set(_chainId, 32 - _chainId.length);
             _chainId = chainIdBytes;
