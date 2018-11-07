@@ -7,6 +7,7 @@ import addPrivateKeyFrom from '../utils/addPrivateKey'
 import Contract from '../contract'
 import proxy from './proxy'
 import validators from '../utils/validators'
+import { ReservedAddr } from '../systems/config'
 
 export interface EnhancedWeb3 extends Web3 {
   base?: any
@@ -107,7 +108,7 @@ export default (web3: EnhancedWeb3) => {
     }
     return web3.listeners.listenToTransactionReceipt(result.hash)
   }
-  web3.base._abiAddress = 'ffffffffffffffffffffffffffffffffff010001'
+  web3.base._abiAddress = ReservedAddr.abiAddress.replace(/^0x/, '')
   Object.defineProperty(web3.base, 'abiAddress', {
     get: () => {
       return web3.base._abiAddress
