@@ -22,7 +22,7 @@ const unsigner = (hexUnverifiedTransaction: string) => {
 
   switch (+transaction.version) {
     case 1: {
-      transaction.chainId = +base64ToBytes(transaction.chainIdV1).toString('hex')
+      transaction.chainId = base64ToBytes(transaction.chainIdV1).toString('hex')
       transaction.to = transaction.toV1
       delete transaction.chainIdV1
       delete transaction.toV1
