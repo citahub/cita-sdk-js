@@ -112,7 +112,7 @@ Contract.prototype._executeMethod = function _executeMethod() {
           receiptFormatter: (receipt: any) => {
             if (_.isArray(receipt.logs)) {
               // decode logs
-              var events = _.map(receipt.logs, function(log: any) {
+              const events = _.map(receipt.logs, function(log: any) {
                 return ctx._parent._decodeEventABI.call(
                   {
                     name: 'ALLEVENTS',
@@ -154,7 +154,7 @@ Contract.prototype._executeMethod = function _executeMethod() {
           }
         }
 
-        var sendTransaction = new Method({
+        const sendTransaction = new Method({
           name: 'sendTransaction',
           call: Action.SEND_TRANSACTION,
           params: 1,
@@ -172,9 +172,9 @@ Contract.prototype._executeMethod = function _executeMethod() {
 }
 
 Contract.prototype.getPastEvents = function() {
-  var subOptions = this._generateEventOptions.apply(this, arguments)
+  const subOptions = this._generateEventOptions.apply(this, arguments)
 
-  var getPastLogs = new Method({
+  const getPastLogs = new Method({
     name: 'getPastLogs',
     call: 'getLogs',
     params: 1,
@@ -182,7 +182,7 @@ Contract.prototype.getPastEvents = function() {
     outputFormatter: this._decodeEventABI.bind(subOptions.event)
   })
   getPastLogs.setRequestManager(this._requestManager)
-  var call = getPastLogs.buildCall()
+  const call = getPastLogs.buildCall()
 
   getPastLogs = null
 

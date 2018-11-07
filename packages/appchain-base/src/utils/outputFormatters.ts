@@ -1,5 +1,5 @@
 const { unsigner } = require('@appchain/signer')
-var utils = require('web3-utils')
+const utils = require('web3-utils')
 
 export namespace RPC {
   export interface getTransactionResult {
