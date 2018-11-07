@@ -1,12 +1,7 @@
 import addPrivateKeyFrom from '../../utils/addPrivateKey'
-import {
-  Log,
-  LogParser
-  // LogParser
-} from '../../utils/parsers'
+import { Log, LogParser } from '../../utils/parsers'
 export const sendTransactionHandler = {
   apply: async function(target: Function, thisArg: any, argumentsList: any) {
-    // add private key from wallet if tx not includes one.
     const _tx = argumentsList[0]
     const tx = addPrivateKeyFrom(thisArg.accounts.wallet)(_tx)
     return target(tx)

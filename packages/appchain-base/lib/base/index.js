@@ -26,6 +26,7 @@ const addPrivateKey_1 = __importDefault(require("../utils/addPrivateKey"));
 const contract_1 = __importDefault(require("../contract"));
 const proxy_1 = __importDefault(require("./proxy"));
 const validators_1 = __importDefault(require("../utils/validators"));
+const config_1 = require("../systems/config");
 exports.default = (web3) => {
     web3.base = web3.base || {};
     web3.extend({
@@ -99,7 +100,7 @@ exports.default = (web3) => {
         }
         return web3.listeners.listenToTransactionReceipt(result.hash);
     });
-    web3.base._abiAddress = 'ffffffffffffffffffffffffffffffffff010001';
+    web3.base._abiAddress = config_1.ReservedAddr.abiAddress.replace(/^0x/, '');
     Object.defineProperty(web3.base, 'abiAddress', {
         get: () => {
             return web3.base._abiAddress;

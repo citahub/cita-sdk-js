@@ -14,5 +14,6 @@ exports.ReservedAddr = {
     quotaManager: '0xffffffffffffffffffffffffffffffffff020003',
     roleManagement: '0xffffffffffffffffffffffffffffffffff020007',
     sysConfig: '0xffffffffffffffffffffffffffffffffff020000',
-    versionManager: '0xffffffffffffffffffffffffffffffffff020011'
+    versionManager: '0xffffffffffffffffffffffffffffffffff020011',
+    abiAddress: '0xffffffffffffffffffffffffffffffffff010001'
 };
