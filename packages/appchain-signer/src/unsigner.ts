@@ -1,4 +1,3 @@
-// const utils = require('web3-utils')
 const Signature = require('elliptic/lib/elliptic/ec/signature')
 const blockchainPb = require('../proto-js/blockchain_pb')
 
@@ -11,7 +10,6 @@ const unsigner = (hexUnverifiedTransaction: string) => {
   const unverifiedTransaction = blockchainPb.UnverifiedTransaction.deserializeBinary(bytesUnverifiedTransaction)
   const transactionPb = unverifiedTransaction.getTransaction()
   const signature = unverifiedTransaction.getSignature()
-  const crypto = unverifiedTransaction.getCrypto()
   const transaction = blockchainPb.Transaction.toObject(true, transactionPb)
   // convert base64 data, value to hex
   transaction.value = base64ToBytes(transaction.value).toString('hex')
@@ -33,19 +31,6 @@ const unsigner = (hexUnverifiedTransaction: string) => {
     }
   }
 
-  switch (+transaction.version) {
-    case 1: {
-      transaction.chainId = base64ToBytes(transaction.chainIdV1)
-      transaction.to = transaction.toV1
-      delete transaction.chainIdV1
-      delete transaction.toV1
-      break
-    }
-    default: {
-      break
-    }
-  }
-
   const sign = new Signature({
     r: bytes2hex(signature.slice(0, 32)).slice(2),
     s: bytes2hex(signature.slice(32, 64)).slice(2),
@@ -53,26 +38,29 @@ const unsigner = (hexUnverifiedTransaction: string) => {
   })
 
   const txMsg = transactionPb.serializeBinary()
+
   const hashedMsg = sha3(txMsg).slice(2)
 
   const msg = new Buffer(hashedMsg.toString(), 'hex')
 
   const pubPoint = ec.recoverPubKey(msg, sign, sign.recoveryParam, 'hex')
 
-  const publicKey = pubPoint
+  const publicKey = `0x${pubPoint
     .encode('hex')
     .slice(2)
-    .toLowerCase()
+    .toLowerCase()}`
+
   const bytesPubkey = new Buffer(hex2bytes(publicKey))
-  const address = sha3(bytesPubkey)
+
+  const address = `0x${sha3(bytesPubkey)
     .slice(-40)
-    .toLowerCase()
+    .toLowerCase()}`
 
   const hexSig = bytes2hex(signature).slice(2)
+
   const result = {
     transaction,
     signature: hexSig,
-    crypto,
     sender: { publicKey, address },
   }
 

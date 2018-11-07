@@ -1,4 +1,5 @@
-var ABICoder = require('web3-eth-abi')
+const ABICoder = require('web3-eth-abi')
+
 export interface Log {
   address: string
   topics: string[]
