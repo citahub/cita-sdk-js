@@ -118,17 +118,17 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     tx.setVersion(version);
     const txMsg = tx.serializeBinary();
     const hashedMsg = exports.sha3(txMsg).slice(2);
-    var key = exports.ec.keyFromPrivate((externalKey || privateKey).replace(/^0x/, ''), 'hex');
-    var sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true });
-    var sign_r = sign.r.toString(16);
-    var sign_s = sign.s.toString(16);
+    const key = exports.ec.keyFromPrivate((externalKey || privateKey).replace(/^0x/, ''), 'hex');
+    const sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true });
+    let sign_r = sign.r.toString(16);
+    let sign_s = sign.s.toString(16);
     if (sign_r.length == 63)
         sign_r = '0' + sign_r;
     if (sign_s.length == 63)
         sign_s = '0' + sign_s;
-    var signature = sign_r + sign_s;
-    var sign_buffer = new Buffer(signature, 'hex');
-    var sigBytes = new Uint8Array(65);
+    const signature = sign_r + sign_s;
+    const sign_buffer = new Buffer(signature, 'hex');
+    const sigBytes = new Uint8Array(65);
     sigBytes.set(sign_buffer);
     sigBytes[64] = sign.recoveryParam;
     const unverifiedTx = new blockchainPb.UnverifiedTransaction();
