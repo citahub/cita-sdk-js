@@ -1,3 +1,6 @@
-[submodule "packages/nervos-chain/cita-sys-abi"]
-	path = packages/nervos-chain/cita-sys-abi
+[submodule "packages/appchain-base/cita-sys-abi"]
+	path = packages/appchain-base/cita-sys-abi
 	url = https://github.com/cryptape/cita-sys-abi
+[submodule "packages/appchain-signer/cita-proto"]
+	path = packages/appchain-signer/cita-proto
+	url = https://github.com/cryptape/cita-proto
