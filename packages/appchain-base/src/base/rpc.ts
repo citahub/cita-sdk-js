@@ -32,7 +32,6 @@ export const getTransactionReceipt = {
   name: 'getTransactionReceipt',
   call: 'getTransactionReceipt',
   params: 1,
-  // inputFormatter: [formatters.inputAddressFormatter],
   outputFormatter: formatters.outputTransactionReceiptFormatter
 }
 
@@ -131,8 +130,8 @@ export const getTransaction = {
   name: 'getTransaction',
   call: 'getTransaction',
   params: 1,
-  inputFormatter: [null]
-  // outputFormatter: formatters.outputTransactionFormatter,
+  inputFormatter: [null],
+  outputFormatter: outputFormatter.outputTransactionFormatter
 }
 
 export const getTransactionCount = {
@@ -163,7 +162,6 @@ export const signTransaction = {
   name: 'signTransaction',
   call: 'signTransaction',
   params: 1,
-  // inputFormatter: [formatters.inputTransactionFormatter],
   inputFormatter: [signer]
 }
 

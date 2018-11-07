@@ -1,4 +1,4 @@
-require('web3-eth')
+// require('web3-eth')
 const EC = require('elliptic').ec
 const utils = require('web3-utils')
 const blockchainPb = require('../proto-js/blockchain_pb')
@@ -195,6 +195,7 @@ const signer = (
   const serializedUnverifiedTx = unverifiedTx.serializeBinary()
 
   const hexUnverifiedTx = utils.bytesToHex(serializedUnverifiedTx)
+
   return hexUnverifiedTx
 }
 export default signer
