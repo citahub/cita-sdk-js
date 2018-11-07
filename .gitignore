@@ -9,6 +9,7 @@ sign.*
 
 
 packages/appchain-base/*.html
+packages/appchain-base/examples/config.js
 debug
 citaSignTransaction.ts
 *.brk
