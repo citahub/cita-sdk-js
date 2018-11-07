@@ -174,7 +174,7 @@ Contract.prototype._executeMethod = function _executeMethod() {
 Contract.prototype.getPastEvents = function() {
   const subOptions = this._generateEventOptions.apply(this, arguments)
 
-  const getPastLogs = new Method({
+  let getPastLogs = new Method({
     name: 'getPastLogs',
     call: 'getLogs',
     params: 1,

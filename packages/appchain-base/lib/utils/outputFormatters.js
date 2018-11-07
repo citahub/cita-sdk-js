@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const { unsigner } = require('@appchain/signer');
-var utils = require('web3-utils');
+const utils = require('web3-utils');
 exports.outputTransactionFormatter = (rpcTx) => (Object.assign({}, rpcTx, { unsignedTransaction: unsigner(rpcTx.content) }));
 exports.outputAbiFormatter = (_abi) => {
     if (typeof _abi !== 'string')

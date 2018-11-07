@@ -11,9 +11,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const signer_1 = __importDefault(require("@appchain/signer"));
-var _ = require('underscore');
-var formatters = require('web3-core-helpers').formatters;
-var utils = require('web3-utils');
+const _ = require('underscore');
+const formatters = require('web3-core-helpers').formatters;
+const utils = require('web3-utils');
 const outputFormatter = __importStar(require("../utils/outputFormatters"));
 exports.peerCount = {
     name: 'peerCount',
@@ -67,7 +67,7 @@ exports.getBalance = {
     ],
     outputFormatter: utils.hexToNumberString
 };
-var blockCall = function (args) {
+const blockCall = function (args) {
     return _.isString(args[0]) && args[0].indexOf('0x') === 0
         ? 'getBlockByHash'
         : 'getBlockByNumber';
@@ -114,7 +114,7 @@ exports.getBlockNumber = {
     params: 0,
     outputFormatter: utils.hexToNumber
 };
-var getBlockTransactionCountCall = function (args) {
+const getBlockTransactionCountCall = function (args) {
     return _.isString(args[0]) && args[0].indexOf('0x') === 0
         ? 'getBlockTransactionCountByHash'
         : 'getBlockTransactionCountByNumber';
