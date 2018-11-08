@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var utils = require('web3-utils');
+const { unsigner } = require('@appchain/signer');
+const utils = require('web3-utils');
+exports.outputTransactionFormatter = (rpcTx) => (Object.assign({}, rpcTx, { unsignedTransaction: unsigner(rpcTx.content) }));
 exports.outputAbiFormatter = (_abi) => {
     if (typeof _abi !== 'string')
         throw new Error('Malformed ABI');

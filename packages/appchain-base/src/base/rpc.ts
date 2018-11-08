@@ -1,7 +1,7 @@
 import signer from '@appchain/signer'
-var _ = require('underscore')
-var formatters = require('web3-core-helpers').formatters
-var utils = require('web3-utils')
+const _ = require('underscore')
+const formatters = require('web3-core-helpers').formatters
+const utils = require('web3-utils')
 import * as outputFormatter from '../utils/outputFormatters'
 
 export const peerCount = {
@@ -63,7 +63,7 @@ export const getBalance = {
   outputFormatter: utils.hexToNumberString
 }
 
-var blockCall = function(args: any) {
+const blockCall = function(args: any) {
   return _.isString(args[0]) && args[0].indexOf('0x') === 0
     ? 'getBlockByHash'
     : 'getBlockByNumber'
@@ -112,7 +112,7 @@ export const getBlockNumber = {
   params: 0,
   outputFormatter: utils.hexToNumber
 }
-var getBlockTransactionCountCall = function(args: any) {
+const getBlockTransactionCountCall = function(args: any) {
   return _.isString(args[0]) && args[0].indexOf('0x') === 0
     ? 'getBlockTransactionCountByHash'
     : 'getBlockTransactionCountByNumber'

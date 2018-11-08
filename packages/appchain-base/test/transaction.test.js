@@ -24,16 +24,12 @@ const inquireTx = (action = 'getTransactionReceipt') => txHash =>
     }, 1000)
   })
 
-test.skip('signTransaction', () => {
-  //
-})
+test.skip('signTransaction', () => {})
 
-test.skip('sendSignedTransaction', () => {
-  //
-})
+test.skip('sendSignedTransaction', () => {})
 
 test('sendTransaction, getTransactionReceipt, getTransactionProof, and getTransaction', async () => {
-  expect.assertions(6)
+  expect.assertions(7)
   jest.setTimeout(30000)
   const currentHeight = await appchain.base.getBlockNumber()
   const result = await appchain.base.sendTransaction({
@@ -57,7 +53,9 @@ test('sendTransaction, getTransactionReceipt, getTransactionProof, and getTransa
 
   const transactionResult = await appchain.base.getTransaction(result.hash)
   expect(transactionResult.hash).toBe(result.hash)
-
+  expect(
+    transactionResult.unsignedTransaction.sender.address.replace(/^0x/, '')
+  ).toBe(appchain.base.accounts.wallet[0].address.toLowerCase().replace(/^0x/, ''))
   return
 })
 
@@ -94,13 +92,9 @@ test('transfer', async () => {
   expect(+currentBalance).toBeGreaterThan(+prevBalance)
 })
 
-test.skip('sign', () => {
-  //
-})
+test.skip('sign', () => {})
 
-test.skip('call', async () => {
-  //
-})
+test.skip('call', async () => {})
 
 test('listen to transaction receipt', async () => {
   const currentHeight = await appchain.base.getBlockNumber()

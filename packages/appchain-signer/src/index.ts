@@ -1,4 +1,3 @@
-// require('web3-eth')
 const EC = require('elliptic').ec
 const utils = require('web3-utils')
 const blockchainPb = require('../proto-js/blockchain_pb')
@@ -11,7 +10,9 @@ export const getNonce = () => {
   return utils.randomHex(5)
 }
 export const hex2bytes = (num: string) => {
-  return utils.hexToBytes(num.startsWith('0x') ? num : '0x' + num)
+  num = num.replace(/^0x/, '')
+  num = num.length % 2 ? '0x0' + num : '0x' + num
+  return utils.hexToBytes(num)
 }
 export const bytes2hex = (bytes: Uint8Array) => {
   return utils.bytesToHex(bytes)
@@ -68,16 +69,8 @@ const signer = (
       // set to
       _to = new Uint8Array(hex2bytes(_to))
 
-      // set chain id
-      chainId = chainId.toString().replace(/^0x/, '')
-      if (chainId.length % 2) {
-        chainId = '0' + chainId
-      }
-      try {
-        _chainId = hex2bytes(chainId) as Uint8Array
-      } catch (err) {
-        throw err
-      }
+      // set chainId
+      _chainId = hex2bytes('' + chainId) as Uint8Array
       const chainIdBytes = new Uint8Array(32)
       chainIdBytes.set(_chainId, 32 - _chainId.length)
       _chainId = chainIdBytes
@@ -174,15 +167,15 @@ const signer = (
   const hashedMsg = sha3(txMsg).slice(2)
 
   // old school code
-  var key = ec.keyFromPrivate((externalKey || privateKey).replace(/^0x/, ''), 'hex')
-  var sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true })
-  var sign_r = sign.r.toString(16)
-  var sign_s = sign.s.toString(16)
+  const key = ec.keyFromPrivate((externalKey || privateKey).replace(/^0x/, ''), 'hex')
+  const sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true })
+  let sign_r = sign.r.toString(16)
+  let sign_s = sign.s.toString(16)
   if (sign_r.length == 63) sign_r = '0' + sign_r
   if (sign_s.length == 63) sign_s = '0' + sign_s
-  var signature = sign_r + sign_s
-  var sign_buffer = new Buffer(signature, 'hex')
-  var sigBytes = new Uint8Array(65)
+  const signature = sign_r + sign_s
+  const sign_buffer = new Buffer(signature, 'hex')
+  const sigBytes = new Uint8Array(65)
   sigBytes.set(sign_buffer)
   sigBytes[64] = sign.recoveryParam
   // end

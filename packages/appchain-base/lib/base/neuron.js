@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var formatters = require('web3-core-helpers').formatters;
-var utils = require('web3-utils');
+const formatters = require('web3-core-helpers').formatters;
+const utils = require('web3-utils');
 exports.getAccounts = {
     name: 'getAccounts',
     call: 'personal_listAccounts',
