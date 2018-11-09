@@ -4,3 +4,6 @@
 [submodule "packages/appchain-signer/cita-proto"]
 	path = packages/appchain-signer/cita-proto
 	url = https://github.com/cryptape/cita-proto
+[submodule "packages/appchain-signer/appchain-tests"]
+	path = packages/appchain-signer/appchain-tests
+	url = https://github.com/cryptape/appchain-tests/
