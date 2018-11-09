@@ -19,7 +19,8 @@ exports.bytes2hex = (bytes) => {
     return utils.bytesToHex(bytes);
 };
 const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota, validUntilBlock, value = '', version = '0', chainId = '1', to = '', }, externalKey) => {
-    if (!privateKey && !externalKey) {
+    const _privateKey = externalKey || privateKey;
+    if (!_privateKey) {
         console.warn(`No private key found`);
         return {
             data,
@@ -37,6 +38,7 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     let _chainId = chainId;
     let _version = +version ? `V${version}` : '';
     let _nonce = `${nonce}`;
+    let _quota = +quota;
     switch (_version) {
         case 'V1': {
             _to = new Uint8Array(exports.hex2bytes(_to));
@@ -60,11 +62,14 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     else {
         tx.setNonce(_nonce);
     }
-    if (typeof +quota === 'number' && +quota > 0) {
-        tx.setQuota(+quota);
+    if (isNaN(_quota)) {
+        throw new Error('Quota should be set as number');
+    }
+    else if (_quota <= 0) {
+        throw new Error('Quota should be larger than 0');
     }
     else {
-        throw new Error('Quota should be larger than 0');
+        tx.setQuota(_quota);
     }
     value = typeof value === 'number' ? '0x' + value.toString(16) : value || '0x0';
     if (value.length > MAX_VALUE.length) {
@@ -118,7 +123,10 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     tx.setVersion(version);
     const txMsg = tx.serializeBinary();
     const hashedMsg = exports.sha3(txMsg).slice(2);
-    const key = exports.ec.keyFromPrivate((externalKey || privateKey).replace(/^0x/, ''), 'hex');
+    if (_privateKey.replace(/^0x/, '').length !== 64 || !utils.isHex(_privateKey)) {
+        throw new Error('Invalid Private Key');
+    }
+    const key = exports.ec.keyFromPrivate(_privateKey.replace(/^0x/, ''), 'hex');
     const sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true });
     let sign_r = sign.r.toString(16);
     let sign_s = sign.s.toString(16);

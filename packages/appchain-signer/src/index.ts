@@ -44,7 +44,8 @@ const signer = (
   },
   externalKey?: string,
 ) => {
-  if (!privateKey && !externalKey) {
+  const _privateKey = externalKey || privateKey
+  if (!_privateKey) {
     console.warn(`No private key found`)
     return {
       data,
@@ -64,6 +65,7 @@ const signer = (
   let _chainId: Uint8Array | string | number = chainId
   let _version = +version ? `V${version}` : ''
   let _nonce = `${nonce}`
+  let _quota = +quota
   switch (_version) {
     case 'V1': {
       // set to
@@ -98,10 +100,12 @@ const signer = (
    * quota
    * user-defined number, acts as gas limit
    */
-  if (typeof +quota === 'number' && +quota > 0) {
-    tx.setQuota(+quota)
-  } else {
+  if (isNaN(_quota)) {
+    throw new Error('Quota should be set as number')
+  } else if (_quota <= 0) {
     throw new Error('Quota should be larger than 0')
+  } else {
+    tx.setQuota(_quota)
   }
 
   // tradeoff: now cita will throw error when value not set
@@ -166,8 +170,11 @@ const signer = (
 
   const hashedMsg = sha3(txMsg).slice(2)
 
+  if (_privateKey.replace(/^0x/, '').length !== 64 || !utils.isHex(_privateKey)) {
+    throw new Error('Invalid Private Key')
+  }
   // old school code
-  const key = ec.keyFromPrivate((externalKey || privateKey).replace(/^0x/, ''), 'hex')
+  const key = ec.keyFromPrivate(_privateKey.replace(/^0x/, ''), 'hex')
   const sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true })
   let sign_r = sign.r.toString(16)
   let sign_s = sign.s.toString(16)
