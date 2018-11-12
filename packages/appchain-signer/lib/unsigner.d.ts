@@ -1,5 +1,14 @@
 declare const unsigner: (hexUnverifiedTransaction: string) => {
-    transaction: any;
+    transaction: {
+        version: any;
+        data: any;
+        chainId: any;
+        to: any;
+        nonce: any;
+        value: number;
+        quota: any;
+        validUntilBlock: number;
+    };
     signature: any;
     sender: {
         publicKey: string;
