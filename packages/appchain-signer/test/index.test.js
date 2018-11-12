@@ -101,13 +101,15 @@ describe('tests for cita v0', () => {
 })
 
 test('unsign', () => {
-  const signedMsg = sign(tx, privateKey)
+  const signedMsg = sign({ ...tx,
+    to: from
+  }, privateKey)
   const {
     transaction,
     crypto,
     sender
   } = unsign(signedMsg)
-  expect(transaction.to).toBe('')
+  expect(transaction.to).toBe(from.toLowerCase())
   expect(transaction.validUntilBlock).toBe(tx.validUntilBlock)
   expect(transaction.version.toString()).toBe(tx.version)
   expect(transaction.chainId).toBe(tx.chainId)
