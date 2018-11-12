@@ -28,6 +28,9 @@ const unsigner = (hexUnverifiedTransaction: string) => {
     default: {
     }
   }
+  if (transaction.to) {
+    transaction.to = '0x' + transaction.to
+  }
 
   const sign = new Signature({
     r: bytes2hex(signature.slice(0, 32)).slice(2),
