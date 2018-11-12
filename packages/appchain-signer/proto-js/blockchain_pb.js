@@ -1129,7 +1129,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.RichStatus.repeatedFields_ = [3];
+proto.RichStatus.repeatedFields_ = [3,6];
 
 
 
@@ -1164,7 +1164,8 @@ proto.RichStatus.toObject = function(includeInstance, msg) {
     height: jspb.Message.getFieldWithDefault(msg, 2, 0),
     nodesList: msg.getNodesList_asB64(),
     interval: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    version: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    version: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    validatorsList: msg.getValidatorsList_asB64()
   };
 
   if (includeInstance) {
@@ -1220,6 +1221,10 @@ proto.RichStatus.deserializeBinaryFromReader = function(msg, reader) {
     case 5:
       var value = /** @type {number} */ (reader.readUint32());
       msg.setVersion(value);
+      break;
+    case 6:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.addValidators(value);
       break;
     default:
       reader.skipField();
@@ -1282,6 +1287,13 @@ proto.RichStatus.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint32(
       5,
+      f
+    );
+  }
+  f = message.getValidatorsList_asU8();
+  if (f.length > 0) {
+    writer.writeRepeatedBytes(
+      6,
       f
     );
   }
@@ -1422,6 +1434,59 @@ proto.RichStatus.prototype.getVersion = function() {
 /** @param {number} value */
 proto.RichStatus.prototype.setVersion = function(value) {
   jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * repeated bytes validators = 6;
+ * @return {!(Array<!Uint8Array>|Array<string>)}
+ */
+proto.RichStatus.prototype.getValidatorsList = function() {
+  return /** @type {!(Array<!Uint8Array>|Array<string>)} */ (jspb.Message.getRepeatedField(this, 6));
+};
+
+
+/**
+ * repeated bytes validators = 6;
+ * This is a type-conversion wrapper around `getValidatorsList()`
+ * @return {!Array.<string>}
+ */
+proto.RichStatus.prototype.getValidatorsList_asB64 = function() {
+  return /** @type {!Array.<string>} */ (jspb.Message.bytesListAsB64(
+      this.getValidatorsList()));
+};
+
+
+/**
+ * repeated bytes validators = 6;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getValidatorsList()`
+ * @return {!Array.<!Uint8Array>}
+ */
+proto.RichStatus.prototype.getValidatorsList_asU8 = function() {
+  return /** @type {!Array.<!Uint8Array>} */ (jspb.Message.bytesListAsU8(
+      this.getValidatorsList()));
+};
+
+
+/** @param {!(Array<!Uint8Array>|Array<string>)} value */
+proto.RichStatus.prototype.setValidatorsList = function(value) {
+  jspb.Message.setField(this, 6, value || []);
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
+ * @param {number=} opt_index
+ */
+proto.RichStatus.prototype.addValidators = function(value, opt_index) {
+  jspb.Message.addToRepeatedField(this, 6, value, opt_index);
+};
+
+
+proto.RichStatus.prototype.clearValidatorsList = function() {
+  this.setValidatorsList([]);
 };
 
 

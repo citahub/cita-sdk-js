@@ -168,6 +168,13 @@ export class RichStatus extends jspb.Message {
   getVersion(): number;
   setVersion(value: number): void;
 
+  clearValidatorsList(): void;
+  getValidatorsList(): Array<Uint8Array | string>;
+  getValidatorsList_asU8(): Array<Uint8Array>;
+  getValidatorsList_asB64(): Array<string>;
+  setValidatorsList(value: Array<Uint8Array | string>): void;
+  addValidators(value: Uint8Array | string, index?: number): Uint8Array | string;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): RichStatus.AsObject;
   static toObject(includeInstance: boolean, msg: RichStatus): RichStatus.AsObject;
@@ -185,6 +192,7 @@ export namespace RichStatus {
     nodesList: Array<Uint8Array | string>,
     interval: number,
     version: number,
+    validatorsList: Array<Uint8Array | string>,
   }
 }
 
