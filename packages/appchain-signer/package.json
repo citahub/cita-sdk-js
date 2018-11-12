@@ -1,0 +1,35 @@
+{
+  "name": "@appchain/signer",
+  "version": "1.0.39",
+  "main": "lib/index.js",
+  "private": false,
+  "repository": "https://github.com/cryptape/appchain.js/tree/master/packages/appchain-signer",
+  "author": "Keith <keithwhisper@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "protoc": "protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --ts_out=./proto-js --proto_path=cita-proto --js_out=import_style=commonjs,binary:./proto-js cita-proto/blockchain.proto",
+    "build": "tsc",
+    "test": "npm run test:v0",
+    "test:v0": "VERSION=0 jest",
+    "test:v1": "VERSION=1 jest"
+  },
+  "dependencies": {
+    "ec": "^0.0.1",
+    "elliptic": "^6.4.0",
+    "google-protobuf": "^3.5.0",
+    "web3": "^1.0.0-beta.34"
+  },
+  "devDependencies": {
+    "jest": "^23.2.0",
+    "nodemon": "^1.17.5",
+    "protoc": "^1.0.3",
+    "ts-node": "^7.0.0",
+    "ts-protoc-gen": "^0.7.3",
+    "typescript": "^2.9.2"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  }
+}

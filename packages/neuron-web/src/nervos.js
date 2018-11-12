@@ -1,4 +1,4 @@
-import Nervos from '@nervos/chain'
+import Nervos from '@appchain/base'
 import {
   pwd,
   chain
