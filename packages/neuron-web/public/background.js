@@ -3,15 +3,15 @@ let appId = null
 // dapp
 let dappId = null
 
-_nervos = Nervos()
+_appchain = AppChain()
 
 // init _accounts
 let _accounts = []
 
 const loadAccounts = () => {
-  _nervos.appchain.accounts.wallet.load('')
-  _accounts = Array.from(_nervos.appchain.accounts.wallet).map(w => w.address)
-  _nervos.appchain.accounts.wallet.clear()
+  _appchain.base.accounts.wallet.load('')
+  _accounts = Array.from(_appchain.base.accounts.wallet).map(w => w.address)
+  _appchain.base.accounts.wallet.clear()
   return _accounts
 }
 // load accounts

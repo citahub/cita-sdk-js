@@ -7,7 +7,7 @@ import * as React from 'react'
 import CusTextField from '../../components/CusTextField'
 
 import { pwd } from '../../config'
-import { INervosContext, withNervos } from '../../contexts/nervos'
+import { IAppChainContext, withAppChain } from '../../contexts/appchain'
 import { handleInputOf } from '../../utils/compActions'
 import './accounts.css'
 
@@ -25,7 +25,7 @@ const initState = {
 }
 
 type IAccounts = typeof initState
-class Accounts extends React.Component<INervosContext & any, IAccounts> {
+class Accounts extends React.Component<IAppChainContext & any, IAccounts> {
   public readonly state = initState
 
   public handleInput = handleInputOf(this)
@@ -33,8 +33,8 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
     this.loadWallet()
   }
   public loadWallet = () => {
-    // const wallet = this.props.nervos.appchain.accounts.wallet.load(pwd)
-    const { wallet } = this.props.nervos.appchain.accounts
+    // const wallet = this.props.appchain.base.accounts.wallet.load(pwd)
+    const { wallet } = this.props.appchain.base.accounts
     if (wallet.length) {
       this.setState({
         loaded: true,
@@ -55,7 +55,7 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
     if (!privateKey) {
       return this.clearAccount()
     }
-    const { accounts } = this.props.nervos.appchain
+    const { accounts } = this.props.appchain.base
     if (privateKey.replace(/^0x/, '').length !== 64) {
       this.setState({
         privateKeyError: 'Please enter private key in valid format',
@@ -89,8 +89,8 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
     })
   }
   public clearAccount = (e?: any) => {
-    this.props.nervos.appchain.accounts.wallet.clear()
-    this.props.nervos.appchain.accounts.wallet.save(pwd)
+    this.props.appchain.base.accounts.wallet.clear()
+    this.props.appchain.base.accounts.wallet.save(pwd)
     this.setState({
       cleared: true,
       privateKey: '',
@@ -162,4 +162,4 @@ class Accounts extends React.Component<INervosContext & any, IAccounts> {
     )
   }
 }
-export default withNervos(Accounts)
+export default withAppChain(Accounts)

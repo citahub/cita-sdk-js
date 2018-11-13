@@ -19,9 +19,9 @@ function injectCustomJs() {
 
 injectCustomJs()
 
-const _nervos = Nervos()
-_nervos.appchain.accounts.wallet.load('')
-const _accounts = Array.from(_nervos.appchain.accounts.wallet).map(w => w.address)
+const _appchain = AppChain()
+_appchain.base.accounts.wallet.load('')
+const _accounts = Array.from(_appchain.base.accounts.wallet).map(w => w.address)
 
 window.addEventListener('message', (e) => {
   const {
