@@ -136,8 +136,8 @@ export declare const signTransaction: {
       quota: number
       validUntilBlock: string | number
       value: string | number
-      version?: number | undefined
-      chainId: number
+      version?: string | number | undefined
+      chainId: string | number
       to?: string | undefined
     },
     externalKey?: string | undefined
@@ -167,8 +167,8 @@ export declare const sendTransaction: {
       quota: number
       validUntilBlock: string | number
       value: string | number
-      version?: number | undefined
-      chainId: number
+      version?: string | number | undefined
+      chainId: string | number
       to?: string | undefined
     },
     externalKey?: string | undefined
