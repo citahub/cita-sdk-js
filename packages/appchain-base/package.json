@@ -8,7 +8,7 @@
   "scripts": {
     "start": "nodemon --config nodemon.json",
     "debug": "node debug/index.js",
-    "build": "tsc && browserify",
+    "build": "tsc && npm run browserify",
     "docs": "typedoc --out ./documents/ ./src/",
     "test": "jest",
     "parse-abi": "node ./scripts/parse_abi.js",
@@ -26,7 +26,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "postinstall": "rm -f node_modules/web3/index.d.ts",
   "devDependencies": {
+    "@types/web3": "^1.0.12",
     "babel-minify": "^0.4.3",
     "browserify": "^16.2.2",
     "eslint": "^4.19.1",
