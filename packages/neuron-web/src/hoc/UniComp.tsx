@@ -3,7 +3,7 @@ import Dialogue from '../components/Dialogue'
 import EncryptedMessage from '../components/EncryptedMessage'
 import Notifier, { NotifierType } from '../components/Notifier'
 import Transaction, { tx } from '../components/Transaction'
-import { INervosContext, withNervos } from '../contexts/nervos'
+import { IAppChainContext, withAppChain } from '../contexts/appchain'
 import './brand.css'
 
 export interface IUniComp {
@@ -74,7 +74,7 @@ const initState = {
  * Add brand, error handler, transaction dialog
  */
 const UniComp = (Comp: typeof React.Component) => {
-  class WithUniComp extends React.Component<INervosContext, typeof initState> {
+  class WithUniComp extends React.Component<IAppChainContext, typeof initState> {
     public readonly state = initState
     public componentDidMount() {
       // load manifest
@@ -85,7 +85,8 @@ const UniComp = (Comp: typeof React.Component) => {
           const { chainSet } = manifest
           const ids = Object.keys(chainSet)
           tx.chainId = ids[0]
-          this.props.nervos.setProvider(chainSet[tx.chainId])
+          const provider = new this.props.appchain.providers.HttpProvider(chainSet[tx.chainId])
+          this.props.appchain.setProvider(provider)
         } catch (e) {
           window.console.error(e)
         }
@@ -194,7 +195,7 @@ const UniComp = (Comp: typeof React.Component) => {
         }
       }
       if (type === EncryptedMessageAction.SUBMIT) {
-        const account = this.props.nervos.appchain.accounts.wallet[0]
+        const account = this.props.appchain.base.accounts.wallet[0]
         if (!account) {
           if (chrome && chrome.runtime) {
             chrome.runtime.sendMessage({
@@ -247,18 +248,19 @@ const UniComp = (Comp: typeof React.Component) => {
       const { chainInfo } = this.state
       try {
         if (chainInfo.address) {
-          this.props.nervos.setProvider(chainInfo.address)
+          const provider = new this.props.appchain.providers.HttpProvider(chainInfo.address)
+          this.props.appchain.setProvider(provider)
         }
       } catch (err) {
         window.console.error(err)
       }
       this.setState({ txStatus: TransactionAction.SENDING })
-      return this.props.nervos.appchain
+      return this.props.appchain.base
         .sendTransaction(this.state.transaction)
         .then((txRes: { hash: string }) => {
           if (txRes.hash) {
             this.setState({ currentTxHash: txRes.hash, dialogueOn: false, txStatus: TransactionAction.NONE })
-            return this.props.nervos.listeners.listenToTransactionReceipt(txRes.hash)
+            return this.props.appchain.listeners.listenToTransactionReceipt(txRes.hash)
           } else {
             throw new Error('No Transaction Hash Received')
           }
@@ -310,7 +312,7 @@ const UniComp = (Comp: typeof React.Component) => {
                 transaction={transaction}
                 manifest={manifest}
                 handleTxEdit={this.handleTxEdit}
-                chain={this.props.nervos.currentProvider.host}
+                chain={(this.props.appchain.currentProvider as any).host}
                 status={txStatus}
               />
             ) : (
@@ -325,7 +327,7 @@ const UniComp = (Comp: typeof React.Component) => {
       )
     }
   }
-  return withNervos(WithUniComp)
+  return withAppChain(WithUniComp)
 }
 
 export default UniComp

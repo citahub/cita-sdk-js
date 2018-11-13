@@ -3,7 +3,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { chain } from '../../config'
-import { INervosContext, withNervos } from '../../contexts/nervos'
+import { IAppChainContext, withAppChain } from '../../contexts/appchain'
 import { IUniComp } from '../../hoc/UniComp'
 import { handleInputOf } from '../../utils/compActions'
 
@@ -14,7 +14,7 @@ const initState = {
   chainIpError: '',
   saved: false,
 }
-class Options extends React.Component<IUniComp & INervosContext, typeof initState> {
+class Options extends React.Component<IUniComp & IAppChainContext, typeof initState> {
   public readonly state = initState
   public handleInput = handleInputOf(this)
   public handleClick = (e: any) => {
@@ -24,20 +24,19 @@ class Options extends React.Component<IUniComp & INervosContext, typeof initStat
     }
     if (!chainIp.startsWith('http')) {
       this.setState({
-        // chainIpError: 'Protocol required',
         chainIpError: 'chain address error...',
       })
       return
     }
     window.localStorage.setItem('chainIp', chainIp)
-    this.props.nervos.setProvider(chainIp)
+    const provider = new this.props.appchain.providers.HttpProvider(chainIp)
+    this.props.appchain.setProvider(provider)
     this.setState({ saved: true })
     return
   }
   public componentDidMount() {
     this.setState({
       chainIp: window.localStorage.getItem('chainIp') || '',
-      // chainIp: this.props.nervos.currentProvider ? this.props.nervos.currentProvider.host : '',
     })
   }
   public render() {
@@ -63,4 +62,4 @@ class Options extends React.Component<IUniComp & INervosContext, typeof initStat
     )
   }
 }
-export default withNervos(Options)
+export default withAppChain(Options)

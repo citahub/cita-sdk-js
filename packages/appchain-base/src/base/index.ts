@@ -1,4 +1,4 @@
-import Web3 from 'web3'
+import Web3 = require('web3')
 import signer, { unsigner } from '@appchain/signer'
 import * as rpc from './rpc'
 import * as personal from './neuron'

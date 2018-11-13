@@ -4,12 +4,6 @@ const manifestDOM = document.querySelector('link[ref=manifest]')
 if (manifestDOM) {
   const href = manifestDOM.href
   fetch(href).then(res => res.json()).then(manifest => {
-    // if (m) {
-    //   window.postMessage({
-    //     action: 'manifest',
-    //     data: m
-    //   }, "*")
-    // }
     window.manifest = manifest
   }).catch(window.console.error)
 }
@@ -32,7 +26,7 @@ const listener = (actionType, cb, payload) => {
   })
 }
 window.addMessenger = (sdk) => {
-  sdk.appchain.getAccounts = (cb) => {
+  sdk.base.getAccounts = (cb) => {
     window.postMessage({
       action: 'getAccounts',
     }, '*')
@@ -41,7 +35,7 @@ window.addMessenger = (sdk) => {
       id: -1
     })
   }
-  sdk.appchain.getDefaultAccount = (cb) => {
+  sdk.base.getDefaultAccount = (cb) => {
     window.postMessage({
       action: 'getDefaultAccount'
     }, '*')
@@ -51,8 +45,8 @@ window.addMessenger = (sdk) => {
     })
   }
 
-  sdk.appchain.sign = new Proxy(
-    sdk.appchain.sign, {
+  sdk.base.sign = new Proxy(
+    sdk.base.sign, {
       apply: (target, thisArg, argumentsList) => {
         window.postMessage({
           action: 'sign',
@@ -86,9 +80,9 @@ window.addMessenger = (sdk) => {
       }
     }
   )
-  sdk.appchain.getDefaultAccount().then(account => {
+  sdk.base.getDefaultAccount().then(account => {
     if (account) {
-      sdk.appchain.defaultAccount = account
+      sdk.base.defaultAccount = account
     }
   })
 }
@@ -102,8 +96,8 @@ if (window.localStorage.getItem('DISABLE_NEURON_WEB_AUTO_IMPORT')) {
 } else {
   window.addEventListener("neuronWebReady", () => {
     window.console.log("NeuronWebReady")
-    if (window.nervos) {
-      window.addMessenger(window.nervos)
+    if (window.nervos || window.appchain) {
+      window.addMessenger(window.nervos || window.appchain)
     }
   })
   setTimeout(() => {

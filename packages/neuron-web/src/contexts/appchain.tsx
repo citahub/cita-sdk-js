@@ -1,19 +1,19 @@
 import * as React from 'react'
-import nervos from '../nervos'
+import appchain from '../appchain'
 
-export interface INervosContext {
-  nervos: typeof nervos
+export interface IAppChainContext {
+  appchain: typeof appchain
   currentNumber: number
 }
 
-const { Provider, Consumer } = React.createContext<INervosContext>(nervos)
+const { Provider, Consumer } = React.createContext<typeof appchain>(appchain)
 
-export const NervosProvider = (props: React.Props<any>) => <Provider value={nervos}>{props.children}</Provider>
+export const AppChainProvider = (props: React.Props<any>) => <Provider value={appchain}>{props.children}</Provider>
 
 const initState = {
   currentNumber: 0,
 }
-export const withNervos = (Comp: typeof React.Component) =>
+export const withAppChain = (Comp: typeof React.Component) =>
   class extends React.Component<{}, typeof initState> {
     public readonly state = initState
     private timer: any
@@ -27,7 +27,7 @@ export const withNervos = (Comp: typeof React.Component) =>
       clearInterval(this.timer)
     }
     public updateHeight = async () => {
-      const current = await nervos.appchain.getBlockNumber()
+      const current = await appchain.base.getBlockNumber()
       this.setState({
         currentNumber: +current,
       })
@@ -35,7 +35,7 @@ export const withNervos = (Comp: typeof React.Component) =>
     public render() {
       return (
         <Consumer>
-          {nervosCtx => <Comp {...this.props} nervos={nervosCtx} currentNumber={this.state.currentNumber} />}
+          {appchainCtx => <Comp {...this.props} appchain={appchainCtx} currentNumber={this.state.currentNumber} />}
         </Consumer>
       )
     }

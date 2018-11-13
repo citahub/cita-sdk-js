@@ -1,12 +1,8 @@
-import {
-  Button,
-  // IconButton
-} from '@material-ui/core'
-// import SettingsIcon from '@material-ui/icons/Settings'
+import { Button } from '@material-ui/core'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { rebirthAddr } from '../../config'
-import { INervosContext, withNervos } from '../../contexts/nervos'
+import { IAppChainContext, withAppChain } from '../../contexts/appchain'
 import { IUniComp } from '../../hoc/UniComp'
 import { copyToClipboard } from '../../utils/compActions'
 import './transactions.css'
@@ -40,11 +36,11 @@ const initState = {
   transactions: [] as ITransaction[],
 }
 type ITransactionsState = typeof initState
-class Transactions extends React.Component<INervosContext & IUniComp, ITransactionsState> {
+class Transactions extends React.Component<IAppChainContext & IUniComp, ITransactionsState> {
   public readonly state = initState
   private timer: any
   public componentDidMount() {
-    const { wallet } = this.props.nervos.appchain.accounts
+    const { wallet } = this.props.appchain.base.accounts
     if (wallet.length) {
       this.setState({
         address: wallet[0].address,
@@ -54,7 +50,7 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
     this.getMetaData()
   }
   public getBalance = (address: string) => {
-    this.props.nervos.appchain
+    this.props.appchain.base
       .getBalance(address)
       .then((balance: string) => {
         this.setState({ balance })
@@ -62,20 +58,20 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
       .catch(window.console.warn)
   }
   public getMetaData = () => {
-    this.props.nervos.appchain
+    this.props.appchain.base
       .getMetaData()
       .then((metadata: typeof initState.metadata) => {
         this.setState({ metadata })
       })
       .catch(window.console.warn)
   }
-  public componentDidUpdate(nextProps: INervosContext & IUniComp, prevState: ITransactionsState, snapshot: boolean) {
+  public componentDidUpdate(nextProps: IAppChainContext & IUniComp, prevState: ITransactionsState, snapshot: boolean) {
     if (snapshot) {
       this.loadTxs()
     }
   }
-  public getSnapshotBeforeUpdate(prevProps: INervosContext) {
-    const { wallet } = this.props.nervos.appchain.accounts
+  public getSnapshotBeforeUpdate(prevProps: IAppChainContext) {
+    const { wallet } = this.props.appchain.base.accounts
     if (prevProps.currentNumber < this.props.currentNumber && wallet.length) {
       return true
     }
@@ -197,12 +193,7 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
           <div className="transaction__list--board">
             {this.props.currentTxHash ? (
               <div className="transactions__list--item">
-                <div className="transactions__list--time">
-                  {/*
-                  Listening to
-                */}
-                  ****/**/** **:**:**
-                </div>
+                <div className="transactions__list--time">****/**/** **:**:**</div>
                 <div className="transactions__list--hash">{this.props.currentTxHash}</div>
               </div>
             ) : null}
@@ -213,7 +204,9 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
                     <div className="transactions__list--hash" title={tx.hash}>
                       <a
                         href={`${process.env.REACT_APP_MICROSCOPE}${
-                          this.props.nervos.currentProvider ? '?chain=' + this.props.nervos.currentProvider.host : ''
+                          this.props.appchain.currentProvider
+                            ? '?chain=' + (this.props.appchain.currentProvider as any).host
+                            : ''
                         }#/transaction/${tx.hash}`}
                         target="_blank"
                         rel="noreferrer noopener"
@@ -250,4 +243,4 @@ class Transactions extends React.Component<INervosContext & IUniComp, ITransacti
   }
 }
 
-export default withNervos(Transactions)
+export default withAppChain(Transactions)
