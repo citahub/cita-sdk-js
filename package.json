@@ -10,11 +10,12 @@
     "verbose": true,
     "testURL": "http://localhost/"
   },
+  "postinstall": "rm -f node_modules/web3/index.d.ts",
   "devDependencies": {
     "@types/google-protobuf": "^3.2.7",
     "@types/node": "^10.5.1",
     "@types/underscore": "^1.8.8",
-    "@types/web3": "^1.0.0",
+    "@types/web3": "^1.0.12",
     "babel-minify": "^0.4.3",
     "browserify": "^16.2.2",
     "chalk": "^2.4.1",

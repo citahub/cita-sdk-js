@@ -8,7 +8,7 @@
   "scripts": {
     "start": "nodemon --config nodemon.json",
     "debug": "node debug/index.js",
-    "build": "tsc && browserify",
+    "build": "tsc && npm run browserify",
     "docs": "typedoc --out ./documents/ ./src/",
     "test": "jest",
     "parse-abi": "node ./scripts/parse_abi.js",
@@ -26,10 +26,15 @@
   "publishConfig": {
     "access": "public"
   },
+  "postinstall": "rm -f node_modules/web3/index.d.ts",
   "devDependencies": {
+    "@types/web3": "^1.0.12",
     "babel-minify": "^0.4.3",
     "browserify": "^16.2.2",
     "eslint": "^4.19.1",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-typescript": "^0.13.0",
     "husky": "^0.14.3",
     "jest": "^23.1.0",
     "lint-staged": "^7.1.2",
@@ -37,7 +42,8 @@
     "prettier": "^1.13.3",
     "ts-node": "^6.0.5",
     "typedoc": "^0.11.1",
-    "typescript": "^3.1.4"
+    "typescript": "^3.1.4",
+    "typescript-eslint-parser": "^20.1.1"
   },
   "dependencies": {
     "@appchain/signer": "^2.0.1",

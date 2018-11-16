@@ -9,7 +9,7 @@ const txs = fs.readdirSync(txsDir).filter(fileName => fileName.endsWith('.json')
 
 const examples = {}
 txs.forEach(tx => {
-  examples[tx] = JSON.parse(fs.readFileSync(path.join(txsDir, tx)).toString())
+  examples[tx] = require(path.join(txsDir, tx))
 })
 
 txs.forEach(_tx => {

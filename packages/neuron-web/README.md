@@ -20,13 +20,13 @@ window.addEventListener('neuronWebReady', () => {
 ## Get Default Account
 
 ```javascript
-nervos.appchain.getDefaultAccount().then(defaultAccount => console.log(defaultAccount))
+appchain.base.getDefaultAccount().then(defaultAccount => console.log(defaultAccount))
 ```
 
 ## Get Accounts
 
 ```javascript
-nervos.appchain.getAccounts().then(accounts => console.log(accounts))
+appchain.base.getAccounts().then(accounts => console.log(accounts))
 ```
 
 # Demos
