@@ -1,9 +1,9 @@
 {
   "name": "neuron-web",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "dependencies": {
-    "@appchain/base": "^0.20.0",
+    "@appchain/base": "^0.20.1",
     "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^2.0.3",
     "react": "^16.4.2",
