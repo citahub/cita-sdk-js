@@ -128,13 +128,9 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     }
     const key = exports.ec.keyFromPrivate(_privateKey.replace(/^0x/, ''), 'hex');
     const sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true });
-    let sign_r = sign.r.toString(16);
-    let sign_s = sign.s.toString(16);
-    if (sign_r.length == 63)
-        sign_r = '0' + sign_r;
-    if (sign_s.length == 63)
-        sign_s = '0' + sign_s;
-    const signature = sign_r + sign_s;
+    let sign_r = sign.r.toString(16).padStart(64, 0);
+    let sign_s = sign.s.toString(16).padStart(64, 0);
+    const signature = (sign_r + sign_s).padStart(128, 0);
     const sign_buffer = new Buffer(signature, 'hex');
     const sigBytes = new Uint8Array(65);
     sigBytes.set(sign_buffer);
