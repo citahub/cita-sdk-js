@@ -28,7 +28,7 @@ const unsigner = (hexUnverifiedTransaction: string) => {
     default: {
     }
   }
-  if (transaction.to) {
+  if (transaction.to && !transaction.to.startsWith('0x')) {
     transaction.to = '0x' + transaction.to
   }
 
