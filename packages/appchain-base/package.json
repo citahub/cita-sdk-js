@@ -1,6 +1,6 @@
 {
   "name": "@appchain/base",
-  "version": "0.20.1",
+  "version": "0.20.2",
   "main": "lib/index.js",
   "repository": "https://github.com/cryptape/appchain.js/tree/master/packages/appchain-base",
   "author": "Keith <keithwhisper@gmail.com>",
@@ -46,7 +46,7 @@
     "typescript-eslint-parser": "^20.1.1"
   },
   "dependencies": {
-    "@appchain/signer": "^2.0.2",
+    "@appchain/signer": "^2.0.3",
     "web3": "^1.0.0-beta.34"
   },
   "jest": {
