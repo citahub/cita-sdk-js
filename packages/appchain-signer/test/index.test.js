@@ -112,7 +112,7 @@ test('unsign', () => {
   expect(transaction.to).toBe(from.toLowerCase())
   expect(transaction.validUntilBlock).toBe(tx.validUntilBlock)
   expect(transaction.version.toString()).toBe(tx.version)
-  expect(transaction.chainId).toBe(tx.chainId)
+  expect(+transaction.chainId).toBe(+tx.chainId)
   expect(sender.address).toBe(from.toLowerCase())
 })
 
