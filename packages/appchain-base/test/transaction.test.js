@@ -106,29 +106,26 @@ test('listen to transaction receipt', async () => {
   expect(receipt.transactionHash).toBe(result.hash)
 })
 
-test.skip('store abi', async () => {
-  appchain.eth.accounts.wallet.add(
-    appchain.eth.accounts.privateKeyToAccount(privateKey)
-  )
-  const myContract = new appchain.base.Contract(abi)
+test('store abi', async () => {
   const currentHeight = await appchain.base.getBlockNumber()
-  const txResult = await myContract.deploy({
-    data: bytecode,
-    arguments: []
-  }).send({
-    ...tx,
+  const myContract = new appchain.base.Contract(abi)
+  const _tx = Object.assign({}, tx, {
     validUntilBlock: +currentHeight + 88
   })
-  const contractReceipt = await appchain.listeners.listenToTransactionReceipt(txResult.hash)
-  const receipt = await appchain.base.storeAbi(contractReceipt.contractAddress, abi, {
-    ...tx,
-    validUntilBlock: +currentHeight + 88
-  })
-  if (receipt.errorMessages) {
-    throw new Error(receipt.errorMessages)
-  }
-
-
-  const returnAbi = await appchain.base.getAbi(contractReceipt.contractAddress)
+  const txResult = await myContract
+    .deploy({
+      data: bytecode,
+      arguments: []
+    })
+    .send(_tx)
+  const receipt = await appchain.listeners.listenToTransactionReceipt(
+    txResult.hash
+  )
+  const txReceipt = await appchain.base.storeAbi(
+    receipt.contractAddress,
+    abi,
+    _tx
+  )
+  const returnAbi = await appchain.base.getAbi(receipt.contractAddress, 'pending')
   expect(JSON.stringify(returnAbi)).toBe(JSON.stringify(abi))
 })
