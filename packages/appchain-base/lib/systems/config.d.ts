@@ -1,3 +1,3 @@
 export declare const ReservedAddr: {
-  [index: string]: string
-}
+    [index: string]: string;
+};

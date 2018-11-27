@@ -1,6 +1,6 @@
-import AppChain from './index'
+import AppChain from './index';
 declare global {
-  interface Window {
-    AppChain: typeof AppChain
-  }
+    interface Window {
+        AppChain: typeof AppChain;
+    }
 }

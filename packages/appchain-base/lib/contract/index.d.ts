@@ -1,2 +1,2 @@
-declare const Contract: any
-export default Contract
+declare const Contract: any;
+export default Contract;
