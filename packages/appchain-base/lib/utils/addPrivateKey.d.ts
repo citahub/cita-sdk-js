@@ -1,2 +1,2 @@
-declare const _default: (wallet: any) => (transaction: any) => any
-export default _default
+declare const _default: (wallet: any) => (transaction: any) => any;
+export default _default;

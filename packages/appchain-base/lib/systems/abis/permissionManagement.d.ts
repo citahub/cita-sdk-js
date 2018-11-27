@@ -1,32 +1,30 @@
-declare const _default: (
-  | {
-      constant: boolean
-      inputs: {
-        name: string
-        type: string
-      }[]
-      name: string
-      outputs: {
-        name: string
-        type: string
-      }[]
-      payable: boolean
-      stateMutability: string
-      type: string
-      anonymous?: undefined
-    }
-  | {
-      anonymous: boolean
-      inputs: {
-        indexed: boolean
-        name: string
-        type: string
-      }[]
-      name: string
-      type: string
-      constant?: undefined
-      outputs?: undefined
-      payable?: undefined
-      stateMutability?: undefined
-    })[]
-export default _default
+declare const _default: ({
+    constant: boolean;
+    inputs: {
+        name: string;
+        type: string;
+    }[];
+    name: string;
+    outputs: {
+        name: string;
+        type: string;
+    }[];
+    payable: boolean;
+    stateMutability: string;
+    type: string;
+    anonymous?: undefined;
+} | {
+    anonymous: boolean;
+    inputs: {
+        indexed: boolean;
+        name: string;
+        type: string;
+    }[];
+    name: string;
+    type: string;
+    constant?: undefined;
+    outputs?: undefined;
+    payable?: undefined;
+    stateMutability?: undefined;
+})[];
+export default _default;
