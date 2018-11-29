@@ -13,7 +13,11 @@ The `appchain.js` library is a collection of packages which contains specific fu
 
 `@appchain/base` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@appchain/base@0.17.x` will work perfectly with `CITA@0.17`
 
-# Changelog since @appchain/base@0.18.0
-
-- [update]: **System Contracts**, add 7 more system contracts instance.
-- [fix]: **Account Generation**, fix bug of pass privatekey without `0x` to nervos.appchain.accounts.privateKeyToAccount;
+# Changlog since @appchain/base@0.19.0
+  - [Chore]: *test*, add appchain-tests module;
+  - [Fix]: *signature*, fix signature offset;
+  - [Update]: *type-def*, update web3 type definition;
+  - [Feature]: *protocol version*, support CITA version 1;
+  - [Refactor]: *store-abi*, refactor storeAbi method;
+  - [Feature]: *getTransaction*, add more detail in result of getTransaction;
+  - [Update]: *Rename*, rename @nervos/chain to @appchain/base
