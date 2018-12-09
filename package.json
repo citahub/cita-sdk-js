@@ -4,11 +4,17 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
     "test": "lerna run test",
+    "cm": "git-cz",
     "precommit": "yarn run test"
   },
   "jest": {
     "verbose": true,
     "testURL": "http://localhost/"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "postinstall": "rm -f node_modules/web3/index.d.ts",
   "devDependencies": {
@@ -19,6 +25,8 @@
     "babel-minify": "^0.4.3",
     "browserify": "^16.2.2",
     "chalk": "^2.4.1",
+    "commitizen": "^3.0.5",
+    "cz-conventional-changelog": "2.1.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^3.3.0",
