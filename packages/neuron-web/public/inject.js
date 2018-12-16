@@ -88,19 +88,20 @@ window.addMessenger = (sdk) => {
 }
 
 const neuronWebReadyEvent = new Event("neuronWebReady")
+window.dispatchEvent(neuronWebReadyEvent)
 
 // Fuer die schwach app
-if (window.localStorage.getItem('DISABLE_NEURON_WEB_AUTO_IMPORT')) {
-  window.dispatchEvent(neuronWebReadyEvent)
+// if (window.localStorage.getItem('DISABLE_NEURON_WEB_AUTO_IMPORT')) {
+//   window.dispatchEvent(neuronWebReadyEvent)
 
-} else {
-  window.addEventListener("neuronWebReady", () => {
-    window.console.log("NeuronWebReady")
-    if (window.nervos || window.appchain) {
-      window.addMessenger(window.nervos || window.appchain)
-    }
-  })
-  setTimeout(() => {
-    window.dispatchEvent(neuronWebReadyEvent)
-  }, 1000)
-}
+// } else {
+//   window.addEventListener("neuronWebReady", () => {
+//     window.console.log("NeuronWebReady")
+//     if (window.nervos || window.appchain) {
+//       window.addMessenger(window.nervos || window.appchain)
+//     }
+//   })
+//   setTimeout(() => {
+//     window.dispatchEvent(neuronWebReadyEvent)
+//   }, 1000)
+// }
