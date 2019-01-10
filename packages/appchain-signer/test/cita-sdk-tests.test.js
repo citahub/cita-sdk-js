@@ -4,7 +4,7 @@ const path = require('path')
 const sign = require('../lib').default
 
 
-const txsDir = path.resolve(__dirname, '../appchain-tests/transactions/')
+const txsDir = path.resolve(__dirname, '../cita-sdk-tests/transactions/')
 const txs = fs.readdirSync(txsDir).filter(fileName => fileName.endsWith('.json'))
 
 const examples = {}
