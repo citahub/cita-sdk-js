@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { rebirthAddr } from '../../config'
-import { IAppChainContext, withAppChain } from '../../contexts/appchain'
+import { ICITAContext, withCITA } from '../../contexts/cita'
 import { IUniComp } from '../../hoc/UniComp'
 import { copyToClipboard } from '../../utils/compActions'
 import './transactions.css'
@@ -36,11 +36,11 @@ const initState = {
   transactions: [] as ITransaction[],
 }
 type ITransactionsState = typeof initState
-class Transactions extends React.Component<IAppChainContext & IUniComp, ITransactionsState> {
+class Transactions extends React.Component<ICITAContext & IUniComp, ITransactionsState> {
   public readonly state = initState
   private timer: any
   public componentDidMount() {
-    const { wallet } = this.props.appchain.base.accounts
+    const { wallet } = this.props.cita.base.accounts
     if (wallet.length) {
       this.setState({
         address: wallet[0].address,
@@ -50,7 +50,7 @@ class Transactions extends React.Component<IAppChainContext & IUniComp, ITransac
     this.getMetaData()
   }
   public getBalance = (address: string) => {
-    this.props.appchain.base
+    this.props.cita.base
       .getBalance(address)
       .then((balance: string) => {
         this.setState({ balance })
@@ -58,20 +58,20 @@ class Transactions extends React.Component<IAppChainContext & IUniComp, ITransac
       .catch(window.console.warn)
   }
   public getMetaData = () => {
-    this.props.appchain.base
+    this.props.cita.base
       .getMetaData()
       .then((metadata: typeof initState.metadata) => {
         this.setState({ metadata })
       })
       .catch(window.console.warn)
   }
-  public componentDidUpdate(nextProps: IAppChainContext & IUniComp, prevState: ITransactionsState, snapshot: boolean) {
+  public componentDidUpdate(nextProps: ICITAContext & IUniComp, prevState: ITransactionsState, snapshot: boolean) {
     if (snapshot) {
       this.loadTxs()
     }
   }
-  public getSnapshotBeforeUpdate(prevProps: IAppChainContext) {
-    const { wallet } = this.props.appchain.base.accounts
+  public getSnapshotBeforeUpdate(prevProps: ICITAContext) {
+    const { wallet } = this.props.cita.base.accounts
     if (prevProps.currentNumber < this.props.currentNumber && wallet.length) {
       return true
     }
@@ -145,8 +145,7 @@ class Transactions extends React.Component<IAppChainContext & IUniComp, ITransac
             <Button
               onClick={this.copyToClipboard}
               disabled={copied}
-              classes={{ root: `button-1 ${copied ? 'disabled' : 'primary'} transactions__list--button` }}
-            >
+              classes={{ root: `button-1 ${copied ? 'disabled' : 'primary'} transactions__list--button` }}>
               {copied ? 'Copied' : 'Copy Address'}
             </Button>
             <SwitchWallet address={address} />
@@ -162,8 +161,7 @@ class Transactions extends React.Component<IAppChainContext & IUniComp, ITransac
                 lineHeight: 1.23,
                 marginBottom: '39px',
                 marginTop: '70px',
-              }}
-            >
+              }}>
               No wallet yet, please import wallet first!
             </h1>
             <SwitchWallet address={address} />
@@ -177,8 +175,7 @@ class Transactions extends React.Component<IAppChainContext & IUniComp, ITransac
               fontWeight: 100,
               padding: '0 17px',
               textAlign: 'left',
-            }}
-          >
+            }}>
             <React.Fragment>
               {transactions.length ? 'History Transactions' : 'No Transactions'}{' '}
               {/*
@@ -204,13 +201,12 @@ class Transactions extends React.Component<IAppChainContext & IUniComp, ITransac
                     <div className="transactions__list--hash" title={tx.hash}>
                       <a
                         href={`${process.env.REACT_APP_MICROSCOPE}${
-                          this.props.appchain.currentProvider
-                            ? '?chain=' + (this.props.appchain.currentProvider as any).host
+                          this.props.cita.currentProvider
+                            ? '?chain=' + (this.props.cita.currentProvider as any).host
                             : ''
                         }#/transaction/${tx.hash}`}
                         target="_blank"
-                        rel="noreferrer noopener"
-                      >
+                        rel="noreferrer noopener">
                         {tx.hash}
                       </a>
                     </div>
@@ -243,4 +239,4 @@ class Transactions extends React.Component<IAppChainContext & IUniComp, ITransac
   }
 }
 
-export default withAppChain(Transactions)
+export default withCITA(Transactions)

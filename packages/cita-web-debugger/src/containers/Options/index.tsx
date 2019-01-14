@@ -3,7 +3,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { chain } from '../../config'
-import { IAppChainContext, withAppChain } from '../../contexts/appchain'
+import { ICITAContext, withCITA } from '../../contexts/cita'
 import { IUniComp } from '../../hoc/UniComp'
 import { handleInputOf } from '../../utils/compActions'
 
@@ -14,7 +14,7 @@ const initState = {
   chainIpError: '',
   saved: false,
 }
-class Options extends React.Component<IUniComp & IAppChainContext, typeof initState> {
+class Options extends React.Component<IUniComp & ICITAContext, typeof initState> {
   public readonly state = initState
   public handleInput = handleInputOf(this)
   public handleClick = (e: any) => {
@@ -29,8 +29,8 @@ class Options extends React.Component<IUniComp & IAppChainContext, typeof initSt
       return
     }
     window.localStorage.setItem('chainIp', chainIp)
-    const provider = new this.props.appchain.providers.HttpProvider(chainIp)
-    this.props.appchain.setProvider(provider)
+    const provider = new this.props.cita.providers.HttpProvider(chainIp)
+    this.props.cita.setProvider(provider)
     this.setState({ saved: true })
     return
   }
@@ -62,4 +62,4 @@ class Options extends React.Component<IUniComp & IAppChainContext, typeof initSt
     )
   }
 }
-export default withAppChain(Options)
+export default withCITA(Options)

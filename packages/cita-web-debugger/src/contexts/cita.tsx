@@ -1,19 +1,19 @@
 import * as React from 'react'
-import appchain from '../appchain'
+import cita from '../cita'
 
-export interface IAppChainContext {
-  appchain: typeof appchain
+export interface ICITAContext {
+  cita: typeof cita
   currentNumber: number
 }
 
-const { Provider, Consumer } = React.createContext<typeof appchain>(appchain)
+const { Provider, Consumer } = React.createContext<typeof cita>(cita)
 
-export const AppChainProvider = (props: React.Props<any>) => <Provider value={appchain}>{props.children}</Provider>
+export const CITAProvider = (props: React.Props<any>) => <Provider value={cita}>{props.children}</Provider>
 
 const initState = {
   currentNumber: 0,
 }
-export const withAppChain = (Comp: typeof React.Component) =>
+export const withCITA = (Comp: typeof React.Component) =>
   class extends React.Component<{}, typeof initState> {
     public readonly state = initState
     private timer: any
@@ -27,7 +27,7 @@ export const withAppChain = (Comp: typeof React.Component) =>
       clearInterval(this.timer)
     }
     public updateHeight = async () => {
-      const current = await appchain.base.getBlockNumber()
+      const current = await cita.base.getBlockNumber()
       this.setState({
         currentNumber: +current,
       })
@@ -35,7 +35,7 @@ export const withAppChain = (Comp: typeof React.Component) =>
     public render() {
       return (
         <Consumer>
-          {appchainCtx => <Comp {...this.props} appchain={appchainCtx} currentNumber={this.state.currentNumber} />}
+          {citaCtx => <Comp {...this.props} cita={citaCtx} currentNumber={this.state.currentNumber} />}
         </Consumer>
       )
     }

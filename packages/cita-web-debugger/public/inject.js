@@ -85,23 +85,17 @@ window.addMessenger = (sdk) => {
       sdk.base.defaultAccount = account
     }
   })
+  window.addEventListener('message', (msg) => {
+    // update default account once it changed
+    if (msg.data && msg.data.action === 'privateKeyChanged') {
+      sdk.base.getDefaultAccount().then(account => {
+        if (account) {
+          sdk.base.defaultAccount = account
+        }
+      })
+    }
+  })
 }
 
 const neuronWebReadyEvent = new Event("neuronWebReady")
 window.dispatchEvent(neuronWebReadyEvent)
-
-// Fuer die schwach app
-// if (window.localStorage.getItem('DISABLE_NEURON_WEB_AUTO_IMPORT')) {
-//   window.dispatchEvent(neuronWebReadyEvent)
-
-// } else {
-//   window.addEventListener("neuronWebReady", () => {
-//     window.console.log("NeuronWebReady")
-//     if (window.nervos || window.appchain) {
-//       window.addMessenger(window.nervos || window.appchain)
-//     }
-//   })
-//   setTimeout(() => {
-//     window.dispatchEvent(neuronWebReadyEvent)
-//   }, 1000)
-// }
