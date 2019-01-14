@@ -1,8 +1,6 @@
-const {
-  appchain
-} = require('./config')
+const { citaSDK } = require('./config')
 
-const standardPrivateKey = appchain.base.accounts.create().privateKey
+const standardPrivateKey = citaSDK.base.accounts.create().privateKey
 const standardPrivateKeyWithout0x = standardPrivateKey.slice(2)
 
 const emptyPrivateKey = ''
@@ -11,28 +9,28 @@ const longPrivateKey = standardPrivateKey + '0'
 const invalidHexPrivateKey = shortPrivateKey + 'g'
 
 test('private key is empty', () => {
-  const valid = appchain.utils.isPrivateKey(emptyPrivateKey)
+  const valid = citaSDK.utils.isPrivateKey(emptyPrivateKey)
   expect(valid).toBe(false)
 })
 test('private key is too short', () => {
-  const valid = appchain.utils.isPrivateKey(shortPrivateKey)
+  const valid = citaSDK.utils.isPrivateKey(shortPrivateKey)
   expect(valid).toBe(false)
 })
 test('private key is too long', () => {
-  const valid = appchain.utils.isPrivateKey(longPrivateKey)
+  const valid = citaSDK.utils.isPrivateKey(longPrivateKey)
   expect(valid).toBe(false)
 })
 test('standard private key is right', () => {
-  const valid = appchain.utils.isPrivateKey(standardPrivateKey)
+  const valid = citaSDK.utils.isPrivateKey(standardPrivateKey)
   expect(valid).toBe(true)
 })
 
 test('standard private key without 0x is right', () => {
-  const valid = appchain.utils.isPrivateKey(standardPrivateKeyWithout0x)
+  const valid = citaSDK.utils.isPrivateKey(standardPrivateKeyWithout0x)
   expect(valid).toBe(true)
 })
 
 test('invalid hex private key', () => {
-  const valid = appchain.utils.isPrivateKey(invalidHexPrivateKey)
+  const valid = citaSDK.utils.isPrivateKey(invalidHexPrivateKey)
   expect(valid).toBe(false)
 })

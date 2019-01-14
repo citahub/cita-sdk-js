@@ -32,7 +32,7 @@ const deploy = async () => {
   // create contract ins
   const myContract = new web3.base.Contract(abi)
 
-  // deploy myContract to AppChain and get transaction result
+  // deploy myContract to CITA and get transaction result
   const txRes = await myContract
     .deploy({
       data: bytecode,

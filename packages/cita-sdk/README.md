@@ -2,8 +2,6 @@
 ![npm](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
 
-<!-- [![CITA](https://img.shields.io/badge/made%20for-Nervos%20AppChain-blue.svg)](https://appchain.nervos.org) -->
-
 # About
 
 `@cryptape/cita-sdk` is a function takes `provider` and `Web3 Class`(optional) as inputs, returns nervos-supported web3 instance, methods of `citaSDK.utils`, `citaSDK.eth`, `citaSDK.shh`, `citaSDK.bzz` are same as [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html)

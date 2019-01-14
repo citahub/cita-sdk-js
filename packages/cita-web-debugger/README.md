@@ -20,18 +20,18 @@ window.addEventListener('neuronWebReady', () => {
 ## Get Default Account
 
 ```javascript
-appchain.base.getDefaultAccount().then(defaultAccount => console.log(defaultAccount))
+citaSDK.base.getDefaultAccount().then(defaultAccount => console.log(defaultAccount))
 ```
 
 ## Get Accounts
 
 ```javascript
-appchain.base.getAccounts().then(accounts => console.log(accounts))
+citaSDK.base.getAccounts().then(accounts => console.log(accounts))
 ```
 
 # Demos
 
-Demos could be found at [Dapp Demos on Neuron-Web Branch](https://github.com/cryptape/dapp-demos/tree/neuron-web).
+Demos could be found at [DApp Demos on Neuron-Web Branch](https://github.com/cryptape/dapp-demos/tree/neuron-web).
 
 # Developer Mode
 

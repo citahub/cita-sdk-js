@@ -1,7 +1,6 @@
 [![Travis](https://travis-ci.org/cryptape/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/cryptape/cita-sdk-js)
 ![npm (scoped)](https://img.shields.io/npm/v/@cryptape/cita-signer.svg)
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@cryptape/cita-signer.svg)
-[![AppChain](https://img.shields.io/badge/made%20for-Nervos%20AppChain-blue.svg)](https://appchain.nervos.org)
 
 # nervos-signer
 

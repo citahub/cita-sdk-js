@@ -1,10 +1,4 @@
-const {
-  appchain,
-  bytecode,
-  privateKey,
-  abi,
-  tx
-} = require('./config')
+const { citaSDK, bytecode, privateKey, abi, tx } = require('./config')
 
 const inquireTx = (action = 'getTransactionReceipt') => txHash =>
   new Promise((resolve, reject) => {
@@ -15,7 +9,7 @@ const inquireTx = (action = 'getTransactionReceipt') => txHash =>
         reject(new Error('No Result Received'))
       }
       remains--
-      appchain.base[action](txHash).then(res => {
+      citaSDK.base[action](txHash).then(res => {
         if (res) {
           clearInterval(interval)
           resolve(res)
@@ -31,8 +25,8 @@ test.skip('sendSignedTransaction', () => {})
 test('sendTransaction, getTransactionReceipt, getTransactionProof, and getTransaction', async () => {
   expect.assertions(7)
   jest.setTimeout(30000)
-  const currentHeight = await appchain.base.getBlockNumber()
-  const result = await appchain.base.sendTransaction({
+  const currentHeight = await citaSDK.base.getBlockNumber()
+  const result = await citaSDK.base.sendTransaction({
     ...tx,
     validUntilBlock: +currentHeight + 88
   })
@@ -51,11 +45,13 @@ test('sendTransaction, getTransactionReceipt, getTransactionProof, and getTransa
   const proof = await inquireTx('getTransactionProof')(result.hash)
   expect(proof).not.toBeNull()
 
-  const transactionResult = await appchain.base.getTransaction(result.hash)
+  const transactionResult = await citaSDK.base.getTransaction(result.hash)
   expect(transactionResult.hash).toBe(result.hash)
   expect(
     transactionResult.unsignedTransaction.sender.address.replace(/^0x/, '')
-  ).toBe(appchain.base.accounts.wallet[0].address.toLowerCase().replace(/^0x/, ''))
+  ).toBe(
+    citaSDK.base.accounts.wallet[0].address.toLowerCase().replace(/^0x/, '')
+  )
   return
 })
 
@@ -64,10 +60,10 @@ test('transfer', async () => {
   jest.setTimeout(30000)
 
   const to = '0xb4061fa8e18eeeeeeeeeeeeeeeeeeeeeeeeeeeee'
-  const prevBalance = await appchain.base.getBalance(to, 'pending')
+  const prevBalance = await citaSDK.base.getBalance(to, 'pending')
 
-  const currentHeight = await appchain.base.getBlockNumber()
-  const result = await appchain.base.sendTransaction({
+  const currentHeight = await citaSDK.base.getBlockNumber()
+  const result = await citaSDK.base.sendTransaction({
     ...tx,
     validUntilBlock: +currentHeight + 88,
     data: '',
@@ -86,9 +82,9 @@ test('transfer', async () => {
   expect(receipt.transactionHash).toBe(result.hash)
   expect(receipt.errorMessages).not.toBeNull()
   //TODO: getTransactionProof
-  const transactionResult = await appchain.base.getTransaction(result.hash)
+  const transactionResult = await citaSDK.base.getTransaction(result.hash)
   expect(transactionResult.hash).toBe(result.hash)
-  const currentBalance = await appchain.base.getBalance(to, 'pending')
+  const currentBalance = await citaSDK.base.getBalance(to, 'pending')
   expect(+currentBalance).toBeGreaterThan(+prevBalance)
 })
 
@@ -97,18 +93,20 @@ test.skip('sign', () => {})
 test.skip('call', async () => {})
 
 test('listen to transaction receipt', async () => {
-  const currentHeight = await appchain.base.getBlockNumber()
-  const result = await appchain.base.sendTransaction({
+  const currentHeight = await citaSDK.base.getBlockNumber()
+  const result = await citaSDK.base.sendTransaction({
     ...tx,
     validUntilBlock: +currentHeight + 88
   })
-  const receipt = await appchain.listeners.listenToTransactionReceipt(result.hash)
+  const receipt = await citaSDK.listeners.listenToTransactionReceipt(
+    result.hash
+  )
   expect(receipt.transactionHash).toBe(result.hash)
 })
 
 test('store abi', async () => {
-  const currentHeight = await appchain.base.getBlockNumber()
-  const myContract = new appchain.base.Contract(abi)
+  const currentHeight = await citaSDK.base.getBlockNumber()
+  const myContract = new citaSDK.base.Contract(abi)
   const _tx = Object.assign({}, tx, {
     validUntilBlock: +currentHeight + 88
   })
@@ -118,14 +116,17 @@ test('store abi', async () => {
       arguments: []
     })
     .send(_tx)
-  const receipt = await appchain.listeners.listenToTransactionReceipt(
+  const receipt = await citaSDK.listeners.listenToTransactionReceipt(
     txResult.hash
   )
-  const txReceipt = await appchain.base.storeAbi(
+  const txReceipt = await citaSDK.base.storeAbi(
     receipt.contractAddress,
     abi,
     _tx
   )
-  const returnAbi = await appchain.base.getAbi(receipt.contractAddress, 'pending')
+  const returnAbi = await citaSDK.base.getAbi(
+    receipt.contractAddress,
+    'pending'
+  )
   expect(JSON.stringify(returnAbi)).toBe(JSON.stringify(abi))
 })

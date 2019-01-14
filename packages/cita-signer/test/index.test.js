@@ -1,5 +1,5 @@
 const {
-  appchain,
+  citaSDK,
   tx,
   from,
   privateKey,
@@ -19,7 +19,7 @@ const inquireReceipt = txHash => new Promise((resolve, reject) => {
       reject(new Error('No Receipt Received'))
     }
     remains--
-    appchain.base.getTransactionReceipt(txHash).then(receipt => {
+    citaSDK.base.getTransactionReceipt(txHash).then(receipt => {
       if (receipt && receipt.transactionHash) {
         clearInterval(interval)
         resolve(receipt)
@@ -31,12 +31,12 @@ const inquireReceipt = txHash => new Promise((resolve, reject) => {
 test('sendTransaction with internal key, getTransactionReceipt, and getTransaction', async () => {
   expect.assertions(5)
   jest.setTimeout(30000)
-  const currentHeight = await appchain.base.getBlockNumber()
+  const currentHeight = await citaSDK.base.getBlockNumber()
   const signedMsg = sign({ ...tx,
     validUntilBlock: +currentHeight + 88,
     privateKey
   })
-  const result = await appchain.base.sendSignedTransaction(signedMsg)
+  const result = await citaSDK.base.sendSignedTransaction(signedMsg)
   expect(result.status).toBe('OK')
   expect(result.hash.startsWith('0x')).toBe(true)
   if (!result.hash) {
@@ -46,7 +46,7 @@ test('sendTransaction with internal key, getTransactionReceipt, and getTransacti
   expect(receipt.transactionHash).toBe(result.hash)
   expect(receipt.errorMessages).not.toBeNull()
   //TODO: getTransactionProof
-  const transactionResult = await appchain.base.getTransaction(result.hash)
+  const transactionResult = await citaSDK.base.getTransaction(result.hash)
   expect(transactionResult.hash).toBe(result.hash)
   return
 })
@@ -54,11 +54,11 @@ test('sendTransaction with internal key, getTransactionReceipt, and getTransacti
 test('sendTransaction with external key, getTransactionReceipt, and getTransaction', async () => {
   expect.assertions(5)
   jest.setTimeout(30000)
-  const currentHeight = await appchain.base.getBlockNumber()
+  const currentHeight = await citaSDK.base.getBlockNumber()
   const signedMsg = sign({ ...tx,
     validUntilBlock: +currentHeight + 88
   }, privateKey)
-  const result = await appchain.base.sendSignedTransaction(signedMsg)
+  const result = await citaSDK.base.sendSignedTransaction(signedMsg)
   expect(result.status).toBe('OK')
   expect(result.hash.startsWith('0x')).toBe(true)
 
@@ -71,7 +71,7 @@ test('sendTransaction with external key, getTransactionReceipt, and getTransacti
   expect(receipt.transactionHash).toBe(result.hash)
   expect(receipt.errorMessages).not.toBeNull()
   //TODO: getTransactionProof
-  const transactionResult = await appchain.base.getTransaction(result.hash)
+  const transactionResult = await citaSDK.base.getTransaction(result.hash)
   expect(transactionResult.hash).toBe(result.hash)
   return
 })
