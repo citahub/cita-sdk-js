@@ -1,4 +1,4 @@
-const AppChain = require('../lib');
-const SERVER = 'https://node.cryptape.com';
-const appchain = AppChain.default(SERVER);
-module.exports = appchain;
+const CITASDK = require('../lib')
+const SERVER = 'https://node.cryptape.com'
+const citaSDK = CITASDK.default(SERVER)
+module.exports = citaSDK

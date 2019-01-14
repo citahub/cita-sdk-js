@@ -1,9 +1,6 @@
 const chalk = require('chalk')
 const web3 = require('./web3')
-const {
-  privateKey
-} = require('./config')
-
+const { privateKey } = require('./config')
 
 const divider = () => console.log(chalk.green('-'.repeat(10)))
 
@@ -42,7 +39,7 @@ const transfer = async (to, value) => {
 }
 
 const checkBalance = async to => {
-  const balance = await web3.base.getBalance(to)
+  const balance = await web3.base.getBalance(to, 'pending')
   console.log(chalk.green.bold(`Now ${to} has balance of ${balance}`))
 }
 

@@ -1,10 +1,6 @@
 const chalk = require('chalk')
 const web3 = require('./web3')
-const {
-  privateKey,
-  bytecode,
-  abi
-} = require('./config')
+const { privateKey, bytecode, abi } = require('./config')
 
 const divider = () => console.log(chalk.green('-'.repeat(10)))
 
@@ -37,10 +33,12 @@ const deploy = async () => {
   const myContract = new web3.base.Contract(abi)
 
   // deploy myContract to AppChain and get transaction result
-  const txRes = await myContract.deploy({
-    data: bytecode,
-    arguments: [10]
-  }).send(tx)
+  const txRes = await myContract
+    .deploy({
+      data: bytecode,
+      arguments: [10]
+    })
+    .send(tx)
   console.log(chalk.blue.bold('Received Transaction Result'))
   divider()
   console.log(chalk.blue(JSON.stringify(txRes, null, 2)))
