@@ -1,25 +1,26 @@
 [![Travis](https://travis-ci.org/cryptape/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/cryptape/cita-sdk-js)
-![npm](https://img.shields.io/npm/v/@appchain/base.svg)
-[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@appchain/base.svg)
-[![AppChain](https://img.shields.io/badge/made%20for-Nervos%20AppChain-blue.svg)](https://appchain.nervos.org)
+![npm](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
+[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
+
+<!-- [![CITA](https://img.shields.io/badge/made%20for-Nervos%20AppChain-blue.svg)](https://appchain.nervos.org) -->
 
 # About
 
-`@appchain/base` is a function takes `provider` and `Web3 Class`(optional) as inputs, returns nervos-supported web3 instance, methods of `appchain.utils`, `appchain.eth`, `appchain.shh`, `appchain.bzz` are same as [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html)
+`@cryptape/cita-sdk` is a function takes `provider` and `Web3 Class`(optional) as inputs, returns nervos-supported web3 instance, methods of `citaSDK.utils`, `citaSDK.eth`, `citaSDK.shh`, `citaSDK.bzz` are same as [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html)
 
 # Version
 
-`@appchain/base` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@appchain/base@0.17.x` will work perfectly with `CITA@0.17`
+`@cryptape/cita-sdk` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@cryptape/cita-sdk@0.17.x` will work perfectly with `CITA@0.17`
 
 # Prerequisites
 
 ## Learn `web3@1.0`
 
-By default, `@appchain/base` acts like [`web3@1.0.0`](https://web3js.readthedocs.io/en/1.0/getting-started.html), and has the same APIs.
+By default, `@cryptape/cita-sdk` acts like [`web3@1.0.0`](https://web3js.readthedocs.io/en/1.0/getting-started.html), and has the same APIs.
 
 ## Learn `CITA`
 
-`@appchain/base` works for Nervos AppChain whose kernel is [CITA](https://docs.nervos.org/cita/#/README).
+`@cryptape/cita-sdk` works for [CITA](https://docs.nervos.org/cita/#/README).
 
 Before using this SDK, following concept should be cast.
 
@@ -68,28 +69,28 @@ Log {
 
 # Getting Started
 
-To use `@appchain/base', you can add it via npm
+To use `@cryptape/cita-sdk', you can add it via npm
 
 ```shell
-yarn add @appchain/base
+yarn add @cryptape/cita-sdk
 ````
 
 or to link it in browser directly with
 
 ```html
-<script src="node_modules/@appchain/base/lib/bundle.js" />
+<script src="node_modules/@cryptape/cita-sdk/lib/bundle.js" />
 ```
 
-# Add `appchain.js`
+# Add `citaSDK.js`
 
 ```javascript
-import AppChain from '@appchain/base'
-const appchain = AppChain('http://localhost:1337')
+import CITASDK from '@cryptape/cita-sdk'
+const citaSDK = CITASDK('http://localhost:1337')
 ```
 
-# AppChain
+# CITA SDK
 
-`appchain.base` allows you to interact with an Nervos AppChain and Nervos Smart Contract.
+`citaSDK.base` allows you to interact with an CITA Blockchain and CITA Smart Contract.
 
 ## RPC API Reference
 
@@ -98,11 +99,11 @@ const appchain = AppChain('http://localhost:1337')
 ```javascript
 /**
  * @method peerCount
- * @desc request peer count of AppChain
+ * @desc request peer count of CITA
  * @param null
  * @return {Promise<string>} Promise returns peer count
  */
-appchain.base.peerCount()
+citaSDK.base.peerCount()
 ```
 
 ### getMetaData
@@ -110,7 +111,7 @@ appchain.base.peerCount()
 ```javascript
 /**
  * @method getMetaData
- * @desc request metadata of AppChain, including `chainId`, `chainName`, `operator`, `website`, `genesisTimestamp`, `validators`, `blockInterval`, `tokenName`, `tokenSymbol`, `tokenAvatar`
+ * @desc request metadata of CITA, including `chainId`, `chainName`, `operator`, `website`, `genesisTimestamp`, `validators`, `blockInterval`, `tokenName`, `tokenSymbol`, `tokenAvatar`
  * @param null
  * @return {Promise<object>} Promise returns metadata
  * {
@@ -134,7 +135,7 @@ appchain.base.peerCount()
  *   }
  * }
  */
-appchain.base.getMetaData()
+citaSDK.base.getMetaData()
 ```
 
 ### getAbi
@@ -142,12 +143,12 @@ appchain.base.getMetaData()
 ```javascript
 /**
  * @method getAbi
- * @desc request abi object from the AppChain
+ * @desc request abi object from the CITA
  * @param {string} - contract address
  * @param {string} - block number
  * @return {Promise<Abi>} Promise returns abi
  */
-appchain.base.getAbi('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
+citaSDK.base.getAbi('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
 ```
 
 ### getCode
@@ -155,12 +156,12 @@ appchain.base.getAbi('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
 ```javascript
 /**
  * @method getCode
- * @desc request contract code from the AppChain
+ * @desc request contract code from the CITA
  * @param {string} - contract address
  * @param {string} - block number
  * @return {Promise<string>} Promise returns code
  */
-appchain.base.getCode('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
+citaSDK.base.getCode('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
 ```
 
 ### getBalance
@@ -172,7 +173,7 @@ appchain.base.getCode('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7', 'latest')
  * @param {string} - account address
  * @return {Promise<BN>} Promise returns balance
  */
-appchain.base.getBalance('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
+citaSDK.base.getBalance('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
 ```
 
 ### getAccounts
@@ -190,7 +191,7 @@ appchain.base.getBalance('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
  * @param {string|number} - block hash or block number
  * @return {Promise<Block>} Promise returns block
  */
-appchain.base.getBlock(0)
+citaSDK.base.getBlock(0)
 ```
 
 ### getBlockByNumber
@@ -202,7 +203,7 @@ appchain.base.getBlock(0)
  * @param {number} - block number
  * @return {Promise<Block>} Promise returns block
  */
-appchain.base.getBlockByNumber(0)
+citaSDK.base.getBlockByNumber(0)
 ```
 
 ### getBlockByHash
@@ -214,7 +215,7 @@ appchain.base.getBlockByNumber(0)
  * @param {string} - block hash
  * @return {Promise<Block>} Promise returns block
  */
-appchain.base.getBlockByHash('0x0c56def738d15d9dfaad64ad246e8b5fe39e175ce3da308ea1018869522a1a4d')
+citaSDK.base.getBlockByHash('0x0c56def738d15d9dfaad64ad246e8b5fe39e175ce3da308ea1018869522a1a4d')
 ```
 
 ### getBlockNumber
@@ -222,11 +223,11 @@ appchain.base.getBlockByHash('0x0c56def738d15d9dfaad64ad246e8b5fe39e175ce3da308e
 ```javascript
 /**
  * @method getBlockNumber
- * @desc request current block number of AppChain
+ * @desc request current block number of CITA
  * @param null
  * @return {Promise<number>} Promise returns current block number
  */
-appchain.base.getBlockNumber()
+citaSDK.base.getBlockNumber()
 ```
 
 ### getBlockTransactionCount
@@ -244,7 +245,7 @@ appchain.base.getBlockNumber()
  * @param {string} - account address
  * @return {Promise<number>} Promise returns transaction count of account address
  */
-appchain.base.getTransactionCount('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
+citaSDK.base.getTransactionCount('0xb3f940e3b5F0AA26dB9f86F0824B3581fE18E9D7')
 ```
 
 ### getLogs
@@ -279,7 +280,7 @@ const filter = {
   address: '0x35bD452c37d28becA42097cFD8ba671C8DD430a1',
   fromBlock: '0x0',
 }
-web3.appchain.getLogs(filter, abi).then(console.log)
+citaSDK.base.getLogs(filter, abi).then(console.log)
 ```
 
 ### newMessageFilter
@@ -295,7 +296,7 @@ web3.appchain.getLogs(filter, abi).then(console.log)
 const topics = {
   topics: ['0x8fb1356be6b2a4e49ee94447eb9dcb8783f51c41dcddfe7919f945017d163bf3'],
 }
-appchain.base.newMessageFilter(topics)
+citaSDK.base.newMessageFilter(topics)
 ```
 
 ### newBlockFilter
@@ -308,7 +309,7 @@ appchain.base.newMessageFilter(topics)
  * @return {Promise<string>} Promise returns filter id
  */
 
-appchain.base.newBlockFilter()
+citaSDK.base.newBlockFilter()
 ```
 
 ### getFilterChanges
@@ -321,7 +322,7 @@ appchain.base.newBlockFilter()
  * @return {Promise<Array<string>} Promise returns filter logs
  */
 
-appchain.base.getFilterChanges('0x1')
+citaSDK.base.getFilterChanges('0x1')
 ```
 
 ### getFitlerLogs
@@ -334,7 +335,7 @@ appchain.base.getFilterChanges('0x1')
  * @return {Promise<Array<string>} Promise returns filter logs
  */
 
-appchain.base.getFitlerLogs('0x1')
+citaSDK.base.getFitlerLogs('0x1')
 ```
 
 ### deleteMessageFilter
@@ -347,7 +348,7 @@ appchain.base.getFitlerLogs('0x1')
  * @return {Promise<boolean>} Promise returns success
  */
 
-appchain.base.deleteMessageFilter('0x1')
+citaSDK.base.deleteMessageFilter('0x1')
 ```
 
 ### sign
@@ -361,7 +362,7 @@ appchain.base.deleteMessageFilter('0x1')
  * @return {Promise<string>} Promise returns signed message
  */
 
-appchain.base.sign('hello', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
+citaSDK.base.sign('hello', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
 ```
 
 ### personal.sign
@@ -376,7 +377,7 @@ appchain.base.sign('hello', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
  * @return {Promise<string>} Promise returns signed message
  */
 
-appchain.base.personal.sign('message', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58', 'password')
+citaSDK.base.personal.sign('message', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58', 'password')
 ```
 
 ### sendTransaction
@@ -384,12 +385,12 @@ appchain.base.personal.sign('message', '0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea
 ```javascript
 /**
  * @method sendTransaction
- * @desc send transaction to AppChain, if transaction including `privateKey`, or wallet has been set, it will sign the transaction locally, otherwise the transaction will be send to node and signed remote.
+ * @desc send transaction to CITA, if transaction including `privateKey`, or wallet has been set, it will sign the transaction locally, otherwise the transaction will be send to node and signed remote.
  * @param {object} - transaction object
  * @return {Promise<object>} Promise returns transaction hash object
  */
 
-appchain.base.sendTransaction(transaction)
+citaSDK.base.sendTransaction(transaction)
 ```
 
 ### sendSignedTransaction
@@ -397,12 +398,12 @@ appchain.base.sendTransaction(transaction)
 ```javascript
 /**
  * @method sendSignedTransaction
- * @desc send signed transaction to AppChain
+ * @desc send signed transaction to CITA
  * @param {string} - signed transaction message
  * @return {Promise<object>} Promise returns transaction hash object
  */
 
-appchain.base.sendSignedTransaction('signedTransaction')
+citaSDK.base.sendSignedTransaction('signedTransaction')
 ```
 
 ### getTransactionReceipt
@@ -415,7 +416,7 @@ appchain.base.sendSignedTransaction('signedTransaction')
  * @return {Promise<object>} Promise returns transaction receipt object
  */
 
-appchain.base.getTransactionReceipt('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
+citaSDK.base.getTransactionReceipt('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
 ```
 
 ```javascript
@@ -426,7 +427,7 @@ appchain.base.getTransactionReceipt('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b
  * @return {Promise<string>} Promise returns transaction proof
  */
 
-appchain.base.getTransactionProof('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
+citaSDK.base.getTransactionProof('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4ef95ebb28cb3b29ccb1d91')
 ```
 
 ### getTransaction
@@ -439,7 +440,7 @@ appchain.base.getTransactionProof('0xe418a9cf4f4257aaed8c4c1259d30fb41ea650f4b4e
  * @return {Promise<object>} Promise returns transaction object
  */
 
-appchain.base.getTransaction('0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
+citaSDK.base.getTransaction('0x6fc32e7bdcb8040c4f587c3e9e6cfcee4025ea58')
 ```
 
 ## Contract Reference
@@ -464,7 +465,7 @@ const transaction = {
   value: '0x0',
 }
 // create contract instance
-const myContract = new web3.appchain.Contract(abi)
+const myContract = new citaSDK.base.Contract(abi)
 
 // deploy contract and get transaction result
 const txRes = await myContract
@@ -486,7 +487,7 @@ myContract.options.address = receipt.contractAddress
 ```javascript
 /**
  * @method storeAbi
- * @desc send contract abi to AppChain
+ * @desc send contract abi to CITA
  * @param {string} - contract hash
  * @param {abi} - abi object
  * @return {Promise<object>} Promise returns transaction receipt object
@@ -496,7 +497,7 @@ const abi = JSON.parse(
   '[{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]',
 )
 
-const receipt = appchain.base.storeAbi(contractAddress, abi, transaction)
+const receipt = citaSDK.base.storeAbi(contractAddress, abi, transaction)
 ```
 
 ### Use Contract
@@ -505,7 +506,7 @@ const receipt = appchain.base.storeAbi(contractAddress, abi, transaction)
 const abi = JSON.parse(
   '[{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]',
 )
-const contract = new appchain.base.Contract(abi, contractAddress)
+const contract = new citaSDK.base.Contract(abi, contractAddress)
 
 // call method
 // get method is specified by contract through abi
@@ -530,7 +531,7 @@ contract.methods.set(5).send(transaction)
  * @param {string} [externalPrivateKey] - if external private key exsits, the one in transaction object will be overriden
  * @return {string} signedTransaction
  */
-appchain.base.signer({
+citaSDK.base.signer({
   privateKey: '0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d9',
   data:
     '6060604052341561000f57600080fd5b60d38061001d6000396000f3006060604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806360fe47b114604e5780636d4ce63c14606e575b600080fd5b3415605857600080fd5b606c60048080359060200190919050506094565b005b3415607857600080fd5b607e609e565b6040518082815260200191505060405180910390f35b8060008190555050565b600080549050905600a165627a7a723058202d9a0979adf6bf48461f24200e635bc19cd1786efbcfc0608eb1d76114d405860029',
@@ -570,7 +571,7 @@ appchain.base.signer({
  *    }
  * }
  */
-appchain.base.unsigner(transactionContent)
+citaSDK.base.unsigner(transactionContent)
 ```
 
 ### transactionReceiptListener
@@ -582,27 +583,27 @@ appchain.base.unsigner(transactionContent)
  * @param {string} transaction hash
  * @return {Promise<object>} transaction receipt object
  */
-appchain.listeners.listenToTransactionReceipt(result.hash).then(console.log)
+citaSDK.listeners.listenToTransactionReceipt(result.hash).then(console.log)
 ```
 
 ## System Contracts API
 
-System contracts locating in `appchain.system` can be used as normal contracts.
+System contracts locating in `citaSDK.system` can be used as normal contracts.
 
 ```javascript
-appchain.system.admin
-appchain.system.authorization
-appchain.system.batchTx
-appchain.system.chainManager
-appchain.system.emergencyBrake
-appchain.system.groupManagement
-appchain.system.nodeManager
-appchain.system.permissionManagement
-appchain.system.priceManager
-appchain.system.quotaManager
-appchain.system.roleManagement
-appchain.system.sysConfig
-appchain.system.versionManage
+citaSDK.system.admin
+citaSDK.system.authorization
+citaSDK.system.batchTx
+citaSDK.system.chainManager
+citaSDK.system.emergencyBrake
+citaSDK.system.groupManagement
+citaSDK.system.nodeManager
+citaSDK.system.permissionManagement
+citaSDK.system.priceManager
+citaSDK.system.quotaManager
+citaSDK.system.roleManagement
+citaSDK.system.sysConfig
+citaSDK.system.versionManage
 ```
 
 Corresponding methods can be found [here](https://docs.nervos.org/cita/#/contracts_guide/sys)
@@ -616,5 +617,5 @@ Corresponding methods can be found [here](https://docs.nervos.org/cita/#/contrac
  * @param {string} - privateKey
  * @return {boolean} - valid
  */
-const valid = appchain.utils.isPrivateKey('0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d')
+const valid = citaSDK.utils.isPrivateKey('0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d')
 ```
