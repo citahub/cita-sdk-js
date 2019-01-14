@@ -3,7 +3,7 @@
   "version": "2.0.3",
   "main": "lib/index.js",
   "private": false,
-  "repository": "https://github.com/cryptape/appchain.js/tree/master/packages/appchain-signer",
+  "repository": "https://github.com/cryptape/cita-sdk-js/tree/master/packages/appchain-signer",
   "author": "Keith <keithwhisper@gmail.com>",
   "license": "MIT",
   "scripts": {

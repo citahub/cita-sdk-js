@@ -2,7 +2,7 @@
   "name": "@appchain/base",
   "version": "0.20.2",
   "main": "lib/index.js",
-  "repository": "https://github.com/cryptape/appchain.js/tree/master/packages/appchain-base",
+  "repository": "https://github.com/cryptape/cita-sdk-js/tree/master/packages/appchain-base",
   "author": "Keith <keithwhisper@gmail.com>",
   "license": "MIT",
   "scripts": {
