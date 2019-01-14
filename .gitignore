@@ -6,6 +6,7 @@ node_modules
 *.secret.*
 debug.*
 sign.*
+.env
 
 
 packages/cita-sdk/*.html

@@ -5,6 +5,8 @@ node_js:
 cache:
   directories:
     - /*/**/node_modules
+before_install:
+  - git submodule update --init --remote --recursive
 install:
   # - yarn bootstrap
   - travis_retry make ci-install
