@@ -8,8 +8,8 @@ debug.*
 sign.*
 
 
-packages/appchain-base/*.html
-packages/appchain-base/examples/config.js
+packages/cita-sdk/*.html
+packages/cita-sdk/examples/config.js
 debug
 citaSignTransaction.ts
 *.brk
