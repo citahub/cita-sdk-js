@@ -97,5 +97,5 @@ window.addMessenger = (sdk) => {
   })
 }
 
-const neuronWebReadyEvent = new Event("neuronWebReady")
-window.dispatchEvent(neuronWebReadyEvent)
+const citaWebDebuggerReadyEvent = new Event("citaWebDebuggerReady")
+window.dispatchEvent(citaWebDebuggerReadyEvent)
