@@ -1,5 +1,7 @@
 // 向页面注入JS
-const files = ['bundle.js', 'inject.js']
+const files = [
+  'inject.js'
+]
 let fIdx = 0
 let panelId = null
 
@@ -17,11 +19,7 @@ function injectCustomJs() {
   document.body.appendChild(temp);
 }
 
-injectCustomJs()
-
-const _appchain = AppChain()
-_appchain.base.accounts.wallet.load('')
-const _accounts = Array.from(_appchain.base.accounts.wallet).map(w => w.address)
+window.onload = injectCustomJs
 
 window.addEventListener('message', (e) => {
   const {

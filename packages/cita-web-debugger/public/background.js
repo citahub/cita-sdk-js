@@ -3,15 +3,15 @@ let appId = null
 // dapp
 let dappId = null
 
-_appchain = AppChain()
+_citaSDK = CITASDK()
 
 // init _accounts
 let _accounts = []
 
 const loadAccounts = () => {
-  _appchain.base.accounts.wallet.load('')
-  _accounts = Array.from(_appchain.base.accounts.wallet).map(w => w.address)
-  _appchain.base.accounts.wallet.clear()
+  _citaSDK.base.accounts.wallet.load('')
+  _accounts = Array.from(_citaSDK.base.accounts.wallet).map(w => w.address)
+  _citaSDK.base.accounts.wallet.clear()
   return _accounts
 }
 // load accounts

@@ -7,7 +7,7 @@ import * as React from 'react'
 import CusTextField from '../../components/CusTextField'
 
 import { pwd } from '../../config'
-import { IAppChainContext, withAppChain } from '../../contexts/appchain'
+import { ICITAContext, withCITA } from '../../contexts/cita'
 import { handleInputOf } from '../../utils/compActions'
 import './accounts.css'
 
@@ -25,7 +25,7 @@ const initState = {
 }
 
 type IAccounts = typeof initState
-class Accounts extends React.Component<IAppChainContext & any, IAccounts> {
+class Accounts extends React.Component<ICITAContext & any, IAccounts> {
   public readonly state = initState
 
   public handleInput = handleInputOf(this)
@@ -33,8 +33,8 @@ class Accounts extends React.Component<IAppChainContext & any, IAccounts> {
     this.loadWallet()
   }
   public loadWallet = () => {
-    // const wallet = this.props.appchain.base.accounts.wallet.load(pwd)
-    const { wallet } = this.props.appchain.base.accounts
+    // const wallet = this.props.cita.base.accounts.wallet.load(pwd)
+    const { wallet } = this.props.cita.base.accounts
     if (wallet.length) {
       this.setState({
         loaded: true,
@@ -55,7 +55,7 @@ class Accounts extends React.Component<IAppChainContext & any, IAccounts> {
     if (!privateKey) {
       return this.clearAccount()
     }
-    const { accounts } = this.props.appchain.base
+    const { accounts } = this.props.cita.base
     if (privateKey.replace(/^0x/, '').length !== 64) {
       this.setState({
         privateKeyError: 'Please enter private key in valid format',
@@ -89,8 +89,8 @@ class Accounts extends React.Component<IAppChainContext & any, IAccounts> {
     })
   }
   public clearAccount = (e?: any) => {
-    this.props.appchain.base.accounts.wallet.clear()
-    this.props.appchain.base.accounts.wallet.save(pwd)
+    this.props.cita.base.accounts.wallet.clear()
+    this.props.cita.base.accounts.wallet.save(pwd)
     this.setState({
       cleared: true,
       privateKey: '',
@@ -143,8 +143,7 @@ class Accounts extends React.Component<IAppChainContext & any, IAccounts> {
           classes={{
             root: 'button-1 primary accounts__container--button',
           }}
-          onClick={this.addAccount}
-        >
+          onClick={this.addAccount}>
           Enter
         </Button>
         {/*
@@ -162,4 +161,4 @@ class Accounts extends React.Component<IAppChainContext & any, IAccounts> {
     )
   }
 }
-export default withAppChain(Accounts)
+export default withCITA(Accounts)

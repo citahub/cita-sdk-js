@@ -11,7 +11,7 @@ Neuron Web is just a debugger tool now, do not take it as an official wallet.
 ## Enable nervos in dapp to interact with NeuronWeb
 
 ```javascript
-window.addEventListener('neuronWebReady', () => {
+window.addEventListener('citaWebDebuggerReady', () => {
   window.console.log('neuron web ready')
   window.addMessenger(nervos)
 })
