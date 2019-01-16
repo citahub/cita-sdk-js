@@ -5,7 +5,8 @@
     "bootstrap": "lerna bootstrap --hoist",
     "test": "lerna run test",
     "cm": "git-cz",
-    "precommit": "yarn run test"
+    "precommit": "yarn run test",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "jest": {
     "verbose": true,
