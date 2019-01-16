@@ -99,3 +99,4 @@ window.addMessenger = (sdk) => {
 
 const citaWebDebuggerReadyEvent = new Event("citaWebDebuggerReady")
 window.dispatchEvent(citaWebDebuggerReadyEvent)
+console.log('CITA Web Debugger Ready')
