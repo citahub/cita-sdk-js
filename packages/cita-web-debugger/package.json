@@ -1,6 +1,6 @@
 {
   "name": "cita-web-debugger",
-  "version": "0.2.0-alpha.0",
+  "version": "0.2.0-alpha.1",
   "private": true,
   "dependencies": {
     "@cryptape/cita-sdk": "^0.22.0-alpha.0",
