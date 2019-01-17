@@ -3,6 +3,7 @@
   "private": false,
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
+    "build": "lerna run build",
     "test": "lerna run test",
     "cm": "git-cz",
     "precommit": "yarn run test",
@@ -27,6 +28,7 @@
     "browserify": "^16.2.2",
     "chalk": "^2.4.1",
     "commitizen": "^3.0.5",
+    "cross-env": "^5.2.0",
     "cz-conventional-changelog": "2.1.0",
     "dotenv": "^6.2.0",
     "eslint": "^4.19.1",

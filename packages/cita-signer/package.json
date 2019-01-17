@@ -9,10 +9,10 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "protoc": "protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --ts_out=./proto-js --proto_path=cita-proto --js_out=import_style=commonjs,binary:./proto-js cita-proto/blockchain.proto",
-    "build": "../../node_modules/.bin/tsc",
+    "build": "cross-env ../../node_modules/.bin/tsc",
     "test": "npm run test:v1",
-    "test:v0": "VERSION=0 ../../node_modules/.bin/jest",
-    "test:v1": "VERSION=1 ../../node_modules/.bin/jest"
+    "test:v0": "cross-env VERSION=0 ../../node_modules/.bin/jest",
+    "test:v1": "cross-env VERSION=1 ../../node_modules/.bin/jest"
   },
   "dependencies": {
     "ec": "^0.0.1",

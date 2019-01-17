@@ -14,7 +14,7 @@ const transaction = {
   quota: 1e8,
   data: bytecode,
   chainId: 1,
-  version: 0,
+  version: 1,
   validUntilBlock: 999999,
   value: '0x0'
 }
