@@ -87,6 +87,7 @@ test('getFilterLogs', async () => {
 
 test('deleteMessageFilter', async () => {
   const filterId = await citaSDK.base.newBlockFilter()
+  const changes = await citaSDK.base.getFilterLogs(filterId)
   const success = await citaSDK.base.deleteMessageFilter(filterId)
   expect(success).toBe(true)
 })
