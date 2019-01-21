@@ -1,0 +1,46 @@
+{
+  "name": "@cryptape/cita-sdk",
+  "version": "0.20.1",
+  "main": "lib/index.js",
+  "repository": "https://github.com/cryptape/cita-sdk-js/tree/master/packages/cita-sdk",
+  "author": "Keith <keithwhisper@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --config nodemon.json",
+    "debug": "node debug/index.js",
+    "build": "cross-env ../../node_modules/.bin/tsc && npm run browserify",
+    "docs": "typedoc --out ./documents/ ./src/",
+    "test": "cross-env ../../node_modules/.bin/jest",
+    "parse-abi": "node ./scripts/parse_abi.js",
+    "example": "node examples/deploy.js",
+    "browserify": "browserify ./lib/browser.js -o ./lib/bundle.js && minify ./lib/bundle.js -d ./lib/",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "cross-env ../../node_modules/.bin/eslint --fix",
+      "git add"
+    ]
+  },
+  "docs": "typedoc --theme markdown",
+  "publishConfig": {
+    "access": "public"
+  },
+  "postinstall": "rm -f node_modules/web3/index.d.ts",
+  "devDependencies": {
+    "@types/web3": "^1.0.12",
+    "babel-minify": "^0.4.3",
+    "browserify": "^16.2.2",
+    "cross-env": "^5.2.0",
+    "typedoc": "^0.11.1"
+  },
+  "dependencies": {
+    "@cryptape/cita-signer": "^2.2.0-alpha.0",
+    "web3": "^1.0.0-beta.37"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  },
+  "gitHead": "d023071be0cd9d70cf604c68e341aef7ccad5ea5"
+}

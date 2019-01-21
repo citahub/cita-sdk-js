@@ -1,0 +1,35 @@
+{
+  "name": "@cryptape/cita-signer",
+  "version": "2.2.0-alpha.0",
+  "main": "lib/index.js",
+  "private": false,
+  "repository": "https://github.com/cryptape/cita-sdk-js/tree/master/packages/cita-signer",
+  "author": "Keith <keithwhisper@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "protoc": "protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --ts_out=./proto-js --proto_path=cita-proto --js_out=import_style=commonjs,binary:./proto-js cita-proto/blockchain.proto",
+    "build": "cross-env ../../node_modules/.bin/tsc",
+    "test": "npm run test:v1",
+    "test:v0": "cross-env VERSION=0 ../../node_modules/.bin/jest",
+    "test:v1": "cross-env VERSION=1 ../../node_modules/.bin/jest"
+  },
+  "dependencies": {
+    "ec": "^0.0.1",
+    "elliptic": "^6.4.0",
+    "google-protobuf": "^3.5.0",
+    "web3": "^1.0.0-beta.34"
+  },
+  "devDependencies": {
+    "protoc": "^1.0.3",
+    "ts-protoc-gen": "^0.7.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  },
+  "gitHead": "d023071be0cd9d70cf604c68e341aef7ccad5ea5"
+}
