@@ -4,20 +4,11 @@
 
 # Overview
 
-The `appchain.js` library is a collection of packages which contains specific functionality for the [Nervos AppChain](http://appchain.nervos.org/) ecosystem.
+The `cita-sdk-js` library is a collection of packages which contains specific functionality for the [Nervos AppChain](http://appchain.nervos.org/) ecosystem.
 
-- The `appchain-base` is for interacting with `AppChain` and has been published at [@appchain/base](https://www.npmjs.com/package/@appchain/base)
-- The `appchain-signer` is for signing transaction for `AppChain` and has been published at [@cryptape/cita-signer](https://www.npmjs.com/package/@cryptape/cita-signer)
+- The `@cryptape/cita-sdk` is for interacting with `CITA` and has been published at [@cryptape/cita-sdk](https://www.npmjs.com/package/@cryptape/cita-sdk)
+- The `@cryptape/cita-signer` is for signing transaction for `CITA` and has been published at [@cryptape/cita-signer](https://www.npmjs.com/package/@cryptape/cita-signer)
 
 # Version
 
-`@appchain/base` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@appchain/base@0.17.x` will work perfectly with `CITA@0.17`
-
-# Changlog since @appchain/base@0.19.0
-  - [Chore]: *test*, add appchain-tests module;
-  - [Fix]: *signature*, fix signature offset;
-  - [Update]: *type-def*, update web3 type definition;
-  - [Feature]: *protocol version*, support CITA version 1;
-  - [Refactor]: *store-abi*, refactor storeAbi method;
-  - [Feature]: *getTransaction*, add more detail in result of getTransaction;
-  - [Update]: *Rename*, rename @nervos/chain to @appchain/base
+`@cryptape/cita-sdk` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@cryptape/cita-sdk@0.20.x` will work perfectly with `CITA@0.20`
