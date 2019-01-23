@@ -187,7 +187,7 @@ const signer = (
 
   const unverifiedTx = new blockchainPb.UnverifiedTransaction()
   unverifiedTx.setTransaction(tx)
-  unverifiedTx.setCrypto(blockchainPb.Crypto.SECP)
+  unverifiedTx.setCrypto(blockchainPb.Crypto.DEFAULT)
   unverifiedTx.setSignature(sigBytes)
 
   const serializedUnverifiedTx = unverifiedTx.serializeBinary()

@@ -137,7 +137,7 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     sigBytes[64] = sign.recoveryParam;
     const unverifiedTx = new blockchainPb.UnverifiedTransaction();
     unverifiedTx.setTransaction(tx);
-    unverifiedTx.setCrypto(blockchainPb.Crypto.SECP);
+    unverifiedTx.setCrypto(blockchainPb.Crypto.DEFAULT);
     unverifiedTx.setSignature(sigBytes);
     const serializedUnverifiedTx = unverifiedTx.serializeBinary();
     const hexUnverifiedTx = utils.bytesToHex(serializedUnverifiedTx);
