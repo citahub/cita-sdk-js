@@ -348,6 +348,30 @@ export namespace BlockBody {
   }
 }
 
+export class CompactBlockBody extends jspb.Message {
+  clearTxHashesList(): void;
+  getTxHashesList(): Array<Uint8Array | string>;
+  getTxHashesList_asU8(): Array<Uint8Array>;
+  getTxHashesList_asB64(): Array<string>;
+  setTxHashesList(value: Array<Uint8Array | string>): void;
+  addTxHashes(value: Uint8Array | string, index?: number): Uint8Array | string;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CompactBlockBody.AsObject;
+  static toObject(includeInstance: boolean, msg: CompactBlockBody): CompactBlockBody.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: CompactBlockBody, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CompactBlockBody;
+  static deserializeBinaryFromReader(message: CompactBlockBody, reader: jspb.BinaryReader): CompactBlockBody;
+}
+
+export namespace CompactBlockBody {
+  export type AsObject = {
+    txHashesList: Array<Uint8Array | string>,
+  }
+}
+
 export class Block extends jspb.Message {
   getVersion(): number;
   setVersion(value: number): void;
@@ -377,6 +401,38 @@ export namespace Block {
     version: number,
     header?: BlockHeader.AsObject,
     body?: BlockBody.AsObject,
+  }
+}
+
+export class CompactBlock extends jspb.Message {
+  getVersion(): number;
+  setVersion(value: number): void;
+
+  hasHeader(): boolean;
+  clearHeader(): void;
+  getHeader(): BlockHeader | undefined;
+  setHeader(value?: BlockHeader): void;
+
+  hasBody(): boolean;
+  clearBody(): void;
+  getBody(): CompactBlockBody | undefined;
+  setBody(value?: CompactBlockBody): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CompactBlock.AsObject;
+  static toObject(includeInstance: boolean, msg: CompactBlock): CompactBlock.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: CompactBlock, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CompactBlock;
+  static deserializeBinaryFromReader(message: CompactBlock, reader: jspb.BinaryReader): CompactBlock;
+}
+
+export namespace CompactBlock {
+  export type AsObject = {
+    version: number,
+    header?: BlockHeader.AsObject,
+    body?: CompactBlockBody.AsObject,
   }
 }
 
@@ -493,7 +549,7 @@ export enum ProofType {
 }
 
 export enum Crypto {
-  SECP = 0,
-  SM2 = 1,
+  DEFAULT = 0,
+  RESERVED = 1,
 }
 
