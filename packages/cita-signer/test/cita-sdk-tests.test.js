@@ -25,7 +25,7 @@ txs.forEach(_tx => {
       expect(() => sign(tx, privateKey)).toThrowError(/\w+/)
     } else {
       const factSigned = sign(tx, privateKey)
-      expect(factSigned.replace(/0x0*/, '')).toBe(signed.replace(/0x0*/, ''))
+      expect(factSigned).toBe(signed)
     }
   })
 })

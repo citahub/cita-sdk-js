@@ -16,7 +16,11 @@ exports.hex2bytes = (num) => {
     return utils.hexToBytes(num);
 };
 exports.bytes2hex = (bytes) => {
-    return utils.bytesToHex(bytes);
+    const hex = utils.bytesToHex(bytes).replace(/^0x/, '');
+    if (!hex) {
+        return hex;
+    }
+    return hex.length % 2 ? '0x0' + hex : '0x' + hex;
 };
 const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota, validUntilBlock, value = '', version = '0', chainId = '1', to = '', }, externalKey) => {
     const _privateKey = externalKey || privateKey;
@@ -140,7 +144,7 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     unverifiedTx.setCrypto(blockchainPb.Crypto.DEFAULT);
     unverifiedTx.setSignature(sigBytes);
     const serializedUnverifiedTx = unverifiedTx.serializeBinary();
-    const hexUnverifiedTx = utils.bytesToHex(serializedUnverifiedTx);
+    const hexUnverifiedTx = exports.bytes2hex(serializedUnverifiedTx);
     return hexUnverifiedTx;
 };
 exports.default = signer;

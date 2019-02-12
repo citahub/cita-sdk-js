@@ -19,6 +19,7 @@ const unsigner = (hexUnverifiedTransaction: string) => {
     quota: transactionPb.getQuota(),
     validUntilBlock: +transactionPb.getValidUntilBlock(),
   }
+
   switch (+version) {
     case 1: {
       transaction.chainId = '0x' + (+bytes2hex(transactionPb.getChainIdV1())).toString(16)
