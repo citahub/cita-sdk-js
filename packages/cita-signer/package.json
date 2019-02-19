@@ -1,6 +1,6 @@
 {
   "name": "@cryptape/cita-signer",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "main": "lib/index.js",
   "private": false,
   "repository": "https://github.com/cryptape/cita-sdk-js/tree/master/packages/cita-signer",
