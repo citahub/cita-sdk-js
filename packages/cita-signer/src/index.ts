@@ -15,7 +15,11 @@ export const hex2bytes = (num: string) => {
   return utils.hexToBytes(num)
 }
 export const bytes2hex = (bytes: Uint8Array) => {
-  return utils.bytesToHex(bytes)
+  const hex = utils.bytesToHex(bytes).replace(/^0x/, '')
+  if (!hex) {
+    return hex
+  }
+  return hex.length % 2 ? '0x0' + hex : '0x' + hex
 }
 
 const signer = (
@@ -187,12 +191,12 @@ const signer = (
 
   const unverifiedTx = new blockchainPb.UnverifiedTransaction()
   unverifiedTx.setTransaction(tx)
-  unverifiedTx.setCrypto(blockchainPb.Crypto.SECP)
+  unverifiedTx.setCrypto(blockchainPb.Crypto.DEFAULT)
   unverifiedTx.setSignature(sigBytes)
 
   const serializedUnverifiedTx = unverifiedTx.serializeBinary()
 
-  const hexUnverifiedTx = utils.bytesToHex(serializedUnverifiedTx)
+  const hexUnverifiedTx = bytes2hex(serializedUnverifiedTx)
 
   return hexUnverifiedTx
 }
