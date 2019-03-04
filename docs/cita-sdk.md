@@ -2,55 +2,53 @@
 ![npm](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
 
-[中文文档](https://github.com/cryptape/cita-sdk-js/docs/cita-sdk.md)
+# 概述
 
-# About
+`@cryptape/cita-sdk` 是一个方法, 他接收 `provider` 和 `Web3 Class`(可选) 作为参数, 返回一个支持 CITA 的 sdk 实例. 该实例下多个对象的使用方法, 如 `citaSDK.utils`, `citaSDK.eth`, `citaSDK.shh`, `citaSDK.bzz` 均与 [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html) 相同.
 
-`@cryptape/cita-sdk` is a function takes `provider` and `Web3 Class`(optional) as inputs, returns cita-supported web3 instance, methods of `citaSDK.utils`, `citaSDK.eth`, `citaSDK.shh`, `citaSDK.bzz` are same as [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html)
+# 版本
 
-# Version
+`@cryptape/cita-sdk` 严格遵守 Semver, 并与 CITA 的 MAJOR 和 MINOR 版本号保持一致.
 
-`@cryptape/cita-sdk` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@cryptape/cita-sdk@0.17.x` will work perfectly with `CITA@0.17`
+# 预备知识
 
-# Prerequisites
+## 学习 `web3@1.0`
 
-## Learn `web3@1.0`
+如无特别声明, `@cryptape/cita-sdk` 的使用与 [`web3@1.0.0`](https://web3js.readthedocs.io/en/1.0/getting-started.html) 一致.
 
-By default, `@cryptape/cita-sdk` acts like [`web3@1.0.0`](https://web3js.readthedocs.io/en/1.0/getting-started.html), and has the same APIs.
+## 学习 `CITA`
 
-## Learn `CITA`
+`@cryptape/cita-sdk` 用于 [CITA](https://citahub.com) 相关服务.
 
-`@cryptape/cita-sdk` works for [CITA](https://citahub.com).
+使用 SDK 前请先了解以下概念.
 
-Before using this SDK, following concept should be cast.
+1. 交易对象
 
-1. Transaction Object
+待签名的交易对象的 Proto 描述 [cita-proto](https://github.com/cryptape/cita-proto/blob/master/blockchain.proto#L49)
 
-Transaction Object to be signed has been defined in [cita-proto](https://github.com/cryptape/cita-proto/blob/master/blockchain.proto#L49)
+CITA 返回的交易对象 [here](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransaction)
 
-Transaction Object returned from CITA has been declared [here](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransaction)
+2. 交易回执
 
-2. Transaction Receipt
+[交易回执](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransactionreceipt)
 
-[Transaction Receipt](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransactionreceipt)
+3. 区块对象
 
-3. Block Object
+[区块对象](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getblockbyhash)
 
-[Block Object](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getblockbyhash)
+4. 元数据对象
 
-4. MetaData Object
-
-[MetaData Object](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getmetadata)
+[元数据对象](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getmetadata)
 
 5. ABI
 
 [ABI](https://solidity.readthedocs.io/en/v0.4.25/abi-spec.html)
 
-6. Filter Object
+6. Filter 对象
 
-[Filter Object](https://docs.citahub.com/en-US/cita/rpc-guide/rpc#newfilter)
+[Filter 对象](https://docs.citahub.com/en-US/cita/rpc-guide/rpc#newfilter)
 
-7. Transaction Log
+7. 交易日志
 
 ````javascript
 Log {
@@ -67,21 +65,21 @@ Log {
 }
 ``
 
-# Getting Started
+# 快速开始
 
-To use `@cryptape/cita-sdk`, you can add it via npm
+可以通过 npm 安装 `@cryptape/cita-sdk`
 
 ```shell
 yarn add @cryptape/cita-sdk
 ````
 
-or to link it in browser directly with
+或者直接通过 script 标签引入
 
 ```html
 <script src="node_modules/@cryptape/cita-sdk/lib/bundle.js" />
 ```
 
-# Add `citaSDK.js`
+# 创建 `citaSDK.js`
 
 ```javascript
 import CITASDK from '@cryptape/cita-sdk'
@@ -90,9 +88,9 @@ const citaSDK = CITASDK('http://localhost:1337')
 
 # CITA SDK
 
-`citaSDK.base` allows you to interact with an CITA Blockchain and CITA Smart Contract.
+通过 `citaSDK.base` 与 CITA 链和 CITA 智能合约交互.
 
-## RPC API Reference
+## RPC API 参考
 
 ### peerCount
 
@@ -588,7 +586,7 @@ citaSDK.listeners.listenToTransactionReceipt(result.hash).then(console.log)
 
 ## System Contracts API
 
-System contracts locating in `citaSDK.system` can be used as normal contracts.
+系统合约位于 `citaSDK.system`, 使用方法与一般合约相同.
 
 ```javascript
 citaSDK.system.admin
@@ -606,9 +604,9 @@ citaSDK.system.sysConfig
 citaSDK.system.versionManage
 ```
 
-Corresponding methods can be found [here](https://docs.citahub.com/en-US/cita/system/system-contracts#batch-transaction)
+对应合约方法可以在 [这里](https://docs.citahub.com/en-US/cita/system/system-contracts#batch-transaction) 查看.
 
-## Additional Utils
+## 其他功能
 
 ```javascript
 /**
