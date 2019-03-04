@@ -2,11 +2,9 @@
 ![npm (scoped)](https://img.shields.io/npm/v/@cryptape/cita-signer.svg)
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@cryptape/cita-signer.svg)
 
-[中文文档](https://github.com/cryptape/cita-sdk-js/docs/cita-signer.md)
-
 # cita-signer
 
-This package is the signing module.
+`cita-signer` 为签名模块.
 
 ### API
 
@@ -57,7 +55,7 @@ signer({
 unsigner(transactionContent)
 ```
 
-### Basic Usage
+### 基本使用
 
 ```javascript
 import signer, { unsigner } from '@cryptape/cita-signer'
@@ -77,6 +75,6 @@ const signed = sign(transaction)
 const unsignedTransaction = unsigner(signed)
 ```
 
-### In the case of no private key
+### 如果没有私钥
 
-If the transaction has no private key and `web3.eth.accounts.wallet` is empty, the returned msg will be plain transaction.
+如果交易中不包含私钥, 且 `cita.base.accounts.wallet` 中也不包含账户, 该模块会返回原始交易信息.
