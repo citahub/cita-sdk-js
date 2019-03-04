@@ -1,4 +1,4 @@
-[中文文档](https://github.com/cryptape/docs/cita-web-debugger.md)
+[中文文档](https://github.com/cryptape/cita-sdk-js/blob/develop/docs/cita-web-debugger.md)
 
 # Overview
 
