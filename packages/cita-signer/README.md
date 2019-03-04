@@ -2,7 +2,7 @@
 ![npm (scoped)](https://img.shields.io/npm/v/@cryptape/cita-signer.svg)
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@cryptape/cita-signer.svg)
 
-[中文文档](https://github.com/cryptape/cita-sdk-js/blob/develop/docs/cita-signer.md)
+[中文文档](https://github.com/cryptape/cita-sdk-js/blob/develop/docs/zh-CN/cita-signer.md)
 
 # cita-signer
 
