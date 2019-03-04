@@ -2,7 +2,7 @@
 ![npm](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
 
-[中文文档](https://github.com/cryptape/cita-sdk-js/docs/cita-sdk.md)
+[中文文档](https://github.com/cryptape/cita-sdk-js/blob/develop/docs/cita-sdk.md)
 
 # About
 
