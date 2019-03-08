@@ -168,7 +168,7 @@ const signer = (
     throw err
   }
 
-  tx.setVersion(version)
+  tx.setVersion(+version)
 
   const txMsg = tx.serializeBinary()
 

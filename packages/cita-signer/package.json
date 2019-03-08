@@ -18,7 +18,7 @@
     "ec": "^0.0.1",
     "elliptic": "^6.4.0",
     "google-protobuf": "^3.5.0",
-    "web3": "^1.0.0-beta.34"
+    "web3": "1.0.0-beta.37"
   },
   "devDependencies": {
     "protoc": "^1.0.3",
