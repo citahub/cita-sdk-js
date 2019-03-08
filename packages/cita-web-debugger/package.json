@@ -1,9 +1,9 @@
 {
   "name": "cita-web-debugger",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "dependencies": {
-    "@cryptape/cita-sdk": "^0.21.1",
+    "@cryptape/cita-sdk": "^0.21.2",
     "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^2.0.3",
     "react": "^16.4.2",
