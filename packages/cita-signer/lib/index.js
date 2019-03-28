@@ -124,7 +124,7 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     catch (err) {
         throw err;
     }
-    tx.setVersion(version);
+    tx.setVersion(+version);
     const txMsg = tx.serializeBinary();
     const hashedMsg = exports.sha3(txMsg).slice(2);
     if (_privateKey.replace(/^0x/, '').length !== 64 || !utils.isHex(_privateKey)) {

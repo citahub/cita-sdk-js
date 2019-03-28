@@ -1,10 +1,11 @@
 [![Travis](https://travis-ci.org/cryptape/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/cryptape/cita-sdk-js)
 ![](https://camo.githubusercontent.com/ecafd86d8356a1adc60fb4fd393bcc7584187f99/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6d61696e7461696e6564253230776974682d6c65726e612d6363303066662e737667)
-[![AppChain](https://img.shields.io/badge/made%20for-Nervos%20AppChain-blue.svg)](https://appchain.nervos.org)
+
+[中文文档](https://github.com/cryptape/cita-sdk-js/blob/develop/docs/zh-CN/overview.md)
 
 # Overview
 
-The `cita-sdk-js` library is a collection of packages which contains specific functionality for the [Nervos AppChain](http://appchain.nervos.org/) ecosystem.
+The `cita-sdk-js` library is a collection of packages which contains specific functionality for the [CITA](https://citahub.com/) ecosystem.
 
 - The `@cryptape/cita-sdk` is for interacting with `CITA` and has been published at [@cryptape/cita-sdk](https://www.npmjs.com/package/@cryptape/cita-sdk)
 - The `@cryptape/cita-signer` is for signing transaction for `CITA` and has been published at [@cryptape/cita-signer](https://www.npmjs.com/package/@cryptape/cita-signer)

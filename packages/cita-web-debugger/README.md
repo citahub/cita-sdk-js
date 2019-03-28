@@ -1,19 +1,21 @@
+[中文文档](https://github.com/cryptape/cita-sdk-js/blob/develop/docs/zh-CN/cita-web-debugger.md)
+
 # Overview
 
-Neuron Web is an extension of chrome similar to [MetaMask](https://metamask.io).
+CITA Web Debugger is an extension of chrome similar to [MetaMask](https://metamask.io).
 
 # Disclaimer
 
-Neuron Web is just a debugger tool now, do not take it as an official wallet.
+CITA Web Debugger is just a debugger tool now, do not take it as an official wallet.
 
 # Quick Start
 
-## Enable nervos in dapp to interact with NeuronWeb
+## Enable citaSDK in dapp to interact with CITA Web Debugger
 
 ```javascript
 window.addEventListener('citaWebDebuggerReady', () => {
-  window.console.log('neuron web ready')
-  window.addMessenger(nervos)
+  window.console.log('cita web debugger ready')
+  window.addMessenger(citaSDK)
 })
 ```
 
@@ -31,7 +33,7 @@ citaSDK.base.getAccounts().then(accounts => console.log(accounts))
 
 # Demos
 
-Demos could be found at [DApp Demos on Neuron-Web Branch](https://github.com/cryptape/dapp-demos/tree/neuron-web).
+Demos could be found at [DApp Demos](https://github.com/cryptape/first-forever-demo/tree/neuron-web).
 
 # Developer Mode
 
@@ -45,6 +47,6 @@ yarn install && yarn run build
 
 Go to `about://extension` in chrome and turn on the switch of `Developer Mode`
 
-## Add Develop Package of NeuronWeb
+## Add Develop Package of CITAWebDebugger
 
-Click on <kbd>Load Unpacked Extension</kbd> to select the pre-built package `built` in `neuronWeb` for adding the develop package.
+Click on <kbd>Load Unpacked Extension</kbd> to select the pre-built package `built` in `cita-web-debugger` for adding the develop package.
