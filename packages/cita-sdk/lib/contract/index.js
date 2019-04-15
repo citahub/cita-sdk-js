@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cita_signer_1 = __importDefault(require("@cryptape/cita-signer"));
 const addPrivateKey_1 = __importDefault(require("../utils/addPrivateKey"));
 const _ = __importStar(require("underscore"));
+const subscription_1 = __importDefault(require("../subscriptions/subscription"));
 const Contract = require('web3-eth-contract');
 const Method = require('web3-core-method');
 const utils = require('web3-utils');
@@ -135,6 +136,34 @@ Contract.prototype._executeMethod = function _executeMethod() {
                 return sendTransaction(args.options, args.callback);
         }
     }
+};
+Contract.prototype._on = function () {
+    const ctx = this;
+    var subOptions = this._generateEventOptions.apply(this, arguments);
+    this._checkListener('newListener', subOptions.event.name, subOptions.callback);
+    this._checkListener('removeListener', subOptions.event.name, subOptions.callback);
+    var subscription = new subscription_1.default({
+        subscription: {
+            params: 1,
+            inputFormatter: [formatters.inputLogFormatter],
+            outputFormatter: this._decodeEventABI.bind(subOptions.event),
+            subscriptionHandler: function (output) {
+                if (output.removed) {
+                    ctx.emit('changed', output);
+                }
+                else {
+                    ctx.emit('data', output);
+                }
+                if (_.isFunction(ctx.callback)) {
+                    ctx.callback(null, output, this);
+                }
+            }
+        },
+        type: 'eth',
+        requestManager: this._requestManager
+    });
+    subscription.subscribe('logs', subOptions.params, subOptions.callback || function () { });
+    return subscription;
 };
 Contract.prototype.getPastEvents = function () {
     const subOptions = this._generateEventOptions.apply(this, arguments);
