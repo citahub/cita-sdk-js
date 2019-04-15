@@ -2,6 +2,7 @@
 import signer from '@cryptape/cita-signer'
 import addPrivateKeyFrom from '../utils/addPrivateKey'
 import * as _ from 'underscore'
+import Subscription from '../subscriptions/subscription'
 const Contract = require('web3-eth-contract')
 const Method = require('web3-core-method')
 const utils = require('web3-utils')
@@ -171,6 +172,53 @@ Contract.prototype._executeMethod = function _executeMethod() {
   }
 }
 
+// get past log subscription
+Contract.prototype._on = function() {
+  const ctx = this
+  var subOptions = this._generateEventOptions.apply(this, arguments)
+
+  // prevent the event "newListener" and "removeListener" from being overwritten
+  this._checkListener('newListener', subOptions.event.name, subOptions.callback)
+  this._checkListener(
+    'removeListener',
+    subOptions.event.name,
+    subOptions.callback
+  )
+
+  // TODO check if listener already exists? and reuse subscription if options are the same.
+
+  // create new subscription
+  var subscription = new Subscription({
+    subscription: {
+      params: 1,
+      inputFormatter: [formatters.inputLogFormatter],
+      outputFormatter: this._decodeEventABI.bind(subOptions.event),
+      // DUBLICATE, also in web3-eth
+      subscriptionHandler: function(output: any) {
+        if (output.removed) {
+          ctx.emit('changed', output)
+        } else {
+          ctx.emit('data', output)
+        }
+
+        if (_.isFunction(ctx.callback)) {
+          ctx.callback(null, output, this)
+        }
+      }
+    },
+    type: 'eth',
+    requestManager: this._requestManager
+  })
+  subscription.subscribe(
+    'logs',
+    subOptions.params,
+    subOptions.callback || function() {}
+  )
+
+  return subscription
+}
+
+// getPastLogs RPC
 Contract.prototype.getPastEvents = function() {
   const subOptions = this._generateEventOptions.apply(this, arguments)
 
@@ -188,4 +236,5 @@ Contract.prototype.getPastEvents = function() {
 
   return call(subOptions.params, subOptions.callback)
 }
+
 export default Contract
