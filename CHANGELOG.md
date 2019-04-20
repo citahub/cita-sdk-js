@@ -1,3 +1,18 @@
+#  (2019-04-20)
+
+
+### Bug Fixes
+
+* **contract:** update contract subscription methods ([a9d5939](https://github.com/cryptape/cita-sdk-js/commit/a9d5939))
+* remove package lock in cita-web-debugger ([02cf4db](https://github.com/cryptape/cita-sdk-js/commit/02cf4db))
+
+
+### Features
+
+* **rpc:** add two rpc methods ([0aa093e](https://github.com/cryptape/cita-sdk-js/commit/0aa093e))
+
+
+
 #  (2019-03-28)
 
 
