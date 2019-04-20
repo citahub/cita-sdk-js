@@ -224,3 +224,13 @@ exports.getLogs = {
     call: 'getLogs',
     params: 1
 };
+exports.peersInfo = {
+    name: 'peersInfo',
+    call: 'peersInfo',
+    params: 0
+};
+exports.getVersion = {
+    name: 'getVersion',
+    call: 'getVersion',
+    params: 0
+};
