@@ -12,3 +12,7 @@
 # 版本
 
 `@cryptape/cita-sdk` 严格尊崇 Semver, 并且始终与 [CITA](https://github.com/cryptape/cita) 的 `MAJOR` 和 `MINOR` 版本号保持一致.
+
+# 需注意
+
+Websocket 链接已支持, 但是 pub/sub 模式尚未在 CITA 上实现.
