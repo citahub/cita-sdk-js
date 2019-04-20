@@ -6,6 +6,10 @@
 
 `@cryptape/cita-sdk` 是一个方法, 他接收 `provider` 和 `Web3 Class`(可选) 作为参数, 返回一个支持 CITA 的 sdk 实例. 该实例下多个对象的使用方法, 如 `citaSDK.utils`, `citaSDK.eth`, `citaSDK.shh`, `citaSDK.bzz` 均与 [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html) 相同.
 
+# 需注意
+
+Websocket 链接已支持, 但是 pub/sub 模式尚未在 CITA 上实现.
+
 # 版本
 
 `@cryptape/cita-sdk` 严格遵守 Semver, 并与 CITA 的 MAJOR 和 MINOR 版本号保持一致.
