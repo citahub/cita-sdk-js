@@ -43,7 +43,7 @@ yarn install && yarn run build
 
 ## 开启 Chrome 的开发者模式
 
-在 Chrome 中前往 `about://extension` 并开启 `Developer Mode`
+在 Chrome 中前往 `chrome://extensions` 并开启 `Developer Mode`
 
 ## 添加开发者版本的安装包
 
