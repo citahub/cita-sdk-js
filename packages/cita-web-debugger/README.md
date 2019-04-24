@@ -45,7 +45,7 @@ yarn install && yarn run build
 
 ## Turn on Chrome Developer Mode
 
-Go to `about://extension` in chrome and turn on the switch of `Developer Mode`
+Go to `chrome://extensions` in chrome and turn on the switch of `Developer Mode`
 
 ## Add Develop Package of CITAWebDebugger
 
