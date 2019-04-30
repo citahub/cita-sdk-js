@@ -1,7 +1,8 @@
 {
   "name": "cita-web-debugger",
-  "version": "0.2.4",
-  "private": true,
+  "version": "0.2.5",
+  "private": false,
+  "license": "MIT",
   "dependencies": {
     "@cryptape/cita-sdk": "^0.21.2",
     "@material-ui/core": "^1.5.1",

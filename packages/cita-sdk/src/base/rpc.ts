@@ -236,3 +236,17 @@ export const getLogs = {
   call: 'getLogs',
   params: 1
 }
+
+// new coming in v0.23.0
+
+export const peersInfo = {
+  name: 'peersInfo',
+  call: 'peersInfo',
+  params: 0
+}
+
+export const getVersion = {
+  name: 'getVersion',
+  call: 'getVersion',
+  params: 0
+}

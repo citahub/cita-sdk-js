@@ -7,7 +7,9 @@
     "test": "lerna run test",
     "cm": "git-cz",
     "precommit": "yarn run test",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "release": "lerna version --conventional-commits",
+    "publish": "lerna publish from-package"
   },
   "jest": {
     "verbose": true,

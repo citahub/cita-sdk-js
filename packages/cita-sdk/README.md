@@ -8,6 +8,10 @@
 
 `@cryptape/cita-sdk` is a function takes `provider` and `Web3 Class`(optional) as inputs, returns cita-supported web3 instance, methods of `citaSDK.utils`, `citaSDK.eth`, `citaSDK.shh`, `citaSDK.bzz` are same as [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html)
 
+# Notice
+
+Websocket is supported, but the pub/sub is not completed in CITA for now.
+
 # Version
 
 `@cryptape/cita-sdk` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@cryptape/cita-sdk@0.17.x` will work perfectly with `CITA@0.17`

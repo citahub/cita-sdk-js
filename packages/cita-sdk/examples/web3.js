@@ -1,4 +1,4 @@
+const { server } = require('./config')
 const CITASDK = require('../lib')
-const SERVER = 'https://node.cryptape.com'
-const citaSDK = CITASDK.default(SERVER)
+const citaSDK = CITASDK.default(server)
 module.exports = citaSDK

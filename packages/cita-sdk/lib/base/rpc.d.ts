@@ -185,3 +185,13 @@ export declare const getLogs: {
     call: string;
     params: number;
 };
+export declare const peersInfo: {
+    name: string;
+    call: string;
+    params: number;
+};
+export declare const getVersion: {
+    name: string;
+    call: string;
+    params: number;
+};
