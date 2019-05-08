@@ -4,9 +4,9 @@
   "private": false,
   "license": "MIT",
   "dependencies": {
-    "@cryptape/cita-sdk": "^0.21.2",
-    "@material-ui/core": "^1.5.1",
-    "@material-ui/icons": "^2.0.3",
+    "@cryptape/cita-sdk": "0.23.0",
+    "@material-ui/core": "1.5.1",
+    "@material-ui/icons": "2.0.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-router-dom": "^4.3.1",
