@@ -25,5 +25,6 @@
     "@types/react": "^16.4.12",
     "@types/react-dom": "^16.0.7",
     "@types/react-router-dom": "^4.3.0"
-  }
+  },
+  "gitHead": "0a467a7f5c750c7a409922f32421be9f276e909b"
 }
