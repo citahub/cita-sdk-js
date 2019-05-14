@@ -21,7 +21,8 @@ const unsigner = (hexUnverifiedTransaction: string) => {
   }
 
   switch (+version) {
-    case 1: {
+    case 1:
+    case 2: {
       transaction.chainId = '0x' + (+bytes2hex(transactionPb.getChainIdV1())).toString(16)
       transaction.to = bytes2hex(transactionPb.getToV1())
       break

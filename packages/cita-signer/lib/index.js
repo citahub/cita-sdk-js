@@ -40,7 +40,7 @@ const signer = ({ from, privateKey, data = '', nonce = exports.getNonce(), quota
     }
     let _to = to.toLowerCase().replace(/^0x/, '');
     let _chainId = chainId;
-    let _version = +version ? `V${version}` : '';
+    let _version = +version ? `V${version === 2 ? 1 : version}` : '';
     let _nonce = `${nonce}`;
     let _quota = +quota;
     switch (_version) {
