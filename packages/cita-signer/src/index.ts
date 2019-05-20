@@ -71,7 +71,11 @@ const signer = (
   let _nonce = `${nonce}`
   let _quota = +quota
   switch (_version) {
-    case 'V1': {
+    case '': {
+      break
+    }
+    case 'V1':
+    default: {
       // set to
       _to = new Uint8Array(hex2bytes(_to))
 
@@ -80,9 +84,6 @@ const signer = (
       const chainIdBytes = new Uint8Array(32)
       chainIdBytes.set(_chainId, 32 - _chainId.length)
       _chainId = chainIdBytes
-      break
-    }
-    default: {
       break
     }
   }
