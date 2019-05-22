@@ -12,7 +12,8 @@
     "build": "cross-env ../../node_modules/.bin/tsc",
     "test": "npm run test:v1",
     "test:v0": "cross-env VERSION=0 ../../node_modules/.bin/jest",
-    "test:v1": "cross-env VERSION=1 ../../node_modules/.bin/jest"
+    "test:v1": "cross-env VERSION=1 ../../node_modules/.bin/jest",
+    "test:v2": "cross-env VERSION=2 ../../node_modules/.bin/jest"
   },
   "dependencies": {
     "ec": "^0.0.1",
