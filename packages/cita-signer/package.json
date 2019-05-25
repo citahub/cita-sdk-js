@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "protoc": "^1.0.3",
-    "ts-protoc-gen": "^0.7.3"
+    "ts-protoc-gen": "^0.10.0"
   },
   "publishConfig": {
     "access": "public"
