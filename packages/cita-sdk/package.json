@@ -28,7 +28,7 @@
   },
   "postinstall": "rm -f node_modules/web3/index.d.ts",
   "devDependencies": {
-    "@types/web3": "1.0.12",
+    "@types/web3": "1.0.18",
     "babel-minify": "^0.4.3",
     "browserify": "^16.2.2",
     "cross-env": "^5.2.0",
