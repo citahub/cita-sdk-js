@@ -67,7 +67,7 @@ const signer = (
   // preprocess
   let _to: Uint8Array | string = to.toLowerCase().replace(/^0x/, '')
   let _chainId: Uint8Array | string | number = chainId
-  let _version = +version ? `V${version === 2 ? 1 : version}` : ''
+  let _version = +version ? `V1` : ''
   let _nonce = `${nonce}`
   let _quota = +quota
   switch (_version) {

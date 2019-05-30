@@ -462,7 +462,7 @@ const transaction = {
   nonce: 999999,
   quota: 1e10,
   chainId: 1,
-  version: 0,
+  version: 2,
   validUntilBlock: 999999,
   value: '0x0',
 }
@@ -540,7 +540,7 @@ citaSDK.base.signer({
   nonce: '47',
   quota: 2.1e13,
   validUntilBlock: 114930,
-  version: 0,
+  version: 2,
   chainId: 1,
   value: '0',
 })
@@ -569,7 +569,7 @@ citaSDK.base.signer({
  *      to: '',
  *      validUntilBlock: 663228,
  *      value: [...],
- *      version: 0,
+ *      version: 2,
  *    }
  * }
  */
