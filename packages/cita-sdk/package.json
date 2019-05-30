@@ -32,7 +32,7 @@
     "babel-minify": "^0.4.3",
     "browserify": "^16.2.2",
     "cross-env": "^5.2.0",
-    "typedoc": "^0.11.1"
+    "typedoc": "^0.14.2"
   },
   "dependencies": {
     "@cryptape/cita-signer": "^2.4.0",
