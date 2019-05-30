@@ -1,6 +1,6 @@
 {
   "name": "@cryptape/cita-sdk",
-  "version": "0.23.1",
+  "version": "0.24.0",
   "main": "lib/index.js",
   "repository": "https://github.com/cryptape/cita-sdk-js/tree/master/packages/cita-sdk",
   "author": "Keith <keithwhisper@gmail.com>",
@@ -35,12 +35,12 @@
     "typedoc": "^0.14.2"
   },
   "dependencies": {
-    "@cryptape/cita-signer": "^2.3.0",
+    "@cryptape/cita-signer": "^2.4.0",
     "web3": "1.0.0-beta.37"
   },
   "jest": {
     "verbose": true,
     "testURL": "http://localhost/"
   },
-  "gitHead": "a61762aae250e4235a79de0cc75d562b366e669a"
+  "gitHead": "d63d762e3e51fa26f851b0a1efe390e97210a77d"
 }
