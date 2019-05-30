@@ -2,7 +2,7 @@ export const transaction = {
   from: '',
   nonce: '' + Math.random(),
   chainId: 1,
-  version: 0,
+  version: 2,
   value: '0x0'
 }
 
