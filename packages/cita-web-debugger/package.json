@@ -1,10 +1,10 @@
 {
   "name": "cita-web-debugger",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "private": false,
   "license": "MIT",
   "dependencies": {
-    "@cryptape/cita-sdk": "^0.23.1",
+    "@cryptape/cita-sdk": "^0.24.0",
     "@material-ui/core": "1.5.1",
     "@material-ui/icons": "3.0.0",
     "react": "^16.4.2",
@@ -26,5 +26,5 @@
     "@types/react-dom": "^16.0.7",
     "@types/react-router-dom": "^4.3.0"
   },
-  "gitHead": "a61762aae250e4235a79de0cc75d562b366e669a"
+  "gitHead": "d63d762e3e51fa26f851b0a1efe390e97210a77d"
 }
