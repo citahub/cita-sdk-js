@@ -21,7 +21,7 @@ const tx = {
   nonce: 999999,
   quota: 1e8,
   chainId: 1,
-  version: 1,
+  version: 2,
   validUntilBlock: 999999,
   value: '0x0'
 }
