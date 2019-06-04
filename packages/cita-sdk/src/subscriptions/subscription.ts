@@ -26,7 +26,6 @@ class Subscription extends EventEmitter {
   _reconnectIntervalId: any
   options: any
   subscriptionMethod: any
-
   constructor(options: any) {
     super(options)
 
