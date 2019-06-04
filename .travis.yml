@@ -11,4 +11,5 @@ install:
   # - yarn bootstrap
   - travis_retry make ci-install
 script:
+  - yarn run build
   - yarn test
