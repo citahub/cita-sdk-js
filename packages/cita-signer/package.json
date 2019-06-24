@@ -1,6 +1,6 @@
 {
   "name": "@cryptape/cita-signer",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "main": "lib/index.js",
   "private": false,
   "repository": "https://github.com/cryptape/cita-sdk-js/tree/master/packages/cita-signer",
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "protoc": "^1.0.3",
-    "ts-protoc-gen": "^0.7.3"
+    "ts-protoc-gen": "^0.10.0"
   },
   "publishConfig": {
     "access": "public"
@@ -32,5 +32,5 @@
     "verbose": true,
     "testURL": "http://localhost/"
   },
-  "gitHead": "d63d762e3e51fa26f851b0a1efe390e97210a77d"
+  "gitHead": "c779ddab45d74bfdd6a82f9af3bbd3b111fb704c"
 }

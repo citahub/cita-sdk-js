@@ -1,16 +1,16 @@
 {
   "name": "cita-web-debugger",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "private": false,
   "license": "MIT",
   "dependencies": {
-    "@cryptape/cita-sdk": "^0.24.0",
+    "@cryptape/cita-sdk": "^0.24.1",
     "@material-ui/core": "1.5.1",
-    "@material-ui/icons": "2.0.3",
+    "@material-ui/icons": "3.0.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "2.17.0"
+    "react-router-dom": "^5.0.0",
+    "react-scripts-ts": "3.1.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -19,12 +19,12 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.72",
-    "@types/jest": "^23.3.1",
-    "@types/node": "^10.9.2",
+    "@types/chrome": "^0.0.86",
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.3",
     "@types/react": "^16.4.12",
     "@types/react-dom": "^16.0.7",
     "@types/react-router-dom": "^4.3.0"
   },
-  "gitHead": "d63d762e3e51fa26f851b0a1efe390e97210a77d"
+  "gitHead": "c779ddab45d74bfdd6a82f9af3bbd3b111fb704c"
 }
