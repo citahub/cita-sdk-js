@@ -15,6 +15,12 @@ export interface Log {
 export const LogParser = (log: Log | string, abi: any) => {
   if (typeof log === 'string') return log
   if (!abi) throw new Error('ABI Missed')
-  const decodedLogs = ABICoder.decodeLog(abi, log.data || '', log.topics || [])
+  if (abi.length === undefined) throw new Error('ABI must be type of array')
+  const topics =
+    abi.filter((input: { indexed: boolean }) => input.indexed).length ===
+    log.topics.length
+      ? log.topics
+      : log.topics.slice(1)
+  const decodedLogs = ABICoder.decodeLog(abi, log.data || '', topics)
   return { ...log, decodedLogs }
 }
