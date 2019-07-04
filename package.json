@@ -3,7 +3,7 @@
   "private": false,
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
-    "build": "lerna run build",
+    "build": "lerna run build --ignore=cita-web-debugger",
     "test": "lerna run test",
     "cm": "git-cz",
     "precommit": "yarn run test",
@@ -59,7 +59,6 @@
     "crypto-js": "^3.1.9-1",
     "ec": "^0.0.1",
     "elliptic": "^6.4.0",
-    "google-protobuf": "^3.5.0",
-    "web3": "^1.0.0-beta.34"
+    "google-protobuf": "^3.5.0"
   }
 }
