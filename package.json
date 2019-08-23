@@ -3,7 +3,7 @@
   "private": false,
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
-    "build": "lerna run build",
+    "build": "lerna run build --ignore=cita-web-debugger",
     "test": "lerna run test",
     "cm": "git-cz",
     "precommit": "yarn run test",
@@ -35,11 +35,11 @@
     "dotenv": "^8.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^5.0.0",
+    "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-typescript": "^0.14.0",
-    "husky": "^2.3.0",
+    "husky": "^3.0.0",
     "jest": "^23.6.0",
     "lerna": "^3.0.0-rc.0",
     "lint-staged": "^8.1.7",
@@ -48,7 +48,7 @@
     "protoc": "^1.0.3",
     "ts-node": "^8.2.0",
     "ts-protoc-gen": "^0.10.0",
-    "typedoc": "^0.14.2",
+    "typedoc": "^0.15.0",
     "types-bn": "^0.0.1",
     "typescript": "^3.1.4",
     "typescript-eslint-parser": "^22.0.0",
@@ -59,7 +59,6 @@
     "crypto-js": "^3.1.9-1",
     "ec": "^0.0.1",
     "elliptic": "^6.4.0",
-    "google-protobuf": "^3.5.0",
-    "web3": "^1.0.0-beta.34"
+    "google-protobuf": "^3.5.0"
   }
 }
