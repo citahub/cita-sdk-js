@@ -36,7 +36,8 @@
   },
   "dependencies": {
     "@cryptape/cita-signer": "^2.4.1",
-    "web3": "1.0.0-beta.37"
+    "web3": "1.0.0-beta.37",
+    "fstream": "1.0.12"
   },
   "jest": {
     "verbose": true,
