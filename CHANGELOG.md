@@ -1,3 +1,17 @@
+# [v0.25.0](https://github.com/cryptape/cita-sdk-js/releases/tag/v0.25.0) ([compare](https://github.com/cryptape/cita-sdk-js/compare/v0.24.1...v0.25.0))
+
+### Changed
+
+* Dependabot upgraded some dependencie ([fbca58a...04cf0d6](https://github.com/cryptape/cita-sdk-js/compare/fbca58a...72c0176) by Keith-CY).
+* Upgrade fstream to 1.0.12 ([80c1de9](https://github.com/cryptape/cita-sdk-js/pull/202/commits/80c1de925c2fb3f4d5b66a4145c818dc66da7a41) by cezres).
+* Removed dependency protoc ([50146e1](https://github.com/cryptape/cita-sdk-js/pull/202/commits/50146e1eee19a78f4cb1c644b9179710e73ff500) by cezres).
+
+### Fixed
+
+* Fixed an issue where cita-web-debugger build failed ([d2264dc](https://github.com/cryptape/cita-sdk-js/pull/202/commits/d2264dcef5589ea07a6f107734d4ef60e2ac5aa2) by cezres)
+
+
+
 #  (2019-04-20)
 
 
