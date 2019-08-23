@@ -23,7 +23,6 @@
     "fstream": "1.0.12"
   },
   "devDependencies": {
-    "protoc": "^1.0.3",
     "ts-protoc-gen": "^0.10.0"
   },
   "publishConfig": {
