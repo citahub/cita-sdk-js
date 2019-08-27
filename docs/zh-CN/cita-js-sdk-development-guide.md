@@ -22,11 +22,8 @@ lint tool 相关配置文件在 /packages/cita-sdk/.eslintrc.js
 Github Flow Guide (https://guides.github.com/introduction/flow/)
 
 ### 版本号规则
-x.y.z
 
-* x.y 跟随 CITA 的版本号
-* z 由 SDK 自己定义：修复或增加 feature 则变化
-
+`@cryptape/cita-sdk` 严格尊崇 Semver, 并且始终与 [CITA](https://github.com/cryptape/cita) 的 `MAJOR` 和 `MINOR` 版本号保持一致。
 
 ### 如何测试
 
@@ -77,4 +74,3 @@ $ npm publish
         * x：主版本号，当功能模块有较大的变动。
         * y：子版本号，当功能有一定的增加或变化。
         * z：阶段版本号，一般是 Bug 修复或是一些小的变动。
-

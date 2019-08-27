@@ -20,4 +20,4 @@ Websocket is supported, but the pub/sub is not completed in CITA for now.
 
 # Documentations
 
-- [CITA JS SDK Development Guide](docs/zh-CN/cita-js-sdk-development-guide.md)
+- [CITA JS SDK Development Guide](docs/en-US/cita-js-sdk-development-guide.md)
