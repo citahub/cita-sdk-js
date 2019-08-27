@@ -17,3 +17,7 @@ The `cita-sdk-js` library is a collection of packages which contains specific fu
 # Notice
 
 Websocket is supported, but the pub/sub is not completed in CITA for now.
+
+# Documentations
+
+- [CITA JS SDK Development Guide](docs/zh-CN/cita-js-sdk-development-guide.md)

@@ -16,3 +16,7 @@
 # 需注意
 
 Websocket 链接已支持, 但是 pub/sub 模式尚未在 CITA 上实现.
+
+# 文档
+
+- [CITA JS SDK 开发 上手文档](cita-js-sdk-development-guide.md)
