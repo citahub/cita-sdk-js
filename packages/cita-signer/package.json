@@ -1,6 +1,6 @@
 {
   "name": "@cryptape/cita-signer",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "main": "lib/index.js",
   "private": false,
   "repository": "https://github.com/cryptape/cita-sdk-js/tree/master/packages/cita-signer",
@@ -17,9 +17,9 @@
   },
   "dependencies": {
     "elliptic": "^6.4.0",
+    "fstream": "1.0.12",
     "google-protobuf": "^3.5.0",
-    "web3": "1.0.0-beta.37",
-    "fstream": "1.0.12"
+    "web3": "1.0.0-beta.37"
   },
   "devDependencies": {
     "ts-protoc-gen": "^0.10.0"
