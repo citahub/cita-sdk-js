@@ -16,7 +16,6 @@
     "test:v2": "cross-env VERSION=2 ../../node_modules/.bin/jest"
   },
   "dependencies": {
-    "ec": "^0.0.1",
     "elliptic": "^6.4.0",
     "google-protobuf": "^3.5.0",
     "web3": "1.0.0-beta.37",
