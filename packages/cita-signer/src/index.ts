@@ -1,6 +1,10 @@
+import citaRSA from './config'
 const EC = require('elliptic').ec
 const utils = require('web3-utils')
 const blockchainPb = require('../proto-js/blockchain_pb')
+const smCrypto = require('sm-series-crypto')
+export const sm2 = smCrypto.sm2
+export const sm3 = smCrypto.sm3
 
 const MAX_VALUE = '0x' + 'f'.repeat(32)
 export const unsigner = require('./unsigner').default
@@ -33,7 +37,7 @@ const signer = (
     value = '',
     version = '0',
     chainId = '1',
-    to = '',
+    to = ''
   }: {
     from: string
     privateKey: string
@@ -46,11 +50,11 @@ const signer = (
     chainId: string | number
     to?: string
   },
-  externalKey?: string,
+  externalKey?: string
 ) => {
   const _privateKey = externalKey || privateKey
   if (!_privateKey) {
-    console.warn(`No private key found`)
+    console.warn('No private key found')
     return {
       data,
       from,
@@ -60,14 +64,14 @@ const signer = (
       value,
       version,
       chainId,
-      to,
+      to
     }
   }
 
   // preprocess
   let _to: Uint8Array | string = to.toLowerCase().replace(/^0x/, '')
   let _chainId: Uint8Array | string | number = chainId
-  let _version = +version ? `V1` : ''
+  let _version = +version ? 'V1' : ''
   let _nonce = `${nonce}`
   let _quota = +quota
   switch (_version) {
@@ -96,7 +100,7 @@ const signer = (
   if (!_nonce) {
     tx.setNonce(getNonce())
   } else if (_nonce.length > 128) {
-    throw new Error(`Nonce should be random string with max length of 128`)
+    throw new Error('Nonce should be random string with max length of 128')
   } else {
     tx.setNonce(_nonce)
   }
@@ -120,7 +124,7 @@ const signer = (
     throw new Error(`Value should not be larger than ${MAX_VALUE}`)
   }
   if (+value < 0) {
-    throw new Error(`Value should not be negative`)
+    throw new Error('Value should not be negative')
   }
 
   if (value) {
@@ -142,7 +146,7 @@ const signer = (
     if (utils.isAddress(to)) {
       tx[`setTo${_version}`](_to)
     } else {
-      throw new Error(`Invalid to address`)
+      throw new Error('Invalid to address')
     }
   }
 
@@ -151,13 +155,13 @@ const signer = (
    * works as timeout, usually set to be current block number + 88, if the transaction has not been mined after valid until block, it will be reguarded as a failed transaction.
    */
   if (validUntilBlock === undefined || isNaN(+validUntilBlock)) {
-    throw new Error(`ValidUntilBlock should be set`)
+    throw new Error('ValidUntilBlock should be set')
   } else {
     tx.setValidUntilBlock(+validUntilBlock)
   }
 
   if (_chainId === undefined) {
-    throw new Error(`Chain Id should be set`)
+    throw new Error('Chain Id should be set')
   } else {
     tx[`setChainId${_version}`](_chainId)
   }
@@ -172,33 +176,83 @@ const signer = (
   tx.setVersion(+version)
 
   const txMsg = tx.serializeBinary()
+  // console.log(txMsg)
 
-  const hashedMsg = sha3(txMsg).slice(2)
-
-  if (_privateKey.replace(/^0x/, '').length !== 64 || !utils.isHex(_privateKey)) {
+  if (
+    _privateKey.replace(/^0x/, '').length !== 64 ||
+    !utils.isHex(_privateKey)
+  ) {
     throw new Error('Invalid Private Key')
   }
-  // old school code
-  const key = ec.keyFromPrivate(_privateKey.replace(/^0x/, ''), 'hex')
-  const sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), { canonical: true })
-  let sign_r = sign.r.toString(16).padStart(64, 0)
-  let sign_s = sign.s.toString(16).padStart(64, 0)
-  const signature = (sign_r + sign_s).padStart(128, 0)
-  const sign_buffer = new Buffer(signature, 'hex')
-  const sigBytes = new Uint8Array(65)
-  sigBytes.set(sign_buffer)
-  sigBytes[64] = sign.recoveryParam
-  // end
 
-  const unverifiedTx = new blockchainPb.UnverifiedTransaction()
-  unverifiedTx.setTransaction(tx)
-  unverifiedTx.setCrypto(blockchainPb.Crypto.DEFAULT)
-  unverifiedTx.setSignature(sigBytes)
+  /**
+   * secp256k1
+   */
+  if (citaRSA == 'secp256k1' || !citaRSA) {
+    // old school code
+    const hashedMsg = sha3(txMsg).slice(2)
+    const key = ec.keyFromPrivate(_privateKey.replace(/^0x/, ''), 'hex')
+    const sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), {
+      canonical: true
+    })
+    let sign_r = sign.r.toString(16).padStart(64, 0)
+    let sign_s = sign.s.toString(16).padStart(64, 0)
+    const signature = (sign_r + sign_s).padStart(128, 0)
+    const sign_buffer = Buffer.from(signature, 'hex')
+    const sigBytes = new Uint8Array(65)
+    sigBytes.set(sign_buffer)
+    sigBytes[64] = sign.recoveryParam
+    // end
 
-  const serializedUnverifiedTx = unverifiedTx.serializeBinary()
+    const unverifiedTx = new blockchainPb.UnverifiedTransaction()
+    unverifiedTx.setTransaction(tx)
+    unverifiedTx.setCrypto(blockchainPb.Crypto.DEFAULT)
+    unverifiedTx.setSignature(sigBytes)
 
-  const hexUnverifiedTx = bytes2hex(serializedUnverifiedTx)
+    const serializedUnverifiedTx = unverifiedTx.serializeBinary()
 
-  return hexUnverifiedTx
+    var hexUnverifiedTx = bytes2hex(serializedUnverifiedTx)
+    return hexUnverifiedTx
+  }
+  // sm2
+  else if (citaRSA == 'sm2') {
+    const key = _privateKey.replace(/^0x/, '')
+    const publicKey = sm2.SM2KeyPair(null, key).pubToString()
+    const dosm3hash = function(msg: Array<number>, pub: string) {
+      const key = sm2.SM2KeyPair(pub)
+      const msg_sm3 = sm3().sum(msg)
+      var za = key._combine(msg_sm3)
+      var sm3hash = new sm3()
+      var childKey = sm3hash.sum(za)
+      return childKey
+    }
+    const doSignature = function(msg: Array<string>, pri: string, pub: string) {
+      const uint8ToBytes = function(uint8: Array<string>) {
+        for (var bytes = [], c = 0; c < uint8.length; c += 1)
+          bytes.push(parseInt(uint8[c]))
+        return bytes
+      }
+      const msg_push = uint8ToBytes(msg)
+      const signkey = sm2.SM2KeyPair(pub, pri)
+      const msg_za = dosm3hash(msg_push, pub)
+      const signature = signkey.signDigest(msg_za)
+      const sign_r = signature.r
+      const sign_s = signature.s
+      return sign_r + sign_s
+    }
+    const signature = doSignature(txMsg, key, publicKey)
+
+    const sign_buffer = Buffer.from(signature, 'hex')
+    const sigBytes = new Uint8Array(65)
+    sigBytes.set(sign_buffer)
+
+    const unverifiedTx = new blockchainPb.UnverifiedTransaction()
+    unverifiedTx.setTransaction(tx)
+    const serializedUnverifiedTx = unverifiedTx.serializeBinary()
+    var hexUnverifiedTx = exports.bytes2hex(serializedUnverifiedTx)
+    hexUnverifiedTx =
+      hexUnverifiedTx + '128001' + signature + publicKey.slice(2)
+    return hexUnverifiedTx
+  }
 }
 export default signer
