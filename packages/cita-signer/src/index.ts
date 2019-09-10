@@ -176,7 +176,6 @@ const signer = (
   tx.setVersion(+version)
 
   const txMsg = tx.serializeBinary()
-  // console.log(txMsg)
 
   if (
     _privateKey.replace(/^0x/, '').length !== 64 ||
