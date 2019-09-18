@@ -79,9 +79,9 @@ const unsigner = (hexUnverifiedTransaction: string) => {
   } else if (citaRSA == 'sm2') {
     const hexSig = bytes2hex(signature).slice(2)
 
-    const key = hexSig.slice(128).replace(/^04/i)
+    const pubKey = hexSig.slice(128)
 
-    const publicKey = `0x${key}`
+    const publicKey = `0x${pubKey}`
 
     const address = `0x${bytes2hex(sm3().sum(hex2bytes(publicKey.slice(2))))
       .slice(-40)
