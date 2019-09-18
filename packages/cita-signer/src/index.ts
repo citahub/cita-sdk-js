@@ -217,40 +217,37 @@ const signer = (
   else if (citaRSA == 'sm2') {
     const key = _privateKey.replace(/^0x/, '')
     const publicKey = sm2.SM2KeyPair(null, key).pubToString()
-    const dosm3hash = function(msg: Array<number>, pub: string) {
+    const internalKey = '128001'
+    const uint8ToBytes = function(uint8: Array<string>) {
+      for (var bytes = [], c = 0; c < uint8.length; c += 1)
+        bytes.push(parseInt(uint8[c]))
+      return bytes
+    }
+    const doSm3hash = function(msg: Array<number>, pub: string) {
       const key = sm2.SM2KeyPair(pub)
       const msg_sm3 = sm3().sum(msg)
-      var za = key._combine(msg_sm3)
-      var sm3hash = new sm3()
-      var childKey = sm3hash.sum(za)
+      const za = key._combine(msg_sm3)
+      const sm3hash = new sm3()
+      const childKey = sm3hash.sum(za)
       return childKey
     }
     const doSignature = function(msg: Array<string>, pri: string, pub: string) {
-      const uint8ToBytes = function(uint8: Array<string>) {
-        for (var bytes = [], c = 0; c < uint8.length; c += 1)
-          bytes.push(parseInt(uint8[c]))
-        return bytes
-      }
       const msg_push = uint8ToBytes(msg)
-      const signkey = sm2.SM2KeyPair(pub, pri)
-      const msg_za = dosm3hash(msg_push, pub)
-      const signature = signkey.signDigest(msg_za)
-      const sign_r = signature.r
-      const sign_s = signature.s
-      return sign_r + sign_s
+      const signKey = sm2.SM2KeyPair(pub, pri)
+      const msg_za = doSm3hash(msg_push, pub)
+      const signature = signKey.signDigest(msg_za)
+      const sign_r = signature.r.toString(16).padStart(64, 0)
+      const sign_s = signature.s.toString(16).padStart(64, 0)
+      return (sign_r + sign_s).padStart(128, 0)
     }
     const signature = doSignature(txMsg, key, publicKey)
-
-    const sign_buffer = Buffer.from(signature, 'hex')
-    const sigBytes = new Uint8Array(65)
-    sigBytes.set(sign_buffer)
 
     const unverifiedTx = new blockchainPb.UnverifiedTransaction()
     unverifiedTx.setTransaction(tx)
     const serializedUnverifiedTx = unverifiedTx.serializeBinary()
-    var hexUnverifiedTx = exports.bytes2hex(serializedUnverifiedTx)
+    var hexUnverifiedTx = bytes2hex(serializedUnverifiedTx)
     hexUnverifiedTx =
-      hexUnverifiedTx + '128001' + signature + publicKey.slice(2)
+      hexUnverifiedTx + internalKey + signature + publicKey.slice(2)
     return hexUnverifiedTx
   }
 }
