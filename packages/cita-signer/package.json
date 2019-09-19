@@ -19,6 +19,7 @@
     "elliptic": "^6.4.0",
     "fstream": "1.0.12",
     "google-protobuf": "^3.5.0",
+    "sm-series-crypto": "^0.2.1",
     "web3": "1.0.0-beta.37"
   },
   "devDependencies": {
