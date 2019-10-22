@@ -1,3 +1,0 @@
-export const chain = 'https://node.cryptape.com'
-export const rebirthAddr = 'https://rebirth.cryptape.com'
-export const pwd = ''
