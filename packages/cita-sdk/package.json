@@ -1,6 +1,6 @@
 {
   "name": "@cryptape/cita-sdk",
-  "version": "0.25.1",
+  "version": "1.0.0",
   "main": "lib/index.js",
   "repository": "https://github.com/cryptape/cita-sdk-js/tree/master/packages/cita-sdk",
   "author": "Keith <keithwhisper@gmail.com>",
@@ -35,7 +35,7 @@
     "typedoc": "^0.15.0"
   },
   "dependencies": {
-    "@cryptape/cita-signer": "^2.5.2",
+    "@cryptape/cita-signer": "^1.0.0",
     "fstream": "1.0.12",
     "web3": "1.0.0-beta.37"
   },
