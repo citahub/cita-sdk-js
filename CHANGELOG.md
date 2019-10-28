@@ -1,4 +1,4 @@
-# [v1.0.0](https://github.com/cryptape/cita-sdk-js/releases/tag/@cryptape/cita-sdk@1.0.0) (2019-10-28)
+# [v1.0.0](https://github.com/cryptape/cita-sdk-js/releases/tag/@cryptape/cita-sdk@1.0.0)
 
 
 ### Bug Fixes
@@ -12,14 +12,9 @@
 * fix sign flow ([9405148](https://github.com/cryptape/cita-sdk-js/commit/9405148462331cf8efb21de7f7f6c3c3202e6724))
 * fix test for 0.17 fix ([097b823](https://github.com/cryptape/cita-sdk-js/commit/097b82368f71de2fab08427ad7c191877927f4f7))
 * fix travis cache ([75b3068](https://github.com/cryptape/cita-sdk-js/commit/75b3068fc9257fad557dd39a63b16e3203f3ee03))
-* fix typo ([7f47358](https://github.com/cryptape/cita-sdk-js/commit/7f47358346e0d26625a530122a72592ae9e65e3c))
 * **contract:** update contract subscription methods ([a9d5939](https://github.com/cryptape/cita-sdk-js/commit/a9d59390c3f2ca430c86b268325091411c489ffc))
 * **signer:** padding result of bytes2hex with 0 ([d58286b](https://github.com/cryptape/cita-sdk-js/commit/d58286b2f10417089bf5b2a806a2ee64354c0034))
-* fix typo in listeners ([cfbc2f2](https://github.com/cryptape/cita-sdk-js/commit/cfbc2f215dac35f6cc2cc8c9298dc0417e8d6f7a))
 * ignore event signature in getLogs method ([e0eef49](https://github.com/cryptape/cita-sdk-js/commit/e0eef499bb7b73032f9616b4d830f1667c44ce08))
-* remove console ([875ac8a](https://github.com/cryptape/cita-sdk-js/commit/875ac8a045b6d7613ac5a36aa883782d4219e92f))
-* remove package lock ([9fb5a5e](https://github.com/cryptape/cita-sdk-js/commit/9fb5a5e8c2bec9d374fa4a0f3c31e8bc39989a01))
-* remove package lock in cita-web-debugger ([02cf4db](https://github.com/cryptape/cita-sdk-js/commit/02cf4dbe7d76a1c97d6d3b2254913ea84b43b657))
 * update test cases ([0e28e78](https://github.com/cryptape/cita-sdk-js/commit/0e28e786ee96aa53ab366fdc9a56c3f4211cd3b4))
 
 
