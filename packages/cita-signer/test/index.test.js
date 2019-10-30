@@ -1,3 +1,5 @@
+const {CryptoTx}  = require ("../lib/enum");
+
 const {
   citaSDK,
   tx,
@@ -6,7 +8,7 @@ const {
 } = require('./config')
 
 const sign = require('../lib').default
-const unsign = require('../lib').unsigner
+const unsign = require('../lib/unsigner').default
 
 const MAX_VALUE = '0x' + 'f'.repeat(32)
 
@@ -29,7 +31,7 @@ const inquireReceipt = txHash =>
   })
 
 test('sendTransaction with internal key, getTransactionReceipt, and getTransaction', async () => {
-  expect.assertions(5)
+  expect.assertions(14)
   jest.setTimeout(30000)
   const currentHeight = await citaSDK.base.getBlockNumber()
 
@@ -107,7 +109,7 @@ describe('tests for cita v0', () => {
   })
 })
 
-test('unsign', () => {
+describe('unsign', () => {
   const signedMsg = sign({
     ...tx,
     to: from
@@ -138,4 +140,23 @@ describe('Error Handler', () => {
       expect(err).toEqual(new Error(`Value should not be larger than ${MAX_VALUE}`))
     }
   })
+})
+
+describe('test for sm2', ()  => {
+    const signedMsg = sign({
+      ...tx,
+      to: from,
+      cryptoTx: CryptoTx.SM2
+    }, privateKey)
+    const {
+      transaction,
+      crypto,
+      sender
+    } = unsign(signedMsg, CryptoTx.SM2)
+    expect(transaction.to).toBe(from.toLowerCase())
+    expect(transaction.validUntilBlock).toBe(tx.validUntilBlock)
+    expect(transaction.version.toString()).toBe(tx.version)
+    expect(+transaction.chainId).toBe(+tx.chainId)
+    // privateKey to address use secp265, don't support sm2, so it won't match
+    // expect(sender.address).toBe(from.toLowerCase())
 })
