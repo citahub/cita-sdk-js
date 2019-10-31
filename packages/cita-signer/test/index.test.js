@@ -1,4 +1,4 @@
-const {CryptoTx}  = require ("../lib/enum");
+const { CryptoTx }  = require ("../lib/enum");
 
 const {
   citaSDK,

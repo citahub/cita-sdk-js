@@ -190,7 +190,7 @@ const signer = (
   /**
    * secp256k1
    */
-  if (cryptoTx == CryptoTx.SECP256K1) {
+  if (cryptoTx === CryptoTx.SECP256K1) {
     const hashedMsg = sha3(txMsg).slice(2)
     const key = ec.keyFromPrivate(_privateKey.replace(/^0x/, ''), 'hex')
     const sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), {
@@ -216,7 +216,7 @@ const signer = (
     return hexUnverifiedTx
   }
   // sm2
-  else if (cryptoTx == CryptoTx.SM2) {
+  else if (cryptoTx === CryptoTx.SM2) {
     const key = _privateKey.replace(/^0x/, '')
     const publicKey = sm2.SM2KeyPair(null, key).pubToString()
     const internalKey = '128001'

@@ -1,4 +1,4 @@
-import {publicKeyToAddressSM2} from "../../cita-sdk/lib/utils/sm2Utils";
+import { publicKeyToAddressSM2 } from "../../cita-sdk/lib/utils/sm2Utils";
 
 const Signature = require('elliptic/lib/elliptic/ec/signature')
 const blockchainPb = require('../proto-js/blockchain_pb')
@@ -77,7 +77,7 @@ const unsigner = (hexUnverifiedTransaction: string, cryptoTx: CryptoTx = CryptoT
     }
 
     // return result
-  } else if (cryptoTx == CryptoTx.SM2) {
+  } else if (cryptoTx === CryptoTx.SM2) {
     const hexSig = bytes2hex(signature).slice(2)
 
     const pubKey = hexSig.slice(128)
