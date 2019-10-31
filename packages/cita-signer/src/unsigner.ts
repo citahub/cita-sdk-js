@@ -1,4 +1,4 @@
-import { publicKeyToAddressSM2 } from "../../cita-sdk/lib/utils/sm2Utils";
+const { publicKeyToAddressSM2 } = require('../../cita-sdk/lib/utils/sm2Utils')
 
 const Signature = require('elliptic/lib/elliptic/ec/signature')
 const blockchainPb = require('../proto-js/blockchain_pb')
