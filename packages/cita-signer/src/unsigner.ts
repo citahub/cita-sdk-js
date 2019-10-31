@@ -1,7 +1,9 @@
+import {publicKeyToAddressSM2} from "../../cita-sdk/lib/utils/sm2Utils";
+
 const Signature = require('elliptic/lib/elliptic/ec/signature')
 const blockchainPb = require('../proto-js/blockchain_pb')
 
-import { ec, hex2bytes, bytes2hex, sha3, sm3 } from './index'
+import { ec, hex2bytes, bytes2hex, sha3 } from './index'
 import { CryptoTx } from './enum'
 
 const unsigner = (hexUnverifiedTransaction: string, cryptoTx: CryptoTx = CryptoTx.SECP256K1) => {
@@ -82,9 +84,7 @@ const unsigner = (hexUnverifiedTransaction: string, cryptoTx: CryptoTx = CryptoT
 
     const publicKey = `0x${pubKey}`
 
-    const address = `0x${bytes2hex(sm3().sum(hex2bytes(publicKey.slice(2))))
-      .slice(-40)
-      .toLowerCase()}`
+    const address = publicKeyToAddressSM2(publicKey)
 
     result = {
       transaction,

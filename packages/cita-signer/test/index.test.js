@@ -31,7 +31,7 @@ const inquireReceipt = txHash =>
   })
 
 test('sendTransaction with internal key, getTransactionReceipt, and getTransaction', async () => {
-  expect.assertions(14)
+  expect.assertions(15)
   jest.setTimeout(30000)
   const currentHeight = await citaSDK.base.getBlockNumber()
 
@@ -143,20 +143,21 @@ describe('Error Handler', () => {
 })
 
 describe('test for sm2', ()  => {
-    const signedMsg = sign({
-      ...tx,
-      to: from,
-      cryptoTx: CryptoTx.SM2
-    }, privateKey)
-    const {
-      transaction,
-      crypto,
-      sender
-    } = unsign(signedMsg, CryptoTx.SM2)
-    expect(transaction.to).toBe(from.toLowerCase())
-    expect(transaction.validUntilBlock).toBe(tx.validUntilBlock)
-    expect(transaction.version.toString()).toBe(tx.version)
-    expect(+transaction.chainId).toBe(+tx.chainId)
-    // privateKey to address use secp265, don't support sm2, so it won't match
-    // expect(sender.address).toBe(from.toLowerCase())
+  const sm2Account = citaSDK.eth.accounts.privateKeyToAccount(privateKey, CryptoTx.SM2);
+  tx.from = sm2Account.address
+  const signedMsg = sign({
+    ...tx,
+    to: from,
+    cryptoTx: CryptoTx.SM2
+  }, privateKey)
+  const {
+    transaction,
+    crypto,
+    sender
+  } = unsign(signedMsg, CryptoTx.SM2)
+  expect(transaction.to).toBe(from.toLowerCase())
+  expect(transaction.validUntilBlock).toBe(tx.validUntilBlock)
+  expect(transaction.version.toString()).toBe(tx.version)
+  expect(+transaction.chainId).toBe(+tx.chainId)
+  expect(sender.address).toBe(sm2Account.address.toLowerCase())
 })
