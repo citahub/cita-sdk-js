@@ -20,6 +20,7 @@
 
 ### Features
 
+* support SM2 signature and SM3 hash ([a94cd999](https://github.com/cryptape/cita-sdk-js/pull/222))
 * add log on debugger ready ([a82ec1d](https://github.com/cryptape/cita-sdk-js/commit/a82ec1d4ffab37a47bde361b2b8f21fea2477d3a))
 * update web3 deps ([b4f6460](https://github.com/cryptape/cita-sdk-js/commit/b4f6460ad9b1d527ea5f420c551ada0414039341))
 * **rpc:** add two rpc methods ([0aa093e](https://github.com/cryptape/cita-sdk-js/commit/0aa093e2228a88b84524bc62d131228a67cd3dbe))
