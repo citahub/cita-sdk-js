@@ -1,4 +1,5 @@
-import citaRSA from './config'
+import { CryptoTx } from "./enum"
+
 const EC = require('elliptic').ec
 const utils = require('web3-utils')
 const blockchainPb = require('../proto-js/blockchain_pb')
@@ -37,7 +38,8 @@ const signer = (
     value = '',
     version = '0',
     chainId = '1',
-    to = ''
+    to = '',
+    cryptoTx = CryptoTx.SECP256K1
   }: {
     from: string
     privateKey: string
@@ -49,6 +51,7 @@ const signer = (
     version?: string | number
     chainId: string | number
     to?: string
+    cryptoTx:  CryptoTx
   },
   externalKey?: string
 ) => {
@@ -187,8 +190,7 @@ const signer = (
   /**
    * secp256k1
    */
-  if (citaRSA == 'secp256k1' || !citaRSA) {
-    // old school code
+  if (cryptoTx === CryptoTx.SECP256K1) {
     const hashedMsg = sha3(txMsg).slice(2)
     const key = ec.keyFromPrivate(_privateKey.replace(/^0x/, ''), 'hex')
     const sign = key.sign(new Buffer(hashedMsg.toString(), 'hex'), {
@@ -214,7 +216,7 @@ const signer = (
     return hexUnverifiedTx
   }
   // sm2
-  else if (citaRSA == 'sm2') {
+  else if (cryptoTx === CryptoTx.SM2) {
     const key = _privateKey.replace(/^0x/, '')
     const publicKey = sm2.SM2KeyPair(null, key).pubToString()
     const internalKey = '128001'

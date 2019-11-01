@@ -1,11 +1,12 @@
-import citaRSA from './config'
+const { publicKeyToAddressSM2 } = require('../../cita-sdk/lib/utils/sm2Utils')
 
 const Signature = require('elliptic/lib/elliptic/ec/signature')
 const blockchainPb = require('../proto-js/blockchain_pb')
 
-import { ec, hex2bytes, bytes2hex, sha3, sm3 } from './index'
+import { ec, hex2bytes, bytes2hex, sha3 } from './index'
+import { CryptoTx } from './enum'
 
-const unsigner = (hexUnverifiedTransaction: string) => {
+const unsigner = (hexUnverifiedTransaction: string, cryptoTx: CryptoTx = CryptoTx.SECP256K1) => {
   const bytesUnverifiedTransaction = hex2bytes(hexUnverifiedTransaction)
   const unverifiedTransaction = blockchainPb.UnverifiedTransaction.deserializeBinary(
     bytesUnverifiedTransaction
@@ -41,7 +42,7 @@ const unsigner = (hexUnverifiedTransaction: string) => {
   if (transaction.to && !transaction.to.startsWith('0x')) {
     transaction.to = '0x' + transaction.to
   }
-  if (citaRSA == 'secp256k1' || !citaRSA) {
+  if (cryptoTx === CryptoTx.SECP256K1) {
     const sign = new Signature({
       r: bytes2hex(signature.slice(0, 32)).slice(2),
       s: bytes2hex(signature.slice(32, 64)).slice(2),
@@ -76,16 +77,14 @@ const unsigner = (hexUnverifiedTransaction: string) => {
     }
 
     // return result
-  } else if (citaRSA == 'sm2') {
+  } else if (cryptoTx === CryptoTx.SM2) {
     const hexSig = bytes2hex(signature).slice(2)
 
     const pubKey = hexSig.slice(128)
 
     const publicKey = `0x${pubKey}`
 
-    const address = `0x${bytes2hex(sm3().sum(hex2bytes(publicKey.slice(2))))
-      .slice(-40)
-      .toLowerCase()}`
+    const address = publicKeyToAddressSM2(publicKey)
 
     result = {
       transaction,
