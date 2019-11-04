@@ -1,15 +1,13 @@
-const { publicKeyToAddressSM2 } = require('../../cita-sdk/lib/utils/sm2Utils')
-
 const Signature = require('elliptic/lib/elliptic/ec/signature')
 const blockchainPb = require('../proto-js/blockchain_pb')
 
-import { ec, hex2bytes, bytes2hex, sha3 } from './index'
+import {ec, hex2bytes, bytes2hex, sha3, sm3} from './index'
 import { CryptoTx } from './enum'
 
 const unsigner = (hexUnverifiedTransaction: string, cryptoTx: CryptoTx = CryptoTx.SECP256K1) => {
   const bytesUnverifiedTransaction = hex2bytes(hexUnverifiedTransaction)
   const unverifiedTransaction = blockchainPb.UnverifiedTransaction.deserializeBinary(
-    bytesUnverifiedTransaction
+      bytesUnverifiedTransaction
   )
   const transactionPb = unverifiedTransaction.getTransaction()
   const signature = unverifiedTransaction.getSignature()
@@ -34,7 +32,7 @@ const unsigner = (hexUnverifiedTransaction: string, cryptoTx: CryptoTx = CryptoT
     case 2:
     default: {
       transaction.chainId =
-        '0x' + (+bytes2hex(transactionPb.getChainIdV1())).toString(16)
+          '0x' + (+bytes2hex(transactionPb.getChainIdV1())).toString(16)
       transaction.to = bytes2hex(transactionPb.getToV1())
       break
     }
@@ -58,15 +56,15 @@ const unsigner = (hexUnverifiedTransaction: string, cryptoTx: CryptoTx = CryptoT
     const pubPoint = ec.recoverPubKey(msg, sign, sign.recoveryParam, 'hex')
 
     const publicKey = `0x${pubPoint
-      .encode('hex')
-      .slice(2)
-      .toLowerCase()}`
+    .encode('hex')
+    .slice(2)
+    .toLowerCase()}`
 
     const bytesPubkey = new Buffer(hex2bytes(publicKey))
 
     const address = `0x${sha3(bytesPubkey)
-      .slice(-40)
-      .toLowerCase()}`
+    .slice(-40)
+    .toLowerCase()}`
 
     const hexSig = bytes2hex(signature).slice(2)
 
@@ -84,7 +82,9 @@ const unsigner = (hexUnverifiedTransaction: string, cryptoTx: CryptoTx = CryptoT
 
     const publicKey = `0x${pubKey}`
 
-    const address = publicKeyToAddressSM2(publicKey)
+    const address = `0x${bytes2hex(sm3().sum(hex2bytes(publicKey.slice(2))))
+    .slice(-40)
+    .toLowerCase()}`
 
     result = {
       transaction,
