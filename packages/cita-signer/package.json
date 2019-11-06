@@ -20,7 +20,7 @@
     "fstream": "1.0.12",
     "google-protobuf": "^3.5.0",
     "sm-series-crypto": "^0.2.1",
-    "web3": "1.0.0-beta.37"
+    "web3": "1.2.2"
   },
   "devDependencies": {
     "ts-protoc-gen": "^0.12.0"
