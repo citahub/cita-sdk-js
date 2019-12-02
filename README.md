@@ -1,18 +1,18 @@
-[![Travis](https://travis-ci.org/cryptape/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/cryptape/cita-sdk-js)
+[![Travis](https://travis-ci.org/citahub/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/citahub/cita-sdk-js)
 ![](https://camo.githubusercontent.com/ecafd86d8356a1adc60fb4fd393bcc7584187f99/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6d61696e7461696e6564253230776974682d6c65726e612d6363303066662e737667)
 
-[中文文档](https://github.com/cryptape/cita-sdk-js/blob/develop/docs/zh-CN/overview.md)
+[中文文档](https://github.com/citahub/cita-sdk-js/blob/develop/docs/zh-CN/overview.md)
 
 # Overview
 
 The `cita-sdk-js` library is a collection of packages which contains specific functionality for the [CITA](https://citahub.com/) ecosystem.
 
-- The `@cryptape/cita-sdk` is for interacting with `CITA` and has been published at [@cryptape/cita-sdk](https://www.npmjs.com/package/@cryptape/cita-sdk)
-- The `@cryptape/cita-signer` is for signing transaction for `CITA` and has been published at [@cryptape/cita-signer](https://www.npmjs.com/package/@cryptape/cita-signer)
+- The `@citahub/cita-sdk` is for interacting with `CITA` and has been published at [@citahub/cita-sdk](https://www.npmjs.com/package/@citahub/cita-sdk)
+- The `@citahub/cita-signer` is for signing transaction for `CITA` and has been published at [@citahub/cita-signer](https://www.npmjs.com/package/@citahub/cita-signer)
 
 # Version
 
-`@cryptape/cita-sdk` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@cryptape/cita-sdk@0.20.x` will work perfectly with `CITA@0.20`
+`@citahub/cita-sdk` strictly abides by Semver, and is compatible with [CITA](https://github.com/citahub/cita) by `MAJOR` and `MINOR` version, e.g. `@citahub/cita-sdk@0.20.x` will work perfectly with `CITA@0.20`
 
 # Notice
 
@@ -22,7 +22,7 @@ Websocket is supported, but the pub/sub is not completed in CITA for now.
 # Contributing
 
 ### Repository
-https://github.com/cryptape/cita-sdk-js
+https://github.com/citahub/cita-sdk-js
 
 ### Tech Stack
 
@@ -33,7 +33,7 @@ https://github.com/cryptape/cita-sdk-js
 
 
 ### Task Management
-https://github.com/cryptape/cita-sdk-js/issues
+https://github.com/citahub/cita-sdk-js/issues
 
 ### Coding Style
 lint tool: ESLint
@@ -44,14 +44,14 @@ Github Flow Guide (https://guides.github.com/introduction/flow/)
 
 ### Version
 
-`@cryptape/cita-sdk` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@cryptape/cita-sdk@0.20.x` will work perfectly with `CITA@0.20`.
+`@citahub/cita-sdk` strictly abides by Semver, and is compatible with [CITA](https://github.com/citahub/cita) by `MAJOR` and `MINOR` version, e.g. `@citahub/cita-sdk@0.20.x` will work perfectly with `CITA@0.20`.
 
 ### How To Test
 
 **Build:**
 
 ```bash
-$ git clone https://github.com/cryptape/cita-sdk-js.git & cd ./cita-sdk-js
+$ git clone https://github.com/citahub/cita-sdk-js.git & cd ./cita-sdk-js
 $ git submodule update --init --remote --recursive
 $ yarn install
 $ yarn bootstrap
@@ -83,11 +83,11 @@ The version upgrade does not require manual modification of `package.json`. Afte
 **Naming Rules:**
 
 * cita-sdk
-    * `@cryptape/cita-sdk@x.y.z`
+    * `@citahub/cita-sdk@x.y.z`
         * `x.y` follows the version number of CITA.
         * `z` is defined by the SDK itself, modified when adding or modifying a feature.
 * cita-signer
-    * `@cryptape/cita-signer@x.y.z`
+    * `@citahub/cita-signer@x.y.z`
         * x: MAJOR version, when you make incompatible API changes.
         * y: MINOR version, when you add functionality in a backwards compatible manner.
         * z: STAGE version, when you make backwards compatible bug fixes.

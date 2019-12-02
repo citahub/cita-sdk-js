@@ -1,5 +1,5 @@
 // import Contract from 'web3-eth-contract'
-import signer from '@cryptape/cita-signer'
+import signer from '@citahub/cita-signer'
 import addPrivateKeyFrom from '../utils/addPrivateKey'
 import * as _ from 'underscore'
 import Subscription from '../subscriptions/subscription'

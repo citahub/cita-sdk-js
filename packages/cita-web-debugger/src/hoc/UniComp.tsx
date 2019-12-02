@@ -294,7 +294,7 @@ const UniComp = (Comp: typeof React.Component) => {
       return (
         <div>
           {/*
-          <img className="logo" src="https://cdn.cryptape.com/images/neuron-logo.png" alt="logo" />
+          <img className="logo" src="https://cdn.citahub.com/images/neuron-logo.png" alt="logo" />
         */}
           <Notifier message={errorMsg} on={!!errorMsg} type={NotifierType.ERROR} handleClose={this.closeNotifier} />
           <Comp

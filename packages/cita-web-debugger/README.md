@@ -1,4 +1,4 @@
-[中文文档](https://github.com/cryptape/cita-sdk-js/blob/develop/docs/zh-CN/cita-web-debugger.md)
+[中文文档](https://github.com/citahub/cita-sdk-js/blob/develop/docs/zh-CN/cita-web-debugger.md)
 
 # Overview
 
@@ -33,7 +33,7 @@ citaSDK.base.getAccounts().then(accounts => console.log(accounts))
 
 # Demos
 
-Demos could be found at [DApp Demos](https://github.com/cryptape/first-forever-demo/tree/neuron-web).
+Demos could be found at [DApp Demos](https://github.com/citahub/first-forever-demo/tree/neuron-web).
 
 # Developer Mode
 

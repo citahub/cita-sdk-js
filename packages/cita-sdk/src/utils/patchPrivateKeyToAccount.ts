@@ -1,4 +1,4 @@
-import { CryptoTx } from '@cryptape/cita-signer/lib/enum'
+import { CryptoTx } from '@citahub/cita-signer/lib/enum'
 
 import { accountSignedBySm2 } from './sm2Utils'
 export default (web3: any) => {

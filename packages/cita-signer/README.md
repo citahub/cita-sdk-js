@@ -1,8 +1,8 @@
-[![Travis](https://travis-ci.org/cryptape/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/cryptape/cita-sdk-js)
-![npm (scoped)](https://img.shields.io/npm/v/@cryptape/cita-signer.svg)
-[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@cryptape/cita-signer.svg)
+[![Travis](https://travis-ci.org/citahub/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/citahub/cita-sdk-js)
+![npm (scoped)](https://img.shields.io/npm/v/@citahub/cita-signer.svg)
+[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@citahub/cita-signer.svg)
 
-[中文文档](https://github.com/cryptape/cita-sdk-js/blob/develop/docs/zh-CN/cita-signer.md)
+[中文文档](https://github.com/citahub/cita-sdk-js/blob/develop/docs/zh-CN/cita-signer.md)
 
 # cita-signer
 
@@ -60,7 +60,7 @@ unsigner(transactionContent)
 ### Basic Usage
 
 ```javascript
-import signer, { unsigner } from '@cryptape/cita-signer'
+import signer, { unsigner } from '@citahub/cita-signer'
 
 const transaction = {
   privateKey: '0x7cc34429d268cdf33e1595d9aa3c56bfcb785c24b7f6dd031fe059d93d8e92d9',
