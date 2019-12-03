@@ -1,5 +1,5 @@
 import Web3 = require('web3')
-import signer, { unsigner } from '@cryptape/cita-signer'
+import signer, { unsigner } from '@citahub/cita-signer'
 import * as rpc from './rpc'
 import * as personal from './neuron'
 import listener from './listener'

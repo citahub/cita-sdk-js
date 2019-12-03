@@ -1,4 +1,4 @@
-import CITASDK from '@cryptape/cita-sdk'
+import CITASDK from '@citahub/cita-sdk'
 import {
   pwd,
   chain

@@ -1,4 +1,4 @@
-// https://github.com/cryptape/cita/blob/fece9024b6a02b62452cda3755b2a1ea0026c167/scripts/contracts/contracts.yml
+// https://github.com/citahub/cita/blob/fece9024b6a02b62452cda3755b2a1ea0026c167/scripts/contracts/contracts.yml
 export const ReservedAddr: { [index: string]: string } = {
   admin: '0xffffffffffffffffffffffffffffffffff02000c',
   authorization: '0xffffffffffffffffffffffffffffffffff020006',

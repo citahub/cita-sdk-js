@@ -1,9 +1,9 @@
 [submodule "packages/cita-sdk/cita-sys-abi"]
 	path = packages/cita-sdk/cita-sys-abi
-	url = https://github.com/cryptape/cita-sys-abi
+	url = https://github.com/citahub/cita-sys-abi
 [submodule "packages/cita-signer/cita-proto"]
 	path = packages/cita-signer/cita-proto
-	url = https://github.com/cryptape/cita-proto
+	url = https://github.com/citahub/cita-proto
 [submodule "packages/cita-signer/cita-sdk-tests"]
 	path = packages/cita-signer/cita-sdk-tests
-	url = https://github.com/cryptape/cita-sdk-tests
+	url = https://github.com/citahub/cita-sdk-tests

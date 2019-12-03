@@ -1,10 +1,10 @@
-[![Travis](https://travis-ci.org/cryptape/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/cryptape/cita-sdk-js)
-![npm](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
-[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
+[![Travis](https://travis-ci.org/citahub/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/citahub/cita-sdk-js)
+![npm](https://img.shields.io/npm/v/@citahub/cita-sdk.svg)
+[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@citahub/cita-sdk.svg)
 
 # 概述
 
-`@cryptape/cita-sdk` 是一个方法, 他接收 `provider` 和 `Web3 Class`(可选) 作为参数, 返回一个支持 CITA 的 sdk 实例. 该实例下多个对象的使用方法, 如 `citaSDK.utils`, `citaSDK.eth`, `citaSDK.shh`, `citaSDK.bzz` 均与 [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html) 相同.
+`@citahub/cita-sdk` 是一个方法, 他接收 `provider` 和 `Web3 Class`(可选) 作为参数, 返回一个支持 CITA 的 sdk 实例. 该实例下多个对象的使用方法, 如 `citaSDK.utils`, `citaSDK.eth`, `citaSDK.shh`, `citaSDK.bzz` 均与 [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html) 相同.
 
 # 需注意
 
@@ -12,37 +12,37 @@ Websocket 链接已支持, 但是 pub/sub 模式尚未在 CITA 上实现.
 
 # 版本
 
-`@cryptape/cita-sdk` 严格遵守 Semver, 并与 CITA 的 MAJOR 和 MINOR 版本号保持一致.
+`@citahub/cita-sdk` 严格遵守 Semver, 并与 CITA 的 MAJOR 和 MINOR 版本号保持一致.
 
 # 预备知识
 
 ## 学习 `web3@1.0`
 
-如无特别声明, `@cryptape/cita-sdk` 的使用与 [`web3@1.0.0`](https://web3js.readthedocs.io/en/1.0/getting-started.html) 一致.
+如无特别声明, `@citahub/cita-sdk` 的使用与 [`web3@1.0.0`](https://web3js.readthedocs.io/en/1.0/getting-started.html) 一致.
 
 ## 学习 `CITA`
 
-`@cryptape/cita-sdk` 用于 [CITA](https://citahub.com) 相关服务.
+`@citahub/cita-sdk` 用于 [CITA](https://citahub.com) 相关服务.
 
 使用 SDK 前请先了解以下概念.
 
 1. 交易对象
 
-待签名的交易对象的 Proto 描述 [cita-proto](https://github.com/cryptape/cita-proto/blob/master/blockchain.proto#L49)
+待签名的交易对象的 Proto 描述 [cita-proto](https://github.com/citahub/cita-proto/blob/master/blockchain.proto#L49)
 
-CITA 返回的交易对象 [here](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransaction)
+CITA 返回的交易对象 [here](https://github.com/citahub/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransaction)
 
 2. 交易回执
 
-[交易回执](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransactionreceipt)
+[交易回执](https://github.com/citahub/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransactionreceipt)
 
 3. 区块对象
 
-[区块对象](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getblockbyhash)
+[区块对象](https://github.com/citahub/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getblockbyhash)
 
 4. 元数据对象
 
-[元数据对象](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getmetadata)
+[元数据对象](https://github.com/citahub/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getmetadata)
 
 5. ABI
 
@@ -71,22 +71,22 @@ Log {
 
 # 快速开始
 
-可以通过 npm 安装 `@cryptape/cita-sdk`
+可以通过 npm 安装 `@citahub/cita-sdk`
 
 ```shell
-yarn add @cryptape/cita-sdk
+yarn add @citahub/cita-sdk
 ````
 
 或者直接通过 script 标签引入
 
 ```html
-<script src="node_modules/@cryptape/cita-sdk/lib/bundle.js" />
+<script src="node_modules/@citahub/cita-sdk/lib/bundle.js" />
 ```
 
 # 创建 `citaSDK.js`
 
 ```javascript
-import CITASDK from '@cryptape/cita-sdk'
+import CITASDK from '@citahub/cita-sdk'
 const citaSDK = CITASDK('http://localhost:1337')
 ```
 
