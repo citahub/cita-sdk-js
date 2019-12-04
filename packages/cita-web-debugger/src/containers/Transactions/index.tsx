@@ -128,7 +128,7 @@ class Transactions extends React.Component<ICITAContext & IUniComp, ITransaction
     return (
       <div className="transactions__container">
         <div className="header" style={{ borderBottom: '1px solid #e9ebf0' }}>
-          <img className="logo" src="https://cdn.cryptape.com/images/neuron-logo.png" alt="logo" />
+          <img className="logo" src="https://cdn.citahub.com/images/neuron-logo.png" alt="logo" />
           <div className="transactions__network">
             Current Network:{' '}
             <Link to="/options" style={{ color: 'inherit' }}>{`${metadata.chainName || 'unknown'}`}</Link>

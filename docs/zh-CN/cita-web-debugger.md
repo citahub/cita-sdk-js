@@ -31,7 +31,7 @@ citaSDK.base.getAccounts().then(accounts => console.log(accounts))
 
 # Demos
 
-[DApp Demos](https://github.com/cryptape/first-forever-demo/tree/neuron-web).
+[DApp Demos](https://github.com/citahub/first-forever-demo/tree/neuron-web).
 
 # 开发者模式
 

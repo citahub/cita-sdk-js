@@ -1,4 +1,4 @@
-import signer from '@cryptape/cita-signer'
+import signer from '@citahub/cita-signer'
 const _ = require('underscore')
 const formatters = require('web3-core-helpers').formatters
 const utils = require('web3-utils')

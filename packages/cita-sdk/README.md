@@ -1,12 +1,12 @@
-[![Travis](https://travis-ci.org/cryptape/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/cryptape/cita-sdk-js)
-![npm](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
-[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@cryptape/cita-sdk.svg)
+[![Travis](https://travis-ci.org/citahub/cita-sdk-js.svg?branch=develop)](https://travis-ci.org/citahub/cita-sdk-js)
+![npm](https://img.shields.io/npm/v/@citahub/cita-sdk.svg)
+[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/npm/v/@citahub/cita-sdk.svg)
 
-[中文文档](https://github.com/cryptape/cita-sdk-js/blob/develop/docs/zh-CN/cita-sdk.md)
+[中文文档](https://github.com/citahub/cita-sdk-js/blob/develop/docs/zh-CN/cita-sdk.md)
 
 # About
 
-`@cryptape/cita-sdk` is a function takes `provider` and `Web3 Class`(optional) as inputs, returns cita-supported web3 instance, methods of `citaSDK.utils`, `citaSDK.eth`, `citaSDK.shh`, `citaSDK.bzz` are same as [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html)
+`@citahub/cita-sdk` is a function takes `provider` and `Web3 Class`(optional) as inputs, returns cita-supported web3 instance, methods of `citaSDK.utils`, `citaSDK.eth`, `citaSDK.shh`, `citaSDK.bzz` are same as [web3](https://web3js.readthedocs.io/en/1.0/getting-started.html)
 
 # Notice
 
@@ -14,37 +14,37 @@ Websocket is supported, but the pub/sub is not completed in CITA for now.
 
 # Version
 
-`@cryptape/cita-sdk` strictly abides by Semver, and is compatible with [CITA](https://github.com/cryptape/cita) by `MAJOR` and `MINOR` version, e.g. `@cryptape/cita-sdk@0.17.x` will work perfectly with `CITA@0.17`
+`@citahub/cita-sdk` strictly abides by Semver, and is compatible with [CITA](https://github.com/citahub/cita) by `MAJOR` and `MINOR` version, e.g. `@citahub/cita-sdk@0.17.x` will work perfectly with `CITA@0.17`
 
 # Prerequisites
 
 ## Learn `web3@1.0`
 
-By default, `@cryptape/cita-sdk` acts like [`web3@1.0.0`](https://web3js.readthedocs.io/en/1.0/getting-started.html), and has the same APIs.
+By default, `@citahub/cita-sdk` acts like [`web3@1.0.0`](https://web3js.readthedocs.io/en/1.0/getting-started.html), and has the same APIs.
 
 ## Learn `CITA`
 
-`@cryptape/cita-sdk` works for [CITA](https://citahub.com).
+`@citahub/cita-sdk` works for [CITA](https://citahub.com).
 
 Before using this SDK, following concept should be cast.
 
 1. Transaction Object
 
-Transaction Object to be signed has been defined in [cita-proto](https://github.com/cryptape/cita-proto/blob/master/blockchain.proto#L49)
+Transaction Object to be signed has been defined in [cita-proto](https://github.com/citahub/cita-proto/blob/master/blockchain.proto#L49)
 
-Transaction Object returned from CITA has been declared [here](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransaction)
+Transaction Object returned from CITA has been declared [here](https://github.com/citahub/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransaction)
 
 2. Transaction Receipt
 
-[Transaction Receipt](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransactionreceipt)
+[Transaction Receipt](https://github.com/citahub/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#gettransactionreceipt)
 
 3. Block Object
 
-[Block Object](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getblockbyhash)
+[Block Object](https://github.com/citahub/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getblockbyhash)
 
 4. MetaData Object
 
-[MetaData Object](https://github.com/cryptape/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getmetadata)
+[MetaData Object](https://github.com/citahub/cita/blob/develop/docs/zh-CN/rpc_guide/rpc.md#getmetadata)
 
 5. ABI
 
@@ -73,22 +73,22 @@ Log {
 
 # Getting Started
 
-To use `@cryptape/cita-sdk`, you can add it via npm
+To use `@citahub/cita-sdk`, you can add it via npm
 
 ```shell
-yarn add @cryptape/cita-sdk
+yarn add @citahub/cita-sdk
 ````
 
 or to link it in browser directly with
 
 ```html
-<script src="node_modules/@cryptape/cita-sdk/lib/bundle.js" />
+<script src="node_modules/@citahub/cita-sdk/lib/bundle.js" />
 ```
 
 # Add `citaSDK.js`
 
 ```javascript
-import CITASDK from '@cryptape/cita-sdk'
+import CITASDK from '@citahub/cita-sdk'
 const citaSDK = CITASDK('http://localhost:1337')
 ```
 

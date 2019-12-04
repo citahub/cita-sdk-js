@@ -1,9 +1,9 @@
 {
-  "name": "@cryptape/cita-signer",
+  "name": "@citahub/cita-signer",
   "version": "2.6.0",
   "main": "lib/index.js",
   "private": false,
-  "repository": "https://github.com/cryptape/cita-sdk-js/tree/master/packages/cita-signer",
+  "repository": "https://github.com/citahub/cita-sdk-js/tree/master/packages/cita-signer",
   "author": "Keith <keithwhisper@gmail.com>",
   "license": "MIT",
   "scripts": {

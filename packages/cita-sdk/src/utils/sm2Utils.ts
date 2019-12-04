@@ -1,4 +1,4 @@
-import { bytes2hex, hex2bytes, sm2, sm3 } from '@cryptape/cita-signer/lib'
+import { bytes2hex, hex2bytes, sm2, sm3 } from '@citahub/cita-signer/lib'
 import { Account } from 'web3/eth/accounts'
 
 export const privateKeyToPublicKeyBySM2 = (privateKey: string): string => {
