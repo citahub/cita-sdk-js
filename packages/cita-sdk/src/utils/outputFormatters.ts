@@ -1,6 +1,6 @@
 const { unsigner } = require('@citahub/cita-signer')
-const utils = require('web3-utils')
-
+const Web3 = require('web3')
+const web3 = new Web3()
 export namespace RPC {
   export interface getTransactionResult {
     blockHash: string
@@ -20,7 +20,7 @@ export const outputTransactionFormatter = (
 export const outputAbiFormatter = (_abi: string) => {
   if (typeof _abi !== 'string') throw new Error('Malformed ABI')
 
-  const abiStr = utils.hexToUtf8(_abi)
+  const abiStr = web3.eth.abi.decodeParameter('string', _abi)
   try {
     const abi = JSON.parse(abiStr)
     return abi
