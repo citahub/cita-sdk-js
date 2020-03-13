@@ -13,7 +13,7 @@
     "test": "cross-env ../../node_modules/.bin/jest",
     "parse-abi": "node ./scripts/parse_abi.js",
     "example": "node examples/deploy.js",
-    "browserify": "browserify ./lib/browser.js -o ./lib/bundle.js && terser lib/bundle.js -c -m -o lib/bundle.js ",
+    "browserify": "browserify ./lib/browser.js -o ./lib/bundle.js && node_modules/.bin/terser lib/bundle.js -c -m -o lib/bundle.js ",
     "precommit": "lint-staged"
   },
   "lint-staged": {
