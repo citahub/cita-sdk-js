@@ -13,7 +13,7 @@
     "test": "cross-env ../../node_modules/.bin/jest",
     "parse-abi": "node ./scripts/parse_abi.js",
     "example": "node examples/deploy.js",
-    "browserify": "browserify ./lib/browser.js -o ./lib/bundle.js && minify ./lib/bundle.js -d ./lib/",
+    "browserify": "browserify ./lib/browser.js -o ./lib/bundle.js && terser lib/bundle.js -c -m -o lib/bundle.js ",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -29,9 +29,9 @@
   "postinstall": "rm -f node_modules/web3/index.d.ts",
   "devDependencies": {
     "@types/web3": "1.0.12",
-    "babel-minify": "^0.5.0",
     "browserify": "^16.2.2",
     "cross-env": "^5.2.0",
+    "terser": "^4.6.6",
     "typedoc": "^0.15.0"
   },
   "dependencies": {
