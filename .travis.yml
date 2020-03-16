@@ -12,6 +12,8 @@ before_install:
 install:
   # - yarn bootstrap
   - travis_retry make ci-install
+before_script:
+  - npm install -g terser
 script:
   - npx lerna run --ignore cita-web-debugger build
   - yarn test
