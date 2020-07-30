@@ -16,7 +16,7 @@
     "test:v2": "cross-env VERSION=2 ../../node_modules/.bin/jest"
   },
   "dependencies": {
-    "elliptic": "^6.4.0",
+    "elliptic": "^6.5.3",
     "fstream": "1.0.12",
     "google-protobuf": "^3.5.0",
     "sm-series-crypto": "^0.2.1",
