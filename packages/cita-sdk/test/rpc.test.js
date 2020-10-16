@@ -85,9 +85,13 @@ test('getFilterLogs', async () => {
   expect(Array.isArray(changes)).toBe(true)
 })
 
-test('deleteMessageFilter', async () => {
-  const filterId = await citaSDK.base.newBlockFilter()
-  const changes = await citaSDK.base.getFilterLogs(filterId)
-  const success = await citaSDK.base.deleteMessageFilter(filterId)
-  expect(success).toBe(true)
-})
+test("deleteMessageFilter", async () => {
+  const filterId = await citaSDK.base.newBlockFilter();
+  const retryTimes = 20;
+  const results = await Promise.all(
+    new Array(retryTimes)
+      .fill(0)
+      .map(async () => await citaSDK.base.deleteMessageFilter(filterId))
+  );
+  expect(results.includes(true)).toBe(true);
+});
