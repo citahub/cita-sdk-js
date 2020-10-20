@@ -2,7 +2,7 @@ import * as React from 'react'
 import cita from '../cita'
 
 export interface ICITAContext {
-  cita: typeof cita
+  cita: any
   currentNumber: number
 }
 
