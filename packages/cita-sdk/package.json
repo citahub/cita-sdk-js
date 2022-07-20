@@ -31,7 +31,7 @@
     "@types/web3": "1.0.12",
     "browserify": "^16.2.2",
     "cross-env": "^5.2.0",
-    "terser": "^4.6.6",
+    "terser": "^4.8.1",
     "typedoc": "^0.15.0"
   },
   "dependencies": {
